@@ -10,4 +10,9 @@ public class CampingController {
 	public String detail() {
 		return "camping/detail";
 	}
+	
+	public String test() {
+		System.out.println("git test 입니다.");
+		return "test";
+	}
 }
