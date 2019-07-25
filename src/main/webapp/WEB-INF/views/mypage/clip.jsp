@@ -78,7 +78,7 @@ img, p {
 					</div>
 					<div class="content">
 						<p>글램핑/카라반</p>
-						<a href="#">하`비 카라반/글램핑</a>
+						<a href="#">하비 카라반/글램핑</a>
 						<p>경북 > 청도군 > 각북면</p>
 					</div>
 				</div>
