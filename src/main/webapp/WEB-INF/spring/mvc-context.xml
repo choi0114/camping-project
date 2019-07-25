@@ -16,5 +16,7 @@
 	</mvc:view-resolvers>
 	
 	<context:component-scan base-package="com.sample.camping.controller"></context:component-scan>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
 </beans>

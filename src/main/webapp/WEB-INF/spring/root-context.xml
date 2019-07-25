@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- 
+		커넥션풀(DataSource객체)를 스프링의 빈으로 등록한다.
+	 -->
+	 <bean id="dataSource" 
+	 	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	 	p:driverClassName="oracle.jdbc.OracleDriver"
+	 	p:url="jdbc:oracle:thin:@localhost:1521:xe"
+		p:username="hr"
+		p:password="zxcv1234" />
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:mapperLocations="classpath:/META-INF/mybatis/mappers/*.xml"
+		p:configLocation="classpath:/META-INF/mybatis/mybatis-config.xml"></bean>
+	<mybatis-spring:scan base-package="com.sample.camping.dao"/>
+	 
+	 <!-- 
+	 	서비스 클래스 DAO클래스를 스프링의 빈으로 등록한다.
+	  --> 
+	  <context:component-scan base-package="com.sample.camping.service"></context:component-scan>
+	  	
 </beans>

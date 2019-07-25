@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.BoardDao">
+
+	<insert id="addJoin" parameterType="Board">
+		insert into CAMP_JOINING_BOARDS(
+			JOINING_NO
+			,JOINING_TITLE
+			,JOINING_CONTENTS
+			,USER_ID
+		)
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId})
+	</insert>
+	<insert id="addOpinion" parameterType="Board">
+		insert into CAMP_OPINION_BOARDS(
+			OPINION_NO
+			,OPINION_TITLE
+			,OPINION_CONTENTS
+			,USER_ID
+			,CAMPSITE_NO
+		)
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo})
+	</insert>
+	<insert id="addReview" parameterType="Board">
+		insert into CAMP_REVIEW_BOARDS(
+			REVIEW_NO
+			,REVIEW_TITLE
+			,REVIEW_CONTENTS
+			,USER_ID
+			,CAMPSITE_NO
+		)
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo})
+	</insert>
+	<insert id="addFree" parameterType="Board">
+		insert into CAMP_FREE_BOARDS(
+			FREE_NO
+			,FREE_TITLE
+			,FREE_CONTENTS
+			,USER_ID
+		)
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId})
+	</insert>
+
+</mapper>

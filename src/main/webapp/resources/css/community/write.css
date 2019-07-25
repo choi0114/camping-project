@@ -1,0 +1,54 @@
+a:hover,a:focus{
+   text-decoration: none;
+}
+
+.bottom {
+	padding-top: 20px;
+}
+.page-head-left {
+    margin-top: 63px;
+    
+    margin-bottom: -20px;
+    font-weight: bold;
+}
+.page-head-right {
+    padding-top: 40px;
+   
+}
+.left-box {
+    width:70%;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border:1px solid #f1f3f5; 
+    margin-left: 110px;
+    background-color: #e9ecef;
+}
+.menu-box {
+    padding: 15px;
+    border-bottom: 1px solid #adb5bd;
+}
+.last-menu-box {
+    padding: 13px;
+}
+.select-orange {
+    color: coral;
+    border-bottom:4px solid coral;
+    padding-bottom: 13px;
+}
+.board {
+	
+	margin-top: 3px;
+	margin-right: -40px;
+	margin-bottom: 11px;
+}
+
+.title {
+	margin-left: -2px;
+	margin-right: -5px;
+	margin-top: 1px;
+}
+.writeWell {
+	background-color: white;
+	margin-left:70px;
+}
