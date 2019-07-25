@@ -7,7 +7,7 @@ import com.sample.camping.vo.CampingSites;
 
 public interface MapService {
 
-	List<CampingSites> getCampSites(String city);
+	List<CampingSites> getCampSites(Map<String, Object> param);
 	List<CampingSites> getCampSitesList(Map<String, Object>param);
 	Integer getCampSitesCount();
 }

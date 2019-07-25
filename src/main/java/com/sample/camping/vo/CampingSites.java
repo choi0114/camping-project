@@ -19,9 +19,11 @@ public class CampingSites {
 	private int point;
 	private Date createDate;
 	private String used;
+	private String sido;
 	private int myCampingNo;
 	
 	public CampingSites() {}
+	
 
 	public int getNo() {
 		return no;
@@ -141,6 +143,13 @@ public class CampingSites {
 
 	public void setUsed(String used) {
 		this.used = used;
+	}
+	public String getSido() {
+		return sido;
+	}
+	
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
 
 	public int getMyCampingNo() {

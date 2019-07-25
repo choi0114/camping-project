@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,10 +22,20 @@ public class MapController {
 	private MapService mapService;
 	
 	@RequestMapping("/map.camp")
-	public String Map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city) {
+	public String Map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
 		
-		model.addAttribute("campsites",mapService.getCampSites(city));
+		System.out.println(status);
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("citys", city);
+		param.put("states", status);
+		
+		
+		model.addAttribute("campsites",mapService.getCampSites(param));
 		model.addAttribute("campCounts",mapService.getCampSitesCount());
+		
+		List<CampingSites> list = mapService.getCampSites(param);
+		
 		
 		return "map/main";
 	}
@@ -32,7 +43,8 @@ public class MapController {
 	
 	@RequestMapping("/maplist.camp")
 	@ResponseBody
-	public List<CampingSites> maplist(@RequestParam("cp") int cp , @RequestParam(value = "city",required = false , defaultValue = "전국")String city ){		
+	public List<CampingSites> maplist(@RequestParam("cp") int cp , @RequestParam(value = "city",required = false , defaultValue = "전국")String city
+				,@RequestParam(value="status",required = false, defaultValue = "update")String status){		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		
@@ -42,9 +54,8 @@ public class MapController {
 		param.put("st",start);
 		param.put("en", end);
 		param.put("citys",city);
-		System.out.println(city);
+		param.put("states",status);
 		
-	
 		
 		return mapService.getCampSitesList(param);
 					

@@ -13,6 +13,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .address2{
+    	font-weight: bold;
+    }
         ul{
           margin: 7px 0px 0px 0px;
           padding: 0;
@@ -74,9 +77,16 @@
             vertical-align: top;
             margin: 4px 5px 0 0;
         }
-    .subject a span.sbjcat3 {
+    .subject a span.sbjcat3 { 
         background: #3789de;
         }
+    .subject a span.sbjcat2{ 
+    	background: #59DA50;
+    }
+    .subject a span.sbjcat1{
+    	background: #FF9436;
+    }
+    
     .content .subject {
         font-size: 20px;
         letter-spacing: -0.03em;
@@ -180,30 +190,28 @@
                 		<span class="total" id="total-list">${campCounts } 개</span>
                 	</div> 
                 	<div class="col-sm-9 text-right abc">
-	                   <div class="btn-group">
-	                    <a href="#" class="btn btn-default btn-xs" id="list-distance" ><strong>거리순</strong></a>
-	                    <a href="#" class="btn btn-default btn-xs" id="list-update">업데이트순</a>
-	                    <a href="#" class="btn btn-default btn-xs" id="list-like">추천순</a>
-	                    <a href="#" class="btn btn-default btn-xs" id="list-reference">조회순</a>
-	                    <a href="#" class="btn btn-default btn-xs" id="list-comment">댓글순</a>
+	                   <div id="btn-group">
+	                    <a href="map.camp?status=update&city=${param.city }" class="btn ${empty param.status || param.status eq 'update' ? 'btn-success' :'btn-default' } btn-xs" id="update">업데이트순</a>
+	                    <a href="map.camp?status=like&city=${param.city }" class="btn ${param.status eq 'like' ? 'btn-success' :'btn-default' } btn-xs" id="like">추천순</a>
+	                    <a href="map.camp?status=price&city=${param.city }" class="btn ${ param.status eq 'price' ? 'btn-success' :'btn-default' } btn-xs" id="price">가격순</a>
+	                    <a href="map.camp?status=comment&city=${param.city }" class="btn ${param.status  eq 'comment' ? 'btn-success' :'btn-default' } btn-xs" id="comment">댓글순</a>
 	                   </div>
                 	</div>
-                
                 	<div class="row">
                 	    <div class="col-sm-12 text-left sear-box">
                 	   <form method="post" action="#">
                            <select class="searchSelect" id="selectState" name="state">
-                            <option value="">전국</option>
-                            <option value="서울" ${param.city eq '서울' ? 'selected' : "" }>서울</option>
-                            <option value="경기" ${param.city eq '경기' ? 'selected' : "" }>경기</option>
-                            <option value="인천" ${param.city eq '인천' ? 'selected' : "" }>인천</option>
-                            <option value="부산" ${param.city eq '부산' ? 'selected' : "" }>부산</option>
-                            <option value="세종" ${param.city eq '세종' ? 'selected' : "" }>세종</option>
-                            <option value="대전" ${param.city eq '대전' ? 'selected' : "" }>대전</option>
-                            <option value="충청" ${param.city eq '충청' ? 'selected' : "" }>충청도</option>
-                            <option value="경상" ${param.city eq '경상' ? 'selected' : "" }>경상도</option>
-                            <option value="전라" ${param.city eq '전라' ? 'selected' : "" }>전라도</option>
-                            <option value="제주도" ${param.city eq '제주도' ? 'selected' : "" }>제주도</option>
+	                            <option value="">전국</option>
+	                            <option value="서울" ${param.city eq '서울' ? 'selected' : "" }>서울</option>
+	                            <option value="경기" ${param.city eq '경기' ? 'selected' : "" }>경기</option>
+	                            <option value="인천" ${param.city eq '인천' ? 'selected' : "" }>인천</option>
+	                            <option value="부산" ${param.city eq '부산' ? 'selected' : "" }>부산</option>
+	                            <option value="세종" ${param.city eq '세종' ? 'selected' : "" }>세종</option>
+	                            <option value="대전" ${param.city eq '대전' ? 'selected' : "" }>대전</option>
+	                            <option value="충청" ${param.city eq '충청' ? 'selected' : "" }>충청도</option>
+	                            <option value="경상" ${param.city eq '경상' ? 'selected' : "" }>경상도</option>
+	                            <option value="전라" ${param.city eq '전라' ? 'selected' : "" }>전라도</option>
+	                            <option value="제주도" ${param.city eq '제주도' ? 'selected' : "" }>제주도</option>
                            </select>
                 	   </form>
                 	    </div>
@@ -220,14 +228,23 @@
                                <div class="content">
                                    <div class="subject">
                                     <a href="#">
-                                    <span class="sbjcat sbjcat3">${campsite.sort }</span><!--캠핑장분류-->
+                                    <c:if test="${campsite.sort eq 'CAMP' }">
+                                		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
+                                    </c:if>
+                                     <c:if test="${campsite.sort eq 'NOMAL' }">
+                                		<span class="sbjcat sbjcat2">캠핑장</span><!--캠핑장분류--> 
+                                    </c:if>
+                                     <c:if test="${campsite.sort eq 'CAR' }">
+                                		<span class="sbjcat sbjcat1">카라반</span><!--캠핑장분류--> 
+                                    </c:if>
+									                                
                                      	${campsite.name } <!-- 캠핑장 이름 -->
                                     </a>
                                    </div>
                                    <div class="cont"> <!-- 캠핑장 주소 -->
                                       <p class="location">
-                                          <span class="distance">10.6km</span> <!-- 거리 -->
-                                          <span>${campsite.address }</span>
+                                         	
+                                          <span class="address2">${campsite.sido }</span>
                                       </p>
                                       <ul>
                                         <li class="address">${campsite.address }</li>         
@@ -237,7 +254,8 @@
                                </div>              	       
                         </div> <!-- 돌려야할곳 -->
                 	</c:forEach>
-                	</div>	
+                	</div>
+           
                 </div>
                 <div class="col-sm-8">
                     <div id="map" style="width: 100%; height: 900px; position:relative;"> 
@@ -251,23 +269,25 @@
         </div>
         
     </div>
+    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
-		
-		
 	
 		$('#selectState').change(function(){
-			location.href ="map.camp?city=" + $(this).val();
-		})
+			location.href ="map.camp?city=" + $(this).val() + "&satus=update";
+		});
+		
+		
 		
 		var page = 2;
 		var dataloading = false;
 		var dosi = $("#selectState option:selected").val();
-		alert(dosi);
+		
 		$('.camping-list').scroll(function() {
 			var scrollTop = $(this).scrollTop();
 			var boxheight = $(this).height();
-			var listheight = 0;
+			var listheight = 0;	
+			var stat = $('#btn-group .btn-success').attr("id");
 			
 			$(this).find('.list-box').each(function(index, box) {
 				listheight += $(box).height();
@@ -280,7 +300,7 @@
 					$.ajax({
 						type:"GET",
 						url:"maplist.camp",
-						data:{cp:page , city:dosi},
+						data:{cp:page , city:dosi , status:stat},
 						dataType:"json",
 						beforeSend: function() {
 							dataloading = true;
@@ -293,6 +313,16 @@
 							page++;
 	
 							$.each(result , function(index , list){
+								
+								var sort;
+								if (list.sort == 'CAMP'){
+									sort = "<span class='sbjcat sbjcat3'>글램핑</span>";
+								}else if(list.sort == "NOMAL"){
+									sort = "<span class='sbjcat sbjcat2'>캠핑장</span>";
+								}else{
+									sort ="<span class='sbjcat sbjcat1'>카라반</span>";
+								}
+								
 								var row = "<div class='col-sm-12 col-xs-4 list-box'>";
 									row+= "<div class='left-photo'>";
 									row+= "<img src='resources/images/update.png' class='new'>";
@@ -301,14 +331,13 @@
 									row+= "<div class='content'>";
 									row+= "<div class='subject'>";
 									row+= "<a href='#'>";
-									row+="<span class='sbjcat sbjcat3'>"+list.sort+"</span>";
+									row+= sort;
 									row+= list.name;
 									row+="</a>";
 									row+="</div>";
 									row+="<div class='cont'>";
 									row+="<p class='location'>";
-									row+="<span class='distance'>10.6km</span>"
-									row+="<span>"+list.address+"</span>";
+									row+="<span class='address2'>"+list.sido+"</span>";
 									row+="</p>";
 									row+="<ul>";
 									row+="<li class='address'>"+list.address+"</li>";
@@ -331,6 +360,9 @@
 				$(this).addClass("active").siblings().removeClass("active");
 			})
 		})
+		
+		
+		// ↓ KAKAO MAP 스크립트
 	
 		// 맵 생성
 		var container = document.getElementById('map');

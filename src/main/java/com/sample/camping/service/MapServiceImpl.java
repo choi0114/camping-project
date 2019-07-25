@@ -15,12 +15,13 @@ public class MapServiceImpl implements MapService {
 	@Autowired
 	private MapDao mapDao;
 
+
 	@Override
-	public List<CampingSites> getCampSites(String city) {
-
-		return mapDao.getCampSites(city);
+	public List<CampingSites> getCampSites(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapDao.getCampSites(param);
 	}
-
+	
 	@Override
 	public List<CampingSites> getCampSitesList(Map<String,Object>param) {
 
