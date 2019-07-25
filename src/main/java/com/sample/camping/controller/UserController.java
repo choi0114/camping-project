@@ -39,8 +39,16 @@ public class UserController {
 
 	@ExceptionHandler(AlreadyUsedIdException.class) // 실행하다가 예외가 발생하면 실행
 	public String alreadyUsedIdExceptionHandler(AlreadyUsedIdException ex) {
+		ex.printStackTrace();
 		return "error/user/registerfail";
 	}
+	
+	@ExceptionHandler(LoginFailureException.class) // 로그인 실패시 발생하는 예외
+	public String LoginFailureExceptionHandler(LoginFailureException ex) {
+		ex.printStackTrace();
+		return "error/user/loginfail";
+	}
+	
 	
 	@RequestMapping("/form.camp")
 	public String home() {
@@ -52,5 +60,14 @@ public class UserController {
 		userService.registerUser(user);
 		return "login/completed";
 	}
-	
+	@RequestMapping("/login.camp")
+	public String login(String id, String password,
+			HttpSession session) {
+		
+		User user = userService.login(id, password);
+
+		session.setAttribute("LOGIN_USER", user);
+		return "login/completed";
+	}
 }
+	

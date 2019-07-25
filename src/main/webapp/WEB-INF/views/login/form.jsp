@@ -24,6 +24,7 @@
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
+						<form class="pb-modalreglog-form-reg" method="post" action="login.camp">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -32,11 +33,10 @@
 							<h4 class="modal-title" id="myModalLabel">로그인</h4>
 						</div>
 						<div class="modal-body">
-							<form>
 								<div class="form-group">
 									<label for="email">아이디</label>
 									<div class="input-group pb-modalreglog-input-group">
-										<input type="text" class="form-control" id="id"
+										<input type="text" class="form-control" id="id" name="id"
 											placeholder="아이디"> <span class="input-group-addon"><span
 											class="glyphicon glyphicon-user"></span></span>
 									</div>
@@ -44,18 +44,18 @@
 								<div class="form-group">
 									<label for="password">비밀번호</label>
 									<div class="input-group pb-modalreglog-input-group">
-										<input type="password" class="form-control" id="pws"
+										<input type="password" class="form-control" id="pws" name="password"
 											placeholder="비밀번호"> <span class="input-group-addon"><span
 											class="glyphicon glyphicon-lock"></span></span>
 									</div>
 								</div>
-							</form>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary">로그인</button>
+							<button type="submit" class="btn btn-primary">로그인</button>
 						</div>
+					  </form>
 					</div>
 				</div>
 			</div>
@@ -153,7 +153,7 @@
 	var pwJ = /^[a-zA-Z0-9]{8,}$/;
 	var nameJ = /^[가-힣]{2,6}$/;
 	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	var phoneJ = /^0\\d{1,2}-\\d{3,4}-\\d{4}$/;
+	var phoneJ = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 
 	$('#inputPws').blur(function(){
 		if(pwJ.test($('#inputPws').val())){
