@@ -226,8 +226,9 @@
                                     <img class="tm" src="resources/images/camping.png"> <!-- 캠핑 사진-->                                  
                                </div>
                                <div class="content">
-                                   <div class="subject">
-                                    <a href="#">
+                                   <div class="subject">	
+	
+                                    <a href="#" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
                                     <c:if test="${campsite.sort eq 'CAMP' }">
                                 		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
@@ -330,7 +331,7 @@
 									row+= "</div>";
 									row+= "<div class='content'>";
 									row+= "<div class='subject'>";
-									row+= "<a href='#'>";
+									row+= "<a href='#' class='campsite-name' data-Lat='"+list.latitude+"' data-lng='"+list.longitude+"'>";
 									row+= sort;
 									row+= list.name;
 									row+="</a>";
@@ -355,28 +356,88 @@
 			
 		});
 		
-		$(function(){
+	
 			$(".btn-group a").click(function(){ // active 클래스 추가
 				$(this).addClass("active").siblings().removeClass("active");
 			})
-		})
+		
 		
 		
 		// ↓ KAKAO MAP 스크립트
+		
+		// 위도,경도로 이동
+		function setCenter(lat,lng){
+			var moveLatLng = new kakao.maps.LatLng(lat,lng);
+				
+			map.setCenter(moveLatLng);
+		}
+	
+		// 배열에 담긴 마커 지우기
+		function setMarkers(map){ 
+		    for(var i=0; i<markers.length;i++){
+		        markers[i].setMap(map);
+		    }
+		}
 	
 		// 맵 생성
 		var container = document.getElementById('map');
+		var lat; // 위도
+		var lng; // 경도
+		
 		var options = {
 			center: new kakao.maps.LatLng(37.581854899999996, 126.98633099999998),
-			level: 9
+			level: 5
 			
 		};
 		
 		var map = new kakao.maps.Map(container, options);
 		
+		var markers = [];
 		
+		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
+		$(".camping-list").on('click', '.campsite-name', function(event){
+			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
+			var abc = $(this).children('.sbjcat').text();
+			console.log(abc);
+			if(markers != null){
+					setMarkers(null);
+			}
+			
+			lat = $(this).attr('data-lat');
+			lng = $(this).attr('data-lng');
+			 
+			event.preventDefault();
+			
+			// var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+	
+			var imageSrc = 'resources/images/maptent1.svg', // 마커이미지의 주소입니다    
+		    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+		     
+		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+		   	//markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); 
+		    var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+			
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition,
+			    image: markerImage // 마커 이미지 설정
+			});	 
+			// 마커를 지도에 표시.
+				marker.setMap(map);
+				markers.push(marker);
+			// 해당 마커로 위도,경도로 이동.
+				setCenter(lat,lng);
+			// 하이브리드 맵으로 변경
+				map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+		});
+
+
 		// 현재위치 정보
 		$("#location-button").click(function(){
+			if(markers != null){
+				setMarkers(null);
+				}
 			if (navigator.geolocation) {
 			    
 			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -423,12 +484,12 @@
 			        map: map, 
 			        position: locPosition
 			    }); 
-			    
+			    markers.push(marker);
 			    // 지도 중심좌표를 접속위치로 변경합니다
 			    map.setCenter(locPosition);      
 			
 			}
-
+		
 		})
 	</script>
 </body>
