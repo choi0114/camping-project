@@ -23,7 +23,7 @@
 	.panel-body ul {
 		font-size: 14px;
 	}
-	.panel-heading {
+	.panel-heading { 
 		border: 1px #c7c8d2 solid;
 	}
 	.panel-body {

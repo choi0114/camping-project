@@ -18,7 +18,8 @@ public class CampSite {
 	private Integer point;
 	private Date createDate;
 	private String usedYn;
-	private MyCampSite myCampSite;
+	private MyCampsite MyCampsite;
+	
 	public Integer getNo() {
 		return no;
 	}
@@ -103,11 +104,11 @@ public class CampSite {
 	public void setUsedYn(String usedYn) {
 		this.usedYn = usedYn;
 	}
-	public MyCampSite getMyCampSite() {
-		return myCampSite;
+	public MyCampsite getMyCampsite() {
+		return MyCampsite;
 	}
-	public void setMyCampSite(MyCampSite myCampSite) {
-		this.myCampSite = myCampSite;
+	public void setMyCampsite(MyCampsite MyCampsite) {
+		this.MyCampsite = MyCampsite;
 	}
 	
 	
