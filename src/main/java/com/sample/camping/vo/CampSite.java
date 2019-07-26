@@ -2,7 +2,7 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
-public class CampingSites {
+public class CampSite {
 	
 	private Integer no;
 	private	String name;
@@ -18,11 +18,11 @@ public class CampingSites {
 	private String photo;
 	private Integer point;
 	private Date createDate;
-	private String used;
+	private String usedYn;
 	private String sido;
-	private int myCampingNo;
+	private int MyCampsite;
 	
-	public CampingSites() {}
+	public CampSite() {}
 
 	public Integer getNo() {
 		return no;
@@ -136,12 +136,12 @@ public class CampingSites {
 		this.createDate = createDate;
 	}
 
-	public String getUsed() {
-		return used;
+	public String getUsedYn() {
+		return usedYn;
 	}
 
-	public void setUsed(String used) {
-		this.used = used;
+	public void setUsedYn(String usedYn) {
+		this.usedYn = usedYn;
 	}
 
 	public String getSido() {
@@ -152,14 +152,12 @@ public class CampingSites {
 		this.sido = sido;
 	}
 
-	public int getMyCampingNo() {
-		return myCampingNo;
+	public int getMyCampsite() {
+		return MyCampsite;
 	}
 
-	public void setMyCampingNo(int myCampingNo) {
-		this.myCampingNo = myCampingNo;
+	public void setMyCampsite(int myCampsite) {
+		MyCampsite = myCampsite;
 	}
-	
 
-	
 }

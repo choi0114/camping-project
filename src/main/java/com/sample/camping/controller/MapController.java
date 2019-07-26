@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 import com.sample.camping.service.MapService;
-import com.sample.camping.vo.CampingSites;
+import com.sample.camping.vo.CampSite;
 
 @Controller
 public class MapController {
@@ -34,7 +34,7 @@ public class MapController {
 		model.addAttribute("campsites",mapService.getCampSites(param));
 		model.addAttribute("campCounts",mapService.getCampSitesCount());
 		
-		List<CampingSites> list = mapService.getCampSites(param);
+		List<CampSite> list = mapService.getCampSites(param);
 		
 		
 		return "map/main";
@@ -43,7 +43,7 @@ public class MapController {
 	
 	@RequestMapping("/maplist.camp")
 	@ResponseBody
-	public List<CampingSites> maplist(@RequestParam("cp") int cp , @RequestParam(value = "city",required = false , defaultValue = "전국")String city
+	public List<CampSite> Maplist(@RequestParam("cp") int cp , @RequestParam(value = "city",required = false , defaultValue = "전국")String city
 				,@RequestParam(value="status",required = false, defaultValue = "update")String status){		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -59,5 +59,17 @@ public class MapController {
 		
 		return mapService.getCampSitesList(param);
 					
+	}
+	// 위도 경도를 통한 DB에 캠핑장 정보 가져오기
+	@RequestMapping("/mapDetail.camp")
+	@ResponseBody
+	public CampSite MapLatLng(Double lat , Double lng){
+	
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("lat", lat);
+		param.put("lng",lng);
+		
+		return mapService.getLanLngMDetail(param);
 	}
 } 

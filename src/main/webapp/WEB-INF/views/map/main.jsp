@@ -98,21 +98,17 @@
             float: left;
             display:inline-block;
             position: relative;
-
-
         }
         .content{
                 position: relative;
                 margin-left: 180px;
         }
-        
-     
+
         .total{
             font-size: 15px;
             margin-bottom: 2px;
         }
         select{
-
             outline: none;
             min-width: 70px;
             height: 36px;
@@ -131,7 +127,7 @@
        
     .btn-default.active:focus, .btn-default.active:hover{
     	background-color: #FFA648;
-    	color: white;
+    	color: white;	
     	font-weight: bold;
     }
     	.pos{
@@ -386,31 +382,51 @@
 		
 		var options = {
 			center: new kakao.maps.LatLng(37.581854899999996, 126.98633099999998),
-			level: 5
-			
+			level: 7
 		};
 		
 		var map = new kakao.maps.Map(container, options);
 		
 		var markers = [];
 		
-		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
+	// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
 		$(".camping-list").on('click', '.campsite-name', function(event){
-			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
-			var abc = $(this).children('.sbjcat').text();
-			console.log(abc);
+			// 위도,경도
+			event.preventDefault();
+			lat = $(this).attr('data-lat');
+			lng = $(this).attr('data-lng');
+		
+			$.ajax({
+				type:"GET",
+				url:"mapDetail.camp",
+				data:{lat:lat , lng:lng},
+				dataType:"json",
+				success(function(data){
+					
+					
+				})
+			})
+			
+
+			var icon;  // 아이콘 이미지 저장객체
+			var sort = $(this).children('.sbjcat').text();
+			
+			if(sort == '글램핑'){
+				icon = 'maptent1.svg';
+			}else if(sort == '캠핑장'){
+				icon = 'maptent3.svg';
+			}else{
+				icon = 'maptent2.svg'; // 카라반 
+			}
+
 			if(markers != null){
 					setMarkers(null);
 			}
 			
-			lat = $(this).attr('data-lat');
-			lng = $(this).attr('data-lng');
-			 
-			event.preventDefault();
 			
-			// var markerPosition  = new kakao.maps.LatLng(lat, lng); 
-	
-			var imageSrc = 'resources/images/maptent1.svg', // 마커이미지의 주소입니다    
+		
+			
+			var imageSrc = 'resources/images/'+icon, // 마커이미지의 주소입니다    
 		    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 		     
@@ -428,6 +444,8 @@
 				markers.push(marker);
 			// 해당 마커로 위도,경도로 이동.
 				setCenter(lat,lng);
+			// 맵 레벨을 4로 변경
+				map.setLevel(3);
 			// 하이브리드 맵으로 변경
 				map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
 		});

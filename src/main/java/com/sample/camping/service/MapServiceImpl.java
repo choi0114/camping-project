@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.MapDao;
-import com.sample.camping.vo.CampingSites;
+import com.sample.camping.vo.CampSite;
 
 @Service
 public class MapServiceImpl implements MapService {
@@ -17,13 +17,13 @@ public class MapServiceImpl implements MapService {
 
 
 	@Override
-	public List<CampingSites> getCampSites(Map<String, Object> param) {
+	public List<CampSite> getCampSites(Map<String, Object> param) {
 		// TODO Auto-generated method stub
 		return mapDao.getCampSites(param);
 	}
 	
 	@Override
-	public List<CampingSites> getCampSitesList(Map<String,Object>param) {
+	public List<CampSite> getCampSitesList(Map<String,Object>param) {
 
 		return mapDao.getCampSitesList(param);
 	}
@@ -32,5 +32,11 @@ public class MapServiceImpl implements MapService {
 	public Integer getCampSitesCount() {
 		// TODO Auto-generated method stub
 		return mapDao.getCampSitesCount();
+	}
+	
+@Override
+	public CampSite getLanLngMDetail(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return mapDao.getLanLngMDetail(param);
 	}
 }

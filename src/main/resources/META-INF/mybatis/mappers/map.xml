@@ -4,7 +4,7 @@
 <mapper namespace="com.sample.camping.dao.MapDao">
 
 <select id="getCampSites" parameterType="map" resultType="campingsites">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -35,9 +35,9 @@ FROM (select X.* , row_number() over (
 					campsite_photo photo,
 					campsite_point point,
 					campsite_create_date createDate,
-					campsite_used_yn used,
+					campsite_used_yn usedYn,
 					campsite_sido sido,
-					my_campsite_no myCampingNo,
+					my_campsite_no MyCampsite,
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
 											WHERE B.campsite_no = A.campsite_no) cnt
@@ -57,7 +57,7 @@ AND
 
 </select>
 <select id="getCampSitesList" parameterType="Map" resultType="campingsites">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -88,9 +88,9 @@ FROM (select X.* , row_number() over (
 					campsite_photo photo,
 					campsite_point point,
 					campsite_create_date createDate,
-					campsite_used_yn used,
+					campsite_used_yn usedYn,
 					campsite_sido sido,
-					my_campsite_no myCampingNo,
+					my_campsite_no MyCampsite,
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
 											WHERE B.campsite_no = A.campsite_no) cnt
@@ -115,8 +115,32 @@ FROM (select X.* , row_number() over (
 	from
 		camp_campsites
 </select>
-<!-- <select id="getListUpdate" parameterType="" resultType="campingssites">
-	select
-		
-</select> -->
+<select id="getLanLngMDetail" parameterType="Map" resultType="campingsites">
+				select
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn usedYn,
+					campsite_sido sido,
+					my_campsite_no MyCampsite
+				from
+					CAMP_CAMPSITES
+				where
+					campsite_latitude = #{lat}
+				and
+					campsite_longitude = #{lng}
+				
+								
+</select>
 </mapper>
