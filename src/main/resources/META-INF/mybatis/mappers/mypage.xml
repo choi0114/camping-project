@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sample.camping.dao.UserDao">
+
+	<select id="getUserBuId" resultType="com.sample.camping.vo.User" parameterType="string">
+		select
+			user_id id,
+			user_password password,
+			user_name name,
+			user_nick_name nickName,
+			user_email email,
+			user_phone_number phoneNumber,
+			user_profile_photo profilePhoto,
+			user_type type,
+			user_used_yn usedYn,
+			user_create_date createDate
+		from
+			camp_users
+		where 
+			user_id = #{value}
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -9,11 +9,12 @@ public class User {
 	private String name;
 	private String nickName;
 	private String email;
-	private String tel;
-	private String fileName;
+	private String phoneNumber;
+	private String profilePhoto;
 	private String type;
 	private String usedYn;
 	private Date createDate;
+	
 	public String getId() {
 		return id;
 	}
@@ -43,18 +44,18 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}	
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public String getTel() {
-		return tel;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public String getProfilePhoto() {
+		return profilePhoto;
 	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 	public String getType() {
 		return type;
