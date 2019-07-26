@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.sample.camping.vo.User;
 
-public interface UserDao {
+public interface AdminUserDao {
 
 	void addUser(User user);
 	User getUserById(String userId);
