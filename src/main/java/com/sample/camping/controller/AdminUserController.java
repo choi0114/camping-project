@@ -53,4 +53,3 @@ public class AdminUserController {
 		return "login/completed";
 	}
 }
-	
