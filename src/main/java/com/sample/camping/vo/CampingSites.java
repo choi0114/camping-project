@@ -4,32 +4,31 @@ import java.util.Date;
 
 public class CampingSites {
 	
-	private int no;
+	private Integer no;
 	private	String name;
 	private String sort;
 	private Double latitude;
 	private Double longitude;
 	private String address;
 	private String tel;
-	private int sites;
-	private int price;
-	private int likes;
-	private int hates;
+	private Integer sites;
+	private Integer price;
+	private Integer likes;
+	private Integer hates;
 	private String photo;
-	private int point;
+	private Integer point;
 	private Date createDate;
 	private String used;
 	private String sido;
 	private int myCampingNo;
 	
 	public CampingSites() {}
-	
 
-	public int getNo() {
+	public Integer getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(Integer no) {
 		this.no = no;
 	}
 
@@ -53,21 +52,17 @@ public class CampingSites {
 		return latitude;
 	}
 
-
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-
 
 	public Double getLongitude() {
 		return longitude;
 	}
 
-
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-
 
 	public String getAddress() {
 		return address;
@@ -85,35 +80,35 @@ public class CampingSites {
 		this.tel = tel;
 	}
 
-	public int getSites() {
+	public Integer getSites() {
 		return sites;
 	}
 
-	public void setSites(int sites) {
+	public void setSites(Integer sites) {
 		this.sites = sites;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public int getLikes() {
+	public Integer getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(Integer likes) {
 		this.likes = likes;
 	}
 
-	public int getHates() {
+	public Integer getHates() {
 		return hates;
 	}
 
-	public void setHates(int hates) {
+	public void setHates(Integer hates) {
 		this.hates = hates;
 	}
 
@@ -125,11 +120,11 @@ public class CampingSites {
 		this.photo = photo;
 	}
 
-	public int getPoint() {
+	public Integer getPoint() {
 		return point;
 	}
 
-	public void setPoint(int point) {
+	public void setPoint(Integer point) {
 		this.point = point;
 	}
 
@@ -148,10 +143,11 @@ public class CampingSites {
 	public void setUsed(String used) {
 		this.used = used;
 	}
+
 	public String getSido() {
 		return sido;
 	}
-	
+
 	public void setSido(String sido) {
 		this.sido = sido;
 	}
@@ -164,6 +160,6 @@ public class CampingSites {
 		this.myCampingNo = myCampingNo;
 	}
 	
-	
 
+	
 }
