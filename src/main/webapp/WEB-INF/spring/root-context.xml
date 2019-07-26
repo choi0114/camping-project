@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<context:annotation-config/>
-	
 	<context:component-scan base-package="com.sample.camping.service"/>
 	
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/myoracle"></jee:jndi-lookup>
-	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe"
+		p:username="hr"
+		p:password="zxcv1234"/>
+			
+	<!-- 
+		mybatis의 핵심객체 SqlSessionFactory를 스프링의 빈으로 등록한다.
+		SqlSessionFactory는 SqlSession객체를 제공한다.
+		SqlSession은 매퍼 인스턴스를 생성하고, SQL 실행과 관련된 메소드를 제공하는 객체다.
+	 -->		
+			
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath:/META-INF/mybatis/mappers/*.xml" />
-	
-	<mybatis-spring:scan base-package="com.sample.aop.dao"/>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	<tx:advice id="txAdvice" transaction-manager="transactionManager"></tx:advice>
-	<aop:config>
-		<aop:advisor advice-ref="txAdvice" pointcut="within(com.sample.camping.service.*ServiceImpl)"/>
-	</aop:config>
-	
+		p:configLocation="classpath:/META-INF/mybatis/mybatis-config.xml"
+		p:mapperLocations="classpath:/META-INF/mybatis/mappers/*.xml"/>
+		
+	<!-- 
+		1. 지정된 패키지에 정의된 메퍼 인터페이스(xxxDao)를 스캔한다.
+		2. 위에서 정의한 SqlSessionFactory로부터 SqlSession을 제공받아서
+		   스캔된 매퍼 인터페이스(xxxdao)를 구현한 매퍼 인스턴스를 생성하고 스프링의 빈으로 등록한다.
+		   * 즉, xxxDao 인터페이스 타입의 구현객체들은 자동으로 스프링의 빈으로 등록되는 것이다.
+	 -->	
+	<mybatis-spring:scan base-package="com.sample.camping.admin.dao"/>
+
 </beans>
