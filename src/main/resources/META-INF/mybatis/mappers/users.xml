@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.UserDao">
+
+	<insert id="addUser" parameterType="user">
+		insert into camp_users
+			(user_id, user_password, user_name, user_nick_name, user_email, user_phone_number, user_type)
+		values
+			(#{id}, #{password}, #{name}, #{nickName}, #{email}, #{phoneNumber}, #{type})
+	</insert>	
+
+	<select id="getUserById" parameterType="string" resultType="user">
+		select 
+		  user_id as id,
+		  user_password as password,
+		  user_name as name,
+		  user_nick_name as nickName,
+		  user_email as email,
+		  user_phone_number as phoneNumber,
+		  user_type as type
+		from
+		  camp_users
+		where
+		  user_id = #{value}  	  
+	</select>
+
+	<select id="getUserByName" parameterType="string" resultType="user">
+		select 
+		  user_id as id,
+		  user_password as password,
+		  user_name as name,
+		  user_nick_name as nickName,
+		  user_email as email,
+		  user_phone_number as phoneNumber,
+		  user_type as type
+		from
+		  camp_users
+		where
+		  user_name = #{value}  	  
+	</select>
+</mapper>

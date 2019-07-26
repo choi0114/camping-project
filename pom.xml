@@ -23,8 +23,7 @@
 		</repository>
 	</repositories>
 	
-	<dependencies>
-	
+	<dependencies>	
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -49,6 +48,11 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.9.9</version>
+		</dependency>	
 	
 		<!-- Spring -->
 		<dependency>

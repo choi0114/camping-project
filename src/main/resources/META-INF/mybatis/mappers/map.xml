@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.camping.dao.MapDao">
+
+<select id="getCampSites" parameterType="map" resultType="campingsites">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+FROM (select X.* , row_number() over (	
+										<if test="states == 'update'">
+											order by no  desc
+										</if>
+										<if test="states == 'price'">
+											order by price desc
+										</if>
+										<if test="states == 'comment'">
+											order by cnt desc
+										</if>
+										<if test="states == 'like'">
+											order by likes desc
+										</if>
+										
+										) row_no
+			from(SELECT 
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn used,
+					campsite_sido sido,
+					my_campsite_no myCampingNo,
+											(select   count(*)
+											from CAMP_REVIEW_BOARDS B
+											WHERE B.campsite_no = A.campsite_no) cnt
+				FROM
+					 CAMP_CAMPSITES A
+				<where>
+					<if test="citys != '전국'">
+						campsite_address like '%' || #{citys} || '%'
+					</if>
+				</where>
+				) X
+	) 
+WHERE
+	row_no >= 1
+AND
+	row_no &lt;= 10
+
+</select>
+<select id="getCampSitesList" parameterType="Map" resultType="campingsites">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+FROM (select X.* , row_number() over (	
+										<if test="states == 'update'">
+											order by no  desc
+										</if>
+										<if test="states == 'price'">
+											order by price desc
+										</if>
+										<if test="states == 'comment'">
+											order by cnt desc
+										</if>
+										<if test="states == 'like'">
+											order by likes desc
+										</if>
+										
+										) row_no
+			from(SELECT 
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn used,
+					campsite_sido sido,
+					my_campsite_no myCampingNo,
+											(select   count(*)
+											from CAMP_REVIEW_BOARDS B
+											WHERE B.campsite_no = A.campsite_no) cnt
+				FROM
+					 CAMP_CAMPSITES A
+				<where>
+					<if test="citys != '전국'">
+						campsite_address like '%' || #{citys} || '%'
+					</if>
+				</where>
+					) X
+				) 
+		WHERE
+			row_no >= #{st}
+		AND
+			row_no &lt;= #{en}
+				
+</select>
+<select id="getCampSitesCount" resultType="int">
+	select
+		count(*)
+	from
+		camp_campsites
+</select>
+<!-- <select id="getListUpdate" parameterType="" resultType="campingssites">
+	select
+		
+</select> -->
+</mapper>
