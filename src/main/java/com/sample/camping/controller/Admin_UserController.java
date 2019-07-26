@@ -32,7 +32,7 @@ import com.sample.camping.vo.User;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class Admin_UserController {
 	
 	@Autowired
 	private UserService userService;
@@ -60,6 +60,7 @@ public class UserController {
 		userService.registerUser(user);
 		return "login/completed";
 	}
+	
 	@RequestMapping("/login.camp")
 	public String login(String id, String password,
 			HttpSession session) {
