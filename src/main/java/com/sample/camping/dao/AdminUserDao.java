@@ -1,10 +1,10 @@
-package com.sample.camping.admin.dao;
+package com.sample.camping.dao;
 
 import java.util.List;
 
 import com.sample.camping.vo.User;
 
-public interface Admin_UserDao {
+public interface AdminUserDao {
 
 	void addUser(User user);
 	User getUserById(String userId);

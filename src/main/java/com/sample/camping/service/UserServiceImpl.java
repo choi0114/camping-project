@@ -6,7 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sample.camping.admin.dao.Admin_UserDao;
+import com.sample.camping.dao.AdminUserDao;
 import com.sample.camping.exception.AlreadyUsedIdException;
 import com.sample.camping.exception.LoginFailureException;
 import com.sample.camping.vo.User;
@@ -15,7 +15,7 @@ import com.sample.camping.vo.User;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private Admin_UserDao userDao;
+	private AdminUserDao userDao;
 
 	@Override
 	public void registerUser(User user) {
