@@ -11,8 +11,8 @@ public class CampingController {
 		return "camping/detail";
 	}
 	
+	@RequestMapping("/test.camp")
 	public String test() {
-		System.out.println("git test 입니다.");
-		return "test";
+		return "camping/test";
 	}
 }

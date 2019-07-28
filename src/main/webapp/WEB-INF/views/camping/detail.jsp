@@ -10,30 +10,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-    <script src="css/liquidFillGauge.js" language="JavaScript"></script>
-	<style>
-	    table {
-	        border: 1px solid #ccc;
-	    }
-	    
-	    th, td {
-	        text-align: center;
-	        border: 1px solid #ccc;
-	        font-size: 11px;
-	    }  
-	    
-	    #canvas .circle {
-		display: inline-block;
-		margin: 1em;
-		}
-		
-		.circles-decimals {
-			font-size: .4em;
-		}
-		
-		.liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
-	</style>  
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/camping/resources/js/liquidFillGauge.js"></script>
+    <link rel="stylesheet" href="/camping/resources/css/campingdetail/detail.css">
 </head>
 <body>
 	<div class="container">
@@ -55,19 +34,19 @@
 			<div class="col-sm-12">
 				<button class="btn btn-default">
 					<span class="glyphicon glyphicon-heart-empty"></span>
-					<span style="color: #444;"> | 찜 8</span>
+					<span> | 찜 8</span>
 				</button>
 				<button class="btn btn-default" style="margin-left: 20px;">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
-					<span style="color: #444;"> | 추천 0</span>
+					<span> | 추천 0</span>
 				</button>
 				<button class="btn btn-default">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
-					<span style="color: #444;"> | 비추천 0</span>
+					<span> | 비추천 0</span>
 				</button>
 				<button class="btn btn-default" style="margin-left: 20px;">
 					<span class="glyphicon glyphicon-pencil"></span>
-					<span style="color: #444;"> | 의견 0</span>
+					<span> | 의견 0</span>
 				</button>
 			</div>
 		</div>
@@ -95,42 +74,42 @@
             <strong>033-576-0884 / 033-576-0885</strong>
         </div>
     </div>
-    <div class="row text-center">
-        <div class="col-sm-offset-2 col-sm-1" style="padding: 0px;">
+    <div class="row text-center" id="info-button-box">
+        <div class="col-sm-offset-2 col-sm-1">
             <a href="#">
-            	<img src="images/reservation.svg" width="45;"/>
+            	<img src="/camping/resources/images/reservation.svg" width="45"/>
             </a>
-            <p style="color: #777; font-size: 12px; margin-top: 10px;">실시간예약</p>
+            <p>실시간예약</p>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
+        <div class="col-sm-1">
             <a href="#">
-                <img src="images/website.svg" width="45;"/>
+                <img src="/camping/resources/images/website.svg" width="45"/>
             </a>
-            <p style="color: #777; font-size: 12px; margin-top: 10px;">웹사이트</p>
+            <p>웹사이트</p>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
-            <img src="images/stick.png"/>
+        <div class="col-sm-1">
+            <img src="/camping/resources/images/stick.png"/>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
+        <div class="col-sm-1">
             <a href="#">
-                <img src="images/roadview.svg" width="45;"/>
+                <img src="/camping/resources/images/roadview.svg" width="45"/>
             </a>
-            <p style="color: #777; font-size: 12px; margin-top: 10px;">로드뷰</p>
+            <p>로드뷰</p>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
+        <div class="col-sm-1">
             <a href="#">
-                <img src="images/navigation.svg" width="45;"/>
+                <img src="/camping/resources/images/navigation.svg" width="45"/>
             </a>
-            <p style="color: #777; font-size: 12px; margin-top: 10px;">길찾기</p>
+            <p>길찾기</p>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
-            <img src="images/stick.png"/>
+        <div class="col-sm-1">
+            <img src="/camping/resources/images/stick.png"/>
         </div>
-        <div class="col-sm-1" style="padding: 0px;">
+        <div class="col-sm-1">
             <a href="#">
-                <img src="images/share2.svg" width="45;"/>
+                <img src="/camping/resources/images/share2.svg" width="45"/>
             </a>
-            <p style="color: #777; font-size: 12px; margin-top: 10px;">공유하기</p>
+            <p>공유하기</p>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -150,7 +129,7 @@
         </div>
         <div class="col-sm-6 text-right" style="padding-top: 5px; padding-bottom: 5px;">
             <span>
-                <img src="images/sun.svg" width="18px;"/>
+                <img src="/camping/resources/images/weathers/sun.svg" width="18px;"/>
             </span>
             오늘 : 
             <span style="color: #ff6000"><strong>일출시간</strong> 05 : 15</span>
@@ -159,100 +138,88 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 text-center" style="background-color: #f6f6f6; border: 1px solid #dedede; margin: 0; border-right: none; border-left: none; padding: 17px 10px;">
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+        <div class="col-sm-12 text-center" id="theme-box">
+            <div>
                 <p>
-                    <img src="images/1.svg" width="40">
+                    <img src="/camping/resources/images/themes/27.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">바다낚시</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/5.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">바다낚시</p>
-            </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
-                <p>
-                    <img src="images/220.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">바다낚시</p>
-            </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
-                <p>
-                    <img src="images/223.svg" width="40">
+                    <img src="/camping/resources/images/themes/48.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">반려동물<br>동반</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/225.svg" width="40">
+                    <img src="/camping/resources/images/themes/51.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">수세식<br>화장실</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/226.svg" width="40">
+                    <img src="/camping/resources/images/themes/57.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">온라인예약</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/260.svg" width="40">
+                    <img src="/camping/resources/images/themes/59.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">와이파이</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/278.svg" width="40">
+                    <img src="/camping/resources/images/themes/50.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">샤워시설</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/279.svg" width="40">
+                    <img src="/camping/resources/images/themes/42.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">개수대</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/280.svg" width="40">
+                    <img src="/camping/resources/images/themes/63.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">전기</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/281.svg" width="40">
+                    <img src="/camping/resources/images/themes/46.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">동계캠핑</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/282.svg" width="40">
+                    <img src="/camping/resources/images/themes/58.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">온수제공</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/283.svg" width="40">
+                    <img src="/camping/resources/images/themes/56.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">오토캠핑</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/266.svg" width="40">
+                    <img src="/camping/resources/images/themes/65.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">카라반시설</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/296.svg" width="40">
+                    <img src="/camping/resources/images/themes/69.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">펜션/민박</p>
             </div>
-            <div style="display: inline-block; margin: 15px 0 10px 0; width: 76px; vertical-align: top;">
+            <div>
                 <p>
-                    <img src="images/285.svg" width="40">
+                    <img src="/camping/resources/images/themes/54.svg" width="40">
                 </p>
                 <p style="font-size: 12px;">어린이놀이터</p>
             </div>
@@ -272,7 +239,7 @@
     <div class="row" style="margin-top: 40px;">
         <div class="col-sm-12">
             <span style="margin-right: 10px;">
-                <img src="images/camp.svg" width="18px;"/>
+                <img src="/camping/resources/images/camp.svg" width="18px;"/>
             </span>
             <strong style="color: #144794; font-size: 15px;">총 규모 : </strong>
             <strong style="color: #0a8fe3; font-size: 15px;">총 48개</strong>
@@ -280,21 +247,21 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center">
-			<div style="text-align: center;">
-            	<div style="display: inline-block; margin-left: 20px; margin-right: 20px;">
+			<div id="campsite-amount-box">
+            	<div>
                     <svg id="fillgauge1" width="100" height="150"></svg>
                     <div><strong>오토캠핑 (17)</strong></div>
                 </div>
-                <div style="display: inline-block; margin-left: 20px; margin-right: 20px;">
-                    <svg id="fillgauge8" width="100" height="150"></svg>
+                <div>
+                    <svg id="fillgauge2" width="100" height="150"></svg>
                     <div><strong>카라반 (10)</strong></div>
                 </div>
-                <div style="display: inline-block; margin-left: 20px; margin-right: 20px;">
-                    <svg id="fillgauge7" width="100" height="150"></svg>
+                <div>
+                    <svg id="fillgauge3" width="100" height="150"></svg>
                     <div><strong>야영장 (17)</strong></div>
                 </div>
-                <div style="display: inline-block; margin-left: 20px; margin-right: 20px;">
-                    <svg id="fillgauge9" width="100" height="150"></svg>
+                <div>
+                    <svg id="fillgauge4" width="100" height="150"></svg>
                     <div><strong>컨테이너하우스 (4)</strong></div>
                 </div>
     		</div>
@@ -310,52 +277,52 @@
         <div class="col-sm-12" style="margin-left: 18px; margin-top: 5px;">
             <p>
                 <span style="margin-right: 28px;">일반야영장 (성수기)</span>
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>35,000</strong>원
             </p>
             <p>
                 일반야영장 (비수기 주말)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>25,000</strong>원
             </p>
             <p>
                 일반야영장 (비수기 주중)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>20,000</strong>원
             </p>
             <p>
                 일반야영장 (동절기 주말)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>20,000</strong>원
             </p>
             <p>
                 일반야영장 (동절기 평일)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>15,000</strong>원
             </p>
             <p>
                 <span style="margin-right: 28px;">오토캠핑장 (성수기)</span>
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>40,000</strong>원
             </p>
             <p>
                 오토캠핑장 (비수기 주말)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>30,000</strong>원
             </p>
             <p>
                 오토캠핑장 (비수기 주중)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>25,000</strong>원
             </p>
             <p>
                 오토캠핑장 (동절기 주말)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>25,000</strong>원
             </p>
             <p>
                 오토캠핑장 (동절기 평일)
-                <img src="images/stick2.png"/>
+                <img src="/camping/resources/images/stick2.png"/>
                 <strong>20,000</strong>원
             </p>
         </div>
@@ -363,18 +330,18 @@
     <div class="row" style="margin-top: 30px;">
     	<div class="col-sm-8">
         	<span style="margin-right: 10px;">
-                <img src="images/wind.svg" width="18px;"/>
+                <img src="/camping/resources/images/weathers/wind.svg" width="18px;"/>
             </span>
             <strong style="color: #144794; font-size: 15px;">장호 비치 캠핑장</strong>
             <strong style="color: #0a8fe3; font-size: 15px;"> 주변 미세먼지 농도 (PM<span style="font-size: 10px;">10</span>)</strong>
-            <button class="btn glyphicon glyphicon-question-sign" style="padding: 0px 5px;"></button>
+            <button class="btn glyphicon glyphicon-question-sign" id="fine-dust-btn"></button>
         </div>
         <div class="col-sm-4 text-right">
             <p>자료제공 : 한국환경공단</p>
         </div>
     </div>
     <!-- 원래 접혀 있는 곳 버튼 누르면 보이고 닫히게 하기 -->
-    <div class="row"> 
+    <div class="row" id="fine-dust-box"> 
         <div class="col-sm-12">
             <table class="table">
                 <colgroup>
@@ -446,7 +413,7 @@
                     	<td style="width: 150px;">
                             <div><strong>통합대기지수</strong></div>
                             <div style="display: inline-block; margin: 0 10px;">
-                                <svg id="fillgauge3" width="100" height="150"></svg>
+                                <svg id="fillgauge5" width="100" height="150"></svg>
                                 <div><strong style="color: #32a1ff; font-size: 15px;">좋음</strong></div>
                             </div>
                         </td>
@@ -477,7 +444,7 @@
                                 <strong style="font-size: 18px;">초미세먼지(PM<span style="font-size: 14px;">2.5</span>)</strong>
                             </div>
                             <div style="margin-top: 15px;">
-                                <img src="images/green_wind.svg" width="35"/>
+                                <img src="/camping/resources/images/weathers/green_wind.svg" width="35"/>
                             </div>
                             <div>
                                 <strong style="color: #00c73c;"><span style="font-size: 30px;">26</span><span style="font-size: 15px;">㎍/㎥</span></strong>
@@ -507,7 +474,7 @@
     <div class="row">
         <div class="col-sm-12" style="margin-bottom: 5px;">
             <span>
-                <img src="images/sun.svg" width="18px;"/>
+                <img src="/camping/resources/images/weathers/sun.svg" width="18px;"/>
             </span>
             <strong style="color: #144794; font-size: 15px;">날씨정보</strong>
         </div>
@@ -528,11 +495,11 @@
                             <p>21시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/pm_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>SE 1.3m/s</p>
@@ -542,11 +509,11 @@
                             <p>24시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/pm_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>S 0.9m/s</p>
@@ -556,11 +523,11 @@
                             <p>3시</p>
                             <p style="color: #06f;">22.0℃</p>
                             <p>
-                                <img src="images/pm_Clear.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_Clear.png" width="40"/>
                             </p>
                             <p><strong>맑음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">0%</strong>
                             </p>
                             <p>S 0.8m/s</p>
@@ -570,11 +537,11 @@
                             <p>6시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/am_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>SE 1m/s</p>
@@ -584,11 +551,11 @@
                             <p>9시</p>
                             <p style="color: #06f;">27.0℃</p>
                             <p>
-                                <img src="images/am_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>E 1.5m/s</p>
@@ -598,11 +565,11 @@
                             <p>12시</p>
                             <p style="color: #06f;">28.0℃</p>
                             <p>
-                                <img src="images/am_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>E 2.5m/s</p>
@@ -612,11 +579,11 @@
                             <p>15시</p>
                             <p style="color: #06f;">27.0℃</p>
                             <p>
-                                <img src="images/am_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>E 2.6m/s</p>
@@ -626,11 +593,11 @@
                             <p>18시</p>
                             <p style="color: #06f;">25.0℃</p>
                             <p>
-                                <img src="images/am_MostlyCloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
                             </p>
                             <p><strong>구름 많음</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">20%</strong>
                             </p>
                             <p>E 1.8m/s</p>
@@ -640,11 +607,11 @@
                             <p>21시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/pm_Cloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_Cloudy.png" width="40"/>
                             </p>
                             <p><strong>흐림</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">30%</strong>
                             </p>
                             <p>E 1.1m/s</p>
@@ -654,11 +621,11 @@
                             <p>24시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/pm_Cloudy.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_Cloudy.png" width="40"/>
                             </p>
                             <p><strong>흐림</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">30%</strong>
                             </p>
                             <p>E 3.9m/s</p>
@@ -668,11 +635,11 @@
                             <p>3시</p>
                             <p style="color: #06f;">23.0℃</p>
                             <p>
-                                <img src="images/pm_Rain.png" width="40"/>
+                                <img src="/camping/resources/images/weathers/pm_Rain.png" width="40"/>
                             </p>
                             <p><strong>비</strong></p>
                             <p>
-                                <img src="images/drop.svg" width="15"/>
+                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
                                 <strong style="color: #069;">60%</strong>
                             </p>
                             <p>E 4.1m/s</p>
@@ -683,70 +650,83 @@
             </table>
         </div>
     </div>
+    
+     <div class="row">
+        <div class="col-sm-12" style="margin-bottom: 5px;">
+            <span class="glyphicon glyphicon-globe"></span>
+            <strong style="color: #144794; font-size: 15px;">위치</strong>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-sm-12">
+    	
+    	</div>
+    </div>
+    
     <div class="row">
         <div class="col-sm-12" style="margin-bottom: 15px;">
             <span style="margin-right: 10px;">
-                <img src="images/camp.svg" width="18px;"/>
+                <img src="/camping/resources/images/camp.svg" width="18px;"/>
             </span>
             <strong style="color: #144794; font-size: 15px;">장호 비치 캠핑장</strong>
             <strong style="color: #0a8fe3; font-size: 15px;"> 주변 다른 캠핑장소</strong>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 text-center">
-            <div style="display: inline-block; margin-right: 10px;">
+        <div class="col-sm-12 text-center" id="near-campingsite-box">
+            <div>
                 <div>
-                    <a href="#"><img src="images/camp1.jpg"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="180"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>검봉산 자연휴양림 야영장</strong>
                 </div>
                 <div>
-                    <span style="color: #ff6000; font-size: 12px;">5.4Km</span>
+                    <span>5.4Km</span>
                 </div>
             </div>
-            <div style="display: inline-block; margin-right: 10px;">
+            <div>
                 <div>
-                    <a href="#"><img src="images/camp2.jpg"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="180"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>삼척 엘림 캠핑장</strong>
                 </div>
                 <div>
-                    <span style="color: #ff6000; font-size: 12px;">8.3Km</span>
+                    <span>8.3Km</span>
                 </div>
             </div>
-            <div style="display: inline-block; margin-right: 10px;">
+            <div>
                 <div>
-                    <a href="#"><img src="images/camp3.jpg"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="180"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>씨스포빌 카라반</strong>
                 </div>
                 <div>
-                    <span style="color: #ff6000; font-size: 12px;">14.8Km</span>
+                    <span>14.8Km</span>
                 </div>
             </div>
-            <div style="display: inline-block; margin-right: 10px;">
+            <div>
                 <div>
-                    <a href="#"><img src="images/camp4.jpg"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="180"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>덕풍계곡 마을 야영장</strong>
                 </div>
                 <div>
-                    <span style="color: #ff6000; font-size: 12px;">22.6Km</span>
+                    <span>22.6Km</span>
                 </div>
             </div>
-            <div style="display: inline-block; margin-right: 10px;">
+            <div>
                 <div>
-                    <a href="#"><img src="images/camp3.jpg"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="180"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>덕풍계곡 솔밭 야영장</strong>
                 </div>
                 <div>
-                    <span style="color: #ff6000; font-size: 12px;">23.4Km</span>
+                    <span>23.4Km</span>
                 </div>
             </div>
         </div>
@@ -764,7 +744,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -787,7 +767,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -810,7 +790,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -1026,39 +1006,50 @@
             </button>
         </div>
     </div>
+    
 </div>
 <script type="text/javascript">
     
-    var config6 = liquidFillGaugeDefaultSettings();
-        config6.waveAnimateTime = 3000;
-    var gauge1 = loadLiquidFillGauge("fillgauge1", 17/48*100, config6);
-    var config7 = liquidFillGaugeDefaultSettings();
-        config7.waveAnimateTime = 3000;
-        config7.circleColor = '#ff7777';
-        config7.textColor = '#ff4444';
-        config7.waveTextColor = '#ffaaaa';
-        config7.waveColor = '#ffdddd';
-    var gauge7 = loadLiquidFillGauge('fillgauge7', 17/48*100, config7);
-    var config8 = liquidFillGaugeDefaultSettings();
-        config8.waveAnimateTime = 3000;
-        config8.circleColor = '#6DA398';
-        config8.textColor = '#0E5144';
-        config8.waveTextColor = '#6DA398';
-        config8.waveColor = '#246D5F';
-    var gauge8 = loadLiquidFillGauge('fillgauge8', 10/48*100, config8);
+    var config1 = liquidFillGaugeDefaultSettings();
+        config1.waveAnimateTime = 3000;
+    var gauge1 = loadLiquidFillGauge("fillgauge1", 17/48*100, config1);
     
-     var config9 = liquidFillGaugeDefaultSettings();
-        config9.waveAnimateTime = 3000;
-        config9.circleColor = '#D4AB6A';
-        config9.textColor = '#553300';
-        config9.waveTextColor = '#805615';
-        config9.waveColor = '#AA7D39';
-        var gauge9 = loadLiquidFillGauge('fillgauge9', 4/48*100, config9);
+    var config2 = liquidFillGaugeDefaultSettings();
+        config2.waveAnimateTime = 3000;
+        config2.circleColor = '#ff7777';
+        config2.textColor = '#ff4444';
+        config2.waveTextColor = '#ffaaaa';
+        config2.waveColor = '#ffdddd';
+    var gauge2 = loadLiquidFillGauge('fillgauge2', 17/48*100, config2);
+    
     var config3 = liquidFillGaugeDefaultSettings();
         config3.waveAnimateTime = 3000;
-        config3.circleColor = '#32a1ff';
-        config3.displayPercent = false;
-        var gauge3 = loadLiquidFillGauge('fillgauge3', 47, config3);
-    </script>
+        config3.circleColor = '#6DA398';
+        config3.textColor = '#0E5144';
+        config3.waveTextColor = '#6DA398';
+        config3.waveColor = '#246D5F';
+    var gauge3 = loadLiquidFillGauge('fillgauge3', 10/48*100, config3);
+    
+    var config4 = liquidFillGaugeDefaultSettings();
+        config4.waveAnimateTime = 3000;
+        config4.circleColor = '#D4AB6A';
+        config4.textColor = '#553300';
+        config4.waveTextColor = '#805615';
+        config4.waveColor = '#AA7D39';
+    var gauge4 = loadLiquidFillGauge('fillgauge4', 4/48*100, config4);
+        
+    var config5 = liquidFillGaugeDefaultSettings();
+        config5.waveAnimateTime = 3000;
+        config5.circleColor = '#32a1ff';
+        config5.displayPercent = false;
+        config5.maxValue = 160;
+    var gauge5 = loadLiquidFillGauge('fillgauge5', 47, config5);
+    
+    $('#fine-dust-box').hide();
+    
+    $('#fine-dust-btn').click(function() {
+    	$('#fine-dust-box').toggle('show');
+    });
+</script>
 </body>
 </html>
