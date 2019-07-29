@@ -13,6 +13,108 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+     .close{
+            color: white;
+            padding-top: 7px;
+            padding-right:7px;
+            opacity: .5	!important;
+        }
+       #poswrap {
+            width: 440px;
+            position: absolute;
+            left: -205px;
+            bottom: 80px;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+            box-shadow: 6px 6px 35px rgba(0, 0, 0, .65);
+        }
+
+        .cat3 {
+            color: #3399ff;
+        }
+
+        .info .cat {
+            display: inline-block;
+            padding: 0 8px;
+            height: 18px;
+            font-weight: 700;
+        }
+
+        .title {
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 15px;
+            letter-spacing: -0.02em;
+            padding: 0 0 0 10px;
+            margin: 0;
+            height: 40px;
+            line-height: 40px
+        }
+
+        .body {
+            background: #fff;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 125px;
+            height: 80px;
+            border: 1px solid #ddd;
+            color: #888;
+            overflow: hidden;
+            /*background: #ccc url(./image/nothumb.svg) no-repeat center center;*/
+            background-size: 30%;
+        }
+
+        .desc {
+            position: relative;
+            margin: 10px 0 0 150px;
+            width: 275px;
+            height: 140px;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+        }
+
+        .jibun {
+            padding-bottom: 10px;
+        }
+
+        .body .btn_vote_scrap {
+            position: absolute;
+            bottom: 14px;
+            left: 10px;
+            width: 125px;
+            text-align: center;
+        }
+
+        .btn_vote_scrap a {
+            color: #666;
+        }
+
+        .btn_vote_scrap a:link {
+            text-decoration: none;
+        }
+
+        .btn_vote_scrap a:visited {
+            text-decoration: none;
+        }
+
+        .btn_vote_scrap a:hover {
+            text-decoration: none;
+        }
+ 	.overlay_info {border-radius: 6px; margin-bottom: 12px; float:left;position: relative; border: 1px solid #ccc; border-bottom: 2px solid #ddd;background-color:black;color: white;}
     .address2{
     	font-weight: bold;
     }
@@ -273,8 +375,25 @@
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
-	
-
+			// 위도,경도로 이동
+			function setCenter(lat,lng){
+				var moveLatLng = new kakao.maps.LatLng(lat,lng);
+					
+				map.setCenter(moveLatLng);
+			}
+		
+			// 배열에 담긴 마커 지우기
+			function setMarkers(map){ 
+			    for(var i=0; i<markers.length;i++){
+			        markers[i].setMap(map);
+			    }
+			}
+			// 전체 담긴 마커배열 지우기
+			function setMarkers2(map){ 
+			    for(var i=0; i<markers2.length;i++){
+			        markers2[i].setMap(map);
+			    }
+			}
 		$('#selectState').change(function(){
 			location.href ="map.camp?city=" + $(this).val() + "&satus=update";
 		});
@@ -364,68 +483,206 @@
 		
 		// ↓ KAKAO MAP 스크립트
 		
-		// 마커 위도 경도를 담을 배열
+		var prevClickedMarker;
+		var bigMarker;
+		var custovlay;
+		// 리스트 클릭해서 보여지는 마커 위도 경도를 담을 배열
 		var markers = [];
+		// 전체 마커 위도 경도를 담을 배열
+		var markers2 = [];
+		//  맵에서 클릭 했을 때 담을 마커
+		var clickmarkers = [];
 		// 원 지름 ( 반경 내에 마커 찍기 위해서)
 		var radius = 50000;
+		
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
-	
 			$.ajax({
 				type:"GET",
 				url:"mapAllList.camp",
 				dataType:"json",
 				success:(function(data){
 					$.each(data , function(index , list){
+						var name = list.name;
+						iwContent = '<div class="overlay_info">';
+						iwContent += "<strong>"+list.name+"</strong>";
+						iwContent += '</div>';
 						
+						var content = '<div id="poswrap">';
+						content += "<div>";
+						content += "날씨 정보 (미정)";
+						content +="</div>";
+						content +="<div class='info'>";
+						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						content +=list.name;
+						content +="<div class='close' title='닫기'>X</div>";
+						content +="</div>";
+						content +="<div class='body'>";
+						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						content += "<div class='btn_vote_scrap'>"
+						content +="<div style='float: right'>"
+						content +="<a href='#'>"
+						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
+						content +="좋아요";
+						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+						content +="</a>";
+						content +="</div>";
+						content +="<div style='float: right;'>"
+						content +="<a href='#'>"
+						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
+						content += "싫어요"
+						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "</a>";
+						content += "</div>";
+						content +="</div>";
+						content +="<div class='desc'>"
+						content +="<div class='jibun'>"+list.address+"</div>"
+						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="</div>";
+						content+="</div>";
+						content+="</div>";
+						content+="</div>";
+
 						// 마커의 위치를 지정한다.
 						var markerPosition  = new kakao.maps.LatLng(list.latitude, list.longitude); 
+			 			
+						var imageicon;
+						var campsort = list.sort;
+				
+						if(campsort == 'NOMAL'){
+							imageicon = 'resources/images/tent2.png';
+						}else if(campsort == 'CAMP'){
+							imageicon = 'resources/images/tent1.png';
+						}else{
+							imageicon = 'resources/images/tent3.png'; // 카라반 
+						} 
 						
-						// 마커의 이미지 설정하기.
-						var imageSrc = 'resources/images/maptent1.svg', // 마커이미지의 주소입니다    
-					    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+	 					// 마커 이미지 설정
+		    		 	 var imageSrc = imageicon, // 마커이미지의 주소입니다    
+					    imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
 					    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-					     
+					    
 					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-						
 						// 마커를 생성합니다
 						var marker = new kakao.maps.Marker({
-							    position: markerPosition
-							})	 
-						markers.push(marker); // 배열에 담는다.
-					})
-					markers.forEach(function(m) {
-					    var c1 = map.getCenter();
-					    var c2 = m.getPosition();
+							    position: markerPosition,
+							    clickable:true,
+							    image:markerImage
+							})	
+						
+						markers2.push(marker);
+						
+						var c1 = map.getCenter();
+					    var c2 = marker.getPosition();
 					    var poly = new kakao.maps.Polyline({
 					      // map: map, 을 하지 않아도 거리는 구할 수 있다.
 					      path: [c1, c2]
 					    });
 					    var dist = poly.getLength(); // m 단위로 리턴
-						console.log(dist);
 					    if (dist < radius) {
-					        m.setMap(map);
+					    	
+					    	// 오버레이 생성
+					    	var overlay = new kakao.maps.CustomOverlay({
+					    	    content: iwContent,
+					    	    position: marker.getPosition(), 
+					    	    xAnchor: 0.62,
+					    	    yAnchor: 3.0
+					    	});
+					    	// 마커에 마우스 올리면 보이게 하고
+					    	kakao.maps.event.addListener(marker, 'mouseover', function() {
+					    	    overlay.setMap(map);
+					    	});
+					    	// 마커에서 마우스 내리면 사라지게 한다.
+					    	kakao.maps.event.addListener(marker, 'mouseout', function() {
+					    	    overlay.setMap(null);
+					    	});
+					    	
+					    	kakao.maps.event.addListener(marker, 'click', function() {
+								if (prevClickedMarker) {
+									prevClickedMarker.setVisible(true);
+									if (bigMarker) {
+										bigMarker.setMap(null);
+									}
+								} 
+								prevClickedMarker = marker;
+						    	marker.setVisible(false); // 기존 마커 숨기기
+						    	
+						    	
+						    	var latitude = list.latitude;
+						    	var longitude = list.longitude;
+						    	
+						    	var sort = list.sort;
+								var newIconSrc;
+						    	if(sort == 'CAMP'){
+						    		newIconSrc = 'maptent1.svg';
+								}else if(sort == '캠핑장'){
+									newIconSrc = 'maptent3.svg';
+								}else{
+									newIconSrc = 'maptent2.svg'; // 카라반 
+								}
+						    	
+						    	var imageSrc = 'resources/images/'+newIconSrc, // 마커이미지의 주소입니다    
+								imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+								imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+								    
+								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+					    			
+								var customeroverlay = new kakao.maps.CustomOverlay({
+								    content: content,
+								    map: map,
+								    position: marker.getPosition(),
+								    xAnchor: 0.62,
+						    	    yAnchor: 3.0
+								});
+
+								// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+								kakao.maps.event.addListener(marker, 'click', function() {
+									if(custovlay){
+										custovlay.setMap(null);
+									}
+									
+									customeroverlay.setMap(map);
+									custovlay = customeroverlay;
+								});
+									
+
+								// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+								$('#map').on('click','.close', function(){
+									customeroverlay.setMap(null);
+								})
+								
+					    		// 새로운 마커
+					    		var markerPosition = new kakao.maps.LatLng(latitude,longitude);
+					    		bigMarker = new kakao.maps.Marker({
+								    position: markerPosition,
+								    clickable:true,
+								    image:markerImage
+								})	
+					    		bigMarker.setMap(map); // 새로운 마커
+					    		setCenter(latitude,longitude);
+					    		map.setLevel(2);
+					    		// 하이브리드 맵으로 변경
+								map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+					    		
+					    		//새로운 마커 클릭 시 오버레이 표시
+								kakao.maps.event.addListener(bigMarker, 'click', function() {
+									if(custovlay){
+										custovlay.setMap(null);
+									}
+									customeroverlay.setMap(map);
+									custovlay = customeroverlay;
+									
+								});
+					    	});
+					    	marker.setMap(map);
 					    } else {
-					        m.setMap(null);
+					        marker.setMap(null);
 					    }
+						
 					});
 				})
 			})
-	    })	
-		// 위도,경도로 이동
-		function setCenter(lat,lng){
-			var moveLatLng = new kakao.maps.LatLng(lat,lng);
-				
-			map.setCenter(moveLatLng);
-		}
-	
-		// 배열에 담긴 마커 지우기
-		function setMarkers(map){ 
-		    for(var i=0; i<markers.length;i++){
-		        markers[i].setMap(map);
-		    }
-		}
-	
+	    })
 		// 맵 생성
 		var container = document.getElementById('map');
 		var lat; // 위도
@@ -455,19 +712,33 @@
 		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
 		$(".camping-list").on('click', '.campsite-name', function(event){
 			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
-
+			if (bigMarker) {
+				bigMarker.setMap(null);
+			}
 			if(markers != null){
 					setMarkers(null);
 			}
-			
+			if(markers2 != null){
+					setMarkers2(null);
+			}
+
 			lat = $(this).attr('data-lat');
 			lng = $(this).attr('data-lng');
 			 
 			event.preventDefault();
 			
 			// var markerPosition  = new kakao.maps.LatLng(lat, lng); 
-	
-			var imageSrc = 'resources/images/maptent1.svg', // 마커이미지의 주소입니다    
+			
+			var icon;  // 아이콘 이미지 저장객체
+			var sort = $(this).children('.sbjcat').text();
+			if(sort == '글램핑'){
+				icon = 'maptent1.svg';
+			}else if(sort == '캠핑장'){
+				icon = 'maptent3.svg';
+			}else{
+				icon = 'maptent2.svg'; // 카라반 
+			}
+			var imageSrc = 'resources/images/'+icon, // 마커이미지의 주소입니다  
 		    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 		     
@@ -487,6 +758,8 @@
 				setCenter(lat,lng);
 			// 하이브리드 맵으로 변경
 				map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+			// 맵 레벨 변경
+				map.setLevel(2);
 		});
 
 
@@ -495,6 +768,9 @@
 			if(markers != null){
 				setMarkers(null);
 				}
+			if(markers2 != null){
+				setMarkers2(null);
+			}
 			if (navigator.geolocation) {
 			    
 			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
