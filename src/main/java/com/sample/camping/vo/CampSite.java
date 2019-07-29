@@ -7,19 +7,18 @@ public class CampSite {
 	private Integer no;
 	private String name;
 	private String sort;
-	private Integer latitude;
-	private Integer longitude;
+	private Double latitude;
+	private Double longitude;
 	private String tel;
 	private Integer sites;
 	private Integer price;
 	private Integer likes;
 	private Integer hates;
-	private String photo;
+	private Double photo;
 	private Integer point;
 	private Date createDate;
 	private String usedYn;
-	private MyCampsite MyCampsite;
-	
+	private MyCampsite myCampsite;
 	public Integer getNo() {
 		return no;
 	}
@@ -38,16 +37,16 @@ public class CampSite {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-	public Integer getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Integer latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public Integer getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Integer longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	public String getTel() {
@@ -80,10 +79,10 @@ public class CampSite {
 	public void setHates(Integer hates) {
 		this.hates = hates;
 	}
-	public String getPhoto() {
+	public Double getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(Double photo) {
 		this.photo = photo;
 	}
 	public Integer getPoint() {
@@ -105,12 +104,10 @@ public class CampSite {
 		this.usedYn = usedYn;
 	}
 	public MyCampsite getMyCampsite() {
-		return MyCampsite;
+		return myCampsite;
 	}
-	public void setMyCampsite(MyCampsite MyCampsite) {
-		this.MyCampsite = MyCampsite;
+	public void setMyCampsite(MyCampsite myCampsite) {
+		this.myCampsite = myCampsite;
 	}
-	
-	
 	
 }
