@@ -3,8 +3,8 @@
 
 <mapper namespace="com.sample.camping.dao.MapDao">
 
-<select id="getCampSites" parameterType="map" resultType="campingsites">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+<select id="getCampSites" parameterType="map" resultType="campsite">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -35,9 +35,9 @@ FROM (select X.* , row_number() over (
 					campsite_photo photo,
 					campsite_point point,
 					campsite_create_date createDate,
-					campsite_used_yn used,
+					campsite_used_yn usedYn,
 					campsite_sido sido,
-					my_campsite_no myCampingNo,
+					my_campsite_no "myCampsite.no",
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
 											WHERE B.campsite_no = A.campsite_no) cnt
@@ -56,8 +56,8 @@ AND
 	row_no &lt;= 10
 
 </select>
-<select id="getCampSitesList" parameterType="Map" resultType="campingsites">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,used,myCampingNo,cnt,sido
+<select id="getCampSitesList" parameterType="Map" resultType="campsite">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -88,9 +88,9 @@ FROM (select X.* , row_number() over (
 					campsite_photo photo,
 					campsite_point point,
 					campsite_create_date createDate,
-					campsite_used_yn used,
+					campsite_used_yn usedYn,
 					campsite_sido sido,
-					my_campsite_no myCampingNo,
+					my_campsite_no "myCampsite.no",
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
 											WHERE B.campsite_no = A.campsite_no) cnt

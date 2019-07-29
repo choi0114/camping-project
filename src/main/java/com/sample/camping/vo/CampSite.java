@@ -7,18 +7,20 @@ public class CampSite {
 	private Integer no;
 	private String name;
 	private String sort;
-	private Integer latitude;
-	private Integer longitude;
+	private Double latitude;
+	private Double longitude;
+	private String address;
 	private String tel;
 	private Integer sites;
 	private Integer price;
 	private Integer likes;
 	private Integer hates;
 	private String photo;
-	private Integer point;
+	private Double point;
 	private Date createDate;
 	private String usedYn;
-	private MyCampsite MyCampsite;
+	private String sido;
+	private MyCampsite myCampsite;
 	
 	public Integer getNo() {
 		return no;
@@ -38,17 +40,29 @@ public class CampSite {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-	public Integer getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Integer latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public Integer getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Integer longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getSido() {
+		return sido;
+	}
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
 	public String getTel() {
 		return tel;
@@ -86,10 +100,11 @@ public class CampSite {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public Integer getPoint() {
+	
+	public Double getPoint() {
 		return point;
 	}
-	public void setPoint(Integer point) {
+	public void setPoint(Double point) {
 		this.point = point;
 	}
 	public Date getCreateDate() {
@@ -105,12 +120,9 @@ public class CampSite {
 		this.usedYn = usedYn;
 	}
 	public MyCampsite getMyCampsite() {
-		return MyCampsite;
+		return myCampsite;
 	}
-	public void setMyCampsite(MyCampsite MyCampsite) {
-		this.MyCampsite = MyCampsite;
+	public void setMyCampsite(MyCampsite myCampsite) {
+		this.myCampsite = myCampsite;
 	}
-	
-	
-	
 }
