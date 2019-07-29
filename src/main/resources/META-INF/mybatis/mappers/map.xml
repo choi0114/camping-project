@@ -115,6 +115,29 @@ FROM (select X.* , row_number() over (
 	from
 		camp_campsites
 </select>
+<select id="getAllCampSites" resultType="campsite">
+		select
+			campsite_no no,
+			campsite_name name,
+			campsite_sort sort,
+			campsite_latitude latitude,
+			campsite_longitude longitude,
+			campsite_address address,
+			campsite_tel tel,
+			campsite_sites sites,
+			campsite_price price,
+			campsite_likes likes,
+			campsite_hates hates,
+			campsite_photo photo,
+			campsite_point point,
+			campsite_create_date createDate,
+			campsite_used_yn usedYn,
+			campsite_sido sido
+		from
+			camp_campsites
+		order by
+			campsite_no desc	
+</select>
 <!-- <select id="getListUpdate" parameterType="" resultType="campingssites">
 	select
 		

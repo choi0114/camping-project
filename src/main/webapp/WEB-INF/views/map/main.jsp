@@ -274,12 +274,11 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
 	
+
 		$('#selectState').change(function(){
 			location.href ="map.camp?city=" + $(this).val() + "&satus=update";
 		});
-		
-		
-		
+
 		var page = 2;
 		var dataloading = false;
 		var dosi = $("#selectState option:selected").val();
@@ -365,6 +364,54 @@
 		
 		// ↓ KAKAO MAP 스크립트
 		
+		// 마커 위도 경도를 담을 배열
+		var markers = [];
+		// 원 지름 ( 반경 내에 마커 찍기 위해서)
+		var radius = 50000;
+		// 페이지 들어오자마자 반경 내에 마커 찍기 
+		$(function(){
+	
+			$.ajax({
+				type:"GET",
+				url:"mapAllList.camp",
+				dataType:"json",
+				success:(function(data){
+					$.each(data , function(index , list){
+						
+						// 마커의 위치를 지정한다.
+						var markerPosition  = new kakao.maps.LatLng(list.latitude, list.longitude); 
+						
+						// 마커의 이미지 설정하기.
+						var imageSrc = 'resources/images/maptent1.svg', // 마커이미지의 주소입니다    
+					    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+					    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+					     
+					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+						
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							    position: markerPosition
+							})	 
+						markers.push(marker); // 배열에 담는다.
+					})
+					markers.forEach(function(m) {
+					    var c1 = map.getCenter();
+					    var c2 = m.getPosition();
+					    var poly = new kakao.maps.Polyline({
+					      // map: map, 을 하지 않아도 거리는 구할 수 있다.
+					      path: [c1, c2]
+					    });
+					    var dist = poly.getLength(); // m 단위로 리턴
+						console.log(dist);
+					    if (dist < radius) {
+					        m.setMap(map);
+					    } else {
+					        m.setMap(null);
+					    }
+					});
+				})
+			})
+	    })	
 		// 위도,경도로 이동
 		function setCenter(lat,lng){
 			var moveLatLng = new kakao.maps.LatLng(lat,lng);
@@ -386,19 +433,29 @@
 		
 		var options = {
 			center: new kakao.maps.LatLng(37.581854899999996, 126.98633099999998),
-			level: 5
+			level: 10,
+			minLevel: 4,
+			maxLevel: 10
 			
 		};
 		
-		var map = new kakao.maps.Map(container, options);
-		
-		var markers = [];
+		var map = new kakao.maps.Map(container, options); 
+
+		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+
+		// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+		// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 		
 		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
 		$(".camping-list").on('click', '.campsite-name', function(event){
 			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
-			var abc = $(this).children('.sbjcat').text();
-			console.log(abc);
+
 			if(markers != null){
 					setMarkers(null);
 			}

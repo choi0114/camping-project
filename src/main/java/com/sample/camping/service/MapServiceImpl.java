@@ -33,4 +33,10 @@ public class MapServiceImpl implements MapService {
 		// TODO Auto-generated method stub
 		return mapDao.getCampSitesCount();
 	}
+	
+@Override
+	public List<CampSite> getAllCampSites() {
+		
+		return mapDao.getAllCampSites();
+	}
 }

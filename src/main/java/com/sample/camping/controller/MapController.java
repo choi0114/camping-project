@@ -21,7 +21,7 @@ public class MapController {
 	private MapService mapService;
 	
 	@RequestMapping("/map.camp")
-	public String Map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
+	public String map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
 		
 		System.out.println(status);
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -58,6 +58,13 @@ public class MapController {
 		
 		
 		return mapService.getCampSitesList(param);
-					
+			
+	}
+	
+	@RequestMapping("/mapAllList.camp") // 맵 전부 가져오기 (mycampingNo 제외) 
+	@ResponseBody
+	public List<CampSite> allCampsit(){
+		
+		return mapService.getAllCampSites();
 	}
 } 

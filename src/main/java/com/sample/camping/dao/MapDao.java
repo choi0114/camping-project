@@ -10,5 +10,6 @@ public interface MapDao {
 	List<CampSite> getCampSites(Map<String, Object> param);
 	List<CampSite> getCampSitesList(Map<String, Object>param);
 	Integer getCampSitesCount();
+	List<CampSite> getAllCampSites(); // 전부 가져오기
 
 }
