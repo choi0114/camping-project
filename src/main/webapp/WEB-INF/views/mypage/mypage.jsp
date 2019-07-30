@@ -122,7 +122,6 @@
     border: none;
     outline: 0;
 }
-
 </style>
 </head>
 
@@ -130,7 +129,7 @@
 	<div id="sidewrap">
 	<c:set var="submenu" value="mypage" />
 		<%@ include file="nav/nav.jsp"%>
-:		<div class="scrollarea tse-scrollable">
+		<div class="scrollarea tse-scrollable">
 			<div class="tse-scrollbar">
 				<div class="drag-handle visible"></div>
 			</div>
@@ -146,7 +145,7 @@
 									</div>
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
-											<li><span class="b">가입일</span> : sysdate</li>
+											<li><span class="b">가입일</span> : createDate</li>
 											<li><span class="b">로그인 횟수</span> : loginCut</li>
 											<li><span class="b">댓글</span> : commentCnt</li>
 										</ul>
