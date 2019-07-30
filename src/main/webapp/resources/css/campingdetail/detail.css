@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+table {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 11px;
+}  
+   
+#canvas .circle {
+	display: inline-block;
+	margin: 1em;
+}
+
+.circles-decimals {
+	font-size: .4em;
+}
+
+.liquidFillGaugeText { 
+	font-family: Helvetica; 
+	font-weight: bold; 
+}
+
+#info-button-box div {
+	padding: 0px;
+}
+
+#info-button-box p {
+	color: #777;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+#theme-box {
+	background-color: #f6f6f6;
+	border: 1px solid #dedede;
+	margin: 0px;
+	border-right: none;
+	border-left: none;
+	padding: 17px 10px;
+}
+
+#theme-box div {
+	display: inline-block;
+	margin: 15px 0 10px 0;
+	width: 76px;
+	vertical-align: top;
+}
+
+#campsite-amount-box {
+	text-align: center;
+}
+
+#campsite-amount-box > div {
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#near-campingsite-box > div {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#near-campingsite-box span {
+	color: #ff6000;
+	font-size: 12px;
+}
+
+#fine-dust-btn {
+	padding: 0px 5px;
+}
+
+#dust-gauge-box {
+	width: 80px;
+	height: 41px;
+	border-radius: 3px;
+}
