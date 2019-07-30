@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,7 +20,7 @@
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
-					<p>업데이트 : 2019-07-17</p>
+					<p>업데이트 : 2019-07-30</p>
 				</div>
 				<div class="col-sm-6 text-right">
 					<p>강원 > 삼척시 > 근덕면</p>
@@ -62,9 +63,8 @@
 		</div>
         <div class="col-sm-2 pull-right text-center" style="max-height: 100%;">
             <div>
-                <button id="fine-dust-info-btn" style="background-color: #00c73c; color: #fff; display: inline-block; padding: 5px 10px; border-radius: 10px;">
-                    <span style="font-size: 20px;">39</span>㎍/㎥<br/>미세먼지 보통
-                </button>
+                <button id="fine-dust-info-btn" 
+                		style="color: #fff; display: inline-block; padding: 5px 10px; border-radius: 10px;"></button>
             </div>
         </div>
     </div>
@@ -132,9 +132,9 @@
                 <img src="/camping/resources/images/weathers/sun.svg" width="18px;"/>
             </span>
             오늘 : 
-            <span style="color: #ff6000"><strong>일출시간</strong> 05 : 15</span>
+            <span style="color: #ff6000" id="sunrise-box"></span>
              ~ 
-            <span style="color: #36f"><strong>일몰시간</strong> 19 : 41</span>
+            <span style="color: #36f" id="sunset-box"></span>
         </div>
     </div>
     <div class="row">
@@ -414,10 +414,13 @@
                             <div><strong>통합대기지수</strong></div>
                             <div style="display: inline-block; margin: 0 10px;">
                                 <svg id="fillgauge5" width="100" height="150"></svg>
-                                <div><strong style="color: #32a1ff; font-size: 15px;">좋음</strong></div>
+                                <div id="khai-value-msg-box"></div>
                             </div>
                         </td>
-                        <td style="vertical-align: middle;">
+                        <td style="text-align: center; vertical-align: middle;">
+                        	<div style="width: 500px; display: inline-block; margin-top: 10px;">
+                        		<div id="dust-gauge-box" style="position: relative; top: 15px;"></div>
+                        	</div>
                             <div style="display: inline-block;">
                                 <div style="float: left; background-color: #32a1ff; padding: 0 40px; color: #fff;">0~30</div>
                                 <div style="float: left; background-color: #00c73c; padding: 0 40px; color: #fff;">31~80</div>
@@ -430,37 +433,19 @@
                                 <div style="float: left; color: #fd9b5a; padding: 0 48px; font-size: 13px;">나쁨</div>
                                 <div style="float: left; color: #ff5959; padding: 0 30px; font-size: 13px;">매우나쁨</div>
                             </div>
-                            <div style="margin-top: 20px;">
-                                <p>
-                                    > <strong>측정장소</strong> : 강원 삼척시 남양길 11(남양동 331-9) 남양동주민센터 3층 옥상
-                                </p>
-                                <p>
-                                    > 캠핑장과 <strong style="color: #32a1ff;">21.7Km</strong> 떨어진 남양동1 측정소에서 <strong style="color: #32a1ff;">2019-07-26 09:00</strong>분에 측정된 수치
-                                </p>
-                            </div>
+                            <div id="measuring-station-box" style="margin-top: 20px;"></div>
                         </td>
                         <td>
                             <div style="width: 150px;">
                                 <strong style="font-size: 18px;">초미세먼지(PM<span style="font-size: 14px;">2.5</span>)</strong>
                             </div>
-                            <div style="margin-top: 15px;">
-                                <img src="/camping/resources/images/weathers/green_wind.svg" width="35"/>
-                            </div>
-                            <div>
-                                <strong style="color: #00c73c;"><span style="font-size: 30px;">26</span><span style="font-size: 15px;">㎍/㎥</span></strong>
-                            </div>
-                            <div>
-                                <span style="font-size: 23px; color: #00c73c;">보통</span>
-                            </div>
+                            <div id="fine-dust-img-box" style="margin-top: 15px;"></div>
+                            <div id="fine-dust-value-box"></div>
+                            <div id="fine-dust-msg-box"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            <span style="font-size: 20px; color: #32a1ff">●</span>아황산가스 농도 0.003ppm 
-                            <span style="font-size: 20px; color: #32a1ff">●</span>일산화탄소 농도 0.5ppm 
-                            <span style="font-size: 20px; color: #00c73c">●</span>오존 농도 0.070ppm 
-                            <span style="font-size: 20px; color: #32a1ff">●</span>이산화질소 농도 0.008ppm
-                        </td>
+                        <td colspan="3" id="dust-infos-value-box"></td>
                     </tr>
                 </tbody>
             </table>
@@ -888,12 +873,6 @@
         config4.waveColor = '#AA7D39';
     var gauge4 = loadLiquidFillGauge('fillgauge4', 4/48*100, config4);
         
-    var config5 = liquidFillGaugeDefaultSettings();
-        config5.waveAnimateTime = 3000;
-        config5.circleColor = '#32a1ff';
-        config5.displayPercent = false;
-        config5.maxValue = 160;
-    var gauge5 = loadLiquidFillGauge('fillgauge5', 47, config5);
     
     $('#fine-dust-box').hide();
     
@@ -979,11 +958,11 @@
     var grid = dfs_xy_conv('toXY', 37.38173710552906, 127.00620450263966);
    
     $.ajax({
-    	url: 'xml.camp',
+    	url: 'weatherxml.camp',
     	data: {x: grid.x, y:grid.y},
     	dataType: 'xml',
     	success: function(result) {
-    		console.log(result);
+    		// console.log(result);
     		
     		$('#weather-box').empty();
     		$('#weather-th-box').empty();
@@ -1001,36 +980,54 @@
     			var temp = $(this).find('temp').text();
     			var sky = $(this).find('sky').text();
     			var imgName = '';
-    			if(sky == 1) {			// 맑음
-    				if(hour == 21 || hour == 24 || hour == 3) {
-    					imgName = 'pm_Clear.png';
-    				} else {
-    					imgName = 'am_Clear.png';
-    				}
-    			} else if(sky == 3) {	// 구름많음
-					if(hour == 21 || hour == 24 || hour == 3) {
-    					imgName = 'pm_MostlyCloudy.png';
-    				} else {
-    					imgName = 'am_MostlyCloudy.png';
-    				}
-    			} else if(sky == 4) {	// 흐림
-					if(hour == 21 || hour == 24 || hour == 3) {
-    					imgName = 'pm_Cloudy.png';
-    				} else {
-    					imgName = 'am_Cloudy.png';
-    				}
-    			} else {
-    				if(hour == 21 || hour == 24 || hour == 3) {
-    					imgName = 'pm_Rain.png';
-    				} else {
-    					imgName = 'am_Rain.png';
-    				}
-    			}
+    			
     			var wfKor = $(this).find('wfKor').text();
     			var pop = $(this).find('pop').text();
     			var wdEn = $(this).find('wdEn').text();
     			var ws = Math.round($(this).find('ws').text() * 10)/10;
     			var reh = $(this).find('reh').text();
+    			
+    			if(wfKor == '맑음') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Clear.png';
+    				} else {
+    					imgName = 'am_Clear.png';
+    				}
+    			} else if(wfKor == '구름 조금') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_MostlyCloudy.png';
+    				} else {
+    					imgName = 'am_MostlyCloudy.png';
+    				}
+    			} else if(wfKor == '구름 많음') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_MostlyCloudy.png';
+    				} else {
+    					imgName = 'am_MostlyCloudy.png';
+    				}
+    			} else if(wfKor == '흐림') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Cloudy.png';
+    				} else {
+    					imgName = 'am_Cloudy.png';
+    				}
+    			} else if(wfKor == '비') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Rain.png';
+    				} else {
+    					imgName = 'am_Rain.png';
+    				}
+    			} else if(wfKor == '눈/비') {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Rain.png';
+    				} else {
+    					imgName = 'am_Rain.png';
+    				}
+    			} else if(wfKor == '눈') {
+    				imgName = 'am_Shower.png';
+    			} else {	// wfKor == 소나기
+    				imgName = 'am_Shower.png';
+    			}
     			
     			var day = $(this).find('day').text();
     			if(day == 0) {
@@ -1058,27 +1055,33 @@
 				
     		});
     		
-			var html2 = '<th colspan="' + count0 + '">오늘</th>';
+			var afterMonth = (months + 1) < 10 ? '0' + (months + 1) : months + 1;
 			
+			var html2 = '<th colspan="' + count0 + '">오늘</th>';
 			if(endDay[months-1] == days) {
-				html2 += '<th colspan="' + count1 + '">내일 (' + (months + 1) + '.01)</th>' 
-					  + '<th colspan="' + count2 + '">모레 (' + (months + 1) + '.02)</th>';
+				html2 += '<th colspan="' + count1 + '">내일 (' + afterMonth + '.01)</th>' 
+					  + '<th colspan="' + count2 + '">모레 (' + afterMonth + '.02)</th>';
+	            $('#weather-th-box').append(html2);
 				return;
 			}
 			if(endDay[months-1]-1 == days) {
+				
 				html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + (day + 1) + ')</th>' 
-				  	  + '<th colspan="' + count2 + '">모레 (' + (months + 1) + '.01)</th>';
+				  	  + '<th colspan="' + count2 + '">모레 (' + afterMonth + '.01)</th>';
+	            $('#weather-th-box').append(html2);
 				return;
 			}
 			
 			if(months == 12 && endDay[months-1] == days) {
 				html2 += '<th colspan="' + count1 + '">내일 (01.01)</th>'
              	 	  + '<th colspan="' + count2 + '">모레 (01.02)</th>';
+	            $('#weather-th-box').append(html2);
              	return;
 			}
 			if(months == 12 && endDay[months-1]-1 == days) {
 				html2 += '<th colspan="' + count1 + '">내일 (12.31)</th>'
        	 	  		  + '<th colspan="' + count2 + '">모레 (01.01)</th>';
+	            $('#weather-th-box').append(html2);
        			return;
 			}
 			
@@ -1102,7 +1105,7 @@
     		$('#weather-table').animate({marginLeft : '0px'}, 1000);
     	} else {
 	    	$(this).find('span').removeClass().addClass('glyphicon glyphicon-chevron-left');    		
-			$('#weather-table').animate({ marginLeft : '-595px' }, 1000);    		
+			$('#weather-table').animate({ marginLeft : '-350px' }, 1000);    		
     	}
     	
     });
@@ -1116,6 +1119,320 @@
     	var offset = $('#fine-dust-info-box').offset();
     	$('html, body').animate({scrollTop : offset.top}, 500);
     });
+
+    // TM좌표를 구하기 위해 필요한 AccessToken을 얻는 API 요청
+    function getAccessToken() {
+    	var consumerKey = '4bb91b4af049480babda';
+       	var consumerSecret = '0cc468f9e2ec428f9962';
+    	
+    	return $.ajax({
+    		url: 'https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json',
+    		data: {consumer_key : consumerKey, consumer_secret : consumerSecret},
+    		dataType: 'json'
+    	});
+    }
+    
+    // 위경도를 이용해 TM 좌표를 구하는 API 요청
+    function getPosXY(data) {
+    	var WGS84 = 4326;	// WGS84 경/위도
+    	var GRS80 = 5181;	// GRS80 중부원점
+    	
+    	// getAccessToken의 실행결과로 얻어진 json 형식의 파일에서 accessToken 가져오기
+    	var accessToken = data.result.accessToken;
+    	
+    	// posX = longitude 경도
+    	// posY = latitude 위도
+    	return $.ajax({
+    		url: 'https://sgisapi.kostat.go.kr/OpenAPI3/transformation/transcoord.json',
+	    	data: {accessToken : accessToken, src : WGS84, dst : GRS80, posX : 127.00620450263966, posY : 37.38173710552906},
+	    	dataType: 'json'
+    	});
+    }
+    
+    // TM 좌표를 이용해 근처 측정소 정보를 구하는 API 요청
+    function getNearMeasuringStation(data) {
+    	var posX = data.result.posX;
+    	var posY = data.result.posY;
+    	
+    	var serviceKey = 'aOcLZRzeoEHjos1gxt%2FtugTOk2bJMOhPOpAnBIRuLky8Q%2BpkvJEDN9TRihhCyIUkkdRnfQkg%2Fg4m%2B0nsdo%2BjWg%3D%3D';
+    	
+    	return $.ajax({
+    		url: 'measuringstationxml.camp',
+    		data: {serviceKey : serviceKey, tmX : posX, tmY : posY},
+    		dataType: 'xml'
+    	});
+    }
+    
+    // 근처 측정소 정보 중 가장 가까운 측정소명을 이용해 해당 측정소에서 측정한 미세먼지 수치들을 가져오는 API 요청
+    function getFineDustInfo(data) {
+    	var station = $(data).find('item:first-child');
+    	var stationName = $(station).find('stationName').text();
+    	var addr = $(station).find('addr').text();
+    	var tm = $(station).find('tm').text();
+    	
+    	var serviceKey = 'aOcLZRzeoEHjos1gxt%2FtugTOk2bJMOhPOpAnBIRuLky8Q%2BpkvJEDN9TRihhCyIUkkdRnfQkg%2Fg4m%2B0nsdo%2BjWg%3D%3D';
+    	
+    	return $.ajax({
+    		url: 'finedustinfoxml.camp',
+    		data: {serviceKey : serviceKey, stationName : stationName},
+    		dataType: 'xml',
+    		success: function(data) {
+    			var dustInfos = $(data).find('item:first-child');
+    			var dataTime = $(dustInfos).find('dataTime').text();	// 측정 시간
+    			var khaiValue = $(dustInfos).find('khaiValue').text();	// 통합 대기 지수
+    			var pm10Value = $(dustInfos).find('pm10Value').text();	// 미세먼지 농도
+    			var pm25Value = $(dustInfos).find('pm25Value').text();	// 초미세먼지 농도
+    			var so2Value = $(dustInfos).find('so2Value').text();	// 아황산가스 농도
+    			var coValue = $(dustInfos).find('coValue').text();		// 일산화탄소 농도
+    			var o3Value = $(dustInfos).find('o3Value').text();		// 오존 농도
+    			var no2Value = $(dustInfos).find('no2Value').text();	// 이산화질소 농도
+    			
+    			console.log(data);
+    			
+    	    	var html1 = '<p>'
+    	            	  + '> <strong>측정장소</strong> : ' + addr
+    	            	  + '</p>'
+    	            	  + '<p>'
+    	                  + '> 캠핑장과 <strong style="color: #32a1ff;">' + tm + 'Km</strong> 떨어진 ' + stationName + ' 측정소에서 '
+    	                  + '<strong style="color: #32a1ff;">' + dataTime + '</strong>분에 측정된 수치'
+    	            	  + '</p>';
+    	            	  
+    	        var html21 = '', html22 = '', html23 = '';
+    	        var imgName = '';
+    	        if(pm25Value < 16) {			// 좋음
+    	        	imgName = 'blue_wind.svg';
+    	        
+	    	        html22 = '<strong style="color: #32a1ff;">';
+	    	        html23 = '<span style="font-size: 23px; color: #32a1ff;">좋음</span>';
+    	        } else if(pm25Value < 26) {		// 보통
+    	        	imgName = 'green_wind.svg';
+    	        	
+	    	        html22 = '<strong style="color: #00c73c;">';
+	    	        html23 = '<span style="font-size: 23px; color: #00c73c;">보통</span>';
+    	        } else if(pm25Value < 51) {		// 나쁨
+    	        	imgName = 'orange_wind.svg';
+    	        	
+	    	        html22 = '<strong style="color: #fd9b5a;">';
+	    	        html23 = '<span style="font-size: 23px; color: #fd9b5a;">나쁨</span>';
+    	        } else if(pm25Value >= 51) {	// 매우 나쁨
+    	        	imgName = 'red_wind.svg';
+    	        	
+	    	        html22 = '<strong style="color: #ff5959;">';
+	    	        html23 = '<span style="font-size: 23px; color: #ff5959;">매우 나쁨</span>';
+    	        } else {						// 측정 안 됨
+    	        	imgName = 'gray_wind.svg';
+    	        	
+    	        	html22 = '<strong style="color: #ccc;">';
+	    	        html23 = '<span style="font-size: 23px; color: #ccc;">측정안됨</span>';
+    	        }
+    	        
+   	        	html21 = '<img src="/camping/resources/images/weathers/' + imgName + '" width="35"/>';
+    	        html22 += '<span style="font-size: 30px;">' + pm25Value + '</span><span style="font-size: 15px;">㎍/㎥</span></strong>';
+    	        
+    	        $('#fine-dust-img-box').append(html21);
+    	        $('#fine-dust-value-box').append(html22);
+    	        $('#fine-dust-msg-box').append(html23);
+    	        
+    	        var html3 = '';
+    	        if(so2Value < 0.021) {
+    	        	html3 = '<span style="font-size: 20px; color: #32a1ff;">';
+    	        } else if(so2Value < 0.051) {
+    	        	html3 = '<span style="font-size: 20px; color: #00c73c;">';
+    	        } else if(so2Value < 0.151) {
+    	        	html3 = '<span style="font-size: 20px; color: #fd9b5a;">';
+    	        } else {
+    	        	html3 = '<span style="font-size: 20px; color: #ff5959;">';
+    	        }
+    	        
+    	        html3 += '●</span>아황산가스 농도 <strong style="margin-right: 15px;">' + so2Value + 'ppm</strong>';
+    	        
+    	        if(coValue < 2.01) {
+    	        	html3 += '<span style="font-size: 20px; color: #32a1ff;">';
+    	        } else if(coValue < 9.01) {
+    	        	html3 += '<span style="font-size: 20px; color: #00c73c;">';
+    	        } else if(coValue < 15.01) {
+    	        	html3 += '<span style="font-size: 20px; color: #fd9b5a;">';
+    	        } else {
+    	        	html3 += '<span style="font-size: 20px; color: #ff5959;">';
+    	        }
+    	        
+    	        html3 += '●</span>일산화탄소 농도 <strong style="margin-right: 15px;">' + coValue + 'ppm</strong>';
+    	        
+    	        if(o3Value < 0.031) {
+    	        	html3 += '<span style="font-size: 20px; color: #32a1ff;">';
+    	        } else if(o3Value < 0.091) {
+    	        	html3 += '<span style="font-size: 20px; color: #00c73c;">';
+    	        } else if(o3Value < 0.151) {
+    	        	html3 += '<span style="font-size: 20px; color: #fd9b5a;">';
+    	        } else {
+    	        	html3 += '<span style="font-size: 20px; color: #ff5959;">';
+    	        }
+    	        
+    	        html3 += '●</span>오존 농도 <strong style="margin-right: 15px;">' + o3Value + 'ppm</strong>';
+    	        
+    	        if(no2Value < 0.031) {
+    	        	html3 += '<span style="font-size: 20px; color: #32a1ff;">';
+    	        } else if(no2Valule < 0.061) {
+    	        	html3 += '<span style="font-size: 20px; color: #00c73c;">';
+    	        } else if(no2Value < 0.201) {
+    	        	html3 += '<span style="font-size: 20px; color: #fd9b5a;">';
+    	        } else {
+    	        	html3 += '<span style="font-size: 20px; color: #ff5959;">';
+    	        }
+    	        
+    	        html3 += '●</span>이산화질소 농도 <strong style="margin-right: 15px;">' + no2Value + 'ppm</strong>';
+                    	  
+                $('#measuring-station-box').append(html1);
+                $('#dust-infos-value-box').append(html3);
+                
+                $('#khai-value-msg-box').empty();
+                var html4 = '';
+                
+                var config5 = liquidFillGaugeDefaultSettings();
+	                config5.waveAnimateTime = 3000;
+	                config5.displayPercent = false;
+	                config5.maxValue = 160;
+	                
+	                if(khaiValue < 51) {
+	                	config5.circleColor = '#32a1ff';
+		                config5.textColor = '#003666';
+		                config5.waveTextColor = '#005fb3';
+		                config5.waveColor = '#b3dbff';
+		                
+		                html4 = '<strong style="color: #32a1ff; font-size: 15px;">좋음</strong>';
+		                
+	                } else if(khaiValue < 101) {
+	                	config5.circleColor = '#00c73c';
+		                config5.textColor = '#00661f';
+		                config5.waveTextColor = '#00b336';
+		                config5.waveColor = '#b3ffc9';
+		                
+		                html4 = '<strong style="color: #00c73c; font-size: 15px;">보통</strong>';
+		                
+	                } else if(khaiValue < 251) {
+	                	config5.circleColor = '#fd9b5a';
+		                config5.textColor = '#542901';
+		                config5.waveTextColor = '#b14802';
+		                config5.waveColor = '#fed1b3';
+		                
+		                html4 = '<strong style="color: #fd9b5a; font-size: 15px;">나쁨</strong>';
+		                
+	                } else if(khaiValue >= 251) {
+	                	config5.circleColor = '#ff5959';
+		                config5.textColor = '#660000';
+		                config5.waveTextColor = '#b30000';
+		                config5.waveColor = '#ffb3b3';
+		                
+		                html4 = '<strong style="color: #ff5959; font-size: 15px;">매우 나쁨</strong>';
+		                
+	                } else {
+	                	config5.circleColor = '#ccc';
+		                config5.textColor = '#ccc';
+		                config5.waveTextColor = '#ccc';
+		                config5.waveColor = '#ccc';
+		                
+		                html4 = '<strong style="color: #ccc; font-size: 15px;">정보없음</strong>';
+	                }
+	                
+            	var gauge5 = loadLiquidFillGauge('fillgauge5', khaiValue, config5);
+            	$('#khai-value-msg-box').append(html4);
+            	
+            	console.log(pm10Value);
+            	
+            	$('#fine-dust-info-btn').empty();
+            	var html5 = '';
+            	var html6 = '';
+            	html6 = '<div style="text-align: center; padding-top: 5px; color: #fff;">'
+  				 	  + '<span style="vertical-align: middle; height: 45%; font-size: 23px;">' + pm10Value + '</span> ㎍/㎥'
+    			 	  + '</div>';
+            	if(pm10Value < 31) {
+            		$('#fine-dust-info-btn').css('background-color', '#32a1ff');
+            		html5 = '<span style="font-size: 20px;">' + pm10Value + '</span>㎍/㎥<br/>미세먼지 좋음';
+            		
+            		var gauge = (pm10Value / 160 * 100) + '%';
+            		$('#dust-gauge-box').css('left', gauge)
+            							.css('background-color', '#32a1ff');
+            		html6 += '<div style="position: relative; top: -15px; color: #32a1ff; font-size: 25px;">';
+            	} else if(pm10Value < 81) {
+            		$('#fine-dust-info-btn').css('background-color', '#00c73c');
+            		html5 = '<span style="font-size: 20px;">' + pm10Value + '</span>㎍/㎥<br/>미세먼지 보통';
+            		
+            		var gauge = (pm10Value / 160 * 100) + '%';
+            		$('#dust-gauge-box').css('left', gauge)
+            							.css('background-color', '#00c73c');
+            		html6 += '<div style="position: relative; top: -15px; color: #00c73c; font-size: 25px;">';
+            	} else if(pm10Value < 151) {
+            		$('#fine-dust-info-btn').css('background-color', '#fd9b5a');
+            		html5 = '<span style="font-size: 20px;">' + pm10Value + '</span>㎍/㎥<br/>미세먼지 나쁨';
+            		
+            		var gauge = (pm10Value / 160 * 100) + '%';
+            		$('#dust-gauge-box').css('left', gauge)
+            							.css('background-color', '#fd9b5a');
+            		html6 += '<div style="position: relative; top: -15px; color: #fd9b5a; font-size: 25px;">';
+            	} else if(pm10Value >= 151) {
+            		$('#fine-dust-info-btn').css('background-color', '#ff5959');
+            		html5 = '<span style="font-size: 20px;">' + pm10Value + '</span>㎍/㎥<br/>미세먼지 매우 나쁨';
+            		
+            		var gauge = (pm10Value / 160 * 100) + '%';
+            		$('#dust-gauge-box').css('left', gauge)
+            							.css('background-color', '#ff5959');
+            		html6 += '<div style="position: relative; top: -15px; color: #ff5959; font-size: 25px;">';
+            	} else {
+            		$('#fine-dust-info-btn').css('background-color', '#ccc');
+            		html5 = '<span style="font-size: 20px;">' + pm10Value + '</span>㎍/㎥<br/>측정안됨';
+            		
+            		$('#dust-gauge-box').css('left', '0px')
+            							.css('background-color', '#ccc');
+            		html6 += '<div style="position: relative; top: -15px; color: #ccc; font-size: 25px;">';
+            	}
+            	
+            	html6 += '▼</div>';
+            	
+            	$('#fine-dust-info-btn').append(html5);
+            	$('#dust-gauge-box').append(html6);
+            	
+    		}
+    	});
+    }
+    
+    function getSunTime() {
+    	var serviceKey = 'aOcLZRzeoEHjos1gxt%2FtugTOk2bJMOhPOpAnBIRuLky8Q%2BpkvJEDN9TRihhCyIUkkdRnfQkg%2Fg4m%2B0nsdo%2BjWg%3D%3D';
+       	var today = new Date();
+       	var year = today.getFullYear();
+       	var month = today.getMonth() + 1;
+       	month = month < 10 ? '0' + month : month;
+       	var day = today.getDate();
+       	day = day < 10 ? '0' + day : day;
+       	
+       	var locdate = year + "" + month + "" + day;
+        return $.ajax({
+        	
+        	url: 'suntimexml.camp',
+        	data: {serviceKey : serviceKey, latitude : 37.38173710552906, longitude : 127.00620450263966, locdate : locdate},
+        	dataType: 'xml',
+        	success: function(data) {
+        		console.log(data);
+        		var suntime = $(data).find('item');
+        		var sunrise = $(suntime).find('sunrise').text();
+        		var sunset = $(suntime).find('sunset').text();
+        		
+        		var sunriseHour = sunrise.substr(0, 2);
+        		var sunriseMinute = sunrise.substr(2, 2);
+        		var sunsetHour = sunset.substr(0, 2);
+        		var sunsetMinute = sunset.substr(2, 2);
+        		
+        		var htmlSunRise = '<strong>일출시간</strong> ' + sunriseHour + ' : ' + sunriseMinute;
+        		var htmlSunSet = '<strong>일몰시간</strong> ' + sunsetHour + ' : ' + sunsetMinute;
+        		
+        		$('#sunrise-box').append(htmlSunRise);
+        		$('#sunset-box').append(htmlSunSet);
+
+        	}
+        })
+    }
+    
+    getAccessToken().then(getPosXY).then(getNearMeasuringStation).then(getFineDustInfo);
+    getSunTime();
     
 </script>
 </body>
