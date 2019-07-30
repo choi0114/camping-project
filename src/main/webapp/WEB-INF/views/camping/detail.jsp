@@ -44,7 +44,7 @@
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 					<span> | 비추천 0</span>
 				</button>
-				<button class="btn btn-default" style="margin-left: 20px;">
+				<button class="btn btn-default" style="margin-left: 20px;" id="opinion-btn">
 					<span class="glyphicon glyphicon-pencil"></span>
 					<span> | 의견 0</span>
 				</button>
@@ -62,7 +62,7 @@
 		</div>
         <div class="col-sm-2 pull-right text-center" style="max-height: 100%;">
             <div>
-                <button style="background-color: #00c73c; color: #fff; display: inline-block; padding: 5px 10px; border-radius: 10px;">
+                <button id="fine-dust-info-btn" style="background-color: #00c73c; color: #fff; display: inline-block; padding: 5px 10px; border-radius: 10px;">
                     <span style="font-size: 20px;">39</span>㎍/㎥<br/>미세먼지 보통
                 </button>
             </div>
@@ -327,7 +327,7 @@
             </p>
         </div>
     </div>
-    <div class="row" style="margin-top: 30px;">
+    <div class="row" id="fine-dust-info-box" style="margin-top: 30px;">
     	<div class="col-sm-8">
         	<span style="margin-right: 10px;">
                 <img src="/camping/resources/images/weathers/wind.svg" width="18px;"/>
@@ -481,173 +481,23 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
-                <thead>
-                    <tr style="background-color: #f5f5f5;">
-                        <th colspan="2">오늘</th>
-                        <th colspan="8">내일 (07.19)</th>
-                        <th colspan="8">모레 (07.20)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <p>21시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>SE 1.3m/s</p>
-                            <p>90%</p>
-                        </td>
-                        <td>
-                            <p>24시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>S 0.9m/s</p>
-                            <p>90%</p>
-                        </td>
-                        <td>
-                            <p>3시</p>
-                            <p style="color: #06f;">22.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_Clear.png" width="40"/>
-                            </p>
-                            <p><strong>맑음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">0%</strong>
-                            </p>
-                            <p>S 0.8m/s</p>
-                            <p>85%</p>
-                        </td>
-                        <td>
-                            <p>6시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>SE 1m/s</p>
-                            <p>85%</p>
-                        </td>
-                        <td>
-                            <p>9시</p>
-                            <p style="color: #06f;">27.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>E 1.5m/s</p>
-                            <p>80%</p>
-                        </td>
-                        <td>
-                            <p>12시</p>
-                            <p style="color: #06f;">28.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>E 2.5m/s</p>
-                            <p>85%</p>
-                        </td>
-                        <td>
-                            <p>15시</p>
-                            <p style="color: #06f;">27.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>E 2.6m/s</p>
-                            <p>90%</p>
-                        </td>
-                        <td>
-                            <p>18시</p>
-                            <p style="color: #06f;">25.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/am_MostlyCloudy.png" width="40"/>
-                            </p>
-                            <p><strong>구름 많음</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">20%</strong>
-                            </p>
-                            <p>E 1.8m/s</p>
-                            <p>95%</p>
-                        </td>
-                        <td>
-                            <p>21시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_Cloudy.png" width="40"/>
-                            </p>
-                            <p><strong>흐림</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">30%</strong>
-                            </p>
-                            <p>E 1.1m/s</p>
-                            <p>95%</p>
-                        </td>
-                        <td>
-                            <p>24시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_Cloudy.png" width="40"/>
-                            </p>
-                            <p><strong>흐림</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">30%</strong>
-                            </p>
-                            <p>E 3.9m/s</p>
-                            <p>95%</p>
-                        </td>
-                        <td>
-                            <p>3시</p>
-                            <p style="color: #06f;">23.0℃</p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/pm_Rain.png" width="40"/>
-                            </p>
-                            <p><strong>비</strong></p>
-                            <p>
-                                <img src="/camping/resources/images/weathers/drop.svg" width="15"/>
-                                <strong style="color: #069;">60%</strong>
-                            </p>
-                            <p>E 4.1m/s</p>
-                            <p>95%</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        	<div>
+        		<div class="text-right" style="position: relative; z-index:2; top: 33px;" id="hidden-weather-box">
+        			<button style="height: 33px; background-color: #000;">
+        				<span class="glyphicon glyphicon-chevron-right" style="color: #fff;"></span>
+        			</button>
+        		</div>
+        		<div class="text-center" id="weather-after-box" style="position: relative; z-index: 1; overflow: hidden;">
+		            <table class="table" id="weather-table" style="left: 0px;">
+		                <thead>
+		                    <tr style="background-color: #f5f5f5;" id="weather-th-box"></tr>
+		                </thead>
+		                <tbody>
+		                    <tr id="weather-box"></tr>
+		                </tbody>
+		            </table>
+	            </div>
+            </div>
         </div>
     </div>
     
@@ -676,7 +526,7 @@
         <div class="col-sm-12 text-center" id="near-campingsite-box">
             <div>
                 <div>
-                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="180"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="160"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>검봉산 자연휴양림 야영장</strong>
@@ -687,7 +537,7 @@
             </div>
             <div>
                 <div>
-                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="180"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="160"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>삼척 엘림 캠핑장</strong>
@@ -698,7 +548,7 @@
             </div>
             <div>
                 <div>
-                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="180"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>씨스포빌 카라반</strong>
@@ -709,7 +559,7 @@
             </div>
             <div>
                 <div>
-                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="180"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="160"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>덕풍계곡 마을 야영장</strong>
@@ -720,7 +570,7 @@
             </div>
             <div>
                 <div>
-                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="180"/></a>
+                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
                 </div>
                 <div style="margin-top: 5px;">
                     <strong>덕풍계곡 솔밭 야영장</strong>
@@ -734,8 +584,8 @@
     <div class="row" style="margin-top: 40px;">
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
-                <li class="active"><a>의견</a></li>
-                <li><a>리뷰</a></li>
+                <li class="active" id="opinion-box"><a>의견</a></li>
+                <li id="review-box"><a>리뷰</a></li>
                 <li><a>주변 행사안내</a></li>
                 <li><a>주변 관광지</a></li>
                 <li><a>주변 맛집</a></li>
@@ -1001,7 +851,7 @@
     <div class="row" style="border-bottom: 1px solid #ddd; margin-top: 60px;"></div>
     <div class="row" style="margin-top: 15px; margin-bottom: 60px;">
         <div class="col-sm-12">
-            <button class="btn btn-default">
+            <button class="btn btn-default" id="up-btn">
                 <span class="glyphicon glyphicon-hand-up"></span> | 위로
             </button>
         </div>
@@ -1050,6 +900,223 @@
     $('#fine-dust-btn').click(function() {
     	$('#fine-dust-box').toggle('show');
     });
+    
+    //----------------------------------------------------------
+    // 기상청 홈페이지에서 발췌한 변환 함수
+    //
+    // LCC DFS 좌표변환을 위한 기초 자료
+    //
+    var RE = 6371.00877; // 지구 반경(km)
+    var GRID = 5.0; // 격자 간격(km)
+    var SLAT1 = 30.0; // 투영 위도1(degree)
+    var SLAT2 = 60.0; // 투영 위도2(degree)
+    var OLON = 126.0; // 기준점 경도(degree)
+    var OLAT = 38.0; // 기준점 위도(degree)
+    var XO = 43; // 기준점 X좌표(GRID)
+    var YO = 136; // 기1준점 Y좌표(GRID)
+
+	// LCC DFS 좌표변환 ( code : 
+	//          "toXY"(위경도->좌표, v1:위도, v2:경도), 
+	//          "toLL"(좌표->위경도,v1:x, v2:y) )
+	//
+
+    function dfs_xy_conv(code, v1, v2) {
+        var DEGRAD = Math.PI / 180.0;
+        var RADDEG = 180.0 / Math.PI;
+        
+        var re = RE / GRID;
+        var slat1 = SLAT1 * DEGRAD;
+        var slat2 = SLAT2 * DEGRAD;
+        var olon = OLON * DEGRAD;
+        var olat = OLAT * DEGRAD;
+        
+        var sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+        var sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+        sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+        var ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+        ro = re * sf / Math.pow(ro, sn);
+        var rs = {};
+        if (code == "toXY") {
+            rs['lat'] = v1;
+            rs['lng'] = v2;
+            var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
+            ra = re * sf / Math.pow(ra, sn);
+            var theta = v2 * DEGRAD - olon;
+            if (theta > Math.PI) theta -= 2.0 * Math.PI;
+            if (theta < -Math.PI) theta += 2.0 * Math.PI;
+            theta *= sn;
+            rs['x'] = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+            rs['y'] = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+        }
+        else {
+            rs['x'] = v1;
+            rs['y'] = v2;
+            var xn = v1 - XO;
+            var yn = ro - v2 + YO;
+            ra = Math.sqrt(xn * xn + yn * yn);
+            if (sn < 0.0) - ra;
+            var alat = Math.pow((re * sf / ra), (1.0 / sn));
+            alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
+            
+            if (Math.abs(xn) <= 0.0) {
+                theta = 0.0;
+            }
+            else {
+                if (Math.abs(yn) <= 0.0) {
+                    theta = Math.PI * 0.5;
+                    if (xn < 0.0) - theta;
+                }
+                else theta = Math.atan2(xn, yn);
+            }
+            var alon = theta / sn + olon;
+            rs['lat'] = alat * RADDEG;
+            rs['lng'] = alon * RADDEG;
+        }
+        return rs;
+    }
+
+    var grid = dfs_xy_conv('toXY', 37.38173710552906, 127.00620450263966);
+   
+    $.ajax({
+    	url: 'xml.camp',
+    	data: {x: grid.x, y:grid.y},
+    	dataType: 'xml',
+    	success: function(result) {
+    		console.log(result);
+    		
+    		$('#weather-box').empty();
+    		$('#weather-th-box').empty();
+    		
+    		var today = new Date();
+    		var months = today.getMonth() + 1;
+    		var month = months < 10 ? '0' + months : months;
+    		var days = today.getDate();
+    		var day = days < 10 ? '0' + days : days;
+    		var count0 = 0, count1 = 0, count2 = 0;
+    		var endDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    		
+    		$(result).find('data').each(function(index, item) {
+    			var hour = $(this).find('hour').text();
+    			var temp = $(this).find('temp').text();
+    			var sky = $(this).find('sky').text();
+    			var imgName = '';
+    			if(sky == 1) {			// 맑음
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Clear.png';
+    				} else {
+    					imgName = 'am_Clear.png';
+    				}
+    			} else if(sky == 3) {	// 구름많음
+					if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_MostlyCloudy.png';
+    				} else {
+    					imgName = 'am_MostlyCloudy.png';
+    				}
+    			} else if(sky == 4) {	// 흐림
+					if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Cloudy.png';
+    				} else {
+    					imgName = 'am_Cloudy.png';
+    				}
+    			} else {
+    				if(hour == 21 || hour == 24 || hour == 3) {
+    					imgName = 'pm_Rain.png';
+    				} else {
+    					imgName = 'am_Rain.png';
+    				}
+    			}
+    			var wfKor = $(this).find('wfKor').text();
+    			var pop = $(this).find('pop').text();
+    			var wdEn = $(this).find('wdEn').text();
+    			var ws = Math.round($(this).find('ws').text() * 10)/10;
+    			var reh = $(this).find('reh').text();
+    			
+    			var day = $(this).find('day').text();
+    			if(day == 0) {
+    				count0++;
+    			} else if(day == 1) {
+    				count1++;
+    			} else if(day == 2) {
+    				count2++;
+    			}
+    			
+    			var html1 = '<td style="min-width: 85px;">'
+			             + '<p>' + hour + '시</p>'
+			             + '<p style="color: #06f;">' + temp + '℃</p>'
+			             + '<p><img src="/camping/resources/images/weathers/' + imgName + '" width="40"/></p>'
+			             + '<p><strong>' + wfKor + '</strong></p>'
+			             + '<p>'
+			             + '<img src="/camping/resources/images/weathers/drop.svg" width="15"/>'
+			             + '<strong style="color: #069;">' + pop + '%</strong>'
+			             + '</p>'
+			             + '<p>' + wdEn + ' ' + ws + 'm/s</p>'
+			             + '<p>' + reh + '%</p>'
+			             + '</td>';
+			             
+				$('#weather-box').append(html1);
+				
+    		});
+    		
+			var html2 = '<th colspan="' + count0 + '">오늘</th>';
+			
+			if(endDay[months-1] == days) {
+				html2 += '<th colspan="' + count1 + '">내일 (' + (months + 1) + '.01)</th>' 
+					  + '<th colspan="' + count2 + '">모레 (' + (months + 1) + '.02)</th>';
+				return;
+			}
+			if(endDay[months-1]-1 == days) {
+				html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + (day + 1) + ')</th>' 
+				  	  + '<th colspan="' + count2 + '">모레 (' + (months + 1) + '.01)</th>';
+				return;
+			}
+			
+			if(months == 12 && endDay[months-1] == days) {
+				html2 += '<th colspan="' + count1 + '">내일 (01.01)</th>'
+             	 	  + '<th colspan="' + count2 + '">모레 (01.02)</th>';
+             	return;
+			}
+			if(months == 12 && endDay[months-1]-1 == days) {
+				html2 += '<th colspan="' + count1 + '">내일 (12.31)</th>'
+       	 	  		  + '<th colspan="' + count2 + '">모레 (01.01)</th>';
+       			return;
+			}
+			
+			html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + (day + 1) + ')</th>'
+   	 	  		  + '<th colspan="' + count2 + '">모레 (' + month + '.' + (day + 2) + ')</th>';
+
+            $('#weather-th-box').append(html2);
+    	}
+    });
+    
+    $('#up-btn').click(function() {
+   		$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+   		return false;
+    });
+    
+    $('#hidden-weather-box button').click(function() {
+    	$(this).parent().toggleClass('text-right');
+    	
+    	if($(this).parent().hasClass('text-right')) {
+    		$(this).find('span').removeClass().addClass('glyphicon glyphicon-chevron-right');
+    		$('#weather-table').animate({marginLeft : '0px'}, 1000);
+    	} else {
+	    	$(this).find('span').removeClass().addClass('glyphicon glyphicon-chevron-left');    		
+			$('#weather-table').animate({ marginLeft : '-595px' }, 1000);    		
+    	}
+    	
+    });
+    
+    $('#opinion-btn').click(function() {
+    	var offset = $('#opinion-box').offset();
+    	$('html, body').animate({scrollTop : offset.top}, 500);
+    });
+    
+    $('#fine-dust-info-btn').click(function() {
+    	var offset = $('#fine-dust-info-box').offset();
+    	$('html, body').animate({scrollTop : offset.top}, 500);
+    });
+    
 </script>
 </body>
 </html>
