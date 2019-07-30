@@ -238,7 +238,7 @@
 	    var filepath = this.value;
 	    var m = filepath.match(/([^\/\\]+)$/);
 	    var filename = m[1];
-		var filesize = Math.ceil( (this.files[0].size / 1024) / 1024);
+		var filesize = Math.ceil( (this.files[0].size / 1024) % 1024);
 	    $('#filename').html(filename);
 		if(filesize > 21) {
 			alert("첨부파일 용량이 21MB 보다 더 큽니다.");
