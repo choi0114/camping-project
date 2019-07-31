@@ -2,7 +2,7 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
-public class OPinionBoardComment {
+public class OpinionBoardComment {
 
 	private Integer no;
 	private String contents;
