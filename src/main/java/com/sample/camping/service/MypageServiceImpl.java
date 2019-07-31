@@ -3,9 +3,11 @@ package com.sample.camping.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.MypageDao;
 
+@Service
 public class MypageServiceImpl implements MypageService{
 
 	@Autowired
@@ -13,6 +15,7 @@ public class MypageServiceImpl implements MypageService{
 	
 	@Override
 	public Map<String, Object> getBoards(String userId) {
+		
 		mypageDao.getFreeBoardById(userId);
 		mypageDao.getJoningBoardsById(userId);
 		mypageDao.getOpinionBoardById(userId);
