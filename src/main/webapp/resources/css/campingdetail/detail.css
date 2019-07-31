@@ -62,7 +62,7 @@ th, td {
 
 #near-campingsite-box > div {
 	display: inline-block;
-	margin-right: 10px;
+	margin: 0 5px;
 }
 
 #near-campingsite-box span {

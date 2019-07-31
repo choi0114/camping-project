@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.camping.dao.CampsiteDao">
+
+	<select id="getCampSiteByNo" parameterType="int" resultType="campsite">
+		select
+			campsite_no				no,
+			campsite_name			name,
+			campsite_sort			sort,
+			campsite_latitude		latitude,
+			campsite_longitude		longitude,
+			campsite_address		address,
+			campsite_tel			tel,
+			campsite_sites			sites,
+			campsite_price			price,
+			campsite_likes			likes,
+			campsite_hates			hates,
+			campsite_photo			photo,
+			campsite_point			point,
+			campsite_create_date	createDate,
+			campsite_used_yn		usedYn,
+			campsite_sido			sido,
+			my_campsite_no			"myCampsite.no"
+		from
+			camp_campsites
+		where
+			campsite_no = #{value}
+			
+	</select>
+
+</mapper>

@@ -1,18 +1,27 @@
 package com.sample.camping.controller;
 
-import java.util.Date;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sample.camping.service.CampsiteService;
 import com.sample.camping.view.WeatherXMLView;
+import com.sample.camping.vo.CampSite;
 
 @Controller
 public class CampingController {
 
+	@Autowired
+	CampsiteService campsiteService;
+	
 	@RequestMapping("/detail.camp")
-	public String detail() {
+	public String detail(@RequestParam("no") int no, Model model) {
+		CampSite campsite = campsiteService.getCampSiteByNo(no);
+		model.addAttribute("campsite", campsite);
+		
 		return "camping/detail";
 	}
 	
