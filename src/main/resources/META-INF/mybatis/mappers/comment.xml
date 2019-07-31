@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.BoardCommentDao">
+	<select id="commentByBoardNo" parameterType="map" resultType="comment">
+		select *
+		<if test="boardType != null">
+			<choose>
+				<when test="boardType == 1">
+					from CAMP_JOINING_COMMENTS 
+				</when>
+				<when test="boardType == 2">
+					from CAMP_REVIEW_COMMENTS 
+				</when>
+				<when test="boardType == 3">
+					from CAMP_OPINION_COMMENTS 
+				</when>
+				<when test="boardType == 4">
+					from CAMP_FREE_COMMENTS 
+				</when>
+			</choose>
+		</if>
+		<if test="boardType != null">
+			<choose>
+				<when test="boardType == 1">
+					where JOINING_NO = #{no}
+				</when>
+				<when test="boardType == 2">
+					where REVIEW_NO = #{no}
+				</when>
+				<when test="boardType == 3">
+					where OPINION_NO = #{no}
+				</when>
+				<when test="boardType == 4">
+					where FREE_NO = #{no}
+				</when>
+			</choose>
+		</if>
+	</select>
+	<insert id="addComment" parameterType="map">
+		INSERT INTO 
+			<choose>
+				<when test="boardType == 1">
+					 CAMP_JOINING_COMMENTS 
+				</when>
+				<when test="boardType == 2">
+					 CAMP_REVIEW_COMMENTS 
+				</when>
+				<when test="boardType == 3">
+					 CAMP_OPINION_COMMENTS 
+				</when>
+				<when test="boardType == 4">
+					 CAMP_FREE_COMMENTS 
+				</when>
+			</choose>
+		VALUES (CAMP_COMMENT_SEQ.nextval, #{contents}, sysdate, #{boardNo}, #{userId} )
+	</insert>
+</mapper>

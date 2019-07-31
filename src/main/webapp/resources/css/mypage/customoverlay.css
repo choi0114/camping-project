@@ -1,0 +1,96 @@
+ #poswrap {
+            width: 440px;
+            position: absolute;
+            left: 0px;
+            bottom: 50px;
+            margin-left: 220px;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+            box-shadow: 6px 6px 35px rgba(0, 0, 0, .65);
+        }
+
+        .cat3 {
+            color: #3399ff;
+        }
+
+        .info .cat {
+            display: inline-block;
+            padding: 0 8px;
+            height: 18px;
+            font-weight: 700;
+        }
+
+        .title {
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 15px;
+            letter-spacing: -0.02em;
+            padding: 0 0 0 10px;
+            margin: 0;
+            height: 40px;
+            line-height: 40px
+        }
+
+        .body {
+            background: #fff;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 125px;
+            height: 80px;
+            border: 1px solid #ddd;
+            color: #888;
+            overflow: hidden;
+            background: #ccc url(./image/nothumb.svg) no-repeat center center;
+            background-size: 30%;
+        }
+
+        .desc {
+            position: relative;
+            margin: 10px 0 0 150px;
+            width: 275px;
+            height: 140px;
+        }
+
+        .fa {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+        }
+
+        .jibun {
+            padding-bottom: 10px;
+        }
+
+        .body .btn_vote_scrap {
+            position: absolute;
+            bottom: 14px;
+            left: 10px;
+            width: 125px;
+            text-align: center;
+        }
+
+        .btn_vote_scrap a {
+            color: #666;
+        }
+
+        .btn_vote_scrap a:link {
+            text-decoration: none;
+        }
+
+        .btn_vote_scrap a:visited {
+            text-decoration: none;
+        }
+
+        .btn_vote_scrap a:hover {
+            text-decoration: none;
+        }
