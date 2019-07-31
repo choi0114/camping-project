@@ -33,4 +33,15 @@ public class MapServiceImpl implements MapService {
 		// TODO Auto-generated method stub
 		return mapDao.getCampSitesCount();
 	}
+	
+@Override
+	public List<CampSite> getAllCampSites() {
+		
+		return mapDao.getAllCampSites();
+	}
+@Override
+public CampSite getLatLngCamp(Map<String, Object> param) {
+	// TODO Auto-generated method stub
+	return mapDao.getLatLngCamp(param);
+	}
 }
