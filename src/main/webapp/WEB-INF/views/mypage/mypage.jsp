@@ -17,8 +17,6 @@
 		margin: 3px 0;
 		padding-left: 20px;
 		padding-bottom:10px;
-		background: url("/camp/resources/images/play_button.svg") no-repeat;
-		background-size: 14px 14px;
 	}
 	.panel-body ul {
 		font-size: 14px;
@@ -34,9 +32,7 @@
     width: 60px;
     height: 60px;
     margin: 4px 0 15px 16px;
-    background: url("/camp/resources/images/0.gif") center center no-repeat;
     border-radius: 100%;
-    background-size: 100%;
 }
 	.msg {
     padding: 0 0 15px 28px;
@@ -141,7 +137,7 @@
 								
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3>xxx님의 정보</h3>
+										<span style="font-size: 25px;">xxx님 정보</span>
 									</div>
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
@@ -155,7 +151,7 @@
 								<div class="panel panel-default">
 									<div class="panel-heading" style="text-align: center;">
 										<span style="font-size: 20px;">찜한 캠핑장</span>
-										<a href="clip.camp" class="pull-right"><img src="/camping/resources/images/plus.svg" class="more"></a>
+										<a href="clip.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
 									<div class="panel-body">
 										<div style="text-align: center;">
@@ -165,8 +161,9 @@
 								</div>
 								
 								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3>정복한 캠핑장</h3>
+									<div class="panel-heading" style="text-align: center;">
+										<span style="font-size: 20px;">정복한 캠핑장</span>
+										<a href="conquest.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
 									<div class="panel-body">
 										<div style="text-align: center;">
@@ -183,22 +180,22 @@
 									</div>
 									<form method="post">
 										<div class="rephoto">
-											<div class="avatar"> </div>
+											<div class="avatar" style="background: url(/camping/resources/images/profilePhoto/default.png) center center no-repeat; background-size: 100%;"></div>
 											<div class="msg">
 												회원님을 알릴 수 있는 사진을 등록해 주세요.
 												<br>
 												등록된 사진은 회원님의 개시물이나 댓글등에 사용됩니다.
 												<br>
-												사진 크기는 180 X 180 이상 크기로 등록하세요.
+												사진 크기는 180 X 180px 이상 크기로 등록하세요.
 											</div>
 											<div class="clear"></div>
 											<div class="upload">
-												<span id="filename"> </span>
+												<span id="filename"></span>
 												<label for="upFile">사진선택
 													<input type="file" name="upfile" class="upfile" id="upFile" >
 												</label>
 												<button type="submit" class="bbtn2 bbtn2-gray" style="height: 30px; line-height: 30px;">
-													<i><img src="/camp/resources/images/photo-camera.png" style="width: 14px; height: 14px; color: #fff;"></i>
+													<i><img src="/camping/resources/images/mypage/photo-camera.png" style="width: 14px; height: 14px; color: #fff;"></i>
 													사진등록
 												</button>
 											</div>
@@ -206,8 +203,9 @@
 									</form>
 								</div>
 								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3>내가 쓴 댓글</h3>
+									<div class="panel-heading" style="text-align: center;">
+										<span style="font-size: 20px;">내가 쓴 게시글</span>
+										<a href="post.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
 									<div class="panel-body">
 										<div style="text-align: center;">
@@ -216,8 +214,9 @@
 									</div>
 								</div>
 								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3>내가 쓴 개시글</h3>
+									<div class="panel-heading" style="text-align: center;">
+										<span style="font-size: 20px;">내가 쓴 댓글</span>
+										<a href="comment.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more" ></a>
 									</div>
 									<div class="panel-body">
 										<div style="text-align: center;">

@@ -1,14 +1,33 @@
 package com.sample.camping.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sample.camping.service.MypageService;
+import com.sample.camping.vo.User;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
-
+	
+	@Autowired
+	private MypageService myPageService;
+	
 	@RequestMapping("/mypage.camp")
-	public String mypage() {
+	public String mypage(HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		user.getNickName();
+		user.getName();
+		user.getId();
+		user.getCreateDate();
+		user.getProfilePhoto();
+		user.getType();
+		
+		
 		
 		return "mypage/mypage";
 	}

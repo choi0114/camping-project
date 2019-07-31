@@ -1,28 +1,109 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sample.camping.dao.UserDao">
+<mapper namespace="com.sample.camping.dao.MypageDao">
 
-	<select id="getUserBuId" resultType="com.sample.camping.vo.User" parameterType="string">
-		select
-			user_id id,
-			user_password password,
-			user_name name,
-			user_nick_name nickName,
-			user_email email,
-			user_phone_number phoneNumber,
-			user_profile_photo profilePhoto,
-			user_type type,
-			user_used_yn usedYn,
-			user_create_date createDate
-		from
-			camp_users
+	<select id="getJoningBoardsById" parameterType="string" resultType="JoningBoard">
+		select 
+			joining_no no,
+			joining_title title,
+			joining_contents contents,
+			joining_create_date createDate,
+			user_id "user.id"
+		from 
+			camp_joining_boards
 		where 
-			user_id = #{value}
+			user_id = #{userId}
 	</select>
 	
+	<select id="getOpinionBoardById" parameterType="string" resultType="OpinionBoard">
+		select 
+			opinion_no no,
+			opinion_title title,
+			opinion_contents contents,
+			opinion_create_date createDate,
+			user_id "user.id"
+		from 
+			camp_opinion_boards
+		where 
+			user_id = #{userId}
+	</select>
 	
+	<select id="getReviewBoaedById" parameterType="string" resultType="ReviewBoard">
+		select
+			review_no no,
+			review_title title,
+			review_contents contents,
+			review_create_date createDate,
+			user_id "user.id"
+		from 
+			camp_review_boards
+		where 
+			user_id = #{userId}
+	</select>
 	
+	<select id="getFreeBoardById" parameterType="string" resultType="FreeBoard">
+		select 
+			free_no no,
+			free_title title,
+			free_contents contents,
+			free_create_date createDate,
+			user_id "user.id"
+		from 
+			camp_free_baord
+		where 
+			user_id = #{userId}
+	</select>
 	
+	<select id="getJoningBoardCommentById" parameterType="string" resultType="JoningBoardComment">
+		select 
+			comment_no no,
+			comment_contents contents,
+			comment_create_date createDate,
+			joining_no "joiningBoard.no",
+			user_id "user.id"
+		from 
+			camp_joining_comments
+		where 
+			user_id = #{userId}
+	</select>
 	
+	<select id="getOpinionBoardCommentById" parameterType="string" resultType="OpinionBoardComment">
+		select
+			comment_no no,
+			comment_contents contents,
+			comment_create_date createDate,
+			opinion_no "opinionBoard.no",
+			user_id "user.id"
+		from 
+			camp_opinion_comments
+		where 
+			user_id = #{userId}
+	</select>
+	
+	<select id="getReviewBoardCommentById" parameterType="string" resultType="ReviewcBoardComment">
+		select 
+			comment_no no,
+			comment_contents contents,
+			comment_create_date createDate,
+			review_no "reviceBoard.no",
+			user_id "user.id"
+		from
+			camp_review_comments
+		where 
+			user_id = #{userId}
+	</select>
+	
+	<select id="getFreeBoardCommentById" parameterType="string" resultType="FreeBoardComment">
+		select 
+			comment_no no,
+			comment_contents contents,
+			comment_create_date createDate,
+			free_no "freeBoard.no",
+			user_id "user.id"
+		from 
+			camp_free_comments
+		where 
+			user_id = #{userId}
+	</select>
 	
 </mapper>
