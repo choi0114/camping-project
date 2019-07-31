@@ -39,4 +39,9 @@ public class MapServiceImpl implements MapService {
 		
 		return mapDao.getAllCampSites();
 	}
+@Override
+public CampSite getLatLngCamp(Map<String, Object> param) {
+	// TODO Auto-generated method stub
+	return mapDao.getLatLngCamp(param);
+	}
 }

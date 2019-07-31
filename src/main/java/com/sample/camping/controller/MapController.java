@@ -67,4 +67,17 @@ public class MapController {
 		
 		return mapService.getAllCampSites();
 	}
+	
+	@RequestMapping("/mapLatLng.camp")
+	@ResponseBody
+	public CampSite mapLatLng(Double lat , Double lng) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("lat",lat);
+		param.put("lng",lng);
+		
+		return mapService.getLatLngCamp(param);
+	}
+	
 } 
