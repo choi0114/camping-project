@@ -12,11 +12,9 @@
    
 }
 .left-box {
-	list-style:none;
-    width:80%;
+    width:70%;
     font-weight: bold;
     padding-top: 5px;
-    padding-left: -40px;
     padding-bottom: 5px;
     border:1px solid #f1f3f5; 
     margin-left: 110px;
@@ -37,21 +35,24 @@
 .in-contents {
 	margin-top: 8px;
 }
-
 .join-board {
-    margin-left: 50px;
+    margin-left: 70px;
     margin-bottom: 10px;
 }
-.more {
-    margin-top: 32px;
-}
 .right-box {
-    margin-left: 50px;
+    margin-bottom: 40px;
+    margin-left: 70px;
+    border:1px solid #adb5bd; 
     box-sizing: bordesr-box;
 }
-
 .right-box-img {
     margin-left: -15px;
+}
+.text-right {
+ 
+}
+.container-box-2 {
+
 }
 .sort {
     color: coral;
@@ -66,17 +67,16 @@
     text-align: right
 }
 .title {
-    display: inline-block; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold
 }
 .contents {
     margin-top: 7px;
+    padding-right: 20px;
      /* 한 줄 자르기 */ 
      display: inline-block; 
-     width: 600px; 
+     width: 550px; 
      white-space: nowrap; 
      overflow: hidden; 
      text-overflow: ellipsis; 

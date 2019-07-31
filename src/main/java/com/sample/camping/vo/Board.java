@@ -2,6 +2,8 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
+import com.sample.camping.utils.DateUtils;
+
 public class Board {
 	private Integer no;
 	private String title;
@@ -12,8 +14,22 @@ public class Board {
 	private Date createDate;
 	private String userId;
 	private Integer campsiteNo;
+	private Integer commentCnt;
+	private String thumbnail;
 	
 
+	public Integer getCommentCnt() {
+		return commentCnt;
+	}
+	public void setCommentCnt(Integer commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -64,6 +80,9 @@ public class Board {
 	}
 	public Date getCreateDate() {
 		return createDate;
+	}
+	public String getCreateDateStr() {
+		return DateUtils.dateToString(createDate);
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;

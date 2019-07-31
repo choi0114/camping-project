@@ -97,6 +97,7 @@ div {
 
 .contents {
     margin-top: 13px;
+    min-height: 900px;
 }
 .write-button {
     margin-left: -15px;

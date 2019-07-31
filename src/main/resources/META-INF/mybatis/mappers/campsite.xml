@@ -4,7 +4,7 @@
   
 <mapper namespace="com.sample.camping.dao.CampsiteDao">
 
-<select id="selectCampsite" parameterType="criteria" resultType="campsite">
+<select id="selectCampsite" parameterType="map" resultType="campsite">
 	select
 			CAMPSITE_NO			no		
 			,CAMPSITE_NAME			name
@@ -44,8 +44,13 @@
 		from CAMP_CAMPSITES
 		where CAMPSITE_NAME like '%' || #{keyword} || '%'
 		)
-	<!-- where row_no >= #{begin} and row_no &lt;= #{end} -->
+	where row_no >= #{begin} and row_no &lt;= #{end} 
 		
 </select>
-
+<select id="selectCampCount" parameterType="map" resultType="int">
+	select count(*)
+	from CAMP_CAMPSITES
+	where CAMPSITE_NAME like '%' || #{keyword} || '%'
+		
+</select>
 </mapper>

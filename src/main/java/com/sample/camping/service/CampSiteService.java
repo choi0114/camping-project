@@ -1,10 +1,11 @@
 package com.sample.camping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
-import com.sample.camping.vo.Criteria;
 
 public interface CampSiteService {
-	public List<CampSite> selectCampsite (Criteria criteria);
+	public List<CampSite> selectCampsite (Map<String, Object> map);
+	public Integer selectCampCount (Map<String, Object> map);
 }

@@ -3,16 +3,169 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.sample.camping.dao.BoardDao">
-
+	<select id="selectJoinByNo" parameterType="int" resultType="board">
+		SELECT 
+			B.JOINING_NO				no
+			, B.JOINING_TITLE			title
+			, B.JOINING_CONTENTS		contents
+			, B.JOINING_LIKES			likes
+			, B.JOINING_HATES			hates
+			, B.JOINING_VIEWS			views
+			, B.JOINING_CREATE_DATE	createDate
+			, B.USER_ID				userId 
+			, B.JOINING_THUMBNAIL		thumbnail
+			,(SELECT count(*) FROM CAMP_JOINING_COMMENTS  WHERE JOINING_NO = B.JOINING_NO )  commentCnt
+		FROM CAMP_JOINING_BOARDS B
+		where JOINING_NO = #{value}
+	</select>
+	<select id="selectJoinCount" resultType="int">
+		SELECT count(*)	
+		FROM CAMP_JOINING_BOARDS
+	</select>
+	<select id="selectJoin" resultType="board">
+		SELECT 
+			JOINING_NO				no
+			, JOINING_TITLE			title
+			, JOINING_CONTENTS		contents
+			, JOINING_LIKES			likes
+			, JOINING_HATES			hates
+			, JOINING_VIEWS			views
+			, JOINING_CREATE_DATE	createDate
+			, USER_ID				userId 
+			, JOINING_THUMBNAIL		thumbnail
+			
+		 
+		FROM (SELECT 
+				row_number() over(order by JOINING_NO DESC) as ROW_NO
+				, JOINING_NO
+				, JOINING_TITLE
+				, JOINING_CONTENTS
+				, JOINING_LIKES
+				, JOINING_HATES
+				, JOINING_VIEWS
+				, JOINING_CREATE_DATE
+				, USER_ID
+				, JOINING_THUMBNAIL		
+			FROM CAMP_JOINING_BOARDS)
+		WHERE ROW_NO >= 1 AND ROW_NO &lt;= 5
+		ORDER BY row_no ASC
+	</select>
+	<select id="selectJoinPage" parameterType="map" resultType="board">
+		SELECT 
+			JOINING_NO				no
+			, JOINING_TITLE			title
+			, JOINING_CONTENTS		contents
+			, JOINING_LIKES			likes
+			, JOINING_HATES			hates
+			, JOINING_VIEWS			views
+			, JOINING_CREATE_DATE	createDate
+			, USER_ID				userId 
+		 	, JOINING_THUMBNAIL		thumbnail
+		 	,(SELECT count(*) FROM CAMP_JOINING_COMMENTS  WHERE JOINING_NO = B.JOINING_NO )  commentCnt
+		FROM (SELECT 
+				row_number() over(order by JOINING_NO DESC) as ROW_NO
+				, JOINING_NO
+				, JOINING_TITLE
+				, JOINING_CONTENTS
+				, JOINING_LIKES
+				, JOINING_HATES
+				, JOINING_VIEWS
+				, JOINING_CREATE_DATE
+				, USER_ID
+				, JOINING_THUMBNAIL		
+			FROM CAMP_JOINING_BOARDS) B
+		where row_no >= #{begin} and row_no &lt;= #{end} 
+		ORDER BY row_no ASC
+	</select>
+	
 	<insert id="addJoin" parameterType="Board">
 		insert into CAMP_JOINING_BOARDS(
 			JOINING_NO
 			,JOINING_TITLE
 			,JOINING_CONTENTS
 			,USER_ID
+			, JOINING_THUMBNAIL
 		)
-		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId})
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{thumbnail})
 	</insert>
+	<select id="selectOpinionByNo" parameterType="int" resultType="board">
+		SELECT 
+			B.OPINION_NO				no
+			, B.OPINION_TITLE			title
+			, B.OPINION_CONTENTS		contents
+			, B.OPINION_LIKES			likes
+			, B.OPINION_HATES			hates
+			, B.OPINION_VIEWS			views
+			, B.OPINION_CREATE_DATE	createDate
+			, B.USER_ID				userId 
+			, B.CAMPSITE_NO			campsiteNo
+			, B.OPINION_THUMBNAIL		thumbnail
+			,(SELECT count(*) FROM CAMP_OPINION_COMMENTS  WHERE OPINION_NO = B.OPINION_NO )  commentCnt
+		FROM CAMP_OPINION_BOARDS B
+		where OPINION_NO = #{value}
+	</select>
+	<select id="selectOpinionCount" resultType="int">
+		SELECT count(*)	
+		FROM CAMP_OPINION_BOARDS
+	</select>
+	<select id="selectOpinion" resultType="board">
+		SELECT 
+			OPINION_NO				no
+			, OPINION_TITLE			title
+			, OPINION_CONTENTS		contents
+			, OPINION_LIKES			likes
+			, OPINION_HATES			hates
+			, OPINION_VIEWS			views
+			, OPINION_CREATE_DATE	createDate
+			, USER_ID				userId 
+			, CAMPSITE_NO			campsiteNo
+			, OPINION_THUMBNAIL		thumbnail
+			
+		FROM (SELECT 
+				row_number() over(order by OPINION_NO desc) as ROW_NO
+				, OPINION_NO
+				, OPINION_TITLE
+				, OPINION_CONTENTS
+				, OPINION_LIKES
+				, OPINION_HATES
+				, OPINION_VIEWS
+				, OPINION_CREATE_DATE
+				, USER_ID
+				, CAMPSITE_NO
+				, OPINION_THUMBNAIL		
+			FROM CAMP_OPINION_BOARDS) 
+		WHERE ROW_NO >= 1 AND ROW_NO &lt;= 5
+		ORDER BY row_no asc
+	</select>
+	<select id="selectOpinionPage" parameterType="map" resultType="board">
+		SELECT 
+			OPINION_NO				no
+			, OPINION_TITLE			title
+			, OPINION_CONTENTS		contents
+			, OPINION_LIKES			likes
+			, OPINION_HATES			hates
+			, OPINION_VIEWS			views
+			, OPINION_CREATE_DATE	createDate
+			, USER_ID				userId 
+			, CAMPSITE_NO			campsiteNo
+			, OPINION_THUMBNAIL		thumbnail
+			,(SELECT count(*) FROM CAMP_OPINION_COMMENTS  WHERE OPINION_NO = B.OPINION_NO )  commentCnt
+		FROM (SELECT 
+				row_number() over(order by OPINION_NO desc) as ROW_NO
+				, OPINION_NO
+				, OPINION_TITLE
+				, OPINION_CONTENTS
+				, OPINION_LIKES
+				, OPINION_HATES
+				, OPINION_VIEWS
+				, OPINION_CREATE_DATE
+				, USER_ID
+				, CAMPSITE_NO
+				, OPINION_THUMBNAIL		
+			FROM CAMP_OPINION_BOARDS) B
+		where row_no >= #{begin} and row_no &lt;= #{end} 
+		ORDER BY row_no asc
+	</select>
 	<insert id="addOpinion" parameterType="Board">
 		insert into CAMP_OPINION_BOARDS(
 			OPINION_NO
@@ -20,9 +173,87 @@
 			,OPINION_CONTENTS
 			,USER_ID
 			,CAMPSITE_NO
-		)
-		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo})
+			, OPINION_THUMBNAIL		
+		)	
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo},#{thumbnail})
 	</insert>
+	<select id="selectReviewByNo" parameterType="int" resultType="board">
+		SELECT 
+			B.REVIEW_NO				no
+			, B.REVIEW_TITLE			title
+			, B.REVIEW_CONTENTS		contents
+			, B.REVIEW_LIKES			likes
+			, B.REVIEW_HATES			hates
+			, B.REVIEW_VIEWS			views
+			, B.REVIEW_CREATE_DATE	createDate
+			, B.USER_ID				userId 
+			, B.CAMPSITE_NO			campsiteNo
+			, B.REVIEW_THUMBNAIL		thumbnail
+			,(SELECT count(*) FROM CAMP_REVIEW_COMMENTS  WHERE REVIEW_NO = B.REVIEW_NO )  commentCnt
+		FROM CAMP_REVIEW_BOARDS B
+		where REVIEW_NO = #{value}
+	</select>
+	<select id="selectReviewCount" resultType="int">
+		SELECT count(*)	
+		FROM CAMP_REVIEW_BOARDS
+	</select>
+	<select id="selectReview" resultType="board">
+		SELECT 
+			REVIEW_NO				no
+			, REVIEW_TITLE			title
+			, REVIEW_CONTENTS		contents
+			, REVIEW_LIKES			likes
+			, REVIEW_HATES			hates
+			, REVIEW_VIEWS			views
+			, REVIEW_CREATE_DATE	createDate
+			, USER_ID				userId 
+			, CAMPSITE_NO			campsiteNo
+			, REVIEW_THUMBNAIL		thumbnail
+		FROM (SELECT 
+				row_number() over(order by REVIEW_NO desc) as ROW_NO
+				, REVIEW_NO
+				, REVIEW_TITLE
+				, REVIEW_CONTENTS
+				, REVIEW_LIKES
+				, REVIEW_HATES
+				, REVIEW_VIEWS
+				, REVIEW_CREATE_DATE
+				, USER_ID
+				, CAMPSITE_NO
+				, REVIEW_THUMBNAIL		
+			FROM CAMP_REVIEW_BOARDS)
+		WHERE ROW_NO >= 1 AND ROW_NO &lt;= 5
+		ORDER BY row_no asc
+	</select>
+	<select id="selectReviewPage" parameterType="map" resultType="board">
+		SELECT 
+			REVIEW_NO				no
+			, REVIEW_TITLE			title
+			, REVIEW_CONTENTS		contents
+			, REVIEW_LIKES			likes
+			, REVIEW_HATES			hates
+			, REVIEW_VIEWS			views
+			, REVIEW_CREATE_DATE	createDate
+			, USER_ID				userId 
+			, CAMPSITE_NO			campsiteNo
+			, REVIEW_THUMBNAIL		thumbnail
+			,(SELECT count(*) FROM CAMP_REVIEW_COMMENTS  WHERE REVIEW_NO = B.REVIEW_NO )  commentCnt
+		FROM (SELECT 
+				row_number() over(order by REVIEW_NO desc) as ROW_NO
+				, REVIEW_NO
+				, REVIEW_TITLE
+				, REVIEW_CONTENTS
+				, REVIEW_LIKES
+				, REVIEW_HATES
+				, REVIEW_VIEWS
+				, REVIEW_CREATE_DATE
+				, USER_ID
+				, CAMPSITE_NO
+				, REVIEW_THUMBNAIL		
+			FROM CAMP_REVIEW_BOARDS) B
+		where row_no >= #{begin} and row_no &lt;= #{end} 
+		ORDER BY row_no asc
+	</select>
 	<insert id="addReview" parameterType="Board">
 		insert into CAMP_REVIEW_BOARDS(
 			REVIEW_NO
@@ -30,17 +261,92 @@
 			,REVIEW_CONTENTS
 			,USER_ID
 			,CAMPSITE_NO
+			, REVIEW_THUMBNAIL		
 		)
-		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo})
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{campsiteNo},#{thumbnail})
 	</insert>
+	<select id="selectFreeByNo" parameterType="int" resultType="board">
+		SELECT 
+			B.FREE_NO					no
+			, B.FREE_TITLE			title
+			, B.FREE_CONTENTS			contents
+			, B.FREE_LIKES			likes
+			, B.FREE_HATES			hates
+			, B.FREE_VIEWS			views
+			, B.FREE_CREATE_DATE		createDate
+			, B.USER_ID				userId 
+		 	, B.FREE_THUMBNAIL		thumbnail
+		 	,(SELECT count(*) FROM CAMP_FREE_COMMENTS  WHERE FREE_NO = B.FREE_NO )  commentCnt
+		FROM CAMP_FREE_BOARDS B
+		where FREE_NO = #{value}
+	</select>
+	<select id="selectFreeCount" resultType="int">
+		SELECT count(*)	
+		FROM CAMP_FREE_BOARDS
+	</select>
+	<select id="selectFree" resultType="board">
+		SELECT 
+			FREE_NO					no
+			, FREE_TITLE			title
+			, FREE_CONTENTS			contents
+			, FREE_LIKES			likes
+			, FREE_HATES			hates
+			, FREE_VIEWS			views
+			, FREE_CREATE_DATE		createDate
+			, USER_ID				userId 
+		 	, FREE_THUMBNAIL		thumbnail
+		FROM (SELECT 
+				row_number() over(order by FREE_NO desc) as ROW_NO
+				, FREE_NO
+				, FREE_TITLE
+				, FREE_CONTENTS
+				, FREE_LIKES
+				, FREE_HATES
+				, FREE_VIEWS
+				, FREE_CREATE_DATE
+				, USER_ID
+				, FREE_THUMBNAIL		
+			FROM CAMP_FREE_BOARDS)
+		WHERE ROW_NO >= 1 AND ROW_NO &lt;= 5
+		ORDER BY row_no asc
+	</select>
+	<select id="selectFreePage" parameterType="map" resultType="board">
+		SELECT 
+			FREE_NO					no
+			, FREE_TITLE			title
+			, FREE_CONTENTS			contents
+			, FREE_LIKES			likes
+			, FREE_HATES			hates
+			, FREE_VIEWS			views
+			, FREE_CREATE_DATE		createDate
+			, USER_ID				userId 
+		 	, FREE_THUMBNAIL		thumbnail
+		 	,(SELECT count(*) FROM CAMP_FREE_COMMENTS  WHERE FREE_NO = B.FREE_NO )  commentCnt
+		FROM (SELECT 
+				row_number() over(order by FREE_NO desc) as ROW_NO
+				, FREE_NO
+				, FREE_TITLE
+				, FREE_CONTENTS
+				, FREE_LIKES
+				, FREE_HATES
+				, FREE_VIEWS
+				, FREE_CREATE_DATE
+				, USER_ID
+				, FREE_THUMBNAIL		
+			FROM CAMP_FREE_BOARDS) B
+		where row_no >= #{begin} and row_no &lt;= #{end} 
+		ORDER BY row_no asc
+	</select>
 	<insert id="addFree" parameterType="Board">
 		insert into CAMP_FREE_BOARDS(
 			FREE_NO
-			,FREE_TITLE
-			,FREE_CONTENTS
-			,USER_ID
+			, FREE_TITLE
+			, FREE_CONTENTS
+			, USER_ID
+			, FREE_THUMBNAIL		
 		)
-		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId})
+		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{thumbnail})
 	</insert>
-
+	<!-- 
+	 -->
 </mapper>
