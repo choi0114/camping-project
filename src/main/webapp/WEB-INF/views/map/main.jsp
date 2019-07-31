@@ -338,7 +338,7 @@
                                <div class="content">
                                    <div class="subject">	
 	
-                                    <a href="#" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
+                                    <a href="detail.camp?no=${campsite.no }" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
                                     <c:if test="${campsite.sort eq 'CAMP' }">
                                 		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
@@ -726,8 +726,99 @@
 			})
 	    })
 		
-		// 드래그 할 때 마다 위도 경도 얻고 맵을 새로 찍는다.
+		// 드래그를 시작 할 때 실행되는 이벤트리스너
+		kakao.maps.event.addListener(map,'dragstart',function(){
+			
+			var a = prevClickedMarker.getPosition();
+			console.log(a);
+		})
+		
+		kakao.maps.event.addListener(map, 'dragend', function() {  
+			$.ajax({
+				type:"GET",
+				url:"mapAllList.camp",
+				dataType:"json",
+				beforeSend:function(){
+					$('#map').addClass('darkamap');
+
+				},
+				complete:function(){
+					$('#map').removeClass('darkamap');
+					$('#loading').hide();
+				},
+				success:(function(data){
+					$.each(data , function(index , list){
+						var name = list.name;
+						var iwContent = '<div class="overlay_info">';
+						iwContent += "<strong>"+list.name+"</strong>";
+						iwContent += '</div>';
+						
+						var content = '<div id="poswrap">';
+						content += "<div>";
+						content += "날씨 정보 (미정)";
+						content +="</div>";
+						content +="<div class='info'>";
+						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						content +=list.name;
+						content +="<div class='close' title='닫기'>X</div>";
+						content +="</div>";
+						content +="<div class='body'>";
+						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						content += "<div class='btn_vote_scrap'>"
+						content +="<div style='float: right'>"
+						content +="<a href='#'>"
+						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
+						content +="좋아요";
+						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+						content +="</a>";
+						content +="</div>";
+						content +="<div style='float: right;'>"
+						content +="<a href='#'>"
+						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
+						content += "싫어요"
+						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "</a>";
+						content += "</div>";
+						content +="</div>";
+						content +="<div class='desc'>"
+						content +="<div class='jibun'>"+list.address+"</div>"
+						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="</div>";
+						content+="</div>";
+						content+="</div>";
+						content+="</div>";
+
+				var position = new kakao.maps.LatLng(list.latitude,list.longitude) 
+				selectedMarker = null; //클릭한 마커를 담을 변수
+				
+				addMarker(positions)
+				
+				for (var i = 0, len = positions.length; i < len; i++) {
+				        
+				    // 마커를 생성하고 지도위에 표시합니다
+				    addMarker(positions[i]);
+				}
+				
+				
+				
+				
+				
+				var c1 = map.getCenter();
+			    var c2 = marker.getPosition();
+			    var poly = new kakao.maps.Polyline({
+			      // map: map, 을 하지 않아도 거리는 구할 수 있다.
+			      path: [c1, c2]
+			    });
+			    var dist = poly.getLength(); // m 단위로 리턴
+			    if (dist < radius) {
+			    	
+			    }
+			
+		})
+		
+/* 		// 드래그 끝날 때 마다 위도 경도 얻고 맵을 새로 찍는다.
 		kakao.maps.event.addListener(map, 'dragend', function() {   
+			
 		    // 지도 중심좌표를 얻어옵니다 
 		    var latlng = map.getCenter(); 
 			setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
@@ -826,6 +917,9 @@
 					    var dist = poly.getLength(); // m 단위로 리턴
 					    if (dist < radius) {
 					    	
+					    	if(prevClickedMarker){
+					    		
+					    	
 					    	// 오버레이 생성
 				 	    	var overlay = new kakao.maps.CustomOverlay({
 					    	    content: iwContent,
@@ -844,11 +938,10 @@
 					    	});
 					    	
 					    	kakao.maps.event.addListener(marker, 'click', function() {
-					    		kakao.maps.event.preventMap();
-								if (prevClickedMarker) {
-									/* 안먹혀서 개짜증 prevClickedMarker.setVisible(true); */
-									if (bigMarker) {
-										bigMarker.setMap(null);
+								if (prevClickedMarker) { // 클릭된 마커가 있다면
+									prevClickedMarker.setVisible(true); // 보이게 표시
+									if (bigMarker) { // 클릭 되어서 새로 생성되어있는 마커가 있으면 삭제
+										bigMarker.setMap(null); // 마커 삭제
 									}
 								} 
 					    		if(prevcustovlay){
@@ -862,13 +955,15 @@
 								xAnchor: 0.62,
 						    	yAnchor: 3.0
 							});
-						    	
-							prevcustovlay = customeroverlay;
-							prevcustovlay.setMap(map);
+						    
+						   	 // 커스텀오버레이 생성 및 배열에 담기
+								prevcustovlay = customeroverlay;
+								prevcustovlay.setMap(map);
 						    	
 						    	var latitude = list.latitude;
 						    	var longitude = list.longitude;
 						    	
+						    	// 현재 클릭된 마커를 담는다.
 								prevClickedMarker = marker;
 						    	marker.setVisible(false); // 기존 마커 숨기기
 						    	var sort = list.sort;
@@ -900,7 +995,7 @@
 								    image:markerImage
 								})	
 					    		bigMarker.setMap(map); // 새로운 마커
-					    		setCenter(latitude,longitude);
+					    		setCenter(latitude,longitude); // 그 마커의 위치로 맵의 중심점(포커스)을 변경
 					    		map.setLevel(2);
 					    		// 하이브리드 맵으로 변경
 								map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
@@ -909,7 +1004,7 @@
 					    		//bigmarker 클릭 시 다시 보여주기
 								/* kakao.maps.event.addListener(bigMarker, 'click', function() {
 									prevcustovlay.setMap(map);
-								}) */
+								}) 
 					    	});
 					    	marker.setMap(map);
 					    } else {
@@ -918,7 +1013,7 @@
 					});
 				})
 			})
-		});
+		}); */
 
 		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
 		$(".camping-list").on('click', '.campsite-name', function(event){
