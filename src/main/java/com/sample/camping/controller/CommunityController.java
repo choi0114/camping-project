@@ -54,24 +54,36 @@ public class CommunityController {
 									,@RequestParam int no
 									,@RequestParam int boardType) {
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("boardType", boardType);
+		
 		if(boardType == 1) {
+			model.addAttribute("comments", boardService.commentByBoardNo(map));
 			model.addAttribute("board", boardService.selectJoinByNo(no));
 			model.addAttribute("sort", "가입인사 ");
+			model.addAttribute("boardType", 1 );
 			return "community/detail";
 		}
 		if(boardType == 2) {
+			model.addAttribute("comments", boardService.commentByBoardNo(map));
 			model.addAttribute("board", boardService.selectReviewByNo(no));
 			model.addAttribute("sort", "캠핑장리뷰 ");
+			model.addAttribute("boardType", 2 );
 			return "community/detail";
 		}
 		if(boardType == 3) {
+			model.addAttribute("comments", boardService.commentByBoardNo(map));
 			model.addAttribute("board", boardService.selectOpinionByNo(no));
 			model.addAttribute("sort", "캠핑장의견 ");
+			model.addAttribute("boardType", 3 );
 			return "community/detail";
 		}
 		if(boardType == 4) {
+			model.addAttribute("comments", boardService.commentByBoardNo(map));
 			model.addAttribute("sort", "자유게시판 ");
 			model.addAttribute("board", boardService.selectFreeByNo(no));
+			model.addAttribute("boardType", 4 );
 			return "community/detail";
 		}
 		return "community/detail";
@@ -134,6 +146,19 @@ public class CommunityController {
 		return "redirect:home.camp";
 	}
 	
+	@GetMapping("/addComment.camp")
+	public String addComment( @RequestParam int boardType, 
+										  @RequestParam int boardNo, 
+										  @RequestParam String contents){
+		System.out.println(boardType);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardType", boardType);
+		map.put("boardNo", boardNo);
+		map.put("contents", contents);
+		map.put("userId", "user");
+		boardService.addComment(map);
+		return "redirect:detail.camp?boardType="+boardType+"&no="+boardNo;
+	}
 	@GetMapping("/search.camp")
 	public @ResponseBody Map<String, Object> search(
 			  @RequestParam (value="keyword", required = false, defaultValue = "") String keyword

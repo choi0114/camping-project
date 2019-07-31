@@ -67,6 +67,14 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.9</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.servlets/cos -->
+		<dependency>
+		    <groupId>com.servlets</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>05Nov2002</version>
+		</dependency>
+		
 
 		<!-- Spring -->
 		<dependency>

@@ -6,14 +6,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sample.camping.dao.BoardCommentDao;
 import com.sample.camping.dao.BoardDao;
 import com.sample.camping.vo.Board;
+import com.sample.camping.vo.Comment;
 
 @Service
 public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	private BoardDao dao;
+	
+	@Autowired
+	private BoardCommentDao commentdao;
 	
 	@Override
 	public void addJoin(Board board) {
@@ -129,6 +134,18 @@ public class BoardServiceImpl implements BoardService{
 	public Board selectFreeByNo(int no) {
 		// TODO Auto-generated method stub
 		return dao.selectFreeByNo(no);
+	}
+
+	@Override
+	public List<Comment> commentByBoardNo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return commentdao.commentByBoardNo(map);
+	}
+
+	@Override
+	public void addComment(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		commentdao.addComment(map);
 	}
 
 	

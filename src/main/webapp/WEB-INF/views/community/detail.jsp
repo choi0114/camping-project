@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="row bottom-line">
-                <div class="col-sm-12 contents">
+                <div class="col-sm-12 contents" style="min-height: 400px;">
                 	${board.contents }
                 </div>
             </div>
@@ -90,39 +90,65 @@
                 </div>
             </div>
             <div class="row bottom-line">
-                <div class="col-sm-1">
-                     <img class="id-img2 " src="/camping/resources/images/community/로그인유저프로필" width="60" border-radius=50% height="60" alt=""/>
-                </div>
-                <div class="col-sm-10">
-                    <textarea class="write-comment" id="" >  댓글을 남겨주세요
-                    </textarea>
-                </div>
-                <div class="col-sm-1">
-                    <button type="button" class="btn btn-default write-button" >등록</button>
-                </div>
+            	<form action="addComment.camp" method="get">
+	     			<input type="hidden" value="${boardType }" name="boardType"/>
+	     			<input type="hidden" value="${board.no }" name="boardNo"/>
+	                <div class="col-sm-1">
+	                     <img class="id-img2 " src="/camping/resources/images/community/로그인유저프로필" width="60" border-radius=50% height="60" alt=""/>
+	                </div>
+	     
+	                <div class="col-sm-10">
+	                    <textarea class="write-comment" name="contents" id="contents-id">댓글을 남겨주세요</textarea>
+	                </div>
+	                <div class="col-sm-1">
+	                    <button type="submit" class="btn btn-default write-button" >등록</button>
+	                </div>
+            	</form>
             </div>
             <div class="row bottom-line">
-                <div class="col-sm-1">
-                     <img class="id-img3" src="/camping/resources/images/community/유저프로필" width="55" border-radius=50% height="55" alt=""/>
-                </div>
-                <div class="col-sm-10">
-                    <div class="row comment-top">
-                        <div class="col-sm-2 comment-nick">수정이다요</div>
-                        <div class="col-sm-3 comment-date">2018-11-12 13:32:36</div>
-                    </div>
-                    <div class="row comment-bottom">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quis blanditiis asperiores nisi! Tempore, ab, quibusdam? Aspernatur omnis rerum commodi quas quis architecto nostrum mollitia reprehenderit facilis dolores officia quo quisquam repellat odio, voluptate sed fugiat similique doloremque labore ipsum tempore libero! Quo cum quaerat consequuntur nulla magnam quas, maxime nihil, quibusdam laudantium facere error tenetur laborum modi qui odit vitae, maiores culpa earum nobis. Ad vero eveniet, cupiditate et deserunt consectetur non necessitatibus nulla magni repellendus deleniti minima, inventore, vel fugiat? Cumque officia nisi praesentium, minima quibusdam odio minus, vel aperiam rem reprehenderit commodi, voluptatibus a aspernatur impedit quod.
-                    </div>
-                </div>
-                <div class="col-sm-1 img_container">
-                     <img class="share-img" src="/camping/resources/images/community/share.png"  alts=""/>
-                </div>
-
+            	<c:forEach var="comment" items="${comments }">
+            	comment-userId : ${comment.userId } 
+	                <div class="col-sm-1">
+	                     <img class="id-img3" src="/camping/resources/images/community/유저프로필" width="55" border-radius=50% height="55" alt=""/>
+	                </div>
+	                <div class="col-sm-10">
+	                    <div class="row comment-top">
+	                        <div class="col-sm-2 comment-nick">${comment.userId }</div>
+	                        <div class="col-sm-3 comment-date">${comment.createDate }</div>
+	                    </div>
+	                    <div class="row comment-bottom">
+	                   		${comment.contents }
+	                    </div>
+	                </div>
+	                <div class="col-sm-1 img_container">
+	                     <img class="share-img" src="/camping/resources/images/community/share.png"  alts=""/>
+	                </div>
+	                <div class="row text-center">
+					    <ul class="pagination " id="board-page-box" >
+					    	
+						</ul>
+				    </div>
+ 	           </c:forEach>
             </div>
-            
-            
        </div>
-       <div class="col-sm-3"></div>
+       <div class="col-sm-3">
+       </div>
    </div>
+   <script type="text/javascript">
+   		$(function(){
+   			$('#contents-id').focusin(function(){
+	   			var comment = $("#contents-id").text();
+	   			if(comment == "댓글을 남겨주세요") {
+	   				$("#contents-id").text("");
+	   			}
+   			});
+   			$('#contents-id').focusout(function(){
+   				var comment = $("#contents-id").text();
+	   			if(comment == "") {
+	   				$("#contents-id").text("댓글을 남겨주세요");
+	   			}
+   			})
+   		});
+   </script>
 </body>
 </html>

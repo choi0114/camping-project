@@ -8,7 +8,14 @@ public class Comment {
 	private Date createDate;
 	private Integer boardNo;
 	private String userId;
+	private int boardType;
 	
+	public int getBoardType() {
+		return boardType;
+	}
+	public void setBoardType(int boardType) {
+		this.boardType = boardType;
+	}
 	public Integer getNo() {
 		return no;
 	}

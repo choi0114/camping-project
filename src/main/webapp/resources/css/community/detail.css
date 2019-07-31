@@ -44,7 +44,7 @@ div {
 }
 .title {
     margin-top: 20px;
-    margin-left: -50px;
+    margin-left: -35px;
     font-size: 18px;
     font-weight: bolder
 }
@@ -97,7 +97,7 @@ div {
 
 .contents {
     margin-top: 13px;
-    min-height: 900px;
+    
 }
 .write-button {
     margin-left: -15px;
