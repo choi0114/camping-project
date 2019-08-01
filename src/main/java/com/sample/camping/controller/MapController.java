@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Map;
 
 import com.sample.camping.service.MapService;
+import com.sample.camping.view.WeatherXMLView;
 import com.sample.camping.vo.CampSite;
 
 @Controller
@@ -78,6 +81,16 @@ public class MapController {
 		param.put("lng",lng);
 		
 		return mapService.getLatLngCamp(param);
+	}
+	
+	
+	@RequestMapping("/mapWeather.camp")
+	public ModelAndView mapWeather(String x , String y) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("path", "http://www.kma.go.kr/wid/queryDFS.jsp?gridx="+x+"&gridy="+y);
+		mav.setView(new WeatherXMLView());
+		return mav;
 	}
 	
 } 
