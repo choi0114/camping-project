@@ -231,7 +231,7 @@
 										<c:choose>
 											<c:when test="${not empty board }">
 												<c:forEach var="board" items="${board }">
-													<p>${board.contents }</p>
+													<p>${board.opinionBoard.contents }</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
