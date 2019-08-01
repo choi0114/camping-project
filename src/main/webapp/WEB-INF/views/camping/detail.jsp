@@ -16,6 +16,9 @@
     <script type="text/javascript" src="/camping/resources/js/liquidFillGauge.js"></script>
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/detail.css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42f56255a4fcf9b77f5d2aa725945ccf&libraries=drawing"></script>
+    <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick.css">
+    <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick-theme.css">
+    <script src="/camping/resources/css/campingdetail/slick/slick.js"></script>
 </head>
 <body>
 	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
@@ -463,10 +466,10 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center" id="nearby-campingsite-box">
-	        <div id="near-campingsite-box">
+	        <div id="near-campingsite-box" class="slider demo">
 	        	<div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>검봉산 자연휴양림 야영장</strong>
@@ -477,7 +480,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>삼척 엘림 캠핑장</strong>
@@ -488,7 +491,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>씨스포빌 카라반</strong>
@@ -499,7 +502,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 마을 야영장</strong>
@@ -510,7 +513,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -521,7 +524,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -532,7 +535,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -543,7 +546,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -554,7 +557,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -565,7 +568,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -576,7 +579,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160"/></a>
+	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -585,16 +588,6 @@
 	                    <span>23.4Km</span>
 	                </div>
 	            </div>
-	        </div>
-	        <div>
-	        	<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
 	        </div>
         </div>
     </div>
@@ -1482,7 +1475,16 @@
         position: new kakao.maps.LatLng(campLatitude, campLongitude)
     });
 
-    
+    $(document).ready(function(){
+        $('.demo').slick({
+            dots: false,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            touchMove: false,
+            arrows: true
+        });
+
+    });
 </script>
 </body>
 </html>
