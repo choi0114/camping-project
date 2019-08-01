@@ -408,8 +408,8 @@
                 </div>
                 <div class="col-sm-8">
                     <div id="map" style="width: 100%; height: 900px; position:relative;">
-                    <input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;" id="text-addr">
-	                <button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>
+                    	<input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;">
+	                	<button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>
                     </div>
                 </div> 
             </div>            
@@ -1051,7 +1051,7 @@
 							});
 							// x,y 좌표 구하기 
 							//var grid = dfs_xy_conv('toXY', lat1, lng1);
-							prevcustovlay =customeroverlay;
+							prevcustovlay = customeroverlay;
 							prevcustovlay.setMap(map);
 						})
 					}) 
@@ -1066,6 +1066,7 @@
 
 		// 현재위치 정보
 		$("#location-button").click(function(){
+			
 			if(markers != null){
 				setMarkers(null);
 				}
@@ -1089,7 +1090,7 @@
 				        if (status === kakao.maps.services.Status.OK) {
 	
 				            var address = result[0].address_name; // 행정동 이름
-				            $("#text-addr").val(address);  // Text 셋팅
+				            $('#location').val(address);  // Text 셋팅
 				        }
 				    };
 				    
@@ -1179,7 +1180,7 @@
 	            var yn = ro - v2 + YO;
 	            ra = Math.sqrt(xn * xn + yn * yn);
 	            if (sn < 0.0) - ra;
-	            var alat = Math.pow((re * sf / ra), (1.0 / sn));
+	            var alat = Math.pow((re * sf / ra),(1.0 / sn));
 	            alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
 	            
 	            if (Math.abs(xn) <= 0.0) {
@@ -1238,12 +1239,9 @@
 	    		$('.wtemp').addClass('wwtemp');
 	    		$('.wwtemp').append(temp+"℃");
 	    		$('.wwind').append('<span>풍향: '+ws+'m/s 강수확률: '+pop+'%</span>')
-	    		
-	    		
 	    	}
 	    })
 	  }
-	    
 	</script>
 </body>
 </html>
