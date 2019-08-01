@@ -13,7 +13,6 @@ import com.sample.camping.service.UserService;
 import com.sample.camping.vo.User;
 
 @Controller
-@RequestMapping("/user")
 public class AdminUserController {
 	
 	@Autowired
@@ -31,16 +30,15 @@ public class AdminUserController {
 		return "error/user/loginfail";
 	}
 	
-	
 	@RequestMapping("/form.camp")
 	public String home() {
 		return "login/form";
 	}
 	
-	@RequestMapping("/register.camp")
+	@RequestMapping("/register.camp") 
 	public String register(User user) {
 		userService.registerUser(user);
-		return "login/completed";
+		return "login/form";
 	}
 	
 	@RequestMapping("/login.camp")
@@ -50,6 +48,7 @@ public class AdminUserController {
 		User user = userService.login(id, password);
 
 		session.setAttribute("LOGIN_USER", user);
-		return "login/completed";
+		return "home";
 	}
+	
 }
