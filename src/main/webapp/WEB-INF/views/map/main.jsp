@@ -14,6 +14,44 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .wico{
+     position: absolute;
+    z-index: 10;
+    left: -78px;
+    top: -100px;
+    }
+    .today_weather{
+        position: absolute;
+	    top: 0px;
+	    left: 1px;
+	    z-index: 1;
+    }
+    .wwtemp{
+    	position: absolute;
+	    top: -59px;
+	    left: -1px;
+	    font-size: 22px;
+	    color: #fff;
+	    display: inline-block;
+	    background: #000;
+	    background: rgba(0,0,0,.6);
+	    letter-spacing: -0.01em;
+	    padding: 3px 10px 3px 43px;
+	    z-index: 9;
+	    font-weight: 600;
+	    font-family: roboto;
+	    border-radius: 5px;
+    }
+    .wwind{
+    	    position: absolute;
+		    top: -20px;
+		    left: -1px;
+		    background: #fff;
+		    background: rgba(255,255,255,.8);
+		    font-size: 11px;
+		    padding: 2px 10px 2px 33px;
+		    font-weight: 500;
+    }
     .darkamap{
     	opacity: .2;
     	background-color: black;
@@ -32,8 +70,8 @@
             text-align: left;
             font-size: 14px;
             line-height: 1.5;
-            box-shadow: 6px 6px 35px rgba(0, 0, 0, .65);
-     		z-index:1000;       
+            box-shadow: 6px 6px 35px rgba(0,0,0,.65);
+     		z-index:3;       
         }
 
         .cat3 {
@@ -370,8 +408,8 @@
                 </div>
                 <div class="col-sm-8">
                     <div id="map" style="width: 100%; height: 900px; position:relative;">
-                    <input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;" id="text-addr">
-	                <button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>
+                    	<input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;">
+	                	<button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>
                     </div>
                 </div> 
             </div>            
@@ -557,10 +595,15 @@
 						iwContent += "<strong>"+list.name+"</strong>";
 						iwContent += '</div>';
 						
+				    	var latitude = list.latitude;
+				    	var longitude = list.longitude;
+				    	
 						var content = '<div id="poswrap">';
-						content += "<div>";
-						content += "날씨 정보 (미정)";
-						content +="</div>";
+						content +="<div class='today_weather'>";
+						content +="<span class='fwimg'><img src='' class='wico'></span>";
+						content +="<span class='wtemp'></span>";
+						content += "<span class='ww'></span>";
+						content += "</div>";
 						content +="<div class='info'>";
 						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
 						content +=list.name;
@@ -573,14 +616,14 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 						content +="좋아요";
-						content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
+						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
 						content +="</a>";
 						content +="</div>";
 						content +="<div style='float: right;'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
@@ -649,12 +692,17 @@
 					    	
 					    	
 					    	kakao.maps.event.addListener(marker, 'click', function() {
+
 								if(prevcustovlay){ // 클릭 했던 오버레이가 있으면 
 					    			prevcustovlay.setMap(null);  // 현재 오버레이를 삭제
 					    		}
 								if(prevClickedMarker){
 									prevClickedMarker.setImage(markerImage)
 								}
+								// 날씨 구하기
+								var grid = dfs_xy_conv('toXY', list.latitude, list.longitude);
+								weathers(grid.x, grid.y);
+								
 								
 						    // 클릭 커스텀 오버레이
 							var customeroverlay = new kakao.maps.CustomOverlay({
@@ -707,20 +755,23 @@
 		 kakao.maps.event.addListener(map, 'dragend', function() {
 		    // 지도 중심좌표를 얻어옵니다 
 		    var latlng = map.getCenter(); 
-			setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
+			    if(markers2 != null){
+					setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
+				    }
+			
 				if(markers3 != null){ // 드래그 할 때 마다 새로 얻은 마크가 있다면 
 					setMarkers3(null); // 마커들을 지운다.
 				}
 				if(markers != null){
 					setMarkers(null);
 				}
+				
 			$.ajax({
 				type:"GET",
 				url:"mapAllList.camp",
 				dataType:"json",
 				beforeSend:function(){
 					$('#map').addClass('darkamap');
-
 				},
 				complete:function(){
 					$('#map').removeClass('darkamap');
@@ -732,11 +783,13 @@
 						var iwContent = '<div class="overlay_info">';
 						iwContent += "<strong>"+list.name+"</strong>";
 						iwContent += '</div>';
-						
+
 						var content = '<div id="poswrap">';
-						content += "<div>";
-						content += "날씨 정보 (미정)";
-						content +="</div>";
+						content +="<div class='today_weather'>";
+						content +="<span class='fwimg'><img src='' class='wico'></span>";
+						content +="<span class='wtemp'></span>";
+						content += "<span class='ww'></span>";
+						content += "</div>";
 						content +="<div class='info'>";
 						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
 						content +=list.name;
@@ -821,6 +874,9 @@
 					    	});
 					    	
 					    	kakao.maps.event.addListener(marker, 'click', function() {
+								var grid = dfs_xy_conv('toXY', list.latitude, list.longitude);
+								weathers(grid.x, grid.y);
+								
 								if(prevcustovlay){ // 클릭 했던 오버레이가 있으면 
 					    			prevcustovlay.setMap(null);  // 현재 오버레이를 삭제
 					    		}
@@ -886,19 +942,18 @@
 		$(".camping-list").on('click', '.campsite-name', function(event){
 			event.preventDefault();
 			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
-			if (bigMarker) {
-				bigMarker.setMap(null);
+		    if(markers2 != null){
+				setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
+			    }
+			if(markers3 != null){ // 드래그 할 때 마다 새로 얻은 마크가 있다면 
+				setMarkers3(null); // 마커들을 지운다.
 			}
 			if(markers != null){
-					setMarkers(null);
-			}
-			if(markers2 != null){
-					setMarkers2(null);
+				setMarkers(null);
 			}
 
 			lat1 = $(this).attr('data-lat');
 			lng1 = $(this).attr('data-lng');
-			
 			// 클릭한 캠핑장의 위도 경도
 			var thisMarkerPosition  = new kakao.maps.LatLng(lat1, lng1);
 			
@@ -916,8 +971,7 @@
 		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 		     
 		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-		   	//markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); 
-		    var markerPosition  = new kakao.maps.LatLng(lat1, lng1); 
+		   	markerPosition = new kakao.maps.LatLng(lat1, lng1); 
 			
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
@@ -936,17 +990,28 @@
 			// 맵 레벨 변경
 				map.setLevel(2);
 			
+				
 				kakao.maps.event.addListener(marker, 'click', function() {
+					
+					console.log(thisMarkerPosition)
+					if(prevcustovlay){
+						prevcustovlay.setMap(null)
+					}
 					$.ajax({
 						type:"GET",
 						url:"mapLatLng.camp",
 						data:{lat:lat1 , lng:lng1},
 						dataType:"json",
 						success:(function(list){
+												
+							var grid = dfs_xy_conv('toXY', lat1, lng1);
+							weathers(grid.x, grid.y);
 							var content = '<div id="poswrap">';
-							content += "<div>";
-							content += "날씨 정보 (미정)";
-							content +="</div>";
+							content +="<div class='today_weather'>";
+							content +="<span class='fwimg'><img src='' class='wico'></span>";
+							content +="<span class='wtemp'></span>";
+							content += "<span class='ww'></span>";
+							content += "</div>";
 							content +="<div class='info'>";
 							content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
 							content +=list.name;
@@ -984,18 +1049,24 @@
 								xAnchor: 0.62,
 						    	yAnchor: 3.0
 							});
-							
-							prevcustovlay =customeroverlay;
+							// x,y 좌표 구하기 
+							//var grid = dfs_xy_conv('toXY', lat1, lng1);
+							prevcustovlay = customeroverlay;
 							prevcustovlay.setMap(map);
 						})
 					}) 
 				});
-			
+
+				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+				$('#map').on('click','.close', function(){
+					prevcustovlay.setMap(null);
+				})
 			kakao.maps.event.trigger(marker, 'click', null);
 		});
 
 		// 현재위치 정보
 		$("#location-button").click(function(){
+			
 			if(markers != null){
 				setMarkers(null);
 				}
@@ -1019,7 +1090,7 @@
 				        if (status === kakao.maps.services.Status.OK) {
 	
 				            var address = result[0].address_name; // 행정동 이름
-				            $("#text-addr").val(address);  // Text 셋팅
+				            $('#location').val(address);  // Text 셋팅
 				        }
 				    };
 				    
@@ -1053,7 +1124,124 @@
 			}
 		});
 		
-	
+		
+	    //----------------------------------------------------------
+	    // 기상청 홈페이지에서 발췌한 변환 함수
+	    //
+	    // LCC DFS 좌표변환을 위한 기초 자료
+	    //
+	    var RE = 6371.00877; // 지구 반경(km)
+	    var GRID = 5.0; // 격자 간격(km)
+	    var SLAT1 = 30.0; // 투영 위도1(degree)
+	    var SLAT2 = 60.0; // 투영 위도2(degree)
+	    var OLON = 126.0; // 기준점 경도(degree)
+	    var OLAT = 38.0; // 기준점 위도(degree)
+	    var XO = 43; // 기준점 X좌표(GRID)
+	    var YO = 136; // 기1준점 Y좌표(GRID)
+
+		// LCC DFS 좌표변환 ( code : 
+		//          "toXY"(위경도->좌표, v1:위도, v2:경도), 
+		//          "toLL"(좌표->위경도,v1:x, v2:y) )
+		//
+
+	    function dfs_xy_conv(code, v1, v2) {
+	        var DEGRAD = Math.PI / 180.0;
+	        var RADDEG = 180.0 / Math.PI;
+	        
+	        var re = RE / GRID;
+	        var slat1 = SLAT1 * DEGRAD;
+	        var slat2 = SLAT2 * DEGRAD;
+	        var olon = OLON * DEGRAD;
+	        var olat = OLAT * DEGRAD;
+	        
+	        var sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+	        sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+	        var sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+	        sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+	        var ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+	        ro = re * sf / Math.pow(ro, sn);
+	        var rs = {};
+	        if (code == "toXY") {
+	            rs['lat'] = v1;
+	            rs['lng'] = v2;
+	            var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
+	            ra = re * sf / Math.pow(ra, sn);
+	            var theta = v2 * DEGRAD - olon;
+	            if (theta > Math.PI) theta -= 2.0 * Math.PI;
+	            if (theta < -Math.PI) theta += 2.0 * Math.PI;
+	            theta *= sn;
+	            rs['x'] = Math.floor(ra * Math.sin(theta) + XO + 0.5);
+	            rs['y'] = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+	        }
+	        else {
+	            rs['x'] = v1;
+	            rs['y'] = v2;
+	            var xn = v1 - XO;
+	            var yn = ro - v2 + YO;
+	            ra = Math.sqrt(xn * xn + yn * yn);
+	            if (sn < 0.0) - ra;
+	            var alat = Math.pow((re * sf / ra),(1.0 / sn));
+	            alat = 2.0 * Math.atan(alat) - Math.PI * 0.5;
+	            
+	            if (Math.abs(xn) <= 0.0) {
+	                theta = 0.0;
+	            }
+	            else {
+	                if (Math.abs(yn) <= 0.0) {
+	                    theta = Math.PI * 0.5;
+	                    if (xn < 0.0) - theta;
+	                }
+	                else theta = Math.atan2(xn, yn);
+	            }
+	            var alon = theta / sn + olon;
+	            rs['lat'] = alat * RADDEG;
+	            rs['lng'] = alon * RADDEG;
+	        }
+	        return rs;
+	    }
+	    
+	  function weathers(a,b){
+	    $.ajax({
+	    	url:"mapWeather.camp",
+	    	data:{x:a , y:b},
+	    	dataType:'xml',
+	    	timeout : 10000,
+	    	success:function(result){
+	    		var weatherInfos = $(result).find('data:first-child');
+	    		// 온도
+	    		var temp = $(weatherInfos).find('temp').text();
+	    		// 강수확률
+	    		var pop = $(weatherInfos).find('pop').text();
+	    		// 풍향
+	    		var ws = Math.round($(weatherInfos).find('ws').text() * 10)/10;
+	    		// 날씨상태 (맑음,구름 조금,구름 많음,흐림,비,눈/비,눈)
+				var wfKor = $(weatherInfos).find('wfKor').text();
+	    		
+	    		if(wfKor == '맑음'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Clear.png');
+	    		}else if(wfKor == '구름 조금'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_MostlyCloudy.png');
+	    		}else if(wfKor == '구름 많음'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_MostlyCloudy.png');
+	    		}else if(wfKor == '흐림'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Cloudy.png');
+	    		}else if(wfKor == '비'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Rain.png');
+	    		}else if(wfKor == '눈/비'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Rain.png');
+	    		}else if(wfKor == '눈'){
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Shower.png');
+	    		}else{  // 소나기
+	    			$('.fwimg').find('img').attr('src', 'resources/images/weathers/am_Shower.png');
+	    		}
+	    		$('.today_weather').fadeIn();
+	    		$('.ww').addClass('wwind');
+	    		$('.wtemp').addClass('wwtemp');
+	    		$('.wwtemp').append(temp+"℃");
+	    		$('.wwind').append('<span>풍향: '+ws+'m/s 강수확률: '+pop+'%</span>')
+	    	}
+	    })
+	  }
 	</script>
 </body>
 </html>

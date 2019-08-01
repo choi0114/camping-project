@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sample.camping.dao.MapDao">
-<select id="getCampSites" parameterType="Map" resultType="campsite">
+<select id="getCampSites" parameterType="Map" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
@@ -55,7 +55,7 @@ AND
 	row_no &lt;= 10
 
 </select>
-<select id="getCampSitesList" parameterType="Map" resultType="campsite">
+<select id="getCampSitesList" parameterType="Map" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
@@ -114,7 +114,7 @@ FROM (select X.* , row_number() over (
 	from
 		camp_campsites
 </select>
-<select id="getLatLngCamp" parameterType="map" resultType="campsite">
+<select id="getLatLngCamp" parameterType="map" resultType="campSite">
 SELECT
 					campsite_no no,
 					campsite_name name,
@@ -140,7 +140,7 @@ WHERE
 AND
 				CAMPSITE_LONGITUDE=#{lng}
 </select>
-<select id="getAllCampSites" resultType="campsite">
+<select id="getAllCampSites" resultType="campSite">
 		select
 			campsite_no no,
 			campsite_name name,
