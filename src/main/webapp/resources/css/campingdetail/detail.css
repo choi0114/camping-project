@@ -60,11 +60,6 @@ th, td {
 	margin-right: 20px;
 }
 
-#near-campingsite-box > div {
-	display: inline-block;
-	margin-right: 10px;
-}
-
 #near-campingsite-box span {
 	color: #ff6000;
 	font-size: 12px;
@@ -78,4 +73,8 @@ th, td {
 	width: 80px;
 	height: 41px;
 	border-radius: 3px;
+}
+
+.slick-prev:before, .slick-next:before { 
+    color:#333 !important;
 }

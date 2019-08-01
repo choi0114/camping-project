@@ -2,8 +2,6 @@ package com.sample.camping.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +14,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.camping.form.BoardForm;
 import com.sample.camping.service.BoardService;
-import com.sample.camping.service.CampSiteService;
+import com.sample.camping.service.CampsiteService;
 import com.sample.camping.vo.Board;
 import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.Pagination;
@@ -35,7 +32,7 @@ public class CommunityController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
-	private CampSiteService campsiteService;
+	private CampsiteService campsiteService;
 	
 	@GetMapping("/home.camp")
 	public String communityHome (Model model ) {

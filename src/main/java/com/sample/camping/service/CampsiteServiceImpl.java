@@ -8,11 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.CampsiteDao;
 import com.sample.camping.vo.CampSite;
+
 @Service
-public class CampSiteSeviceImpl implements CampSiteService {
+public class CampsiteServiceImpl implements CampsiteService {
+
 	@Autowired
-	private CampsiteDao campsiteDao;
+	CampsiteDao campsiteDao;
 	
+	@Override
+	public CampSite getCampSiteByNo(int no) {
+		return campsiteDao.getCampSiteByNo(no);
+	}
 	@Override
 	public List<CampSite> selectCampsite(Map<String, Object> map) {
 		return (List<CampSite>) campsiteDao.selectCampsite(map);
@@ -22,5 +28,4 @@ public class CampSiteSeviceImpl implements CampSiteService {
 	public Integer selectCampCount(Map<String, Object> map) {
 		return campsiteDao.selectCampCount(map);
 	}
-
 }
