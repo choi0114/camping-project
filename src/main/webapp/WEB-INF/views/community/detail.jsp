@@ -6,16 +6,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  	<title>커뮤니티 상세페이지</title>
-  	<meta charset="utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="/camping/resources/css/community/detail.css"> 
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>커뮤니티 상세페이지</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/camping/resources/css/community/detail.css"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
+	<div class="fb-share-button" data-href="https://www.naver.com/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%2Fcamping%2Fcommunity%2Fdetail.camp%3Fno%3D69%26boardType%3D1&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">공유하기</a></div>
     <div class="row">
         <div class="col-sm-1">
         </div>
@@ -85,7 +89,12 @@
                     <span class="like">${board.likes }</span>
                     <img class="icon-img" src="/camping/resources/images/community/blogging.png" width="18" height="18"  align="top" />
                     <span class="comment">${board.commentCnt }</span>
+
                     <img class="icon-img" id="kakaostory-share-button" src="/camping/resources/images/community/link.png" width="18" height="18"  align="top" />
+                    <a href="javascript:facebook();">
+                    	<!--  <img class="icon-img" src="/camping/resources/images/community/share.png" width="18" height="18"  align="top" />-->
+                    	<img src="https://developers.kakao.com/sdk/js/resources/story/icon_small.png"/>
+                    </a>
                     <span>공유하기</span>
                     
                 </div>
@@ -130,11 +139,60 @@
 					    </div>
 	            </div>
            </c:forEach>
+            <div class="row bottom-line">
+            	<c:forEach var="comment" items="${comments }">
+	                <div class="col-sm-1">
+	                     <img class="id-img3" src="/camping/resources/images/community/유저프로필" width="55" border-radius=50% height="55" alt=""/>
+	                </div>
+	                <div class="col-sm-10">
+	                    <div class="row comment-top">
+	                        <div class="col-sm-2 comment-nick">${comment.userId }</div>
+	                        <div class="col-sm-3 comment-date"><fmt:formatDate value="${comment.createDate }"/> </div>
+	                    </div>
+	                    <div class="row comment-bottom">
+	                   		${comment.contents }
+	                    </div>
+	                </div>
+	                <div class="col-sm-1 img_container">
+	                     <img class="share-img" src="/camping/resources/images/community/share.png"  alts=""/>
+	                </div>
+	                <div class="row text-center">
+					    <ul class="pagination " id="board-page-box" >
+					    	
+						</ul>
+				    </div>
+				    <hr>
+ 	           </c:forEach>
+            </div>
        </div>
        <div class="col-sm-3">
        </div>
    </div>
    <script type="text/javascript">
+		$(document).ready(function() {
+		  $.ajaxSetup({ cache: true });
+		  $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+		    FB.init({
+		      appId: '{2234596050183849}',
+		      version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+		    });     
+		    $('#loginbutton,#feedbutton').removeAttr('disabled');
+		    FB.getLoginStatus(updateStatusCallback);
+		  });
+		});
+		Kakao.init('fe3f2984711a6761d151c266209ae366');
+		  
+		function shareStory() {
+		  Kakao.Story.share({
+		    url: 'http://localhost/camping/home.camp',
+		    text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
+		  });
+		}
+		function facebook() {
+		 
+		    location.href = 'http://www.facebook.com/sharer.php?u=http://localhost/camping/community/detail.camp?no=96&boardType=2 &t=zz'		   
+		 
+		}  
    		$(function(){
    			$('#contents-id').focusin(function(){
 	   			var comment = $("#contents-id").text();
@@ -160,8 +218,10 @@
    			        text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
    			      });
    			    }
-   			  //]]>
-   			})
+   			});
+   			$("#share-img-kakao").click(function(){
+   				share_kakaostory();	
+   			});
    		});
    </script>
 </body>

@@ -8,38 +8,37 @@
 		<if test="boardType != null">
 			<choose>
 				<when test="boardType == 1">
-					
-						COMMENT_NO				no	
-						,COMMENT_CONTENTS		contents
-						,COMMENT_CREATE_DATE	createDate
-						,JOINING_NO				boardNo
-						,USER_ID				userId
-					
+					COMMENT_NO					no
+					, COMMENT_CONTENTS			contents
+					, COMMENT_CREATE_DATE		createDate
+					, JOINING_NO				boardNo
+					, USER_ID					userId
 					from CAMP_JOINING_COMMENTS 
 				</when>
 				<when test="boardType == 2">
-						COMMENT_NO				no	
-						,COMMENT_CONTENTS		contents
-						,COMMENT_CREATE_DATE	createDate
-						,REVIEW_NO				boardNo
-						,USER_ID				userId
+					COMMENT_NO					no
+					, COMMENT_CONTENTS			contents
+					, COMMENT_CREATE_DATE		createDate
+					, REVIEW_NO				boardNo
+					, USER_ID					userId					
 					from CAMP_REVIEW_COMMENTS 
 				</when>
-				<when test="boardType == 3"> 
-						COMMENT_NO				no	
-						,COMMENT_CONTENTS		contents
-						,COMMENT_CREATE_DATE	createDate
-						,OPINION_NO				boardNo
-						,USER_ID				userId
-					from CAMP_OPINION_COMMENTS
+				<when test="boardType == 3">
+					COMMENT_NO					no
+					, COMMENT_CONTENTS			contents
+					, COMMENT_CREATE_DATE		createDate
+					, OPINION_NO				boardNo
+					, USER_ID					userId					
+					from CAMP_OPINION_COMMENTS 
 				</when>
 				<when test="boardType == 4">
-						COMMENT_NO				no	
-						,COMMENT_CONTENTS		contents
-						,COMMENT_CREATE_DATE	createDate
-						,FREE_NO				boardNo
-						,USER_ID				userId
-					from CAMP_FREE_COMMENTS
+					COMMENT_NO					no
+					, COMMENT_CONTENTS			contents
+					, COMMENT_CREATE_DATE		createDate
+					, FREE_NO				boardNo
+					, USER_ID					userId					
+					
+					from CAMP_FREE_COMMENTS 
 				</when>
 			</choose>
 		</if>
