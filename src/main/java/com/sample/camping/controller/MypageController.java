@@ -23,8 +23,15 @@ public class MypageController {
 	@RequestMapping("/mypage.camp")
 	public String mypage(HttpSession session, Model model) {
 		
+		
 		User user = new User();
 		user.setId("admin");
+		
+		model.addAttribute("count" ,myPageService.getAllCommentCount(user.getId()));
+		
+		Map<String, Object> boardMap = myPageService.getBoards(user.getId());
+		model.addAttribute("boardMap", boardMap);
+		
 		user.setName("admin");
 		user.setEmail("admin@5gcamp.com");
 		user.setNickName("admin");
@@ -39,13 +46,6 @@ public class MypageController {
 		user.setUsedYn("Y");
 
 		session.setAttribute("LOGIN_USER", user);
-		
-		String userId = user.getId();
-		
-		Map<String, Object> boardMap = myPageService.getBoards(userId);
-		
-		model.addAttribute("boardMap", boardMap);
-		
 		
 		return "mypage/mypage";
 	}

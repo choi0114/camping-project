@@ -143,7 +143,7 @@
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
 											<li><span class="b">가입일</span> : <fmt:formatDate value="${LOGIN_USER.createDate }" pattern="yyyy년 M월 d일"/> </li>
-											<li><span class="b">댓글</span> : <c:forEach varStatus="cnt" items="${boardMap }"><c:if test="${cnt.last eq true}">${cnt.count }</c:if></c:forEach> 개</li>
+											<li><span class="b">댓글</span> : ${count } 개</li>
 										</ul>
 									</div>
 								</div>
@@ -171,7 +171,6 @@
 										</div>
 									</div>
 								</div>
-								
 							</div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="panel panel-default">
@@ -210,18 +209,59 @@
 									<div class="panel-body">
 										<c:choose>
 											<c:when test="${not empty boardMap }">
-												<c:forEach var="free" items="${boardMap.free }">
-													<p>${free.contents }</p>
-												</c:forEach>
-												<c:forEach var="joning" items="${boardMap.joning }">
-													<p>${joning.contents }</p>
-												</c:forEach>
-												<c:forEach var="opinion" items="${boardMap.opinion }">
-													<p>${opinion.contents }</p>
-												</c:forEach>
-												<c:forEach var="review" items="${boardMap.review }">
-													<p>${review.contents }</p>
-												</c:forEach>
+												<table class="table">
+													<colgroup>
+														<col width="15%">
+														<col width="*">
+														<col width="15%">
+													</colgroup>
+													<thead>
+														<tr>
+															<th class="text-center">제목</th>
+															<th class="text-center">내용</th>
+															<th>작성일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="free" items="${boardMap.free }">
+														<tr>
+															<td class="text-center">${free.title }</td>
+															<td class="text-center">${free.contents }</td>
+															<td>
+															<fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="joning" items="${boardMap.joning }">
+														<tr>
+															<td class="text-center">${joning.title }</td>
+															<td class="text-center">${joning.contents }</td>
+															<td>
+															<fmt:formatDate value="${joning.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="opinion" items="${boardMap.opinion }">
+														<tr>
+															<td class="text-center">${opinion.title }</td>
+															<td class="text-center">${opinion.contents }</td>
+															<td>
+															<fmt:formatDate value="${opinion.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="review" items="${boardMap.review }">
+														
+														<tr>
+															<td class="text-center">${review.title }</td>
+															<td class="text-center">${review.contents }</td>
+															<td>
+															<fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
@@ -239,18 +279,52 @@
 									<div class="panel-body">
 										<c:choose>
 											<c:when test="${not empty boardMap }">
-												<c:forEach var="freeComment" items="${boardMap.freeComment }">
-													<p>${freeComment.contents }</p>
-												</c:forEach>
-												<c:forEach var="joningComment" items="${boardMap.joningComment }">
-													<p>${joningComment.contents }</p>
-												</c:forEach>
-												<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
-													<p>${opinionComment.contents }</p>
-												</c:forEach>
-												<c:forEach var="reviewComment" items="${boardMap.reviewComment }">
-													<p>${reviewComment.contents }</p>
-												</c:forEach>
+												<table class="table">
+													<colgroup>
+														<col width="*">
+														<col width="15%">
+													</colgroup>
+													<thead>
+														<tr>
+															<th class="text-center">내용</th>
+															<th>작성일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="freeComment" items="${boardMap.freeComment }">
+														<tr>
+															<td class="text-center">${freeComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${freeComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="joningComment" items="${boardMap.joningComment }">
+														<tr>
+															<td class="text-center">${joningComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${joningComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
+														<tr>
+															<td class="text-center">${opinionComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${opinionComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="reviewComment" items="${reviewComment.review }">
+														<tr>
+															<td class="text-center">${reviewComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${reviewComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
