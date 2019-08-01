@@ -23,4 +23,6 @@ public interface MypageDao {
 	List<ReviewBoardComment> getReviewBoardCommentById(String userId);
 	List<FreeBoardComment> getFreeBoardCommentById(String userId);
 
+	Integer getAllCommentCount(String userId);
+	
 }

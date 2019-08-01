@@ -32,4 +32,9 @@ public class MypageServiceImpl implements MypageService{
 		return boardMap;
 	}
 	
+	@Override
+	public Integer getAllCommentCount(String userId) {
+		return mypageDao.getAllCommentCount(userId);
+	}
+	
 }

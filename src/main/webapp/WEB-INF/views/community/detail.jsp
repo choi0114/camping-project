@@ -6,13 +6,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>커뮤니티 상세페이지</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/camping/resources/css/community/detail.css"> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	<title>커뮤니티 상세페이지</title>
+  	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="/camping/resources/css/community/detail.css"> 
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="row">
@@ -41,7 +42,7 @@
     <hr/>
    <div class="row">
        <div class="col-sm-3"></div>
-       <div class="col-sm-6">
+       <div class="col-sm-6 ">
             <div class="row bottom-line">
                 <div class="col-sm-1 boot">
                    <img class="id-img " src="/camping/resources/images/community/유저프로필" width="50" border-radius=50% height="50" alt=""/>
@@ -84,7 +85,7 @@
                     <span class="like">${board.likes }</span>
                     <img class="icon-img" src="/camping/resources/images/community/blogging.png" width="18" height="18"  align="top" />
                     <span class="comment">${board.commentCnt }</span>
-                    <img class="icon-img" src="/camping/resources/images/community/share.png" width="18" height="18"  align="top" />
+                    <img class="icon-img" id="kakaostory-share-button" src="/camping/resources/images/community/link.png" width="18" height="18"  align="top" />
                     <span>공유하기</span>
                     
                 </div>
@@ -105,31 +106,30 @@
 	                </div>
             	</form>
             </div>
-            <div class="row bottom-line">
-            	<c:forEach var="comment" items="${comments }">
-            	comment-userId : ${comment.userId } 
-	                <div class="col-sm-1">
-	                     <img class="id-img3" src="/camping/resources/images/community/유저프로필" width="55" border-radius=50% height="55" alt=""/>
-	                </div>
-	                <div class="col-sm-10">
-	                    <div class="row comment-top">
-	                        <div class="col-sm-2 comment-nick">${comment.userId }</div>
-	                        <div class="col-sm-3 comment-date">${comment.createDate }</div>
-	                    </div>
-	                    <div class="row comment-bottom">
-	                   		${comment.contents }
-	                    </div>
-	                </div>
-	                <div class="col-sm-1 img_container">
-	                     <img class="share-img" src="/camping/resources/images/community/share.png"  alts=""/>
-	                </div>
-	                <div class="row text-center">
-					    <ul class="pagination " id="board-page-box" >
-					    	
-						</ul>
-				    </div>
- 	           </c:forEach>
-            </div>
+           	<c:forEach var="comment" items="${comments }">
+	            <div class="row bottom-line-comment">
+		                <div class="col-sm-1">
+		                     <img class="id-img3" src="/camping/resources/images/community/유저프로필" width="55" border-radius=50% height="55" alt=""/>
+		                </div>
+		                <div class="col-sm-10">
+		                    <div class="row comment-top">
+		                        <div class="col-sm-2 comment-nick">${comment.userId }</div>
+		                        <div class="col-sm-3 comment-date"><fmt:formatDate value="${comment.createDate }"/></div>
+		                    </div>
+		                    <div class="row comment-bottom">
+		                   		${comment.contents }
+		                    </div>
+		                </div>
+		                <div class="col-sm-1 img_container">
+		                     <img class="share-img" src="/camping/resources/images/community/share.png"  alts=""/>
+		                </div>
+		                <div class="row text-center">
+						    <ul class="pagination " id="board-page-box" >
+						    	
+							</ul>
+					    </div>
+	            </div>
+           </c:forEach>
        </div>
        <div class="col-sm-3">
        </div>
@@ -147,6 +147,20 @@
 	   			if(comment == "") {
 	   				$("#contents-id").text("댓글을 남겨주세요");
 	   			}
+   			})
+   			
+   			$("#kakaostory-share-button").click(function(){
+   				
+   			//<![CDATA[
+   			    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+   			    Kakao.init('fe3f2984711a6761d151c266209ae366');
+   			    function shareStory() {
+   			      Kakao.Story.share({
+   			        url: 'https://developers.kakao.com',
+   			        text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
+   			      });
+   			    }
+   			  //]]>
    			})
    		});
    </script>

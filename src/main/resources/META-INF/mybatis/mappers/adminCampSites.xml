@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.AdminCampSiteDao">
+	
+	<!-- 캠핑장 추가 -->
+	<insert id="addCampSite" parameterType="campSite">
+		insert into camp_campsites
+			(campsite_no, campsite_name, campsite_price, campsite_create_date, campsite_used_yn)
+		values
+			(#{campsite_seq.nextval}, #{name}, #{price}, #{createDate}, #{usedYn})
+	</insert>	
+
+	<!-- 모든 캠핑장 출력 -->
+	<select id="getCampingSitesAll" parameterType="string" resultType="campSite">
+		select 
+		  campsite_no as no,
+		  campsite_name as name,
+		  campsite_sort as sort,
+		  campsite_latitude as latitude,
+		  campsite_longitude as longitude,
+		  campsite_address as address,
+		  campsite_tel as tel,
+		  campsite_sites as sites,
+		  campsite_price as price,
+		  campsite_likes as likes,
+		  campsite_hates as hates,
+		  campsite_photo as photo,
+		  campsite_point as point,
+		  campsite_create_date as createDate,
+		  campsite_used_yn as usedYn,
+		  campsite_sido as sido
+		from
+		  camp_campsites 	  
+	</select>
+
+	
+</mapper>
