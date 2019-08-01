@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
 
-public interface CampsiteService {
+public interface CampsitesService {
 
 	CampSite getCampSiteByNo(int no);
 	public List<CampSite> selectCampsite(Map<String, Object> map);

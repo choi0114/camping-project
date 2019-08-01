@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.camping.form.BoardForm;
 import com.sample.camping.service.BoardService;
-import com.sample.camping.service.CampsiteService;
+import com.sample.camping.service.CampsitesService;
 import com.sample.camping.vo.Board;
 import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.Pagination;
@@ -32,7 +32,7 @@ public class CommunityController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
-	private CampsiteService campsiteService;
+	private CampsitesService campsiteService;
 	
 	@GetMapping("/home.camp")
 	public String communityHome (Model model ) {

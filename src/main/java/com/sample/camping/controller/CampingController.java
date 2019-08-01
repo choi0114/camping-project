@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sample.camping.service.CampsiteService;
+import com.sample.camping.service.CampsitesService;
 import com.sample.camping.view.WeatherXMLView;
 import com.sample.camping.vo.CampSite;
 
@@ -15,7 +15,7 @@ import com.sample.camping.vo.CampSite;
 public class CampingController {
 
 	@Autowired
-	CampsiteService campsiteService;
+	CampsitesService campsiteService;
 	
 	@RequestMapping("/detail.camp")
 	public String detail(@RequestParam("no") int no, Model model) {

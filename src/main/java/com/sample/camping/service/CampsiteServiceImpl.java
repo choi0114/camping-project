@@ -10,7 +10,7 @@ import com.sample.camping.dao.CampsiteDao;
 import com.sample.camping.vo.CampSite;
 
 @Service
-public class CampsiteServiceImpl implements CampsiteService {
+public class CampsiteServiceImpl implements CampsitesService {
 
 	@Autowired
 	CampsiteDao campsiteDao;
