@@ -51,6 +51,7 @@
             height: 60px;
         }
 
+        .main-wrap .search-form .glyphicon-search{right: 7px; top: 0px;}
         .main-wrap .search-form .search-input {
             width: 460px;
             height: 56px;
@@ -67,10 +68,8 @@
             
         }
 
-        .main-wrap .search-form .keyword-del {
-            padding: 20PX 20PX;
-            margin-left: 30px;
-        }
+        .main-wrap .search-form .keyword-del {position: absolute; top: 0; right: 80px; width: 60px;
+    											text-align: center; padding-top: 17px;}
 
         .main-wrap .search-form .btn-search {
             border: none;
@@ -87,6 +86,8 @@
             width: 80px;
             border-radius: 0 60px 60px 0px;
         }
+        
+        .main-wrap .search-form .btn-search:hover {color: #fff; background-color: #0099ff;}
 
         .btn-sido {
             display: inline-block;
@@ -102,17 +103,11 @@
             color: #fff;
             text-align: center;
             cursor: pointer;
+            font-size: 15px;
         }
         .btn-sido:hover {background: #fff; color: black;}
 
-        .btn-sido i {
-            margin-left: 5px
-        }
-
-        .btn-sido hover {
-            color: #000;
-            background-color: #ccc;
-        }
+        .btn-sido i {margin-left: 5px}
 
         .twrap .hand {
             height: 135px;
@@ -185,16 +180,16 @@
         		 					background: #9c9eac; color: #fff; width: 50px; text-align: center;
         		 					border-radius: 3px; vertical-align: top; margin: 4px 6px 0 0;}
        	#banner-area a {text-decoration: none; color: #000;}
-       	#camping-map {width: 1200px; margin: 0 auto;}
-       	#camping-map.maininfo .campinfo-wrap{width: 1200px; margin: 0px; max-width: 100%;}
+       	#camping-map {width: 1500px; margin: 0 auto;}
+       	#camping-map.maininfo .campinfo-wrap{width: 1300px; margin-left: 125px; max-width: 100%;}
        	#camping-map.maininfo .campinfo-wrap .kmap {width: 230px; border-right: 1px #e0e0e0 solid;
    													 height: 600px; padding: 50px 30px 0 0;}
    		#camping-map.maininfo .campinfo-wrap .kmap .mapwrap{width: 200px; height: 323px;}
    		#camping-map .campinfo-wrap .kmap h2 {margin: 0; padding: 0; font-size: 1.7rem; font-weight: bold;
     										text-align: center; letter-spacing: -0.03em;}
         #camping-map .campinfo-wrap .kmap p.csub-head {margin: 3px 0 20px; text-align: center; font-size: 0.9rem; font-weight: bold;}
-    	#camping-map.maininfo .campinfo-wrap .kmapright {margin-left: 40px; padding: 50px 0px 0px 0px; width: 900px;}
-    	#camping-map.maininfo .head {display: inline-block; width: 102%; margin-bottom: 20px;}
+    	#camping-map.maininfo .campinfo-wrap .kmapright {margin-left: 40px; padding: 50px 0px 0px 0px; width: 1000px;}
+    	#camping-map.maininfo .head {display: inline-block; width: 100%; margin-bottom: 20px;}
     	#camping-map.maininfo .head .total-cnt {background: #25a5f0; color: #fff; height: 36px; width: 66px;
     										    line-height: 36px; font-size: .9rem; text-align: center;}
   		#camping-map.maininfo .head .page-ui {border: 1px #ccc solid; height: 36px; line-height: 34px; margin: 0 10px;}
@@ -207,7 +202,7 @@
     	.searchSelect:focus, .searchSelect:active, .searchSelect:hover {border: 1px solid #25a5f0;}
     	#camping-map.maininfo .head .selectsido .searchSelect{width: 80px;}
     	#camping-map.maininfo .head .selectsido .subselect{width: 125px;}
-    	#camping-map.maininfo .head .adq {display: inline-block; padding: 7px 3px 0 0; color: black; font-weight: bold; font-size: 13px;}
+    	#camping-map.maininfo .head .adq {display: inline-block; padding: 7px 55px 0 0; color: black; font-weight: bold; font-size: 13px;}
     	#camping-map.maininfo .head .adq:hover{color: #0f8dd7; text-decoration: none;}
     	#camping-map.maininfo .campinfo-wrap .kmapright .items {width: 283px; margin: 7px 40px 30px 0; float: left;}
 		#camping-map.maininfo .campinfo-wrap .kmapright .items .photo {width: 283px; height: 168px;
@@ -220,7 +215,21 @@
     	#camping-map.maininfo .campinfo-wrap .kmapright .items .photo span.cat {position: absolute; right: 0;
 					    bottom: 0; display: inline-block; background: #000; background: rgba(0,0,0,.1);
 					    padding: 4px 5px; color: #efe03e; z-index: 10; font-size: 11px; font-weight: bold;}
-    	
+    	#camping-map.maininfo .campinfo-wrap .kmapright .items .cont {padding-top: 7px;}
+    	#camping-map.maininfo .campinfo-wrap .kmapright .items .cont .tt {padding: 0; font-size: 1rem; 
+    														color: #000; font-weight: bold; margin: 5px 0;}
+    	#camping-map.maininfo .campinfo-wrap .kmapright .items .cont .mcont {color: #008ab8; font-size: 12px;
+    																		font-weight: 500; margin-bottom: 0px;}
+    	#comm {background: #f1f3f9; padding: 50px 0 60px 0;}
+    	.m-wrap {width: 1200px; margin: 0 auto;}
+    	#comm a{text-decoration: none;}
+    	#comm dl {float: left; padding: 0; margin: 0 40px 0 0; width: 270px;}
+    	#comm dt {font-size: 1.3rem; font-weight: bold; margin-bottom: 16px; color: #393b46; line-height: 1.7;}
+    	#comm .more {margin-right: 20px; margin-top: 5px; float: right; color: #999; font-size: small;}
+    	#comm dd {padding: 8px 0px; margin: 0; font-size: 14px; line-height: 1; width: 251px;}
+    	#comm dd a {color: #5f6273; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    				display: inline-block; width: 244px;}
+    	#comm .comment {font-size: 11px; color: #ff6000; float: right;}
     </style>
 </head>
 
@@ -556,7 +565,10 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
     					<div class="photo">
@@ -564,7 +576,10 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
     					<div class="photo">
@@ -572,7 +587,10 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
     					<div class="photo">
@@ -580,7 +598,10 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
     					<div class="photo">
@@ -588,7 +609,10 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
     					<div class="photo">
@@ -596,10 +620,87 @@
     						<span class="distance">3.7km</span>
     						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
     					</div>
-    					<div class="cont"></div>
+    					<div class="cont">
+    						<p class="tt">송도 스포츠파크 캠핑장</p>
+    						<p class="mcont">인천 > 연수구 > 송도동</p>
+    					</div>
     				</div>
     			</div>
     		</div>
+    	</div>
+    </div>
+    <div id="comm" class="maininfo">
+    	<div class="row m-wrap">
+    		<dl class="col-sm-6">
+    			<dt class="sbj">
+    				<img alt="" src="/camping/resources/images/review.svg" style="width: 50px; height: 50px;">
+    				<br>캠핑리뷰
+    				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
+    			</dt>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<span class="comment">1</span>
+    			</dd>
+    		</dl>
+    		<dl class="col-sm-6 nomargin">
+    			<dt class="sbj">
+    				<img alt="" src="/camping/resources/images/board.svg" style="width: 50px; height: 50px;">
+    				<br>자유게시판
+    				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
+    			</dt>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    			<dd>
+    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
+    				<span class="comment">1</span>
+    			</dd>
+    		</dl>
     	</div>
     </div>
     </div>
