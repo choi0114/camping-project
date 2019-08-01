@@ -1,7 +1,5 @@
 package com.sample.camping.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,14 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sample.camping.service.MypageService;
-import com.sample.camping.vo.FreeBoard;
-import com.sample.camping.vo.FreeBoardComment;
-import com.sample.camping.vo.JoningBoard;
-import com.sample.camping.vo.JoningBoardComment;
-import com.sample.camping.vo.OpinionBoard;
-import com.sample.camping.vo.OpinionComment;
-import com.sample.camping.vo.ReviewBoard;
-import com.sample.camping.vo.ReviewBoardComment;
 import com.sample.camping.vo.User;
 
 @Controller
