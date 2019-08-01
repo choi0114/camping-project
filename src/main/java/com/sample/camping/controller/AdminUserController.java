@@ -31,14 +31,14 @@ public class AdminUserController {
 	}
 	
 	@RequestMapping("/form.camp")
-	public String home() {
+	public String form() {
 		return "login/form";
 	}
 	
 	@RequestMapping("/register.camp") 
 	public String register(User user) {
 		userService.registerUser(user);
-		return "login/form";
+		return "redirect:home.camp";
 	}
 	
 	@RequestMapping("/login.camp")
@@ -48,7 +48,7 @@ public class AdminUserController {
 		User user = userService.login(id, password);
 
 		session.setAttribute("LOGIN_USER", user);
-		return "home";
+		return "redirect:home.camp";
 	}
 	
 }
