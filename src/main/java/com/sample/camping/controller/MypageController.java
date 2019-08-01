@@ -1,5 +1,6 @@
 package com.sample.camping.controller;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -31,8 +32,12 @@ public class MypageController {
 		user.setPhoneNumber("010-1111-1111");
 		user.setProfilePhoto("default.png");
 		user.setType("ADMIN");
-		user.setUsedYn("Y");
 		
+		Date date = new Date ( );
+		user.setCreateDate(date);
+
+		user.setUsedYn("Y");
+
 		session.setAttribute("LOGIN_USER", user);
 		
 		String userId = user.getId();

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -137,13 +138,12 @@
 								
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<span style="font-size: 25px;">xxx님 정보</span>
+										<span style="font-size: 25px;">${LOGIN_USER.nickName }님 정보</span>
 									</div>
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
-											<li><span class="b">가입일</span> : createDate</li>
-											<li><span class="b">로그인 횟수</span> : loginCut</li>
-											<li><span class="b">댓글</span> : commentCnt</li>
+											<li><span class="b">가입일</span> : <fmt:formatDate value="${LOGIN_USER.createDate }" pattern="yyyy년 M월 d일"/> </li>
+											<li><span class="b">댓글</span> : <c:forEach varStatus="cnt" items="${boardMap }"><c:if test="${cnt.last eq true}">${cnt.count }</c:if></c:forEach> 개</li>
 										</ul>
 									</div>
 								</div>
