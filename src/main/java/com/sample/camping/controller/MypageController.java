@@ -1,5 +1,7 @@
 package com.sample.camping.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sample.camping.service.MypageService;
+import com.sample.camping.vo.FreeBoard;
+import com.sample.camping.vo.FreeBoardComment;
+import com.sample.camping.vo.JoningBoard;
+import com.sample.camping.vo.JoningBoardComment;
+import com.sample.camping.vo.OpinionBoard;
+import com.sample.camping.vo.OpinionBoardComment;
+import com.sample.camping.vo.ReviewBoard;
+import com.sample.camping.vo.ReviewBoardComment;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -19,15 +29,42 @@ public class MypageController {
 	@RequestMapping("/mypage.camp")
 	public String mypage(HttpSession session) {
 		
-		User user = (User) session.getAttribute("LOGIN_USER");
-		user.getNickName();
-		user.getName();
-		user.getId();
-		user.getCreateDate();
-		user.getProfilePhoto();
-		user.getType();
+		User user = new User();
+		user.setId("admin");
+		user.setName("admin");
+		user.setEmail("admin@5gcamp.com");
+		user.setNickName("admin");
+		user.setPassword("zxcv1234");
+		user.setPhoneNumber("010-1111-1111");
+		user.setProfilePhoto("default.png");
+		user.setType("ADMIN");
+		user.setUsedYn("Y");
 		
+		session.setAttribute("LOGIN_USER", user);
 		
+		String userId = user.getId();
+		
+		Map<String, Object> boardMap = myPageService.getBoards(userId);
+		
+		FreeBoard freeBoard = (FreeBoard) boardMap.get("free");
+		JoningBoard joningBoard = (JoningBoard) boardMap.get("joning");
+		OpinionBoard opinionBoard = (OpinionBoard) boardMap.get("opinion");
+		ReviewBoard reviewBoard = (ReviewBoard) boardMap.get("review");
+		
+		FreeBoardComment freeBoardComment = (FreeBoardComment) boardMap.get("freeComment");
+		JoningBoardComment joningBoardComment = (JoningBoardComment) boardMap.get("joningComment");
+		OpinionBoardComment opinionBoardComment = (OpinionBoardComment) boardMap.get("opinionComment");
+		ReviewBoardComment reviewBoardComment = (ReviewBoardComment) boardMap.get("reviewComment");
+		
+		session.setAttribute("board", freeBoard);
+		session.setAttribute("board", joningBoard);
+		session.setAttribute("board", reviewBoard);
+		session.setAttribute("board", opinionBoard);
+		
+		session.setAttribute("comment", freeBoardComment);
+		session.setAttribute("comment", joningBoardComment);
+		session.setAttribute("comment", reviewBoardComment);
+		session.setAttribute("comment", opinionBoardComment);
 		
 		return "mypage/mypage";
 	}

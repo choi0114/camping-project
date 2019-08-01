@@ -49,7 +49,7 @@
 			free_create_date createDate,
 			user_id "user.id"
 		from 
-			camp_free_baord
+			camp_free_boards
 		where 
 			user_id = #{userId}
 	</select>
@@ -85,7 +85,7 @@
 			comment_no no,
 			comment_contents contents,
 			comment_create_date createDate,
-			review_no "reviceBoard.no",
+			review_no "reviewBoard.no",
 			user_id "user.id"
 		from
 			camp_review_comments

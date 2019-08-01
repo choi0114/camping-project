@@ -8,7 +8,7 @@
 			</div>
 			<ul class="mymenu">
 				<li><a href="/camping/mypage/mypage.camp" 	class="${submenu eq 'mypage' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/1.svg" width="18" height="20"></span> 마이페이지</a></li>
-			<c:if test="${LOGIN_USER.userType eq 'OWNER' }">
+			<c:if test="${LOGIN_USER.type ne 'CLIENT' }">
 				<li><a href="/camping/mypage/addCamp.camp" 	class="${submenu eq 'addCamp' ? 'selected' : ''  }">	<span class="ico"><img src="/camping/resources/images/mypage/tent.svg" width="18" height="20"></span> 내가 등록한 캠핑장</a></li>
 			</c:if>
 				<li><a href="/camping/mypage/clip.camp" 	class="${submenu eq 'clip' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/2.svg" width="18" height="20"></span> 찜한 캠핑장</a></li>

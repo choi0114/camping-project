@@ -208,9 +208,18 @@
 										<a href="post.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
 									<div class="panel-body">
-										<div style="text-align: center;">
-											<p>내가 쓴 댓글이 없습니다.</p>
-										</div>
+										<c:choose>
+											<c:when test="${not empty comment }">
+												<c:forEach var="comment" items="${comment }">
+													<p>${comment.contents }</p>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<div style="text-align: center;">
+													<p>내가 쓴 댓글이 없습니다.</p>
+												</div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 								<div class="panel panel-default">
@@ -219,9 +228,18 @@
 										<a href="comment.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more" ></a>
 									</div>
 									<div class="panel-body">
-										<div style="text-align: center;">
-											<p>내가 쓴 개시글이 없습니다.</p>
-										</div>
+										<c:choose>
+											<c:when test="${not empty board }">
+												<c:forEach var="board" items="${board }">
+													<p>${board.contents }</p>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<div style="text-align: center;">
+													<p>내가 쓴 개시글이 없습니다.</p>
+												</div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
