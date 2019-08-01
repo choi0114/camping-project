@@ -60,6 +60,18 @@ public class MypageController {
 		List<ReviewBoardComment> reviewBoardComment = (List<ReviewBoardComment>) boardMap.get("free");
 		
 		Map<String, Object> board = new HashMap<String, Object>();
+		if(freeBoard.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(joningBoard.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(reviewBoard.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(opinionBoard.isEmpty()) {
+			return "mypage/mypage";
+		}
 		board.put("freeBoard", freeBoard);
 		board.put("joningBoard", joningBoard);
 		board.put("reviewBoard", reviewBoard);
@@ -68,6 +80,20 @@ public class MypageController {
 		model.addAttribute("board", board);
 		
 		Map<String, Object> comment = new HashMap<String, Object>();
+		
+		if(freeBoardComment.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(joningBoardComment.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(opinionBoardComment.isEmpty()) {
+			return "mypage/mypage";
+		}
+		if(reviewBoardComment.isEmpty()) {
+			return "mypage/mypage";
+		}
+		
 		board.put("freeBoardComment", freeBoardComment);
 		board.put("joningBoardComment", joningBoardComment);
 		board.put("opinionBoardComment", opinionBoardComment);
