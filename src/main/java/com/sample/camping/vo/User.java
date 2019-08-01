@@ -14,7 +14,6 @@ public class User {
 	private String type;
 	private String usedYn;
 	private Date createDate;
-	
 	public String getId() {
 		return id;
 	}
@@ -44,7 +43,7 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}	
+	}
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -72,5 +71,8 @@ public class User {
 	public Date getCreateDate() {
 		return createDate;
 	}
-
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
 }
