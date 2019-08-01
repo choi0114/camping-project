@@ -209,14 +209,23 @@
 									</div>
 									<div class="panel-body">
 										<c:choose>
-											<c:when test="${not empty comment }">
-												<c:forEach var="comment" items="${comment }">
-													<p>${comment.contents }</p>
+											<c:when test="${not empty boardMap }">
+												<c:forEach var="free" items="${boardMap.free }">
+													<p>${free.contents }</p>
+												</c:forEach>
+												<c:forEach var="joning" items="${boardMap.joning }">
+													<p>${joning.contents }</p>
+												</c:forEach>
+												<c:forEach var="opinion" items="${boardMap.opinion }">
+													<p>${opinion.contents }</p>
+												</c:forEach>
+												<c:forEach var="review" items="${boardMap.review }">
+													<p>${review.contents }</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
-													<p>내가 쓴 댓글이 없습니다.</p>
+													<p>내가 작성한 게시글이 없습니다.</p>
 												</div>
 											</c:otherwise>
 										</c:choose>
@@ -229,14 +238,23 @@
 									</div>
 									<div class="panel-body">
 										<c:choose>
-											<c:when test="${not empty board }">
-												<c:forEach var="board" items="${board }">
-													<p>${board.opinionBoard.contents }</p>
+											<c:when test="${not empty boardMap }">
+												<c:forEach var="freeComment" items="${boardMap.freeComment }">
+													<p>${freeComment.contents }</p>
+												</c:forEach>
+												<c:forEach var="joningComment" items="${boardMap.joningComment }">
+													<p>${joningComment.contents }</p>
+												</c:forEach>
+												<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
+													<p>${opinionComment.contents }</p>
+												</c:forEach>
+												<c:forEach var="reviewComment" items="${boardMap.reviewComment }">
+													<p>${reviewComment.contents }</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
-													<p>내가 쓴 개시글이 없습니다.</p>
+													<p>내가 작성한 댓글이 없습니다.</p>
 												</div>
 											</c:otherwise>
 										</c:choose>

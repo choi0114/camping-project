@@ -49,58 +49,7 @@ public class MypageController {
 		
 		Map<String, Object> boardMap = myPageService.getBoards(userId);
 		
-		List<FreeBoard> freeBoard = (List<FreeBoard>) boardMap.get("free");
-		List<JoningBoard> joningBoard = (List<JoningBoard>) boardMap.get("free");
-		List<OpinionBoard> opinionBoard = (List<OpinionBoard>) boardMap.get("free");
-		List<ReviewBoard> reviewBoard = (List<ReviewBoard>) boardMap.get("free");
-		
-		List<FreeBoardComment> freeBoardComment = (List<FreeBoardComment>) boardMap.get("free");
-		List<JoningBoardComment> joningBoardComment = (List<JoningBoardComment>) boardMap.get("free");
-		List<OpinionComment> opinionBoardComment = (List<OpinionComment>) boardMap.get("free");
-		List<ReviewBoardComment> reviewBoardComment = (List<ReviewBoardComment>) boardMap.get("free");
-		
-		Map<String, Object> board = new HashMap<String, Object>();
-		if(freeBoard.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(joningBoard.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(reviewBoard.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(opinionBoard.isEmpty()) {
-			return "mypage/mypage";
-		}
-		board.put("freeBoard", freeBoard);
-		board.put("joningBoard", joningBoard);
-		board.put("reviewBoard", reviewBoard);
-		board.put("opinionBoard", opinionBoard);
-		
-		model.addAttribute("board", board);
-		
-		Map<String, Object> comment = new HashMap<String, Object>();
-		
-		if(freeBoardComment.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(joningBoardComment.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(opinionBoardComment.isEmpty()) {
-			return "mypage/mypage";
-		}
-		if(reviewBoardComment.isEmpty()) {
-			return "mypage/mypage";
-		}
-		
-		board.put("freeBoardComment", freeBoardComment);
-		board.put("joningBoardComment", joningBoardComment);
-		board.put("opinionBoardComment", opinionBoardComment);
-		board.put("reviewBoardComment", reviewBoardComment);
-		
-		model.addAttribute("comment", comment);
-		
+		model.addAttribute("boardMap", boardMap);
 		
 		
 		return "mypage/mypage";
