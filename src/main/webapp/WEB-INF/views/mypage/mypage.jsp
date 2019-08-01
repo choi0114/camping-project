@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -137,13 +138,12 @@
 								
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<span style="font-size: 25px;">xxx님 정보</span>
+										<span style="font-size: 25px;">${LOGIN_USER.nickName }님 정보</span>
 									</div>
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
-											<li><span class="b">가입일</span> : createDate</li>
-											<li><span class="b">로그인 횟수</span> : loginCut</li>
-											<li><span class="b">댓글</span> : commentCnt</li>
+											<li><span class="b">가입일</span> : <fmt:formatDate value="${LOGIN_USER.createDate }" pattern="yyyy년 M월 d일"/> </li>
+											<li><span class="b">댓글</span> : ${count } 개</li>
 										</ul>
 									</div>
 								</div>
@@ -171,7 +171,6 @@
 										</div>
 									</div>
 								</div>
-								
 							</div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="panel panel-default">
@@ -209,14 +208,64 @@
 									</div>
 									<div class="panel-body">
 										<c:choose>
-											<c:when test="${not empty comment }">
-												<c:forEach var="comment" items="${comment }">
-													<p>${comment.contents }</p>
-												</c:forEach>
+											<c:when test="${not empty boardMap }">
+												<table class="table">
+													<colgroup>
+														<col width="15%">
+														<col width="*">
+														<col width="15%">
+													</colgroup>
+													<thead>
+														<tr>
+															<th class="text-center">제목</th>
+															<th class="text-center">내용</th>
+															<th>작성일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="free" items="${boardMap.free }">
+														<tr>
+															<td class="text-center">${free.title }</td>
+															<td class="text-center">${free.contents }</td>
+															<td>
+															<fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="joning" items="${boardMap.joning }">
+														<tr>
+															<td class="text-center">${joning.title }</td>
+															<td class="text-center">${joning.contents }</td>
+															<td>
+															<fmt:formatDate value="${joning.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="opinion" items="${boardMap.opinion }">
+														<tr>
+															<td class="text-center">${opinion.title }</td>
+															<td class="text-center">${opinion.contents }</td>
+															<td>
+															<fmt:formatDate value="${opinion.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="review" items="${boardMap.review }">
+														
+														<tr>
+															<td class="text-center">${review.title }</td>
+															<td class="text-center">${review.contents }</td>
+															<td>
+															<fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
-													<p>내가 쓴 댓글이 없습니다.</p>
+													<p>내가 작성한 게시글이 없습니다.</p>
 												</div>
 											</c:otherwise>
 										</c:choose>
@@ -229,14 +278,57 @@
 									</div>
 									<div class="panel-body">
 										<c:choose>
-											<c:when test="${not empty board }">
-												<c:forEach var="board" items="${board }">
-													<p>${board.opinionBoard.contents }</p>
-												</c:forEach>
+											<c:when test="${not empty boardMap }">
+												<table class="table">
+													<colgroup>
+														<col width="*">
+														<col width="15%">
+													</colgroup>
+													<thead>
+														<tr>
+															<th class="text-center">내용</th>
+															<th>작성일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="freeComment" items="${boardMap.freeComment }">
+														<tr>
+															<td class="text-center">${freeComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${freeComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="joningComment" items="${boardMap.joningComment }">
+														<tr>
+															<td class="text-center">${joningComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${joningComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
+														<tr>
+															<td class="text-center">${opinionComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${opinionComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+														<c:forEach var="reviewComment" items="${reviewComment.review }">
+														<tr>
+															<td class="text-center">${reviewComment.contents }</td>
+															<td>
+															<fmt:formatDate value="${reviewComment.createDate }" pattern="yyyy년 M월 d일"/>
+															</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 											</c:when>
 											<c:otherwise>
 												<div style="text-align: center;">
-													<p>내가 쓴 개시글이 없습니다.</p>
+													<p>내가 작성한 댓글이 없습니다.</p>
 												</div>
 											</c:otherwise>
 										</c:choose>

@@ -214,12 +214,6 @@
 			$('#id_check').css('color', 'red');
 		}
 	});
-	
-	
-
-
-
-
 
 </script>
 </body>

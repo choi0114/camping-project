@@ -106,4 +106,28 @@
 			user_id = #{userId}
 	</select>
 	
+	<select id="getAllCommentCount" parameterType="string" resultType="int">
+		select(free.cn1 + joining.cn2 + opinion.cn3 + review.cn4) cnt
+			from (
+			        select count(*) cn1
+			        from camp_free_comments
+			        where user_id = #{userId}
+			    ) free,
+			    (
+			        select count(*) cn2
+			        from camp_joining_comments
+			        where user_id = #{userId}
+			    ) joining,
+			    (
+			        select count(*) cn3
+			        from camp_opinion_comments
+			        where user_id = #{userId}
+			    ) opinion,
+			    (
+			        select count(*) cn4
+			        from camp_review_comments
+			        where user_id = #{userId}
+			    ) review
+	</select>
+	
 </mapper>
