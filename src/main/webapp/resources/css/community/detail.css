@@ -42,6 +42,10 @@ div {
     border-radius: 60%;
     margin-top:30px;
 }
+.bottom-line-comment {
+	padding-bottom: 10px;
+    border-bottom: 1px solid #f1f3f5;
+}
 .title {
     margin-top: 20px;
     margin-left: -35px;
