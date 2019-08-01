@@ -94,7 +94,6 @@
             height: 60px;
             border-radius: 60px;
             overflow: hidden;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, .4);
             width: 115px;
             line-height: 60px;
             margin-right: 10px;
@@ -251,11 +250,11 @@
 	                            	지역별
 	                            <i class="glyphicon glyphicon-chevron-down" aria-hidden="true"></i>
 	                        </div>
-	                        <div class="col-sm-9 search-form" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 30px;">
+	                        <div class="col-sm-9 search-form">
 	                            <form method="" action="" id="">
 	                                <fieldset>
 	                                    <legend>통합검색 폼</legend>
-	                                    <input autocomplete="off" type="text" id="" name="" maxlength="14" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" class="search-input keyword " value="">
+	                                    <input autocomplete="off" type="text" id="search-box" name="" maxlength="14" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" class="search-input keyword " value="">
 	                                    <a class="keyword-del hand">
 	                                        <img src="/camping/resources/images/x.svg" width="26px" height="26px">
 	                                    </a>
@@ -706,6 +705,17 @@
     </div>
 </body>
 <script type="text/javascript">
+
+	$('.btn-sido').click(function() {
+	    viewscrollwrap.animate({
+	        scrollTop: $("#camping-map").offset().top
+	    }, 600);
+	});
+
+
+	$("#search-box").focus(function() {
+		$("#search-box").css("box-shadow":"0px 0px 60px rgba(51,195,255,.6)");
+	})
 
 	function sido(name) {
 		alert(name);
