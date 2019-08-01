@@ -1,0 +1,139 @@
+.page-head-left {
+    margin-top: 58px;
+    margin-left: 120px;
+    margin-bottom: -20px;
+    font-weight: bold;
+}
+.head-community {
+    
+}
+.page-head-right {
+    padding-top: 40px;
+    margin-left: -270px;
+   
+}
+.nick {
+    font-weight: bold;
+    font-size: 17px;
+    margin-left: -15px;
+    margin-top: 3px;
+}
+  
+div {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.sort {
+    color: coral;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: -30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.id-img {
+    border-radius: 60%;
+}
+.id-img2 {
+    border-radius: 60%;
+    margin-top:10px;
+}
+.id-img3 {
+    border-radius: 60%;
+    margin-top:30px;
+}
+.bottom-line-comment {
+	padding-bottom: 10px;
+    border-bottom: 1px solid #f1f3f5;
+}
+.title {
+    margin-top: 20px;
+    margin-left: -35px;
+    font-size: 18px;
+    font-weight: bolder
+}
+.date {
+    color: #868e96;
+}
+.location {
+    color: #868e96;
+    margin-top: 25px;
+}
+.bottom-line {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #adb5bd;
+}
+.bottom-line-before {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #adb5bd;
+}
+.contents-img {
+    display:block;
+}
+.glyphicon-thumbs-up {
+     color:#868e96;    
+}
+.like {
+    margin-top: 2px;
+    margin-left: -5px;
+
+}
+.write-comment {
+    margin-top: 15px;
+    padding-top: 8px;
+    background-color: #e9ecef;
+    width: 98%;
+    color: gray
+}
+.icon-img {
+    margin-left: 20px;
+   
+}
+.like-comment {
+    margin-left: -20px;
+    color: #868e96
+}
+.comment {
+    margin-left: 5px;
+    color: #868e96;
+}
+
+.contents {
+    margin-top: 13px;
+    
+}
+.write-button {
+    margin-left: -15px;
+    margin-top: 30px;
+    width: 70px;
+    font-size: 15px;
+    color: coral;
+    border: coral 1px solid;
+}
+.comment-nick {
+    font-weight: bold;
+    font-size: 15px;
+}
+.comment-top {
+    margin-top: 30px;
+}
+.comment-bottom {
+    margin-left: 0px;
+    padding-bottom:20px;
+}
+.comment-date {
+    margin-left: -50px;
+}
+.img_container {
+    text-align: center;
+    vertical-align: middle;
+ }
+ 
+ .share-img {
+    margin-left:10px;
+    margin-top:50px;
+    width:25px;  
+    height:25;
+	
+}

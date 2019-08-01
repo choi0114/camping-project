@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.CampsiteDao">
+
+<select id="selectCampsite" parameterType="map" resultType="campsite">
+	select
+			CAMPSITE_NO			no		
+			,CAMPSITE_NAME			name
+			,CAMPSITE_SORT			sort
+			,CAMPSITE_LATITUDE		latitude
+			,CAMPSITE_LONGITUDE		longitude
+			,CAMPSITE_ADDRESS		address
+			,CAMPSITE_TEL			tel
+			,CAMPSITE_SITES			sites
+			,CAMPSITE_PRICE			price
+			,CAMPSITE_LIKES			likes
+			,CAMPSITE_HATES			hates
+			,CAMPSITE_PHOTO			photo
+			,CAMPSITE_POINT			point
+			,CAMPSITE_CREATE_DATE	createDate
+			,CAMPSITE_USED_YN		usedYN
+			,MY_CAMPSITE_NO			myCampsiteNo
+	from (
+		select
+			row_number() over(order by CAMPSITE_NO desc) as row_no
+			,CAMPSITE_NO				
+			,CAMPSITE_NAME			
+			,CAMPSITE_SORT			
+			,CAMPSITE_LATITUDE		
+			,CAMPSITE_LONGITUDE		
+			,CAMPSITE_ADDRESS		
+			,CAMPSITE_TEL			
+			,CAMPSITE_SITES			
+			,CAMPSITE_PRICE			
+			,CAMPSITE_LIKES			
+			,CAMPSITE_HATES			
+			,CAMPSITE_PHOTO			
+			,CAMPSITE_POINT			
+			,CAMPSITE_CREATE_DATE	
+			,CAMPSITE_USED_YN		
+			,MY_CAMPSITE_NO			
+		from CAMP_CAMPSITES
+		where CAMPSITE_NAME like '%' || #{keyword} || '%'
+		)
+	where row_no >= #{begin} and row_no &lt;= #{end} 
+		
+</select>
+<select id="selectCampCount" parameterType="map" resultType="int">
+	select count(*)
+	from CAMP_CAMPSITES
+	where CAMPSITE_NAME like '%' || #{keyword} || '%'
+		
+</select>
+</mapper>
