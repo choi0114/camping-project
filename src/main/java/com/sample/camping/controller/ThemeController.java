@@ -11,4 +11,9 @@ public class ThemeController {
 	public String theme() {
 		return "theme/theme";
 	}
+	
+	@RequestMapping("/themelist.camp")
+	public String themelist() {
+		return "theme/themelist";
+	}
 }

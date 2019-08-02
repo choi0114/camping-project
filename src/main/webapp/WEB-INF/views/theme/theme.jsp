@@ -534,6 +534,7 @@
 		        
 		        $svg.attr('height', '40px');
 		        $svg.attr('width', '40px');
+		        $svg.attr('fill', '#555555');
 
 		        // Add replaced image's ID to the new SVG
 		        if(typeof imgID !== 'undefined') {
@@ -559,27 +560,143 @@
 
 		});
 	});
-	    var countEnvironment = 0;
-	    var countConvenient = 0;
-	    var countFun = 0;
-		$('.facbox button').click(function() {
-			var fillColor = $(this).find('.svg path').attr('fill');
-			var imgNo = $(this).attr('data-theme-no');
-			
-			console.log(this);
-			console.log(fillColor);
-			
+	
+    var countEnvironment = 0;
+    var countConvenient = 0;
+    var countFun = 0;
+    var checkedThemes = [];
+	$('.facbox button').click(function() {
+		var fillColor = $(this).find('.svg').attr('fill');
+		var imgNo = $(this).attr('data-theme-no');
+		
+		if(imgNo < 16) {			// 자연환경
 			if(fillColor == '#555555') {
-				$(this).find('.svg path').attr('fill', '#25a5f0');
-				$(this).find('.svg rect').attr('fill', '#25a5f0');
+				if(countEnvironment == 3) {
+					alert('3개만 선택 가능합니다.');
+					return false;
+				}
+				
+				$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#25a5f0');
+				$(this).find('.svg').attr('fill', '#25a5f0');
 				$(this).find('p').css('color', '#25a5f0');
+				
+				checkedThemes.push(imgNo);
+				
+				countEnvironment++;
 			} else {
-				$(this).find('.svg path').attr('fill', '#555555');
-				$(this).find('.svg rect').attr('fill', '#555555');
-				$(this).find('p').css('color', '#333');
+				$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#555555');
+				$(this).find('.svg').attr('fill', '#555555');
+				$(this).find('p').css('color', '#333333');
+				
+				var deleteTheme = checkedThemes.indexOf(imgNo);
+				checkedThemes.splice(deleteTheme, 1);
+				
+				countEnvironment--;
 			}
-			
-		});
+		} else if(imgNo < 42) {		// 즐길거리
+			if(fillColor == '#555555') {
+				if(countFun == 5) {
+					alert('5개만 선택 가능합니다.');
+					return false;
+				}
+				
+				$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#25a5f0');
+				$(this).find('.svg').attr('fill', '#25a5f0');
+				$(this).find('p').css('color', '#25a5f0');
+				
+				checkedThemes.push(imgNo);
+				
+				countFun++;
+			} else {
+				$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#555555');
+				$(this).find('.svg').attr('fill', '#555555');
+				$(this).find('p').css('color', '#333333');
+				
+				var deleteTheme = checkedThemes.indexOf(imgNo);
+				checkedThemes.splice(deleteTheme, 1);
+				
+				countFun--;
+			}
+		} else {					// 편의시설 및 환경
+			if(fillColor == '#555555') {
+				if(countConvenient == 7) {
+					alert('7개만 선택 가능합니다.');
+					return false;
+				}
+				
+				if(imgNo == 56) {	// 오토캠핑
+					$(this).find('.svg path').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#25a5f0');
+						}
+					});
+					$(this).find('.svg polygon').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#25a5f0');
+						}
+					});
+					$(this).find('.svg rect').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#25a5f0');
+						}
+					});
+				} else {
+					$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#25a5f0');
+				}
+				$(this).find('.svg').attr('fill', '#25a5f0');
+				$(this).find('p').css('color', '#25a5f0');
+				
+				checkedThemes.push(imgNo);
+				
+				countConvenient++;
+			} else {
+				if(imgNo == 56) {
+					$(this).find('.svg path').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#555555');
+						}
+					});
+					$(this).find('.svg polygon').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#555555');
+						}
+					});
+					$(this).find('.svg rect').each(function(index, item) {
+						var fillColor = $(item).css('fill');
+						console.log(fillColor);
+						if(fillColor != 'none') {
+							$(item).css('fill', '#555555');
+						}
+					});
+				} else {
+					$(this).find('.svg path, .svg rect, .svg polygon').attr('fill', '#555555');
+				}
+				$(this).find('.svg').attr('fill', '#555555');
+				$(this).find('p').css('color', '#333333');
+				
+				var deleteTheme = checkedThemes.indexOf(imgNo);
+				checkedThemes.splice(deleteTheme, 1);
+				
+				countConvenient--;
+			}
+		}
+		
+		console.log(checkedThemes);
+	});
+	
+	$('.theme-search-btn').click(function() {
+		
+	});
 </script>
 </body>
 </html>
