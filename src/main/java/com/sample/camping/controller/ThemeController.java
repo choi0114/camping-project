@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/theme")
 public class ThemeController {
 	
-	@RequestMapping("/home.camp")
+	@RequestMapping("/search.camp")
 	public String theme() {
-		return "/theme/theme";
+		return "theme/theme";
 	}
 }

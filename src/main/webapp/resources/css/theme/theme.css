@@ -1,7 +1,30 @@
-div {
-    border: 1px solid;    
+.theme-search-btn {
+	background-color: #1097E4; 
+	width: 90px; 
+	height: 40px; 
+	color: #fff; 
+	border-radius: 0px;
+	border: none;
 }
 
-.btn {
-    background-color: deepskyblue
+#theme-table tr:nth-child(odd) {
+	background-color: #f0f0f0;
+}
+
+#theme-table {
+	border: 1px solid #ccc;
+}
+
+.facbox {
+	display: inline-block;
+}
+
+.facbox button {
+	border: none;
+	margin: 10px;
+}
+
+.facbox button p {
+	font-size: 12px;
+	margin-top: 10px;
 }
