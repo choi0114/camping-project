@@ -14,6 +14,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .camping{
+    	padding-right:0px;
+    	padding-left:0px;
+    }
+    .map-box{
+    	padding-right: 0px;
+    padding-left: 0px;
+}
+    }
     .wico{
      position: absolute;
     z-index: 10;
@@ -325,6 +334,7 @@
     </style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> <!-- 총 12 나눔 -->
@@ -406,7 +416,7 @@
                 	</div>
            
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 map-box">
                     <div id="map" style="width: 100%; height: 900px; position:relative;">
                     	<input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;">
 	                	<button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>

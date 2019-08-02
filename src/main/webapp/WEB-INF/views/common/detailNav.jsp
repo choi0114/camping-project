@@ -71,7 +71,7 @@
     </style>
 </head>
 <body>
-<div id="container">
+<div id="container detail-Nav">
     <div class="gnb">
         <ul class="">
             <li><a href="#">HOME</a></li>
