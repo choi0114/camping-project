@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.camping.exception.AlreadyUsedIdException;
 import com.sample.camping.exception.LoginFailureException;
@@ -24,11 +25,7 @@ public class AdminUserController {
 		return "error/user/registerfail";
 	}
 	
-	@ExceptionHandler(LoginFailureException.class) // 로그인 실패시 발생하는 예외
-	public String LoginFailureExceptionHandler(LoginFailureException ex) {
-		ex.printStackTrace();
-		return "error/user/loginfail";
-	}
+	
 	
 	@RequestMapping("/form.camp")
 	public String form() {
@@ -42,13 +39,24 @@ public class AdminUserController {
 	}
 	
 	@RequestMapping("/login.camp")
+	@ResponseBody
 	public String login(String id, String password,
 			HttpSession session) {
-		
-		User user = userService.login(id, password);
+		try {
+			User user = userService.login(id, password);
+			session.setAttribute("LOGIN_USER", user);
+			return "success";
+			
+		} catch ( Exception e) {
+			return "fail";
+		}
 
-		session.setAttribute("LOGIN_USER", user);
-		return "redirect:home.camp";
 	}
 	
+	@RequestMapping("/logout.camp")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:home.camp";
+	}
+
 }

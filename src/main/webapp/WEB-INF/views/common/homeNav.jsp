@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <style>
         body {
@@ -75,12 +75,17 @@
         <ul class="">
             <li><a href="#">HOME</a></li>
             <li><a href="#">공지사항</a></li>
-            <li><a href="#" id="open-register-modal">회원가입</a></li>
-            <li><a href="#" id="open-login-modal">로그인</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#"><span style="color: #25a5f0">안녕하세요!#님</span></a></li>
-            <li><a href="#">로그아웃</a></li>
-            <li><a href="#">고객센터</a></li>
+            <c:choose>
+            	<c:when test="${empty LOGIN_USER }">
+		            <li><a href="#" id="open-register-modal">회원가입</a></li>
+		            <li><a href="#" id="open-login-modal">로그인</a></li>
+            	</c:when>
+            	<c:otherwise>
+		            <li><a href="#">마이페이지</a></li>
+		            <li><a href="#"><span style="color: #25a5f0">안녕하세요!${LOGIN_USER.id }님</span></a></li>
+		            <li><a href="logout.camp">로그아웃</a></li>
+            	</c:otherwise>
+            </c:choose>
         </ul>
     </div>
     <div class="header-wrap">
@@ -145,7 +150,7 @@
 <div id="login-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form class="pb-modalreglog-form-reg" method="post" action="login.camp">
+			<form class="pb-modalreglog-form-reg" method="post" action="login.camp" id="ab">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -161,6 +166,7 @@
 								placeholder="아이디"> <span class="input-group-addon"><span
 								class="glyphicon glyphicon-user"></span></span>
 						</div>
+						<div class="check_font" id="id_check"></div>
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label>
@@ -169,12 +175,13 @@
 								placeholder="비밀번호"> <span class="input-group-addon"><span
 								class="glyphicon glyphicon-lock"></span></span>
 						</div>
+						<div class="check_font" id="pw_check"></div>
 					</div>
 			</div>
 			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="btn-login">로그인</button>
 				<button type="button" class="btn btn-secondary"
 					data-dismiss="modal">닫기</button>
-				<button type="submit" class="btn btn-primary">로그인</button>
 			</div>
 		  </form>
 		</div>
@@ -246,13 +253,12 @@
 							<select class="form-control" name="type">
 								<option value="CLIENT"> 고객 </option>
 								<option value="OWNER"> 주인 </option>
-								<option value="ADMIN"> 관리자 </option>
 							</select>
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 					<button type="submit" class="btn btn-primary" id='a'>회원가입</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 				</div>
 				</form>
 			</div>
@@ -261,13 +267,7 @@
 <script type="text/javascript">
 
 $('#abc').on('submit',function(data){
-	var name = document.getElementById("inputName").value;
-	if (name == '') {
-		event.preventDefault();
-		alert("이름을 입력하세요");
-		return false;
-	}
-	
+
 	var id = document.getElementById("inputId").value;
 	if (id == '') {
 		event.preventDefault();
@@ -309,24 +309,72 @@ $('#abc').on('submit',function(data){
 		alert("이메일을 입력하세요");
 		return false;
 	}
+	
+	alert("회원가입이 완료되었습니다.");
 })
 
-$('#open-login-modal').click(function() {
+
+$("#btn-login").click(function() {
+	var id = document.getElementById("id").value;
+	if (id == '') {
+		event.preventDefault();
+		alert("아이디를 입력하세요");
+		return false;
+	}
+	var pws = document.getElementById("pws").value;
+	if (pws == '') {
+		event.preventDefault();
+		alert("비밀번호를 입력하세요");
+		return false;
+	}
+	
+	$.ajax({
+		type:"POST",
+		url:"",
+		data:{},
+		dataType:"text",
+		success:function(result) {
+			
+		}
+	});
+	
+})
+/* $('#ab').on('submit',function(data){
+	
+}) */
+	
+	
+	
+
+	$('#open-login-modal').click(function() {
 		$("#login-modal").modal("show")
 	});
+	
 	$('#open-register-modal').click(function() {
 		$("#register-modal").modal("show")
 	});
+	
 	$('.form-control').click(function(){
 		 $(this).removeAttr('placeholder');
 	});
+	
 	var empJ = /\s/g;
 	var idJ = /^[a-zA-Z0-9]{6,}$/;
 	var pwJ = /^[a-zA-Z0-9]{8,}$/;
 	var nameJ = /^[가-힣]{2,6}$/;
 	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var phoneJ = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-
+	
+	$("#id").blur(function(){
+		if (idJ.test($(this).val())) {
+			console.log(idJ.test($(this).val()));
+			$("#id_check").text('');
+		} else {
+			$('#id_check').text('4글자이상, 영어 대소문자/숫자만 입력하세요');
+			$('#id_check').css('color', 'red');
+		}
+	});
+	
 	$('#inputPws').blur(function(){
 		if(pwJ.test($('#inputPws').val())){
 			console.log('true');
@@ -382,7 +430,7 @@ $('#open-login-modal').click(function() {
 			console.log(idJ.test($(this).val()));
 			$("#id_check").text('');
 		} else {
-			$('#id_check').text('6글자이상, 영어 대소문자/숫자만 입력하세요');
+			$('#id_check').text('4글자이상, 영어 대소문자/숫자만 입력하세요');
 			$('#id_check').css('color', 'red');
 		}
 	});
