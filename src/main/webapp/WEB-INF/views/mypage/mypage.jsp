@@ -120,6 +120,18 @@
     border: none;
     outline: 0;
 }
+.round {
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    background: #fff;
+    text-align: center;
+}
+
+.round img {
+	max-width: 370px;
+}
 </style>
 </head>
 
@@ -151,11 +163,25 @@
 										<span style="font-size: 20px;">찜한 캠핑장</span>
 										<a href="clip.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
-									<div class="panel-body">
-										<div style="text-align: center;">
-											<p>찜한 캠핑장이 없습니다.</p>
-										</div>
-									</div>
+									<c:choose>
+										<c:when test="${not empty likeCamp }">
+											<ul class="list-group" style="height: 250px; overflow-y: scroll;">
+												<c:forEach var="like" items="${likeCamp }" >
+													<li class="list-group-item">
+														<a href="../detail.camp?no=${like.campSite.no }">${like.campSite.name }</a>
+														<p>${like.campSite.address }</p>
+													</li>
+												</c:forEach>
+											</ul>
+										</c:when>
+										<c:otherwise>
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<p>찜한 캠핑장이 없습니다.</p>
+												</div>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 								
 								<div class="panel panel-default">
@@ -164,9 +190,16 @@
 										<a href="conquest.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
 									<div class="panel-body">
-										<div style="text-align: center;">
-											<p>정복한 캠핑장이 없습니다.</p>
-										</div>
+										<c:choose>
+											<c:when test="${empty likeCamp }">
+												
+											</c:when>
+											<c:otherwise>
+												<div style="text-align: center;">
+													<p>정복한 캠핑장이 없습니다.</p>
+												</div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -204,26 +237,26 @@
 										<span style="font-size: 20px;">내가 쓴 게시글</span>
 										<a href="post.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
-									<div class="panel-body" style="height: 250px; overflow: scroll;">
+									<div class="panel-body" style="height: 250px; overflow-y: scroll;">
 										<c:choose>
 										<c:when test="${not empty boardMap }">
 											<ul class="list-group">
 												<c:forEach var="free" items="${boardMap.free }">
 													<li class="list-group-item">
 														<h5>${free.title }</h5>
-														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														<div class="text-right"><small><fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 													</li>
 												</c:forEach>
 												<c:forEach var="joning" items="${boardMap.joning }">
 													<li class="list-group-item">
 														<h5>${joning.title }</h5>
-														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														<div class="text-right"><small><fmt:formatDate value="${joning.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 													</li>
 												</c:forEach>
 												<c:forEach var="opinion" items="${boardMap.opinion }">
 													<li class="list-group-item">
 														<h5>${opinion.title }</h5>
-														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														<div class="text-right"><small><fmt:formatDate value="${opinion.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 													</li>
 												</c:forEach>
 												<c:forEach var="review" items="${boardMap.review }">
@@ -248,7 +281,7 @@
 										<span style="font-size: 20px;">내가 쓴 댓글</span>
 										<a href="comment.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more" ></a>
 									</div>
-									<div class="panel-body" style="height: 270px; overflow: scroll; position: relative;">
+									<div class="panel-body" style="height: 270px; overflow-y: scroll; position: relative;">
 										<c:choose>
 											<c:when test="${count > 0 }">
 												<ul class="list-group">
@@ -316,7 +349,6 @@
 			}
 		}
 	});
-
 	function submitCheck(f)
 	{
 		if (f.a.value == '')
@@ -343,7 +375,6 @@
 			f.upfile.focus();
 			return false;
 		}
-
 		return confirm('정말로 등록하시겠습니까?       ');
 	}
 	</script>

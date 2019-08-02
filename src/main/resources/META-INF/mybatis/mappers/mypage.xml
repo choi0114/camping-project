@@ -130,4 +130,21 @@
 			    ) review
 	</select>
 	
+	<select id="getLikeCampsiteById" parameterType="string" resultType="likeCampsite">
+		select 
+			a.like_campsite_no no,
+			a.like_campsite_create_date createDate,
+			a.user_id "user.id",
+			a.campsite_no "campSite.no",
+			b.campsite_name "campSite.name",
+			b.campSite_sort "campSite.sort",
+			b.campSite_address "campSite.address"
+		from
+			camp_like_campsite a, camp_campsites b
+		where
+			a.campsite_no = b.campsite_no
+		and 
+			a.user_id = #{value}
+	</select>
+	
 </mapper>

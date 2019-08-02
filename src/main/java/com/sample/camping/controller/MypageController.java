@@ -1,6 +1,7 @@
 package com.sample.camping.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sample.camping.service.MypageService;
 import com.sample.camping.service.UserService;
+import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -46,6 +48,11 @@ public class MypageController {
 		model.addAttribute("boardMap", boardMap);
 
 		session.setAttribute("LOGIN_USER", user);
+		
+		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());		
+		model.addAttribute("likeCamp", likeCamp);
+		
+		System.out.println(likeCamp);
 		
 		return "mypage/mypage";
 	}

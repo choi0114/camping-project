@@ -125,4 +125,14 @@ public class CampSite {
 	public void setMyCampsite(MyCampsite myCampsite) {
 		this.myCampsite = myCampsite;
 	}
+	@Override
+	public String toString() {
+		return "CampSite [no=" + no + ", name=" + name + ", sort=" + sort + ", latitude=" + latitude + ", longitude="
+				+ longitude + ", address=" + address + ", tel=" + tel + ", sites=" + sites + ", price=" + price
+				+ ", likes=" + likes + ", hates=" + hates + ", photo=" + photo + ", point=" + point + ", createDate="
+				+ createDate + ", usedYn=" + usedYn + ", sido=" + sido + ", myCampsite=" + myCampsite + "]";
+	}
+	
+	
+	
 }
