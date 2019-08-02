@@ -33,6 +33,11 @@ public class LikeCampsite {
 	public void setCampSite(CampSite campSite) {
 		this.campSite = campSite;
 	}
+	@Override
+	public String toString() {
+		return "LikeCampsite [no=" + no + ", createDate=" + createDate + ", user=" + user + ", campSite=" + campSite
+				+ "]";
+	}
 	
 	
 	
