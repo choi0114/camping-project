@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
+
 	.panel-body ul li {
 		margin: 3px 0;
 		padding-left: 20px;
@@ -127,9 +128,6 @@
 	<c:set var="submenu" value="mypage" />
 		<%@ include file="nav/nav.jsp"%>
 		<div class="scrollarea tse-scrollable">
-			<div class="tse-scrollbar">
-				<div class="drag-handle visible"></div>
-			</div>
 			<div class="tse-scroll-content scrollwrapbox" style="padding: 15px;">
 				<div class="tse-content">
 					<div id="Dash" class="dashwrap">
@@ -206,131 +204,85 @@
 										<span style="font-size: 20px;">내가 쓴 게시글</span>
 										<a href="post.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
-									<div class="panel-body">
+									<div class="panel-body" style="height: 250px; overflow: scroll;">
 										<c:choose>
-											<c:when test="${not empty boardMap }">
-												<table class="table">
-													<colgroup>
-														<col width="15%">
-														<col width="*">
-														<col width="15%">
-													</colgroup>
-													<thead>
-														<tr>
-															<th class="text-center">제목</th>
-															<th class="text-center">내용</th>
-															<th>작성일</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="free" items="${boardMap.free }">
-														<tr>
-															<td class="text-center">${free.title }</td>
-															<td class="text-center">${free.contents }</td>
-															<td>
-															<fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="joning" items="${boardMap.joning }">
-														<tr>
-															<td class="text-center">${joning.title }</td>
-															<td class="text-center">${joning.contents }</td>
-															<td>
-															<fmt:formatDate value="${joning.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="opinion" items="${boardMap.opinion }">
-														<tr>
-															<td class="text-center">${opinion.title }</td>
-															<td class="text-center">${opinion.contents }</td>
-															<td>
-															<fmt:formatDate value="${opinion.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="review" items="${boardMap.review }">
-														
-														<tr>
-															<td class="text-center">${review.title }</td>
-															<td class="text-center">${review.contents }</td>
-															<td>
-															<fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</c:when>
-											<c:otherwise>
-												<div style="text-align: center;">
-													<p>내가 작성한 게시글이 없습니다.</p>
-												</div>
-											</c:otherwise>
+										<c:when test="${not empty boardMap }">
+											<ul class="list-group">
+												<c:forEach var="free" items="${boardMap.free }">
+													<li class="list-group-item">
+														<h5>${free.title }</h5>
+														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+													</li>
+												</c:forEach>
+												<c:forEach var="joning" items="${boardMap.joning }">
+													<li class="list-group-item">
+														<h5>${joning.title }</h5>
+														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+													</li>
+												</c:forEach>
+												<c:forEach var="opinion" items="${boardMap.opinion }">
+													<li class="list-group-item">
+														<h5>${opinion.title }</h5>
+														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+													</li>
+												</c:forEach>
+												<c:forEach var="review" items="${boardMap.review }">
+													<li class="list-group-item">
+														<h5>${review.title }</h5>
+														<div class="text-right"><small><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+													</li>
+												</c:forEach>
+											</ul>
+										</c:when>
+										<c:otherwise>
+											<div style="text-align: center;">
+												<p>내가 작성한 게시글이 없습니다.</p>
+											</div>
+										</c:otherwise>
 										</c:choose>
 									</div>
 								</div>
+								
 								<div class="panel panel-default">
 									<div class="panel-heading" style="text-align: center;">
 										<span style="font-size: 20px;">내가 쓴 댓글</span>
 										<a href="comment.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more" ></a>
 									</div>
-									<div class="panel-body">
+									<div class="panel-body" style="height: 270px; overflow: scroll; position: relative;">
 										<c:choose>
-											<c:when test="${not empty boardMap }">
-												<table class="table">
-													<colgroup>
-														<col width="*">
-														<col width="15%">
-													</colgroup>
-													<thead>
-														<tr>
-															<th class="text-center">내용</th>
-															<th>작성일</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="freeComment" items="${boardMap.freeComment }">
-														<tr>
-															<td class="text-center">${freeComment.contents }</td>
-															<td>
-															<fmt:formatDate value="${freeComment.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="joningComment" items="${boardMap.joningComment }">
-														<tr>
-															<td class="text-center">${joningComment.contents }</td>
-															<td>
-															<fmt:formatDate value="${joningComment.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
-														<tr>
-															<td class="text-center">${opinionComment.contents }</td>
-															<td>
-															<fmt:formatDate value="${opinionComment.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-														<c:forEach var="reviewComment" items="${reviewComment.review }">
-														<tr>
-															<td class="text-center">${reviewComment.contents }</td>
-															<td>
-															<fmt:formatDate value="${reviewComment.createDate }" pattern="yyyy년 M월 d일"/>
-															</td>
-														</tr>
-														</c:forEach>
-													</tbody>
-												</table>
+											<c:when test="${count > 0 }">
+												<ul class="list-group">
+													<c:forEach var="freeComment" items="${boardMap.freeComment }">
+														<li class="list-group-item">
+															<h4>${freeComment.contents }</h4>
+															<div class="text-right"><small><fmt:formatDate value="${freeComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														</li>
+													</c:forEach>
+													<c:forEach var="joningComment" items="${boardMap.joningComment }">
+														<li class="list-group-item">
+															<h4>${joningComment.contents }</h4>
+															<div class="text-right"><small><fmt:formatDate value="${joningComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														</li>
+													</c:forEach>
+													<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
+														<li class="list-group-item">
+															<h4>${opinionComment.contents }</h4>
+															<div class="text-right"><small><fmt:formatDate value="${opinionComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														</li>
+													</c:forEach>
+													<c:forEach var="reviewComment" items="${boardMap.reviewComment }">
+														<li class="list-group-item">
+															<h4>${reviewComment.contents }</h4>
+															<div class="text-right"><small><fmt:formatDate value="${reviewComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														</li>
+													</c:forEach>
+												</ul>
 											</c:when>
 											<c:otherwise>
-												<div style="text-align: center;">
-													<p>내가 작성한 댓글이 없습니다.</p>
+												<div>
+													<p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">내가 작성한 댓글이 없습니다.</p>
 												</div>
-											</c:otherwise>
+											</c:otherwise>	
 										</c:choose>
 									</div>
 								</div>

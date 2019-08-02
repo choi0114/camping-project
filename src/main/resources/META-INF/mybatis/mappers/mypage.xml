@@ -111,22 +111,22 @@
 			from (
 			        select count(*) cn1
 			        from camp_free_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) free,
 			    (
 			        select count(*) cn2
 			        from camp_joining_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) joining,
 			    (
 			        select count(*) cn3
 			        from camp_opinion_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) opinion,
 			    (
 			        select count(*) cn4
 			        from camp_review_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) review
 	</select>
 	
