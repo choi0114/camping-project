@@ -1,11 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
         body {
             font-size: 12px;
             font-weight: 400;
+        }
+        
+       #resulttop .sitem .cright {
+    height: 45px;
+    cursor: pointer;
+    width: 230px;
+    display: inline-block;
+    padding-left:10px;
+    
+		}
+
+	#resulttop .sitem .fr .clink {
+	    margin-top: 10px;
+	    float:left;
+	}
+       /*  .hand{
+            position: absolute;
+ 		    left: 118px;
+    		top: 60px;
+        }
+        .clink{
+            position: absolute;
+ 		    left: 342px;
+    		top: 83px;
+   	    } */
+         
+        .sitem{
+		    border-bottom: 1px #ddd solid;
+		    padding: 15px;
+		    height: 86px;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    /* overflow: hidden; */
+		    line-height: 1.2;
+        }
+        #resulttop{
+        	 background:#fff;
+        	 max-height: 400px;
+   			 overflow-y: auto;
+        }
+        .t-arr-blue{
+            position: absolute;
+		    left: 191px;
+		    top: 11px;
+		}
+		.rewult-wrap h3{
+			background: #25a5f0;
+		    height: 40px;
+		    line-height: 40px;
+		    color: #fff;
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		    font-size: 15px;
+		}
+        .rewult-wrap{
+        	position: absolute;
+        	top: 36px;
+   			left: 1146px;
+   			z-index:1000;
+		    width: 400px;
+		    margin-left: -200px;
+		    display: block;
+		    max-height: 400px;
+		    box-shadow: 7px 7px 20px rgba(0,0,0,.28);
         }
         #container{
             width: 100%;
@@ -86,7 +151,7 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="#"><img src="../images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="#"><img src="resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
@@ -103,7 +168,7 @@
                         <li><a class="panel-collapse collapse" href="#">자유게시판</a></li>
                     </ul>
                 </li>
-                <li class="searchli">
+                <li class="searchli"> 
                     <div class="topsearch">
                        <form action="" method="get" id="layout-search-border"> <!--onsubmit-->
                            <fieldset>
@@ -115,31 +180,61 @@
                            </fieldset>
                        </form>
                     </div>
-                    <div class="rewult-wrap" style="display: none;">
-                        <img src="image/t_arr_blue.png" class="t-arr-blue">
-                        <i class="fa fa-window-close-o hand" aria-hidden="true"></i> <!--onclick 안내창 숨기기-->
+                    <div class="rewult-wrap" style="display: block;">
+                        <img src="resources/images/t_arr_blue.png" class="t-arr-blue">
+                       	<i class="far fa-window-close"></i>
+                        <i class="fa fa-window-close-o hand"></i> <!--onclick 안내창 숨기기-->
                         <h3 id="bot">
-                            <span class="fblack">''</span>
-                            <span>100건</span>
-                            검색결과가 없습니다, 이 검색되었네요
+                            <span class="fblack">'애견'</span>
+                            <span>100건</span>이 검색되었네요 <!-- 또는 검색결과가 없습니다. -->
                         </h3>
-                        <div id="resulttop" style="display: none;">
+                        <div id="resulttop" style="display: block;">
                             <div class="sitem">
-                                <img src="image/slide15.jpg" width="80" height="45" class="img-thumbnail">
+                            	<div class="imgBox" style="float: left; padding-left: 10px;">
+	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
+                            	</div>
                                 <div class="fl cright hand">
-                                    <p class="cpath">충남 > 태안군 > 남면</p>
+                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
                                     <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
                                 </div>
-                                <div class="fr clink">
+                                <div class="fr clink" style="display: inline-block;">
                                     <a href="#" class="cdirectlink">
-                                        <img src="image/direct.svg" width="26" height="26" title="#">
+                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sitem">
+                            	<div class="imgBox" style="float: left; padding-left: 10px;">
+	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
+                            	</div>
+                                <div class="fl cright hand">
+                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
+                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
+                                </div>
+                                <div class="fr clink" style="display: inline-block;">
+                                    <a href="#" class="cdirectlink">
+                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sitem">
+                            	<div class="imgBox" style="float: left; padding-left: 10px;">
+	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
+                            	</div>
+                                <div class="fl cright hand">
+                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
+                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
+                                </div>
+                                <div class="fr clink" style="display: inline-block;">
+                                    <a href="#" class="cdirectlink">
+                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>
+               </li>
+               </ul>
         </div>
     </div>
 </div>

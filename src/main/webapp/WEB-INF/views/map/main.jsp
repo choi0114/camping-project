@@ -14,12 +14,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .fwimg{
+    position: absolute;
+    left: -77px;
+    top: -101px;
+    z-index: 10;
+	}
 	  #container{
-	      width: 100%;
-	      position:static !important; 
-		    z-index: 13;
-		    background: rgba(0,0,0,.8);
-		    height: 100px;
+	     width: 100%;
+	     position:static !important; 
+		 z-index: 13;
+		 background: rgba(0,0,0,.8);
+		 height: 100px;
 	  }
     .camping{
     	padding-right:0px;
@@ -27,7 +33,7 @@
     }
     .map-box{
     	padding-right: 0px;
-    padding-left: 0px;
+    	padding-left: 0px;
 }
     }
     .wico{
@@ -878,7 +884,7 @@
 				 	    	var overlay = new kakao.maps.CustomOverlay({
 					    	    content: iwContent,
 					    	    position: marker.getPosition(), 
-					    	    xAnchor: 0.62,
+					    	    xAnchor: 0.67,
 					    	    yAnchor: 3.0
 					    	}); 
 					    	// 마커에 마우스 올리면 보이게 하고
