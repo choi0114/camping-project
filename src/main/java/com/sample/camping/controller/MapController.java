@@ -24,7 +24,7 @@ public class MapController {
 	private MapService mapService;
 	
 	@RequestMapping("/map.camp")
-	public String map(Model model , @RequestParam(value = "city",required = false , defaultValue = "Àü±¹")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
+	public String map(Model model , @RequestParam(value = "city",required = false , defaultValue = "ì „êµ­")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
 		
 		System.out.println(status);
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -46,7 +46,7 @@ public class MapController {
 	
 	@RequestMapping("/maplist.camp")
 	@ResponseBody
-	public List<CampSite> maplist(@RequestParam(value = "cp" , required = false, defaultValue = "1") int cp , @RequestParam(value = "city",required = false , defaultValue = "Àü±¹")String city
+	public List<CampSite> maplist(@RequestParam(value = "cp" , required = false, defaultValue = "1") int cp , @RequestParam(value = "city",required = false , defaultValue = "ì „êµ­")String city
 				,@RequestParam(value="status",required = false, defaultValue = "update")String status){		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -64,7 +64,7 @@ public class MapController {
 			
 	}
 	
-	@RequestMapping("/mapAllList.camp") // ¸Ê ÀüºÎ °¡Á®¿À±â (mycampingNo Á¦¿Ü) 
+	@RequestMapping("/mapAllList.camp") // ë§µ ì „ë¶€ ê°€ì ¸ì˜¤ê¸° (mycampingNo ì œì™¸) 
 	@ResponseBody
 	public List<CampSite> allCampsit(){
 		

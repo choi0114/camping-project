@@ -14,6 +14,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+	  #container{
+	      width: 100%;
+	      position:static !important; 
+		    z-index: 13;
+		    background: rgba(0,0,0,.8);
+		    height: 100px;
+	  }
     .camping{
     	padding-right:0px;
     	padding-left:0px;
