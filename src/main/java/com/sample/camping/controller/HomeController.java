@@ -26,14 +26,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/search.camp")
-	public @ResponseBody Map<String, Object> searchCount(@RequestParam("keyword") String keyword) {
+	public @ResponseBody Map<String, Object> searchCount(@RequestParam("keyword") String keyword, @RequestParam("pno") int pno) {
+
+		int begin = (pno-1) * 100 + 1;
+		int end = pno * 100;
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("keyword", keyword);
+		param.put("begin", begin);
+		param.put("end", end);
 		
-		map.put("count", homeService.getCountByKeyword(keyword));
-		map.put("items", homeService.getCampSitesByKeyword(keyword));
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("count", homeService.getCountByKeyword(keyword));
+		result.put("items", homeService.getCampSitesByKeyword(param));
 		
-		return map;
+		return result;
 	}
 	
 	
