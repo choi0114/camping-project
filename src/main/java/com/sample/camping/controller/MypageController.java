@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sample.camping.service.MypageService;
 import com.sample.camping.service.UserService;
 import com.sample.camping.vo.LikeCampsite;
+import com.sample.camping.vo.MyCampsite;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -31,23 +32,23 @@ public class MypageController {
 		Date date = new Date ( );
 		
 		User user = new User();
-		user.setId("user");
+		user.setId("admin");
 		user.setPassword("zxcv1234");
-		user.setName("user");
-		user.setNickName("user");
-		user.setEmail("user@5gcamp.com");
+		user.setName("admin");
+		user.setNickName("admin");
+		user.setEmail("admin@5gcamp.com");
 		user.setPhoneNumber("010-1111-1111");
 		user.setProfilePhoto("default.png");
-		user.setType("CLIENT");
+		user.setType("ADMIN");
 		user.setCreateDate(date);
 		user.setUsedYn("Y");
+		
+		session.setAttribute("LOGIN_USER", user);
 		
 		model.addAttribute("count" ,myPageService.getAllCommentCount(user.getId()));
 		
 		Map<String, Object> boardMap = myPageService.getBoards(user.getId());
 		model.addAttribute("boardMap", boardMap);
-
-		session.setAttribute("LOGIN_USER", user);
 		
 		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());		
 		model.addAttribute("likeCamp", likeCamp);
@@ -58,7 +59,11 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/comment.camp")
-	public String comment() {
+	public String comment(HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGUN_USER");
+		
+		
 		
 		return "mypage/comment";
 	}
@@ -70,13 +75,23 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/clip.camp")
-	public String clip() {
+	public String clip(Model model, HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());				
+		model.addAttribute("likeCamp", likeCamp);
 		
 		return "mypage/clip";
 	}
 	
 	@RequestMapping("/addCamp.camp")
-	public String tent() {
+	public String tent(Model model, HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		List<MyCampsite> addCamp = myPageService.getMyAddCampById(user.getId());
+		model.addAttribute("addCamp", addCamp);
 		
 		return "mypage/addCamp";
 	}

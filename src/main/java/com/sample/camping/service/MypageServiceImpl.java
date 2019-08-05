@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.MypageDao;
 import com.sample.camping.vo.LikeCampsite;
+import com.sample.camping.vo.MyCampsite;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -42,6 +43,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<LikeCampsite> getLikeCampsiteById(String userId) {
 		return mypageDao.getLikeCampsiteById(userId);
+	}
+	
+	@Override
+	public List<MyCampsite> getMyAddCampById(String userId) {
+		return mypageDao.getMyAddCampById(userId);
 	}
 	
 }

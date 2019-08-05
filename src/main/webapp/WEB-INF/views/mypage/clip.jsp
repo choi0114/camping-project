@@ -13,17 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-body {
-    font-size: 12px;
-    font-family: 'roboto','Noto Sans KR','malgun gothic',dotum,gothic;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    word-break: break-all;
-    height: 100%;
-    overflow: hidden;
-    letter-spacing: -0.01em;
-}
-
 .round {
     display: inline-block;
     vertical-align: top;
@@ -32,7 +21,9 @@ body {
     background: #fff;
     text-align: center;
 }
-
+.col-sm-2 {
+	padding :0px;
+}
 .round img {
 	max-width: 370px;
 }
@@ -40,122 +31,63 @@ body {
 	padding-top: 20px;
 }
 
+
 </style>
 </head>
 <body>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-2">
-			<div id="sidewrap">
+			<div id="sidewrap" style="left: 10px;">
 				<c:set var="submenu" value="clip" />
 				<%@ include file="nav/nav.jsp"%>
 			</div>
 		</div>
 		<div class="col-sm-10">
 			<div class="row">
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
+			<c:choose>
+				<c:when test="${not empty likeCamp }">
+				<c:forEach var="like" items="${likeCamp }">
+					<div class="col-sm-3 text-center">
+						<div class="round" style="margin-top: 40px;">
+							<div class="photo">
+								<a href="../detail.camp?no=${like.campSite.no }"> <img
+									src="/camping/resources/images/1.jpg" class="image-thumbnail" />
+								</a>
+							</div>
+							<div class="content">
+								<h4>
+									<c:choose>
+										<c:when test="${like.campSite.sort eq 'CAMP' }">
+										야영장
+									</c:when>
+										<c:when test="${like.campSite.sort eq 'CAR' }">
+										자동차야영장
+									</c:when>
+										<c:otherwise>
+										일반야영장
+									</c:otherwise>
+									</c:choose>
+								</h4>
+								<a href="../detail.camp?no=${like.campSite.no }">${like.campSite.name}</a>
+								<p>${like.campSite.sido }</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
+				</c:forEach>
+				</c:when>
+				<c:otherwise>
+				<div class="row" style="padding-top: 250px;">
+					<div class="text-center">
+						<p><img src="/camping/resources/images/mypage/danger.svg" style="max-width: 250px;"></p>
+						<h2>찜한 캠핑장이 없습니다.</h2>
 					</div>
 				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail"/>
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="round" style="margin-top: 40px;">
-						<div class="photo">
-							<a href="#">
-								<img src="/camping/resources/images/mypage/camp1.jpg" class="image-thumbnail" />
-							</a>
-						</div>
-						<div class="content">
-							<h4>글램핑/카라반</h4>
-							<a href="#">하비 카라반/글램핑</a>
-							<p>경북 > 청도군 > 각북면</p>
-						</div>
-					</div>
-				</div>
+				</c:otherwise>
+			</c:choose>
 			</div>
-		
 		</div>
 	</div>
 </div>
-
 </body>
 </html>

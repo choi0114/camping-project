@@ -138,13 +138,38 @@
 			a.campsite_no "campSite.no",
 			b.campsite_name "campSite.name",
 			b.campSite_sort "campSite.sort",
-			b.campSite_address "campSite.address"
+			b.campSite_address "campSite.address",
+			b.campSite_tel "campSite.tel",
+			b.campSite_photo "campSite.proto",
+			b.campSite_point "campSite.point",
+			b.campSite_sido "campSite.sido"
 		from
 			camp_like_campsite a, camp_campsites b
 		where
 			a.campsite_no = b.campsite_no
 		and 
 			a.user_id = #{value}
+	</select>
+	
+	<select id="getMyAddCampById" parameterType="string" resultType="myCampsite">
+		select 
+			a.my_campsite_no no,
+			a.my_campsite_status status,
+			a.my_campsite_create_date createDate,
+			a.user_id "user.id",
+			b.campsite_no "campSite.no",
+			b.campsite_name "campSite.name",
+			b.campsite_sort "campSite.sort",
+			b.campSite_address "campSite.address",
+			b.campsite_address "campSite.photo",
+			b.campsite_used_yn "campSite.usedYn"
+			
+		from 
+			camp_my_campsites a, camp_campsites b
+		where
+			b.my_campsite_no = a.my_campsite_no
+		and
+			user_id = #{value}
 	</select>
 	
 </mapper>

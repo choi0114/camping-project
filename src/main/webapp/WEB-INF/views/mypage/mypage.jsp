@@ -165,12 +165,19 @@
 									</div>
 									<c:choose>
 										<c:when test="${not empty likeCamp }">
-											<ul class="list-group" style="height: 250px; overflow-y: scroll;">
+											<ul class="list-group" style="height: 250px; overflow-y: scroll; overflow-x: hidden;">
 												<c:forEach var="like" items="${likeCamp }" >
-													<li class="list-group-item">
-														<a href="../detail.camp?no=${like.campSite.no }">${like.campSite.name }</a>
-														<p>${like.campSite.address }</p>
-													</li>
+												<div class="row" style="max-width: 760px;">
+													<div class="col-sm-7">
+														<li class="list-group-item">
+															<h3>이름 : <a href="../detail.camp?no=${like.campSite.no }">${like.campSite.name }</a></h3>
+															<p><span style="font-size: 18px;">장소</span> : ${like.campSite.address }</p>
+														</li>
+													</div>
+													<div class="col-sm-4">
+														<a href="../detail.camp?no=${like.campSite.no }"><img src="/camping/resources/images/1.jpg" style="width: 200px;"></a>
+													</div>
+												</div>
 												</c:forEach>
 											</ul>
 										</c:when>

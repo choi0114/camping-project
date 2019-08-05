@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.LikeCampsite;
+import com.sample.camping.vo.MyCampsite;
 
 public interface MypageService {
 
@@ -11,5 +12,7 @@ public interface MypageService {
 	Integer getAllCommentCount(String userId);
 	
 	List<LikeCampsite> getLikeCampsiteById(String userId);
+	
+	List<MyCampsite> getMyAddCampById(String userId);
 	
 }
