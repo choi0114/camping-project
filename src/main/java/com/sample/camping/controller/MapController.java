@@ -22,6 +22,32 @@ public class MapController {
 
 	@Autowired
 	private MapService mapService;
+
+	@RequestMapping("/more.camp")
+	@ResponseBody
+	public List<CampSite> MoreCampNameAndAdress(@RequestParam("result")String keyword , @RequestParam("page")Integer pagNo){
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+
+		
+		Integer start = (pagNo-1)*10+1;
+		Integer end = start+10-1;
+
+		
+		param.put("result", keyword);
+		param.put("start", start);
+		param.put("end", end);
+		
+		return mapService.getMoreCampNameAndAdress(param);
+	}
+	@RequestMapping("/nameAndAddress.camp")
+	@ResponseBody
+	public List<CampSite> nameAndAdress(@RequestParam("result") String nameAndAddress) {
+		
+		List<CampSite> resutl = mapService.getCampNameAndAdress(nameAndAddress);		
+		
+		return resutl;
+	}
 	
 	@RequestMapping("/map.camp")
 	public String map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {

@@ -3,10 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
+		
+		}
         body {
             font-size: 12px;
             font-weight: 400;
         }
+        #resultImg{position: absolute;left: 331px;top: 90px;}
         
        #resulttop .sitem .cright {
     height: 45px;
@@ -16,7 +19,6 @@
     padding-left:10px;
     
 		}
-
 	#resulttop .sitem .fr .clink {
 	    margin-top: 10px;
 	    float:left;
@@ -31,7 +33,9 @@
  		    left: 342px;
     		top: 83px;
    	    } */
-         
+         .imgresult{
+         	float:right;
+         }
         .sitem{
 		    border-bottom: 1px #ddd solid;
 		    padding: 15px;
@@ -135,7 +139,7 @@
                             color: #fff; cursor: pointer; height: 26px; width: 26px; text-align: center; outline: 0; font-size: 13px;}
     </style>
 </head>
-<body>
+<body ng-app=''>
 <div class="detail-Nav" id="container">
     <div class="gnb">
         <ul class="">
@@ -180,64 +184,109 @@
                            </fieldset>
                        </form>
                     </div>
-                    <div class="rewult-wrap" style="display: block;">
+                    <div class="rewult-wrap" style="display: none;" id="result-box">
                         <img src="resources/images/t_arr_blue.png" class="t-arr-blue">
                        	<i class="far fa-window-close"></i>
                         <i class="fa fa-window-close-o hand"></i> <!--onclick 안내창 숨기기-->
                         <h3 id="bot">
-                            <span class="fblack">'애견'</span>
-                            <span>100건</span>이 검색되었네요 <!-- 또는 검색결과가 없습니다. -->
+                            <span class="fblack"></span>
+                            <span class="count"></span><span class="sodyd">건이 검색되었네요</span><!-- 또는 검색결과가 없습니다. -->
                         </h3>
                         <div id="resulttop" style="display: block;">
-                            <div class="sitem">
-                            	<div class="imgBox" style="float: left; padding-left: 10px;">
-	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
-                            	</div>
-                                <div class="fl cright hand">
-                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink" style="display: inline-block;">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="sitem">
-                            	<div class="imgBox" style="float: left; padding-left: 10px;">
-	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
-                            	</div>
-                                <div class="fl cright hand">
-                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink" style="display: inline-block;">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="sitem">
-                            	<div class="imgBox" style="float: left; padding-left: 10px;">
-	                                <img src="resources/images/slide15.jpg" width="80" height="45" class="img-thumbnail">
-                            	</div>
-                                <div class="fl cright hand">
-                                    <p class="cpath" style="font-size: 12px;">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink" style="display: inline-block;">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="resources/images/direct.svg" width="26" height="26" title="#" style="float: left;">
-                                    </a>
-                                </div>
-                            </div>
                         </div>
+                        <div id='more-list-box' class="text-center" style="background: #fff; display: block;">
+                        	<button id="more-List-Button" class="btn btn-primary" style="width: 100%">더보기</button>
+                        </div> 
                     </div>
                </li>
                </ul>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+var prevLength;
+var page = 2;
+
+$('#more-List-Button').click(function(){
+	var resutl = $('#totalsearch').val();
+	page++;
+	
+	$.ajax({
+		type:"GET",
+		url:"more.camp",
+		data:{result:resutl,page:page},
+		dataType:"json",
+		success:(function(data){
+			$.each(data , function(index, list){
+				var content = "<div class='sitem'>";
+				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
+				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				content += "</div>";
+				content += "<div class='fl cirght hand'>";
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
+				content +="<a href='#' class='cdirectlink'>"
+		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
+				content +="</a>"
+				content += "</div>"
+				content +="</div>"
+				$('#resulttop').append(content);
+			})
+		})
+	})
+})
+$('#totalsearch').keyup(function(event){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}else{
+		$('#result-box').css('display','none');
+	}
+	
+	if(event.keyCode == 8){ // 백스페이스 할 때 마다 keyup 되는거 막기
+		if (prevLength == res.length) {
+			return false;
+		}
+	} else {
+		prevLength = res.length;
+	}
+	
+	$.ajax({
+		type:"GET",
+		url:"nameAndAddress.camp",
+		data:{result:res},
+		dataType:"json",
+		success:(function(data){
+			if(data.length < 10){
+				$('#more-list-box').hide();
+			} else {
+				$('#more-list-box').show();
+			}
+			var totalHap = data.length
+			$('.fblack').text("＇"+res+"＇"); 
+			$('#resulttop').empty();
+			$.each(data , function(index, list){
+				var content = "<div class='sitem'>";
+				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
+				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				content += "</div>";
+				content += "<div class='fl cirght hand'>";
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
+				content +="<a href='#' class='cdirectlink'>"
+		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
+				content +="</a>"
+				content += "</div>"
+				content +="</div>"
+				$('#resulttop').append(content);
+				})
+				$('.count').text(totalHap);
+			})
+		})
+	})
+	
+	
+</script>
 </body>
 </html>
 

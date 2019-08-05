@@ -403,7 +403,7 @@
                                     <c:if test="${campsite.sort eq 'CAMP' }">
                                 		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
-                                     <c:if test="${campsite.sort eq 'NOMAL' }">
+                                     <c:if test="${campsite.sort eq 'NORMAL' }">
                                 		<span class="sbjcat sbjcat2">캠핑장</span><!--캠핑장분류--> 
                                     </c:if>
                                      <c:if test="${campsite.sort eq 'CAR' }">
@@ -539,7 +539,7 @@
 								var sort;
 								if (list.sort == 'CAMP'){
 									sort = "<span class='sbjcat sbjcat3'>글램핑</span>";
-								}else if(list.sort == "NOMAL"){
+								}else if(list.sort == "NORMAL"){
 									sort = "<span class='sbjcat sbjcat2'>캠핑장</span>";
 								}else{
 									sort ="<span class='sbjcat sbjcat1'>카라반</span>";
@@ -664,10 +664,10 @@
 						var imageicon;
 						var campsort = list.sort;
 				
-						if(campsort == 'NOMAL'){
-							imageicon = 'resources/images/tent2.png';
+						if(campsort == 'NORMAL'){
+							imageicon = 'resources/images/tent2.png'; // 글램핑
 						}else if(campsort == 'CAMP'){
-							imageicon = 'resources/images/tent1.png';
+							imageicon = 'resources/images/tent1.png'; // 캠핑장
 						}else{
 							imageicon = 'resources/images/tent3.png'; // 카라반 
 						} 
@@ -849,7 +849,7 @@
 						var imageicon;
 						var campsort = list.sort;
 				
-						if(campsort == 'NOMAL'){
+						if(campsort == 'NORMAL'){
 							imageicon = 'resources/images/tent2.png';
 						}else if(campsort == 'CAMP'){
 							imageicon = 'resources/images/tent1.png';
