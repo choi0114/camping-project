@@ -22,19 +22,23 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-sm-5 col-sm-offset-2 page-head-left " id="community-sort">
+    <div class="col-sm-3 col-sm-offset-2 page-head-left " id="community-sort">
         커뮤니티 > 전체: 최신순
     </div>
-    <div class="col-sm-3 page-head-right">
+    <div class="col-sm-5 page-head-right">
        <form class="form-inline">
            <div class="form-group pull-right">
-                <select class="form-control">
-                    <option>전체</option>
+                <select class="form-control" id="boardType">
+                    <option value="1">가입인사</option>
+                    <option value="2">캠핑장 리뷰</option>
+                    <option value="3">캠핑장 의견</option>
+                    <option value="4">자유</option>
                 </select> 
-                <select class="form-control">
-                    <option>제목</option>
+                <select class="form-control" id="sort">
+                    <option value="title">제목</option>
+                    <option value="contents">내용</option>
                 </select>
-            <input class="form-control" type="text" title="통합검색" id="header_keyword" name="header_keyword" minlength="2" maxlength="10">
+            <input class="form-control" type="text" id="keyword" minlength="2" maxlength="10">
             <button class="form-control" type="button" class="btn btn-default" id="btn_header_search">검색</button>
            </div>
       </form>
@@ -225,31 +229,45 @@
     </div>
 </div>
 <script type="text/javascript">
+	function change(boardType) {
+		if(boardType == 1){
+			$("#join").addClass('active').siblings().removeClass('active');
+			$("#community-sort").text("커뮤니티 > 가입인사 게시판");
+		}
+		if(boardType == 2){
+			$("#review").addClass('active').siblings().removeClass('active');
+			$("#community-sort").text("커뮤니티 > 캠핑장리뷰 게시판");
+		}
+		if(boardType == 3){
+			$("#opinion").addClass('active').siblings().removeClass('active');
+			$("#community-sort").text("커뮤니티 > 캠핑장의견 게시판");
+		}
+		if(boardType == 4){
+			$("#free").addClass('active').siblings().removeClass('active');
+			$("#community-sort").text("커뮤니티 > 자유 게시판");
+		}
+	}
 	$(function() {
-		$(".page-head-right").hide();
-	
+		$("#btn_header_search").click(function(){
+			var boardType = $("#boardType").val();
+			var keyword = $("#keyword").val();
+			var sort = $("#sort").val();
+			if(keyword == ''){
+				alert("검색어를 입력하여 주세요");
+				return false;
+			}
+			change(boardType);
+			getPage(1, boardType, keyword, sort);
+			
+		})
+		
 		$(".list-group-item").click(function(){
 			var boardType = $(this).attr("data-board-type");
-			if(boardType == 1){
-				$("#join").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 가입인사 게시판");
-			}
-			if(boardType == 2){
-				$("#opinion").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장리뷰 게시판");
-			}
-			if(boardType == 3){
-				$("#review").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장의견 게시판");
-			}
-			if(boardType == 4){
-				$("#free").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 자유 게시판");
-			}
+			change(boardType);
 			$(this).addClass('active').siblings().removeClass('active');
 			getPage(1, boardType);
 		});
-		function getPage(pno, boardType){
+		function getPage(pno, boardType, keyword, sort){
 			if(boardType == 0) {
 				location.href= "home.camp";
 				$(".page-head-right").hide();
@@ -259,7 +277,7 @@
 				
 				$.ajax({
 					type:"GET"
-					, url:"board.camp?boardType=" + boardType + "&pno=" + pno
+					, url:"board.camp?boardType=" + boardType + "&pno=" + pno + "&keyword=" + keyword + "&sort=" + sort
 					, dataType:"json"
 					, success:function(data){
 						var boards = data.boards;
@@ -309,7 +327,7 @@
 							var navi = "";
 							var pre = pagination.page - 1;
 							if(pagination.first == false){
-								navi += '<li><a href="#" aria-label="Previous" data-pno="'+pre+'"><span aria-hidden="true">&laquo;</span></a></li>';
+								navi += '<li><a href="#" aria-label="Previous" data-pno="'+pre+'" data-Tnum="'+ boardType +'"><span aria-hidden="true">&laquo;</span></a></li>';
 								
 							}
 							
@@ -318,12 +336,12 @@
 									navi += '<li class="active"><a data-pno="'+i+'" data-Tnum="'+ boardType +'">'+i+'</a></li>';
 									
 								} else {
-									navi += '<li><a data-pno="'+i+'" data-Tnum="'+ boardType +'">'+i+'</a></li>';
+									navi += '<li><a data-pno="'+i+'" data-Tnum="'+ boardType +'" >'+i+'</a></li>';
 								}
 							}
 							var next = pagination.page + 1;
 							if(pagination.last == false){
-								navi += '<li><a href="#" aria-label="Next" data-pno="'+next+'"><span aria-hidden="true">&raquo;</span></a></li>';
+								navi += '<li><a href="#" aria-label="Next" data-pno="'+next+'" data-Tnum="'+ boardType +'"><span aria-hidden="true">&raquo;</span></a></li>';
 								
 							}
 							
@@ -335,49 +353,19 @@
 			}
 		}
 		
+		
+		
 		$("#board-page-box").on("click", "a", function(){
 			var page = $(this).attr("data-pno");
 			var boardType = $(this).attr("data-Tnum");
-			
-
-			if(boardType == 1){
-				$("#join").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 가입인사 게시판");
-			}
-			if(boardType == 2){
-				$("#opinion").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장리뷰 게시판");
-			}
-			if(boardType == 3){
-				$("#review").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장의견 게시판");
-			}
-			if(boardType == 4){
-				$("#free").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 자유 게시판");
-			}
+			change(boardType);
 			getPage(page, boardType);
 		})
 		$(".more").on("click", "a", function(){
 			var page = $(this).attr("data-pno");
 			var boardType = $(this).attr("data-Tnum");
 			
-			if(boardType == 1){
-				$("#join").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 가입인사 게시판");
-			}
-			if(boardType == 2){
-				$("#opinion").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장리뷰 게시판");
-			}
-			if(boardType == 3){
-				$("#review").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 캠핑장의견 게시판");
-			}
-			if(boardType == 4){
-				$("#free").addClass('active').siblings().removeClass('active');
-				$("#community-sort").text("커뮤니티 > 자유 게시판");
-			}
+			change(boardType);
 			getPage(page, boardType);
 		})
 		

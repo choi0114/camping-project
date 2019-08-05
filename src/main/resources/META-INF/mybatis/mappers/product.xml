@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.ProductDao">
+
+	<insert id="addProduct" parameterType="product">
+		insert into CAMP_GOODS (
+			GOODS_NO
+			, GOODS_NAME
+			, GOODS_PRICE
+			, GOODS_PHOTO
+			, GOODS_STOCK
+			, GOODS_SORT
+			, GOODS_SUMMARY
+			, GOODS_CATEGORY
+			, GOODS_LONG_SUMMARY
+			, GOODS_FORSALE
+		)
+		values (CAMP_GOODS_SEQ.nextval, #{name}, #{price}, #{photo}, #{stock}, #{goodsSort}, #{summary}, #{goodsCategory}, #{longSummary}, 'Y') 
+	</insert>
+	<select id="selectProductForsale" parameterType="Map" resultType="product">
+		
+		select
+			GOODS_NO				goodsNo
+			, GOODS_NAME			name
+			, GOODS_PRICE			price
+			, GOODS_PHOTO			photo
+			, GOODS_STOCK			stock
+			, GOODS_SORT			goodsSort
+			, GOODS_SUMMARY			summary
+			, GOODS_CATEGORY		goodsCategory
+			, GOODS_LONG_SUMMARY	longSummary
+			, GOODS_POINT			goodsPoint
+			, GOODS_LIKES			goodsLike
+			, GOODS_HATES			hate
+			, GOODS_CREATE_DATE		createDate
+			, GOODS_FORSALE			forsale
+		from (	select
+					ROW_NUMBER() OVER (ORDER BY GOODS_NO DESC) AS row_no
+					, GOODS_NO
+					, GOODS_NAME
+					, GOODS_PRICE
+					, GOODS_PHOTO
+					, GOODS_POINT
+					, GOODS_LIKES
+					, GOODS_HATES
+					, GOODS_CREATE_DATE
+					, GOODS_STOCK
+					, GOODS_SORT
+					, GOODS_SUMMARY
+					, GOODS_CATEGORY
+					, GOODS_LONG_SUMMARY
+					, GOODS_FORSALE
+				from CAMP_GOODS
+				<if test="keyword != null">
+					where GOODS_NAME = like '%' || #{keyword} || '%'
+				</if>
+				)
+		where (row_no >= #{begin} and row_no &lt;= #{end})
+		and GOODS_STOCK not in(0)
+		and GOODS_FORSALE = 'Y'
+		order by GOODS_NO asc
+		
+	</select>
+	
+	<select id="selectProduct" parameterType="Map" resultType="product">
+		
+		select
+			GOODS_NO				goodsNo
+			, GOODS_NAME			name
+			, GOODS_PRICE			price
+			, GOODS_PHOTO			photo
+			, GOODS_STOCK			stock
+			, GOODS_SORT			goodsSort
+			, GOODS_SUMMARY			summary
+			, GOODS_CATEGORY		goodsCategory
+			, GOODS_LONG_SUMMARY	longSummary
+			, GOODS_POINT			goodsPoint
+			, GOODS_LIKES			goodsLike
+			, GOODS_HATES			hate
+			, GOODS_CREATE_DATE		createDate
+			, GOODS_FORSALE			forsale
+		from (	select
+					ROW_NUMBER() OVER (ORDER BY GOODS_NO DESC) AS row_no
+					, GOODS_NO
+					, GOODS_NAME
+					, GOODS_PRICE
+					, GOODS_PHOTO
+					, GOODS_POINT
+					, GOODS_LIKES
+					, GOODS_HATES
+					, GOODS_CREATE_DATE
+					, GOODS_STOCK
+					, GOODS_SORT
+					, GOODS_SUMMARY
+					, GOODS_CATEGORY
+					, GOODS_LONG_SUMMARY
+					, GOODS_FORSALE
+				from CAMP_GOODS
+				<if test="keyword != null">
+					where GOODS_NAME like '%' || #{keyword} || '%'
+				</if>
+				)
+		where (row_no >= #{begin} and row_no &lt;= #{end})
+		order by GOODS_NO asc
+		
+	</select>
+	
+	<update id="updateProduct" parameterType="map">
+		update CAMP_GOODS
+		set 
+			<if test="start != null">
+				GOODS_FORSALE = 'Y'
+			</if>
+			<if test="end != null">
+				GOODS_FORSALE = 'N'
+			</if>
+		where GOODS_NO = #{no}
+	</update>
+	
+</mapper>

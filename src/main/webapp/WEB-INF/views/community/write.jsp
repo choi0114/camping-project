@@ -349,7 +349,7 @@
 	// textArea에 이미지 첨부
 	function pasteHTML(filepath){
 		setTimeout(function() {
-	    	var sHTML = '<img src="/camping/resources/images/community/'+filepath+'">';
+	    	var sHTML = '<img src="/camping/resources/images/editor/'+filepath+'">';
 	    	oEditors.getById["board-contents"].exec("PASTE_HTML", [sHTML]);
 		}, 5000);
 	}

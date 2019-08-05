@@ -89,27 +89,27 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int selectJoinCount() {
+	public int selectJoinCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.selectJoinCount();
+		return dao.selectJoinCount(map);
 	}
 
 	@Override
-	public int selectOpinionCount() {
+	public int selectOpinionCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.selectOpinionCount();
+		return dao.selectOpinionCount(map);
 	}
 
 	@Override
-	public int selectReviewCount() {
+	public int selectReviewCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.selectReviewCount();
+		return dao.selectReviewCount(map);
 	}
 
 	@Override
-	public int selectFreeCount() {
+	public int selectFreeCount(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.selectFreeCount();
+		return dao.selectFreeCount(map);
 	}
 
 	@Override

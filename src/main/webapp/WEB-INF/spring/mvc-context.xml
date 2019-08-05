@@ -13,13 +13,13 @@
 		/resources/???으로 시작하는 요청은 정적 컨텐츠(이미지, CSS, js)를 요구하는 요청임으로 webapp/resources/ 폴더에서 해당
 		컨텐츠를 찾아서 내려보내도록 한다.	
 	 -->
-	<mvc:resources mapping="/resources/**" location="/resources/">
-	
-	</mvc:resources>
+	<mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
 	
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
 	<context:component-scan base-package="com.sample.camping.controller" />
 </beans>

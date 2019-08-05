@@ -19,10 +19,10 @@ public interface BoardService {
 	List<Board> selectOpinionPage(Map<String, Object> map);
 	List<Board> selectReviewPage(Map<String, Object> map);
 	List<Board> selectFreePage(Map<String, Object> map);
-	int selectJoinCount();
-	int selectOpinionCount();
-	int selectReviewCount();
-	int selectFreeCount();
+	int selectJoinCount(Map<String, Object> map);
+	int selectOpinionCount(Map<String, Object> map);
+	int selectReviewCount(Map<String, Object> map);
+	int selectFreeCount(Map<String, Object> map);
 	Board selectJoinByNo(int no);
 	Board selectOpinionByNo(int no);
 	Board selectReviewByNo(int no);

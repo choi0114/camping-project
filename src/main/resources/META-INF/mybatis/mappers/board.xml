@@ -18,9 +18,19 @@
 		FROM CAMP_JOINING_BOARDS B
 		where JOINING_NO = #{value}
 	</select>
-	<select id="selectJoinCount" resultType="int">
+	<select id="selectJoinCount" resultType="int" parameterType="map">
 		SELECT count(*)	
 		FROM CAMP_JOINING_BOARDS
+		<if test="sort != null">
+			<choose>
+				<when test="sort == 'title'">
+					where JOINING_TITLE like '%' || #{keyword} || '%' 
+				</when>
+				<when test="sort == 'contents'">
+					where JOINING_CONTENTS like '%' || #{keyword} || '%' 
+				</when>
+			</choose>
+		</if>
 	</select>
 	<select id="selectJoin" resultType="board">
 		SELECT 
@@ -73,7 +83,18 @@
 				, JOINING_CREATE_DATE
 				, USER_ID
 				, JOINING_THUMBNAIL		
-			FROM CAMP_JOINING_BOARDS) B
+			FROM CAMP_JOINING_BOARDS
+			<if test="sort != null">
+				<choose>
+					<when test="sort == 'title'">
+						where JOINING_TITLE like '%' || #{keyword} || '%' 
+					</when>
+					<when test="sort == 'contents'">
+						where JOINING_CONTENTS like '%' || #{keyword} || '%' 
+					</when>
+				</choose>
+			</if>
+			) B
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 		ORDER BY row_no ASC
 	</select>
@@ -104,9 +125,19 @@
 		FROM CAMP_OPINION_BOARDS B
 		where OPINION_NO = #{value}
 	</select>
-	<select id="selectOpinionCount" resultType="int">
+	<select id="selectOpinionCount" resultType="int" parameterType="map">
 		SELECT count(*)	
 		FROM CAMP_OPINION_BOARDS
+		<if test="sort != null">
+			<choose>
+				<when test="sort == 'title'">
+					where OPINION_TITLE like '%' || #{keyword} || '%' 
+				</when>
+				<when test="sort == 'contents'">
+					where OPINION_CONTENTS like '%' || #{keyword} || '%' 
+				</when>
+			</choose>
+		</if>
 	</select>
 	<select id="selectOpinion" resultType="board">
 		SELECT 
@@ -162,7 +193,18 @@
 				, USER_ID
 				, CAMPSITE_NO
 				, OPINION_THUMBNAIL		
-			FROM CAMP_OPINION_BOARDS) B
+			FROM CAMP_OPINION_BOARDS
+			<if test="sort != null">
+				<choose>
+					<when test="sort == 'title'">
+						where OPINION_TITLE like '%' || #{keyword} || '%' 
+					</when>
+					<when test="sort == 'contents'">
+						where OPINION_CONTENTS like '%' || #{keyword} || '%' 
+					</when>
+				</choose>
+			</if>
+			) B
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 		ORDER BY row_no asc
 	</select>
@@ -193,9 +235,19 @@
 		FROM CAMP_REVIEW_BOARDS B
 		where REVIEW_NO = #{value}
 	</select>
-	<select id="selectReviewCount" resultType="int">
+	<select id="selectReviewCount" resultType="int" parameterType="map">
 		SELECT count(*)	
 		FROM CAMP_REVIEW_BOARDS
+		<if test="sort != null">
+			<choose>
+				<when test="sort == 'title'">
+					where REVIEW_TITLE like '%' || #{keyword} || '%' 
+				</when>
+				<when test="sort == 'contents'">
+					where REVIEW_CONTENTS like '%' || #{keyword} || '%' 
+				</when>
+			</choose>
+		</if>
 	</select>
 	<select id="selectReview" resultType="board">
 		SELECT 
@@ -250,7 +302,18 @@
 				, USER_ID
 				, CAMPSITE_NO
 				, REVIEW_THUMBNAIL		
-			FROM CAMP_REVIEW_BOARDS) B
+			FROM CAMP_REVIEW_BOARDS
+			<if test="sort != null">
+				<choose>
+					<when test="sort == 'title'">
+						where REVIEW_TITLE like '%' || #{keyword} || '%' 
+					</when>
+					<when test="sort == 'contents'">
+						where REVIEW_CONTENTS like '%' || #{keyword} || '%' 
+					</when>
+				</choose>
+			</if>
+			) B
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 		ORDER BY row_no asc
 	</select>
@@ -280,9 +343,19 @@
 		FROM CAMP_FREE_BOARDS B
 		where FREE_NO = #{value}
 	</select>
-	<select id="selectFreeCount" resultType="int">
+	<select id="selectFreeCount" resultType="int" parameterType="map">
 		SELECT count(*)	
 		FROM CAMP_FREE_BOARDS
+		<if test="sort != null">
+			<choose>
+				<when test="sort == 'title'">
+					where FREE_TITLE like '%' || #{keyword} || '%' 
+				</when>
+				<when test="sort == 'contents'">
+					where FREE_CONTENTS like '%' || #{keyword} || '%' 
+				</when>
+			</choose>
+		</if>
 	</select>
 	<select id="selectFree" resultType="board">
 		SELECT 
@@ -333,7 +406,18 @@
 				, FREE_CREATE_DATE
 				, USER_ID
 				, FREE_THUMBNAIL		
-			FROM CAMP_FREE_BOARDS) B
+			FROM CAMP_FREE_BOARDS
+			<if test="sort != null">
+				<choose>
+					<when test="sort == 'title'">
+						where FREE_TITLE like '%' || #{keyword} || '%' 
+					</when>
+					<when test="sort == 'contents'">
+						where FREE_CONTENTS like '%' || #{keyword} || '%' 
+					</when>
+				</choose>
+			</if>
+			) B
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 		ORDER BY row_no asc
 	</select>

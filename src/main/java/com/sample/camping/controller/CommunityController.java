@@ -96,7 +96,7 @@ public class CommunityController {
 		Board board = new Board();
 		BeanUtils.copyProperties(boardForm, board);
 		MultipartFile mf = boardForm.getThumbnailUploadFile();
-		String  profileImageSaveDirectory = "C:/Users/RealBird/git/camping-project1/src/main/webapp/resources/images/community";
+		String  profileImageSaveDirectory = "C:/Users/RealBird/git/camping-project/src/main/webapp/resources/images/community";
 		if(!mf.isEmpty()) {
 			String filename = mf.getOriginalFilename();
 				
@@ -184,7 +184,9 @@ public class CommunityController {
 	}
 	@GetMapping("/board.camp")
 	public @ResponseBody Map<String , Object> board(@RequestParam int boardType,
-													@RequestParam (value = "pno", required = false, defaultValue = "1") int pno) {
+													@RequestParam (value = "pno", required = false, defaultValue = "1") int pno,
+													@RequestParam String keyword,
+													@RequestParam String sort) {
 		Map<String , Object> map = new HashMap<String, Object>();
 		
 		Map<String , Object> selectmap = new HashMap<String, Object>();
@@ -192,10 +194,12 @@ public class CommunityController {
 		int end = pno*6;
 		selectmap.put("begin", begin);
 		selectmap.put("end", end);
+		selectmap.put("keyword", keyword);
+		selectmap.put("sort", sort);
 		map.put("boardType", boardType);
 		
 		if(boardType == 1) {
-			int records = boardService.selectJoinCount();
+			int records = boardService.selectJoinCount(selectmap);
 			Pagination pagination = new Pagination(pno, 6, records);
 			map.put("pagination", pagination);
 			map.put("boards", boardService.selectJoinPage(selectmap));
@@ -203,7 +207,7 @@ public class CommunityController {
 			return map;
 		}
 		if(boardType == 2) {
-			int records = boardService.selectReviewCount();
+			int records = boardService.selectReviewCount(selectmap);
 			Pagination pagination = new Pagination(pno, 6, records);
 			map.put("pagination", pagination);
 			map.put("boards", boardService.selectReviewPage(selectmap));
@@ -211,7 +215,7 @@ public class CommunityController {
 			
 		}
 		if(boardType == 3) {
-			int records = boardService.selectOpinionCount();
+			int records = boardService.selectOpinionCount(selectmap);
 			Pagination pagination = new Pagination(pno, 6, records);
 			map.put("pagination", pagination);
 			map.put("boards", boardService.selectOpinionPage(selectmap));
@@ -219,7 +223,7 @@ public class CommunityController {
 			
 		}
 		if(boardType == 4) {
-			int records = boardService.selectFreeCount();
+			int records = boardService.selectFreeCount(selectmap);
 			Pagination pagination = new Pagination(pno, 6, records);
 			map.put("pagination", pagination);
 			map.put("boards", boardService.selectFreePage(selectmap));
