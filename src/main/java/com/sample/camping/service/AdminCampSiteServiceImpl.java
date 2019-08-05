@@ -1,6 +1,7 @@
 package com.sample.camping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,13 +18,12 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 	
 	@Override
 	public void addCampSite(CampSite campSite) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public List<CampSite> getCampingSitesAll() {
-		// TODO Auto-generated method stub
+	public List<CampSite> getCampingSitesAll(Map<String, Object> param) {
+
 		return null;
 	}
 	

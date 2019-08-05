@@ -48,6 +48,7 @@
             width: 1200px;
             margin: 0 auto;
             position: absolute;
+            
             left: 50%;
             margin-left: -600px;
             top: 45px;
@@ -81,9 +82,16 @@
 		            <li><a href="#" id="open-login-modal">로그인</a></li>
             	</c:when>
             	<c:otherwise>
-		            <li><a href="#">마이페이지</a></li>
-		            <li><a href="#"><span style="color: #25a5f0">안녕하세요!${LOGIN_USER.id }님</span></a></li>
-		            <li><a href="logout.camp">로그아웃</a></li>
+		            <c:choose>
+			            <c:when test="${LOGIN_USER.id eq 'admin'}">
+				            <li><a href="admin/list.camp">관리자페이지</a></li>
+			            </c:when>
+			            <c:otherwise>
+				            <li><a href="#">마이페이지</a></li>
+			            </c:otherwise>
+		            </c:choose>
+			            <li><a href="#"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
+			            <li><a href="logout.camp">로그아웃</a></li>
             	</c:otherwise>
             </c:choose>
         </ul>
@@ -330,12 +338,17 @@ $("#btn-login").click(function() {
 	
 	$.ajax({
 		type:"POST",
-		url:"",
-		data:{},
+		url:"login.camp",
+		data:{id:id, password:pws},
 		dataType:"text",
 		success:function(result) {
-			
+			if(result == "success"){
+				location.href="home.camp";
+			} else {
+				alert("로그인 실패");
+			}
 		}
+		
 	});
 	
 })
@@ -343,9 +356,6 @@ $("#btn-login").click(function() {
 	
 }) */
 	
-	
-	
-
 	$('#open-login-modal').click(function() {
 		$("#login-modal").modal("show")
 	});
@@ -359,7 +369,7 @@ $("#btn-login").click(function() {
 	});
 	
 	var empJ = /\s/g;
-	var idJ = /^[a-zA-Z0-9]{6,}$/;
+	var idJ = /^[a-zA-Z0-9]{4,}$/;
 	var pwJ = /^[a-zA-Z0-9]{8,}$/;
 	var nameJ = /^[가-힣]{2,6}$/;
 	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
