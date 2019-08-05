@@ -44,6 +44,7 @@
         .main-wrap #form-box{position: relative; left: 115px;}
         .main-wrap .inkey{font-size: 17px; text-align: center; padding-top: 15px; margin-left: 60px;}
         .main-wrap .inkey .link-inkey{color: #fff; margin: 0px 10px; opacity: .7; font-weight: bold;}
+        .main-wrap .inkey .link-inkey:hover{opacity: 1;}
         .main-wrap .search-form {
             background: #fff;
             border-radius: 60px;
@@ -242,8 +243,11 @@
    		#search-result li div.cright .sbjval {font-weight: 500; font-weight: bold;}
    		#search-result li div.clink {float: right; width: 10%;}
    		#search-result li div.clink img {margin-top: 9px;}
-    	
     	.outlight{box-shadow: 0 0 60px rgba(51,195,255,.6);}
+    	.blue{color: #32a1ff; font-weight: bold;}
+    	
+    	#btn-more{width: 100%; height: 40px; font-weight: bold;}
+   		#search-result .more-button{text-align: center;}
     </style>
 </head>
 
@@ -270,7 +274,8 @@
 	                                <fieldset>
 	                                    <legend>통합검색 폼</legend>
 	                                    <input autocomplete="off" type="text" id="search-box" name="" maxlength="14"
-	                                    placeholder="캠핑장 검색" class="search-input keyword ">
+	                                    placeholder="캠핑장 검색"  onfocus="this.placeholder = ''"
+	                                    onblur="this.placeholder = '캠핑장 검색'" class="search-input keyword ">
 	                                    <a class="keyword-del hand" style="display: none;">
 	                                        <img src="/camping/resources/images/x.svg" width="26px" height="26px">
 	                                    </a>
@@ -282,12 +287,12 @@
 	                        </div>
 	                    </div>
 	                    <div class="col-sm-12 inkey">
-	                        <a href="#" class="link-inkey">#무료</a>
-	                        <a href="#" class="link-inkey">#숲속</a>
-	                        <a href="#" class="link-inkey">#무료야영장</a>
-	                        <a href="#" class="link-inkey">#가평</a>
-	                        <a href="#" class="link-inkey">#그늘</a>
-	                        <a href="#" class="link-inkey">#양양</a>
+	                        <a class="link-inkey">#무료</a>
+	                        <a class="link-inkey">#숲속</a>
+	                        <a class="link-inkey">#무료야영장</a>
+	                        <a class="link-inkey">#가평</a>
+	                        <a class="link-inkey">#그늘</a>
+	                        <a class="link-inkey">#양양</a>
 	                    </div>
 	                    <ul id="search-result" class="list-group results" >
 	                    	
@@ -734,10 +739,11 @@
  	*/
  	
  	/* 검색창 */
+ 	var pno = 1;
  	var dt = new Date();
  	var massage = ['추천검색 결과와 실제 결과는 다를수 있어요','검색어 입력 후 엔터 또는 버튼 클릭하세요', '행정구역 검색시 두글자만 입력(예: 부산)','읍면동 이름으로 검색 가능합니다',
 			'저는 구글이 아닙니다. 살살 검색해주세요','하단 검색 추천과 실제 검색결과는 다를수 있어요','다음에 또 만나요','우리 같이 캠핑갈까요?','응수쌤 천재입니다',
-			'검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?','오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay()-3)+'일 입니다.','JHTA로 오세요~',
+			'검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?','오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay()+4)+'일 입니다.','JHTA로 오세요~',
 			'현재 시간은 '+dt.getHours()+'시 '+dt.getMinutes()+'분 입니다.','찾는 캠핑장이 없으면 관리자를 조르세요', '만든이: 지민, 은정, 동건, 수정, 혜인, 본경'];
 
  	
@@ -754,15 +760,29 @@
 		$("#search-result").empty();
 		if ($("#search-box").val().length == 0) {
 			$(".keyword-del").hide();
+			$("random-massage").html('').hide();
+			$("#random-massage").text(massage[Math.round(Math.random()*massage.length)]);
 			return;
 		}
+		
 		$(".keyword-del").show();
 		var keyword = $("#search-box").val();
 		
+		searchFind(keyword, 1);
+		
+	})
+	
+	$("#btn-more").click(function() {
+		var keyword = $("#search-box").val();
+		pno++;
+		searchFind(keyword, pno);
+	})
+	
+	function searchFind(keyword, pno) {
 		$.ajax ({
 			type:"get",
 			url:"search.camp",
-			data:{keyword:keyword},
+			data:{keyword:keyword, pno:pno},
 			dataType:"json",
 			success:function(result) {
 				$("#random-massage").html('<span class="b blue">'+"'"+keyword+"'"+'</span> <span class="b">'+result.count+'건</span> 이 검색되었네요');
@@ -776,28 +796,55 @@
             		html += '</div>';
             		html += '<a href="#" class="cdirectlink">';
             		html += '<div class="col-xs-7 cright hand">';
-            		html += '<p class="cpath">충남 > 태<span class="highlight">안</span> 군 > 남면</p>';
-            		html += '<p class="sbjval">'+camp.name+'</p>';
+            		if (camp.name.indexOf(keyword) >= 0){
+            			address = camp.address.replace(keyword, '<span  class="highlight">'+keyword+'</span>')
+            			name = camp.name.replace(keyword, '<span  class="highlight">'+keyword+'</span>')
+	            		html += '<p class="cpath">'+address+'> 태안군 > 남면</p>';
+	            		html += '<p class="sbjval">'+name+'</p>';            			
+            		} else {
+	            		html += '<p class="cpath">'+address+'> 태안군 > 남면</p>';
+	            		html += '<p class="sbjval">'+camp.name+'</p>';            			
+            		}
             		html += '</div>';
             		html += '</a>';
             		html += '<div class="col-xs-2 clink">';
             		html += '<a href="#" class="cdirectlink">';
-            		html += '<img alt="" src="/camping/resources/images/direct.svg" width="26" height="26" title="몽산포 청솔 오토캠핑장">';
+            		html += '<img alt="" src="/camping/resources/images/direct.svg" width="26" height="26" title='+camp.name+'>';
             		html += '</a>';
             		html += '</div>';
             		html += '</div>';
             		html += '</li>';
             		
             		$("#search-result").append(html);
-				})
+            		
+				})				
+				var html2 = '<li class="list-group-item more-button"><button type="button" id="btn-more" class="btn btn-info">더보기</button></li>';
+								
+           		$("#search-result li:last").after(html2);
+			
+           		$("#btn-more").hide();
+           		if(result.count >= 100) {
+           			$("#btn-more").show();
+           		}
 			}
 		})
-	})
-	
+	}
 	$(".keyword-del").click(function() {
 		$("#search-box").val('');
 		$(".keyword-del").hide();
+		$(".list-group-item").hide();
 	})
+	
+	/* 해시태그 */
+	$('.link-inkey').click(function() {
+		var key = $(this).text();
+			key = key.replace("#", "");
+		$("#search-box").val(key);
+		$("#search-box").focus();
+		searchFind(key);
+		
+		$(".keyword-del").show();
+	});
 
 	function sido(name) {
 		alert(name);

@@ -1,6 +1,7 @@
 package com.sample.camping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	@Override
-	public List<CampSite> getCampSitesByKeyword(String keyword) {
-		return homeDao.getCampSitesByKeyword(keyword);
+	public List<CampSite> getCampSitesByKeyword(Map<String, Object> map) {
+		return homeDao.getCampSitesByKeyword(map);
 	}
 }
