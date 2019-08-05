@@ -94,7 +94,6 @@
             height: 60px;
             border-radius: 60px;
             overflow: hidden;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, .4);
             width: 115px;
             line-height: 60px;
             margin-right: 10px;
@@ -123,7 +122,7 @@
             margin: 0;
             padding: 0;
         }
-        a {text-decoration: none;}
+        .container a {text-decoration: none;}
         .keyword{box-shadow: none !important;}
 
         legend {
@@ -230,6 +229,21 @@
     	#comm dd a {color: #5f6273; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
     				display: inline-block; width: 244px;}
     	#comm .comment {font-size: 11px; color: #ff6000; float: right;}
+    	
+    	/* 모달 */
+    	#search-result {width: 635px; max-height: 390px; overflow: hidden; overflow-y: auto; margin: 70px; position: absolute;
+    					right: 37px; border-radius: 10px; z-index: 10;}
+   		#search-result li {padding: 13px; border-bottom: 1px #eee solid; line-height: 1.2;}
+   		#search-result .list-image {width: auto;}
+   		#search-result li img {float: left; border-radius: 4px;}
+   		#search-result li div.cright {font-size: 1rem; float: left; width: 410px; height: 45px; padding: 0px;}
+   		#search-result li div.cright .cpath {font-size: 12px; color: #3EA9CD; margin: 3px 0 0 0; font-weight: bold;}
+   		.highlight {background-color: yellow; border-radius: .125em;}
+   		#search-result li div.cright .sbjval {font-weight: 500; font-weight: bold;}
+   		#search-result li div.clink {float: right; width: 10%;}
+   		#search-result li div.clink img {margin-top: 9px;}
+    	
+    	.outlight{box-shadow: 0 0 60px rgba(51,195,255,.6);}
     </style>
 </head>
 
@@ -244,19 +258,20 @@
 	            <div class="row main-wrap">
 	                <div class="col-sm-12">
 	                    <div class="main-search">
-	                        <h2>오늘은 어디로 가볼까?</h2>
+	                        <h2 id="random-massage">오늘은 어디로 가볼까?</h2>
 	                    </div>
 	                    <div id="form-box" >
 	                        <div class="col-sm-3 btn-sido hand">
 	                            	지역별
 	                            <i class="glyphicon glyphicon-chevron-down" aria-hidden="true"></i>
 	                        </div>
-	                        <div class="col-sm-9 search-form" style="box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 30px;">
+	                        <div class="col-sm-9 search-form">
 	                            <form method="" action="" id="">
 	                                <fieldset>
 	                                    <legend>통합검색 폼</legend>
-	                                    <input autocomplete="off" type="text" id="" name="" maxlength="14" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" class="search-input keyword " value="">
-	                                    <a class="keyword-del hand">
+	                                    <input autocomplete="off" type="text" id="search-box" name="" maxlength="14"
+	                                    placeholder="캠핑장 검색" class="search-input keyword ">
+	                                    <a class="keyword-del hand" style="display: none;">
 	                                        <img src="/camping/resources/images/x.svg" width="26px" height="26px">
 	                                    </a>
 	                                    <button type="submit" class="btn-search">
@@ -274,6 +289,9 @@
 	                        <a href="#" class="link-inkey">#그늘</a>
 	                        <a href="#" class="link-inkey">#양양</a>
 	                    </div>
+	                    <ul id="search-result" class="list-group results" >
+	                    	
+	                    </ul>
 	                </div>
 	            </div>
 	            <div class="row flex-wrapper">
@@ -706,6 +724,80 @@
     </div>
 </body>
 <script type="text/javascript">
+
+	/* 지역별 버튼 눌렀을 때 스크롤 내려가기
+		$('.btn-sido').click(function() {
+	    	viewscrollwrap.animate({
+	        	scrollTop: $("#camping-map").offset().top
+	   	 	}, 600);
+		});
+ 	*/
+ 	
+ 	/* 검색창 */
+ 	var dt = new Date();
+ 	var massage = ['추천검색 결과와 실제 결과는 다를수 있어요','검색어 입력 후 엔터 또는 버튼 클릭하세요', '행정구역 검색시 두글자만 입력(예: 부산)','읍면동 이름으로 검색 가능합니다',
+			'저는 구글이 아닙니다. 살살 검색해주세요','하단 검색 추천과 실제 검색결과는 다를수 있어요','다음에 또 만나요','우리 같이 캠핑갈까요?','응수쌤 천재입니다',
+			'검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?','오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay()-3)+'일 입니다.','JHTA로 오세요~',
+			'현재 시간은 '+dt.getHours()+'시 '+dt.getMinutes()+'분 입니다.','찾는 캠핑장이 없으면 관리자를 조르세요', '만든이: 지민, 은정, 동건, 수정, 혜인, 본경'];
+
+ 	
+ 	
+	$("#search-box").focus(function() {
+		$(".search-form").addClass('outlight');
+		$("#random-massage").text(massage[Math.round(Math.random()*massage.length)]);
+	}).blur(function() {
+		$(".search-form").removeClass('outlight');
+		$("#random-massage").text(massage[Math.round(Math.random()*massage.length)]);
+	})
+	
+	$("#search-box").keyup(function() {
+		$("#search-result").empty();
+		if ($("#search-box").val().length == 0) {
+			$(".keyword-del").hide();
+			return;
+		}
+		$(".keyword-del").show();
+		var keyword = $("#search-box").val();
+		
+		$.ajax ({
+			type:"get",
+			url:"search.camp",
+			data:{keyword:keyword},
+			dataType:"json",
+			success:function(result) {
+				$("#random-massage").html('<span class="b blue">'+"'"+keyword+"'"+'</span> <span class="b">'+result.count+'건</span> 이 검색되었네요');
+				
+				$.each(result.items, function(index,camp) {
+					
+					var html = '<li class="list-group-item">';
+            		html += '<div class="row">';
+            		html += '<div class="col-xs-3 list-image">';
+            		html += '<img alt="" src="/camping/resources/images/slide1.jpg" width="80" height="45">';
+            		html += '</div>';
+            		html += '<a href="#" class="cdirectlink">';
+            		html += '<div class="col-xs-7 cright hand">';
+            		html += '<p class="cpath">충남 > 태<span class="highlight">안</span> 군 > 남면</p>';
+            		html += '<p class="sbjval">'+camp.name+'</p>';
+            		html += '</div>';
+            		html += '</a>';
+            		html += '<div class="col-xs-2 clink">';
+            		html += '<a href="#" class="cdirectlink">';
+            		html += '<img alt="" src="/camping/resources/images/direct.svg" width="26" height="26" title="몽산포 청솔 오토캠핑장">';
+            		html += '</a>';
+            		html += '</div>';
+            		html += '</div>';
+            		html += '</li>';
+            		
+            		$("#search-result").append(html);
+				})
+			}
+		})
+	})
+	
+	$(".keyword-del").click(function() {
+		$("#search-box").val('');
+		$(".keyword-del").hide();
+	})
 
 	function sido(name) {
 		alert(name);

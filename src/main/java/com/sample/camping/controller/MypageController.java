@@ -1,6 +1,7 @@
 package com.sample.camping.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sample.camping.service.MypageService;
+import com.sample.camping.service.UserService;
+import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -19,36 +22,41 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService myPageService;
+	@Autowired
+	private UserService useService;
 	
 	@RequestMapping("/mypage.camp")
 	public String mypage(HttpSession session, Model model) {
 		
+		Date date = new Date ( );
 		
 		User user = new User();
-		user.setId("admin");
+		user.setId("user");
+		user.setPassword("zxcv1234");
+		user.setName("user");
+		user.setNickName("user");
+		user.setEmail("user@5gcamp.com");
+		user.setPhoneNumber("010-1111-1111");
+		user.setProfilePhoto("default.png");
+		user.setType("CLIENT");
+		user.setCreateDate(date);
+		user.setUsedYn("Y");
 		
 		model.addAttribute("count" ,myPageService.getAllCommentCount(user.getId()));
 		
 		Map<String, Object> boardMap = myPageService.getBoards(user.getId());
 		model.addAttribute("boardMap", boardMap);
-		
-		user.setName("admin");
-		user.setEmail("admin@5gcamp.com");
-		user.setNickName("admin");
-		user.setPassword("zxcv1234");
-		user.setPhoneNumber("010-1111-1111");
-		user.setProfilePhoto("default.png");
-		user.setType("ADMIN");
-		
-		Date date = new Date ( );
-		user.setCreateDate(date);
-
-		user.setUsedYn("Y");
 
 		session.setAttribute("LOGIN_USER", user);
 		
+		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());		
+		model.addAttribute("likeCamp", likeCamp);
+		
+		System.out.println(likeCamp);
+		
 		return "mypage/mypage";
 	}
+	
 	@RequestMapping("/comment.camp")
 	public String comment() {
 		

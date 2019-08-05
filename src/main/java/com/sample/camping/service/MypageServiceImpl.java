@@ -1,12 +1,14 @@
 package com.sample.camping.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.MypageDao;
+import com.sample.camping.vo.LikeCampsite;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -35,6 +37,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public Integer getAllCommentCount(String userId) {
 		return mypageDao.getAllCommentCount(userId);
+	}
+	
+	@Override
+	public List<LikeCampsite> getLikeCampsiteById(String userId) {
+		return mypageDao.getLikeCampsiteById(userId);
 	}
 	
 }

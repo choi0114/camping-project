@@ -111,23 +111,40 @@
 			from (
 			        select count(*) cn1
 			        from camp_free_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) free,
 			    (
 			        select count(*) cn2
 			        from camp_joining_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) joining,
 			    (
 			        select count(*) cn3
 			        from camp_opinion_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) opinion,
 			    (
 			        select count(*) cn4
 			        from camp_review_comments
-			        where user_id = #{userId}
+			        where user_id = #{value}
 			    ) review
+	</select>
+	
+	<select id="getLikeCampsiteById" parameterType="string" resultType="likeCampsite">
+		select 
+			a.like_campsite_no no,
+			a.like_campsite_create_date createDate,
+			a.user_id "user.id",
+			a.campsite_no "campSite.no",
+			b.campsite_name "campSite.name",
+			b.campSite_sort "campSite.sort",
+			b.campSite_address "campSite.address"
+		from
+			camp_like_campsite a, camp_campsites b
+		where
+			a.campsite_no = b.campsite_no
+		and 
+			a.user_id = #{value}
 	</select>
 	
 </mapper>
