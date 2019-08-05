@@ -7,6 +7,7 @@ import com.sample.camping.vo.FreeBoardComment;
 import com.sample.camping.vo.JoningBoard;
 import com.sample.camping.vo.JoningBoardComment;
 import com.sample.camping.vo.LikeCampsite;
+import com.sample.camping.vo.MyCampsite;
 import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.OpinionComment;
 import com.sample.camping.vo.ReviewBoard;
@@ -27,5 +28,7 @@ public interface MypageDao {
 	Integer getAllCommentCount(String userId);
 	
 	List<LikeCampsite> getLikeCampsiteById(String userId);
+	
+	List<MyCampsite> getMyAddCampById(String userId);
 	
 }

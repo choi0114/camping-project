@@ -8,6 +8,8 @@ public class MyCampsite {
 	private String campsitesStatus;
 	private Date createDate;
 	private User user;
+	private CampSite campSite;
+	
 	public Integer getNo() {
 		return no;
 	}
@@ -32,7 +34,11 @@ public class MyCampsite {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+	public CampSite getCampSite() {
+		return campSite;
+	}
+	public void setCampSite(CampSite campSite) {
+		this.campSite = campSite;
+	}
 	
 }

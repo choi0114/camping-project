@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sample.camping.service.MypageService;
 import com.sample.camping.service.UserService;
 import com.sample.camping.vo.LikeCampsite;
+import com.sample.camping.vo.MyCampsite;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -31,14 +32,14 @@ public class MypageController {
 		Date date = new Date ( );
 		
 		User user = new User();
-		user.setId("user");
+		user.setId("admin");
 		user.setPassword("zxcv1234");
-		user.setName("user");
-		user.setNickName("user");
-		user.setEmail("user@5gcamp.com");
+		user.setName("admin");
+		user.setNickName("admin");
+		user.setEmail("admin@5gcamp.com");
 		user.setPhoneNumber("010-1111-1111");
 		user.setProfilePhoto("default.png");
-		user.setType("CLIENT");
+		user.setType("ADMIN");
 		user.setCreateDate(date);
 		user.setUsedYn("Y");
 		
@@ -70,13 +71,47 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/clip.camp")
-	public String clip() {
+	public String clip(Model model) {
+		
+		Date date = new Date ( );
+		
+		User user = new User();
+		user.setId("admin");
+		user.setPassword("zxcv1234");
+		user.setName("admin");
+		user.setNickName("admin");
+		user.setEmail("admin@5gcamp.com");
+		user.setPhoneNumber("010-1111-1111");
+		user.setProfilePhoto("default.png");
+		user.setType("ADMIN");
+		user.setCreateDate(date);
+		user.setUsedYn("Y");
+		
+		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());				
+		model.addAttribute("likeCamp", likeCamp);
 		
 		return "mypage/clip";
 	}
 	
 	@RequestMapping("/addCamp.camp")
-	public String tent() {
+	public String tent(Model model) {
+		
+		Date date = new Date ( );
+		
+		User user = new User();
+		user.setId("admin");
+		user.setPassword("zxcv1234");
+		user.setName("admin");
+		user.setNickName("admin");
+		user.setEmail("admin@5gcamp.com");
+		user.setPhoneNumber("010-1111-1111");
+		user.setProfilePhoto("default.png");
+		user.setType("ADMIN");
+		user.setCreateDate(date);
+		user.setUsedYn("Y");
+		
+		List<MyCampsite> addCamp = myPageService.getMyAddCampById(user.getId());
+		model.addAttribute("addCamp", addCamp);
 		
 		return "mypage/addCamp";
 	}

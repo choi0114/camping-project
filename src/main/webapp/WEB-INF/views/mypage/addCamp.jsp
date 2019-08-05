@@ -20,7 +20,16 @@
 	<c:set var="submenu" value="addCamp" />
 		<%@ include file="nav/nav.jsp"%>
 		<div class="container">
-			
+			<div class="row">
+				<c:forEach var="add" items="${addCamp }">
+					<div class="col-sm-4 text-center">
+						<div class="title">
+							<h3>${add.no }</h3>
+						</div>
+						<div class=""></div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 	
