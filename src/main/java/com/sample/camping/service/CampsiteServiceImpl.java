@@ -19,6 +19,7 @@ public class CampsiteServiceImpl implements CampsitesService {
 	public CampSite getCampSiteByNo(int no) {
 		return campsiteDao.getCampSiteByNo(no);
 	}
+	
 	@Override
 	public List<CampSite> selectCampsite(Map<String, Object> map) {
 		return (List<CampSite>) campsiteDao.selectCampsite(map);
