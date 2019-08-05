@@ -5,7 +5,7 @@ import java.util.Date;
 public class MyCampsite {
 
 	private Integer no;
-	private String campsitesStatus;
+	private String status;
 	private Date createDate;
 	private User user;
 	private CampSite campSite;
@@ -16,11 +16,11 @@ public class MyCampsite {
 	public void setNo(Integer no) {
 		this.no = no;
 	}
-	public String getCampsitesStatus() {
-		return campsitesStatus;
+	public String getstatus() {
+		return status;
 	}
-	public void setCampsitesStatus(String campsitesStatus) {
-		this.campsitesStatus = campsitesStatus;
+	public void setstatus(String status) {
+		this.status = status;
 	}
 	public Date getCreateDate() {
 		return createDate;

@@ -132,7 +132,6 @@
 .round img {
 	max-width: 370px;
 }
-.col-sm-5{}
 </style>
 </head>
 
@@ -166,7 +165,7 @@
 									</div>
 									<c:choose>
 										<c:when test="${not empty likeCamp }">
-											<ul class="list-group" style="height: 250px; overflow-y: scroll;">
+											<ul class="list-group" style="height: 250px; overflow-y: scroll; overflow-x: hidden;">
 												<c:forEach var="like" items="${likeCamp }" >
 												<div class="row" style="max-width: 760px;">
 													<div class="col-sm-7">

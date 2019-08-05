@@ -160,8 +160,10 @@
 			b.campsite_no "campSite.no",
 			b.campsite_name "campSite.name",
 			b.campsite_sort "campSite.sort",
+			b.campSite_address "campSite.address",
 			b.campsite_address "campSite.photo",
-			b.camlsite_sido "campSite.sido"
+			b.campsite_used_yn "campSite.usedYn"
+			
 		from 
 			camp_my_campsites a, camp_campsites b
 		where

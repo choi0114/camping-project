@@ -19,16 +19,32 @@
 	<div id="sidewrap">
 	<c:set var="submenu" value="addCamp" />
 		<%@ include file="nav/nav.jsp"%>
-		<div class="container">
-			<div class="row">
-				<c:forEach var="add" items="${addCamp }">
-					<div class="col-sm-4 text-center">
-						<div class="title">
-							<h3>${add.no }</h3>
+		<div class="container" style="margin-left: 350px;">
+			<div class="page-header">
+				<h2>내가 등록한 캠핑장</h2>
+			</div>
+			<div class="page-body">
+				<c:choose>
+					<c:when test="${not empty addCamp }">
+						<ul class="list-group" style="height: 750px; overflow-y: scroll;">
+							<c:forEach var="add" items="${addCamp }" >
+								<li class="list-group-item">
+									<h4>이름 : <a href="../detail.camp?no=${add.campSite.no }">${add.campSite.name }</a></h4>
+									<p>위치 : ${add.campSite.address }</p>
+									<p>등록 여부 : ${add.status } | 현재 사용여부 : ${add.campSite.usedYn }</p>
+								</li>
+							</c:forEach>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<div class="row" style="padding-top: 250px;">
+						<div class="text-center">
+							<p><img src="/camping/resources/images/mypage/danger.svg" style="max-width: 250px;"></p>
+							<h2>등록한 캠핑장이 없습니다.</h2>
 						</div>
-						<div class=""></div>
 					</div>
-				</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
