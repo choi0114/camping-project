@@ -384,7 +384,7 @@ $("#btn-login").click(function() {
 			$('#id_check').css('color', 'red');
 		}
 	});
-	
+
 	$('#inputPws').blur(function(){
 		if(pwJ.test($('#inputPws').val())){
 			console.log('true');

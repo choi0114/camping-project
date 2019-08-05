@@ -22,7 +22,8 @@
 		  user_nick_name as nickName,
 		  user_email as email,
 		  user_phone_number as phoneNumber,
-		  user_type as type
+		  user_type as type,
+		  user_profile_photo as profilePhoto
 		from
 		  camp_users
 		where
@@ -38,7 +39,8 @@
 		  user_nick_name as nickName,
 		  user_email as email,
 		  user_phone_number as phoneNumber,
-		  user_type as type
+		  user_type as type,
+		  user_profile_photo as profilePhoto
 		from
 		  camp_users
 		where
