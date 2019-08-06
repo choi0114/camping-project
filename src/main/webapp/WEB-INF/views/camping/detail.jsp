@@ -28,7 +28,7 @@
 					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }"/></p>
 				</div>
 				<div class="col-sm-6 text-right">
-					<p>강원 > 삼척시 > 근덕면</p>
+					<p>${campsite.sido }</p>
 				</div>
 			</div>
 			<div class="row">
@@ -141,90 +141,14 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center" id="theme-box">
+        <c:forEach var="theme" items="${themes }">
             <div>
                 <p>
-                    <img src="/camping/resources/images/themes/27.svg" width="40">
+                    <img src="/camping/resources/images/themes/${theme.imageName }" width="40">
                 </p>
-                <p style="font-size: 12px;">바다낚시</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/48.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">반려동물<br>동반</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/51.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">수세식<br>화장실</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/57.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">온라인예약</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/59.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">와이파이</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/50.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">샤워시설</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/42.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">개수대</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/63.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">전기</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/46.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">동계캠핑</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/58.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">온수제공</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/56.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">오토캠핑</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/65.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">카라반시설</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/69.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">펜션/민박</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/54.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">어린이놀이터</p>
-            </div>
+                <p style="font-size: 12px;">${theme.name }</p>
+            </div>        
+        </c:forEach>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -278,7 +202,7 @@
     <div class="row">
         <div class="col-sm-12" style="margin-left: 18px; margin-top: 5px;">
             <p>
-                <span style="margin-right: 28px;">일반야영장 (성수기)</span>
+                <span style="margin-right: 28px;">일반야영장</span>
                 <img src="/camping/resources/images/stick2.png"/>
                 <strong>${campsite.price }</strong>원
             </p>

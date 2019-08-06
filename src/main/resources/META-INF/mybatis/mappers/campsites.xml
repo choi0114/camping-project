@@ -26,7 +26,79 @@
 			camp_campsites
 		where
 			campsite_no = #{value}
-			
+	</select>
+	
+	<select id="getCampSiteByTheme" parameterType="map" resultType="campsite">
+		select
+			cs.campsite_no				no,
+			cs.campsite_name			name,
+			cs.campsite_sort			sort,
+			cs.campsite_latitude		latitude,
+			cs.campsite_longitude		longitude,
+			cs.campsite_address			address,
+			cs.campsite_tel				tel,
+			cs.campsite_sites			sites,
+			cs.campsite_price			price,
+			cs.campsite_likes			likes,
+			cs.campsite_hates			hates,
+			cs.campsite_photo			photo,
+			cs.campsite_point			point,
+			cs.campsite_create_date		createDate,
+			cs.campsite_used_yn			usedYn,
+			cs.campsite_sido			sido,
+			cs.my_campsite_no			"myCampsite.no"
+		from
+			camp_campsites cs, camp_theme_connects connects
+		where
+			cs.campsite_no = connects.campsite_no
+		and
+			connects.theme_no in 
+		<foreach collection="themeNos" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="get10CampSites" parameterType="map" resultType="campsite">
+		select
+			no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo,
+			point, createDate, usedYn, sido, "myCampsite.no"
+		from (
+			select
+				row_number() over (order by no) rowno, X.*
+			from (
+				select distinct
+					cs.campsite_no				no,
+					cs.campsite_name			name,
+					cs.campsite_sort			sort,
+					cs.campsite_latitude		latitude,
+					cs.campsite_longitude		longitude,
+					cs.campsite_address			address,
+					cs.campsite_tel				tel,
+					cs.campsite_sites			sites,
+					cs.campsite_price			price,
+					cs.campsite_likes			likes,
+					cs.campsite_hates			hates,
+					cs.campsite_photo			photo,
+					cs.campsite_point			point,
+					cs.campsite_create_date		createDate,
+					cs.campsite_used_yn			usedYn,
+					cs.campsite_sido			sido,
+					cs.my_campsite_no			"myCampsite.no"
+				from
+					camp_campsites cs, camp_theme_connects connects
+				where
+					cs.campsite_no = connects.campsite_no
+				and
+					connects.theme_no in
+					<foreach collection="themeNos" item="item" index="index" open="(" close=")" separator=",">
+						#{item}
+					</foreach>
+			) X
+		)
+		where
+			rowno >= #{startNo}
+		and
+			rowno &lt;= #{endNo}
 	</select>
 
 </mapper>

@@ -294,10 +294,10 @@
                 <!-- 그 안에 3 / 8로 나눔 -->
                
                 	<div class="col-sm-3 col-xs-2 text-left total-list" style="padding-top: 6px;">	<!-- 3 안에 2 / 10 으로 나눔 <-->
-                	    <img src="resources/images/list.png" width="15%">
+                	    <img src="/camping/resources/images/list.png" width="15%">
                 		<span class="total" id="total-list">${campCounts } 개</span>
                 	</div> 
-                	<div class="col-sm-9 text-right abc">
+                	<div class="col-sm-9 text-right abc" style="margin-bottom: 10px;">
 	                   <div id="btn-group">
 	                    <a href="map.camp?status=update&city=${param.city }" class="btn ${empty param.status || param.status eq 'update' ? 'btn-success' :'btn-default' } btn-xs" id="update">업데이트순</a>
 	                    <a href="map.camp?status=like&city=${param.city }" class="btn ${param.status eq 'like' ? 'btn-success' :'btn-default' } btn-xs" id="like">추천순</a>
@@ -305,9 +305,20 @@
 	                    <a href="map.camp?status=comment&city=${param.city }" class="btn ${param.status  eq 'comment' ? 'btn-success' :'btn-default' } btn-xs" id="comment">댓글순</a>
 	                   </div>
                 	</div>
+                	<div class="row" style="border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; margin-bottom: 10px;">
+                		<div class="col-sm-9 text-center" style="background-color: #ddd; height: 40px;">
+                			<h4><span style="color: #32a1ff;">"테마"</span> 검색결과 입니다.</h4>
+                		</div>
+                		<div class="col-sm-3 text-center" style="background-color: #f4902a; height: 40px;">
+                			<a style="color: #fff;" href="home.camp">
+                				<span class="glyphicon glyphicon-repeat" style="margin-top: 10px;"></span>
+                				<span style="margin-top: 10px;">검색취소</span>
+                			</a>
+                		</div>
+                	</div>
                 	<div class="row">
                 			<img id="loading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" style="z-index: 1000; position: absolute; 
-                			left:1050px; top:300px;">;
+                			left:1050px; top:300px;">
                 	    <div class="col-sm-12 text-left sear-box">
                 	   <form method="post" action="#">
                            <select class="searchSelect" id="selectState" name="state">
@@ -332,13 +343,13 @@
                 	<c:forEach var="campsite" items="${campsites }">                	
                 	       <div class="col-sm-12 col-xs-4 list-box">   
                                <div class="left-photo">
-                                    <img src="resources/images/update.png" class="new">
-                                    <img class="tm" src="resources/images/camping.png"> <!-- 캠핑 사진-->                                  
+                                    <img src="/camping/resources/images/update.png" class="new">
+                                    <img class="tm" src="/camping/resources/images/camping.png"> <!-- 캠핑 사진-->                                  
                                </div>
                                <div class="content">
                                    <div class="subject">	
 	
-                                    <a href="#" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
+                                    <a href="detail.camp?no=${campsite.no }" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
                                     <c:if test="${campsite.sort eq 'CAMP' }">
                                 		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
@@ -359,7 +370,7 @@
                                       </p>
                                       <ul>
                                         <li class="address">${campsite.address }</li>         
-                                        <li class="tel">${campsite.tel }</li>                                 
+                                        <li class="tel">${campsite.tel }</li>                                
                                       </ul>
                                    </div>
                                </div>              	       
@@ -377,10 +388,16 @@
             </div>            
         </div>
         
+        <input type="hidden" name="themes" value="${themes }"/>
+        
     </div>
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
+	
+		
+			var themes = $('[name=themes]').val();
+	
 			// 맵 생성
 			var container = document.getElementById('map');
 			var lat; // 위도
@@ -460,8 +477,8 @@
 					
 					$.ajax({
 						type:"GET",
-						url:"maplist.camp",
-						data:{cp:page , city:dosi , status:stat},
+						url:"themelistjson10range.camp",
+						data:{cp:page, themes: themes},
 						dataType:"json",
 						beforeSend: function() {
 							dataloading = true;
@@ -536,11 +553,13 @@
 		var clickmarkers = [];
 		// 원 지름 ( 반경 내에 마커 찍기 위해서)
 		var radius = 50000;
+		
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
 			$.ajax({
 				type:"GET",
-				url:"mapAllList.camp",
+				url:"themelistjson.camp",
+				data: {themes: themes},
 				dataType:"json",
 				beforeSend:function(){
 					$('#map').addClass('darkamap');
@@ -551,6 +570,7 @@
 					$('#loading').hide();
 				},
 				success:(function(data){
+					console.log(data);
 					$.each(data , function(index , list){
 						var name = list.name;
 						var iwContent = '<div class="overlay_info">';
@@ -716,7 +736,8 @@
 				}
 			$.ajax({
 				type:"GET",
-				url:"mapAllList.camp",
+				url:"themelistjson.camp",
+				data: {themes: themes},
 				dataType:"json",
 				beforeSend:function(){
 					$('#map').addClass('darkamap');

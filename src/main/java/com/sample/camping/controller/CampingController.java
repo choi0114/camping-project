@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sample.camping.service.CampsitesService;
+import com.sample.camping.service.ThemeService;
 import com.sample.camping.view.WeatherXMLView;
 import com.sample.camping.vo.CampSite;
 
@@ -15,12 +16,15 @@ import com.sample.camping.vo.CampSite;
 public class CampingController {
 
 	@Autowired
-	CampsitesService campsiteService;
+	private CampsitesService campsiteService;
+	
+	@Autowired
+	private ThemeService themeService;
 	
 	@RequestMapping("/detail.camp")
 	public String detail(@RequestParam("no") int no, Model model) {
-		CampSite campsite = campsiteService.getCampSiteByNo(no);
-		model.addAttribute("campsite", campsite);
+		model.addAttribute("campsite", campsiteService.getCampSiteByNo(no));
+		model.addAttribute("themes", themeService.getThemesByCampSite(no));
 		
 		return "camping/detail";
 	}

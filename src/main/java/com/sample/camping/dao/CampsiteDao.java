@@ -12,4 +12,7 @@ public interface CampsiteDao {
 	public List<CampSite> selectCampsite (Map<String, Object> map);
 	public Integer selectCampCount (Map<String, Object> map);
 	CampSite getCampSiteByNo(int no);
+	
+	List<CampSite> getCampSiteByTheme(Map<String, Object> map);
+	List<CampSite> get10CampSites(Map<String, Object> map);
 }
