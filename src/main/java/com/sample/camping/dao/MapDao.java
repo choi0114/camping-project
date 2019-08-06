@@ -9,8 +9,12 @@ public interface MapDao {
 
 	List<CampSite> getCampSites(Map<String, Object> param);
 	List<CampSite> getCampSitesList(Map<String, Object>param);
-	Integer getCampSitesCount();
-	List<CampSite> getAllCampSites(); // 전부 가져오기
+	Integer getCampSitesCount(Map<String,Object>param);
+	List<CampSite> getAllCampSites(); 
 	CampSite getLatLngCamp(Map<String, Object>param);
-
+	List<CampSite> getCampNameAndAdress(String keyword);
+	Integer getCampAddressCount(String keyword);
+	List<CampSite> getMoreCampNameAndAdress(Map<String, Object>param);
+	List<CampSite> getCampsitesName(String keyword);
+	
 }

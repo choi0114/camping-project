@@ -2,6 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sample.camping.dao.MapDao">
+<select id="getCampsitesName" parameterType="string" resultType="campSite">
+SELECT  
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn usedYn,
+					campsite_sido sido,
+					my_campsite_no "myCampsite.no"	
+FROM
+					 CAMP_CAMPSITES
+where
+					campsite_name like '%'|| #{keyword} || '%' or campsite_address like '%' || #{keyword} || '%'
+</select>
+<select id="getMoreCampNameAndAdress" parameterType="Map" resultType="campSite">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido
+FROM (select X.* , row_number() over (order by no desc) row_no
+			from(SELECT 
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn usedYn,
+					campsite_sido sido
+				FROM
+					 CAMP_CAMPSITES A
+				where
+					campsite_name like '%'|| #{result} || '%' or campsite_address like '%' || #{result} || '%'
+						) X
+			) 
+WHERE
+	row_no >= #{start}
+AND
+	row_no &lt;= #{end}	
+</select>
+<select id="getCampNameAndAdress" parameterType="string" resultType="campSite">
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido
+FROM (select X.* , row_number() over (order by no desc) row_no
+			from(SELECT 
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn usedYn,
+					campsite_sido sido
+				FROM
+					 CAMP_CAMPSITES A
+				where
+					campsite_name like '%'|| #{nameAndAddress} || '%' or campsite_address like '%' || #{nameAndAddress} || '%'
+						) X
+			) 
+WHERE
+	row_no >= 1
+AND
+	row_no &lt;= 10
+<!--
+SELECT  
+					campsite_no no,
+					campsite_name name,
+					campsite_sort sort,
+					campsite_latitude latitude,
+					campsite_longitude longitude,
+					campsite_address address,
+					campsite_tel tel,
+					campsite_sites sites,
+					campsite_price price,
+					campsite_likes likes,
+					campsite_hates hates,
+					campsite_photo photo,
+					campsite_point point,
+					campsite_create_date createDate,
+					campsite_used_yn usedYn,
+					campsite_sido sido,
+					my_campsite_no afadf			
+FROM
+					 CAMP_CAMPSITES
+where
+					campsite_name like '%'|| #{nameAndAddress} || '%' or campsite_address like '%' || #{nameAndAddress} || '%'
+-->
+</select>
 <select id="getCampSites" parameterType="Map" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
 FROM (select X.* , row_number() over (	
@@ -45,6 +155,12 @@ FROM (select X.* , row_number() over (
 				<where>
 					<if test="citys != '전국'">
 						campsite_address like '%' || #{citys} || '%'
+					</if>
+					<if test="name != '없음'">
+						campsite_name like '%'|| #{name} || '%' or campsite_address like '%' || #{name} || '%'
+					</if>
+					<if test="sort != '없음'">
+						campsite_sort like '%' || #{sort} || '%'
 					</if>
 				</where>
 				) X
@@ -99,6 +215,12 @@ FROM (select X.* , row_number() over (
 					<if test="citys != '전국'">
 						campsite_address like '%' || #{citys} || '%'
 					</if>
+					<if test="name != '없음'">
+						campsite_name like '%'|| #{name} || '%' or campsite_address like '%' || #{name} || '%'
+					</if>
+					<if test="sort != '없음'">
+						campsite_sort like '%' || #{sort} || '%'
+					</if>
 				</where>
 					) X
 				) 
@@ -113,6 +235,17 @@ FROM (select X.* , row_number() over (
 		count(*)
 	from
 		camp_campsites
+	<where>
+			<if test="citys != '전국'">
+						campsite_address like '%' || #{citys} || '%'
+					</if>
+					<if test="name != '없음'">
+						campsite_name like '%'|| #{name} || '%' or campsite_address like '%' || #{name} || '%'
+					</if>
+					<if test="sort != '없음'">
+						campsite_sort like '%' || #{sort} || '%'
+			</if>
+	</where>
 </select>
 <select id="getLatLngCamp" parameterType="map" resultType="campSite">
 SELECT

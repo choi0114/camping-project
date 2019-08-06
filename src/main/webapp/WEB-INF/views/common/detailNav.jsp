@@ -1,11 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
+		
+		}
         body {
             font-size: 12px;
             font-weight: 400;
+        }
+        #resultImg{position: absolute;left: 331px;top: 90px;}
+        
+       #resulttop .sitem .cright {
+    height: 45px;
+    cursor: pointer;
+    width: 230px;
+    display: inline-block;
+    padding-left:10px;
+    
+		}
+	#resulttop .sitem .fr .clink {
+	    margin-top: 10px;
+	    float:left;
+	}
+       /*  .hand{
+            position: absolute;
+ 		    left: 118px;
+    		top: 60px;
+        }
+        .clink{
+            position: absolute;
+ 		    left: 342px;
+    		top: 83px;
+   	    } */
+         .imgresult{
+         	float:right;
+         }
+        .sitem{
+		    border-bottom: 1px #ddd solid;
+		    padding: 15px;
+		    height: 86px;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
+		    /* overflow: hidden; */
+		    line-height: 1.2;
+		    cursor: pointer;
+        }
+        #resulttop{
+        	 background:#fff;
+        	 max-height: 400px;
+   			 overflow-y: auto;
+        }
+        .t-arr-blue{
+            position: absolute;
+		    left: 191px;
+		    top: 11px;
+		}
+		.rewult-wrap h3{
+			background: #25a5f0;
+		    height: 40px;
+		    line-height: 40px;
+		    color: #fff;
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		    font-size: 15px;
+		}
+        .rewult-wrap{
+        	position: absolute;
+        	top: 36px;
+   			left: 1146px;
+   			z-index:1000;
+		    width: 400px;
+		    margin-left: -200px;
+		    display: block;
+		    max-height: 400px;
+		    box-shadow: 7px 7px 20px rgba(0,0,0,.28);
         }
         #container{
             width: 100%;
@@ -86,14 +156,14 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="#"><img src="../images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="home.camp"><img src="resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
-                <li><a href="#">전체</a></li>
-                <li><a href="#">일반캠핑</a></li>
-                <li><a href="#">유료캠핑장</a></li>
-                <li><a href="#">카라반</a></li>
+                <li><a href="map.camp">전체</a></li>
+                <li><a href="map.camp?sort=CAMP">글램핑</a></li>
+                <li><a href="map.camp?sort=CAR">카라반</a></li>
+                <li><a href="map.camp?sort=NORMAL">캠핑장</a></li>
                 <li><a href="#">테마검색</a></li>
                 <li>
                     <a data-toggle="collapse" href="#">캠핑톡</a>
@@ -103,9 +173,9 @@
                         <li><a class="panel-collapse collapse" href="#">자유게시판</a></li>
                     </ul>
                 </li>
-                <li class="searchli">
+                <li class="searchli"> 
                     <div class="topsearch">
-                       <form action="" method="get" id="layout-search-border"> <!--onsubmit-->
+                       <form action="map.camp?resach" method="get" id="layout-search-border"> <!--onsubmit-->
                            <fieldset>
                                 <legend>통합검색 폼</legend>
                                 <input autocomplete="off" type="text" id="totalsearch" class="search-input" name="keyword" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" value="">
@@ -115,34 +185,156 @@
                            </fieldset>
                        </form>
                     </div>
-                    <div class="rewult-wrap" style="display: none;">
-                        <img src="image/t_arr_blue.png" class="t-arr-blue">
-                        <i class="fa fa-window-close-o hand" aria-hidden="true"></i> <!--onclick 안내창 숨기기-->
+                    <div class="rewult-wrap" style="display: none;" id="result-box">
+                        <img src="resources/images/t_arr_blue.png" class="t-arr-blue">
+                       	<i class="far fa-window-close"></i>
+                        <i class="fa fa-window-close-o hand"></i> <!--onclick 안내창 숨기기-->
                         <h3 id="bot">
-                            <span class="fblack">''</span>
-                            <span>100건</span>
-                            검색결과가 없습니다, 이 검색되었네요
+                            <span class="fblack"></span>
+                            <span class="count"></span><span class="sodyd">건이 검색되었네요</span><!-- 또는 검색결과가 없습니다. -->
                         </h3>
-                        <div id="resulttop" style="display: none;">
-                            <div class="sitem">
-                                <img src="image/slide15.jpg" width="80" height="45" class="img-thumbnail">
-                                <div class="fl cright hand">
-                                    <p class="cpath">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="image/direct.svg" width="26" height="26" title="#">
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="resultBox">
+	                        <div id="resulttop" style="display: block;">
+	                        </div>
+	                        <div id='more-list-box' class="text-center" style="background: #fff; display: block;">
+	                        	<button id="more-List-Button" class="btn btn-primary" style="width: 100%">더보기</button>
+	                        </div> 
                         </div>
                     </div>
-                </li>
-            </ul>
+               </li>
+               </ul>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+var prevLength;
+var page = 2;
+var isMoveIntoResultBox = false;
+
+
+$('#more-List-Button').click(function(){
+	var resutl = $('#totalsearch').val();
+	page++;
+	
+	$.ajax({
+		type:"GET",
+		url:"more.camp",
+		data:{result:resutl,page:page},
+		dataType:"json",
+		success:(function(data){
+			$.each(data , function(index, list){
+				var content = "<div class='sitem' id='"+list.name+"'>";
+				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
+				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				content += "</div>";
+				content += "<div class='fl cirght hand'>";
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span></p>"
+				content +="<a href='map.camp?"+list.name+"' class='cdirectlink'>"
+		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
+				content +="</a>"
+				content += "</div>"
+				content +="</div>"
+				$('#resulttop').append(content);
+			})
+		})
+	})
+})
+
+$('#totalsearch').click(function(){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}else{
+		$('#result-box').css('display','none');
+	}
+}) 
+$('#totalsearch').focus(function(){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}
+})
+
+$('#totalsearch').blur(function(){
+	var res = $(this).val();
+	if (!isMoveIntoResultBox) {
+		$('#result-box').css('display','none');
+	}
+})
+
+$('.searchli').on('mouseenter','.resultBox',function(){
+	isMoveIntoResultBox = true
+	console.log(isMoveIntoResultBox);
+})
+$('.searchli').on('mouseleave','.resultBox',function(){
+	isMoveIntoResultBox = false;
+	console.log(isMoveIntoResultBox);
+	$('#result-box').css('display','none');
+}) 
+
+
+/* $('.searchli').on('click', '.sitem', function() {
+	console.log("아이템 클릭");
+	return false;
+})
+$('.searchli').on('click', '#more-list-box', function() {
+	console.log("아이템 클릭");
+	return false;
+}) */
+
+$('#totalsearch').keyup(function(event){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}else{
+		$('#result-box').css('display','none');
+	}
+		
+	
+	if(event.keyCode == 8){ // 백스페이스 할 때 마다 keyup 되는거 막기
+		if (prevLength == res.length) {
+			return false;
+		}
+	} else {
+		prevLength = res.length;
+	}
+	$.ajax({
+		type:"GET",
+		url:"nameAndAddress.camp",
+		data:{result:res},
+		dataType:"json",
+		success:(function(data){
+			if(data.length < 10){
+				$('#more-list-box').hide();
+			} else {
+				$('#more-list-box').show();
+			}
+			var totalHap = data.length
+			$('.fblack').text("＇"+res+"＇"); 
+			$('#resulttop').empty();
+			$.each(data , function(index, list){
+				var content = "<div class='sitem'>";
+				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
+				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				content += "</div>";
+				content += "<div class='fl cirght hand'>";
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
+				content +="<a href='map.camp?keyword="+list.name+"' class='cdirectlink'>"
+		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
+				content +="</a>"
+				content += "</div>"
+				content +="</div>"
+				$('#resulttop').append(content);
+				})
+				$('.count').text(totalHap);
+			})
+		})
+	})
+	
+	
+</script>
 </body>
 </html>
 

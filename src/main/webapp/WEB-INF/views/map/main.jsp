@@ -14,12 +14,53 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .bbtn2-orange {
+    background: #f4902a;
+}
+
+.bbtn2 {
+	float:right;
+    display: inline-block;
+    vertical-align: top;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    border: none;
+    outline: 0;
+    }
+    .searchbox .search_result {
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+    }
+    .searchbox{padding: 0;border-bottom: 1px #bbb solid;border-top: 1px #999 solid;background: #f0f0f0;min-width: 500px;width: 100%;position: relative;}
+    .listwrap .none{
+    	padding: 80px 0;
+	    text-align: center;
+	    font-size: 18px;
+	    border-bottom: 1px #d0d0d0 solid;
+    }
+    .listwrap .none i{color:#999;}
+    .fwimg{
+    position: absolute;
+    left: -77px;
+    top: -101px;
+    z-index: 10;
+	}
 	  #container{
-	      width: 100%;
-	      position:static !important; 
-		    z-index: 13;
-		    background: rgba(0,0,0,.8);
-		    height: 100px;
+	     width: 100%;
+	     position:static !important; 
+		 z-index: 13;
+		 background: rgba(0,0,0,.8);
+		 height: 100px;
 	  }
     .camping{
     	padding-right:0px;
@@ -27,7 +68,7 @@
     }
     .map-box{
     	padding-right: 0px;
-    padding-left: 0px;
+    	padding-left: 0px;
 }
     }
     .wico{
@@ -365,6 +406,8 @@
                 			left:1050px; top:300px;">;
                 	    <div class="col-sm-12 text-left sear-box">
                 	   <form method="post" action="#">
+                	   <input type="hidden" value="${param.keyword }" id="keyword-value"> <!-- 현재 키워드 유지하기 위해서 숨겨놓음 -->
+                	   <input type="hidden" value="${param.sort }" id="sort-value">
                            <select class="searchSelect" id="selectState" name="state">
 	                            <option value="">전국</option>
 	                            <option value="서울" ${param.city eq '서울' ? 'selected' : "" }>서울</option>
@@ -376,15 +419,35 @@
 	                            <option value="충청" ${param.city eq '충청' ? 'selected' : "" }>충청도</option>
 	                            <option value="경상" ${param.city eq '경상' ? 'selected' : "" }>경상도</option>
 	                            <option value="전라" ${param.city eq '전라' ? 'selected' : "" }>전라도</option>
-	                            <option value="제주도" ${param.city eq '제주도' ? 'selected' : "" }>제주도</option>
+	                            <option value="제주특별자치도" ${param.city eq '제주특별자치도' ? 'selected' : "" }>제주도</option>
                            </select>
                 	   </form>
                 	    </div>
                 	</div>
+                	<div class="row">
+                		<div class="col-sm-12">
+							<div class="searchbox" style="display: none">
+								<div class="searchform">
+									<div class="search_result text-center">
+										<a href="javascript:;" onclick="history.back(-1)"
+											class="bbtn2 bbtn2-orange fr"><i class="fa fa-undo"
+											aria-hidden="true"></i> 검색취소</a> <span class="b fblue2">
+											"222" </span> 검색결과 입니다.
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+                	</div>
                
                     
                 	<div class="row camping-list" style="overflow: scroll; height: 833px; max-height: 833px;">
-                	<c:forEach var="campsite" items="${campsites }">                	
+                	<c:if test="${empty campsites}">
+                		<div class="listwrap">
+							<div class="none"><i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i><br><br>캠핑장소가 없습니다.</div>		
+						</div>
+                	</c:if>
+                	<c:forEach var="campsite" items="${campsites }">
                 	       <div class="col-sm-12 col-xs-4 list-box">   
                                <div class="left-photo">
                                     <img src="resources/images/update.png" class="new">
@@ -397,7 +460,7 @@
                                     <c:if test="${campsite.sort eq 'CAMP' }">
                                 		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
-                                     <c:if test="${campsite.sort eq 'NOMAL' }">
+                                     <c:if test="${campsite.sort eq 'NORMAL' }">
                                 		<span class="sbjcat sbjcat2">캠핑장</span><!--캠핑장분류--> 
                                     </c:if>
                                      <c:if test="${campsite.sort eq 'CAR' }">
@@ -436,6 +499,13 @@
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
+		$('#map').click(function(){
+				$('#result-box').css('display','none'); 
+		})
+		
+			var keyword = $("#keyword-value").val();
+	
+
 			// 맵 생성
 			var container = document.getElementById('map');
 			var lat; // 위도
@@ -467,6 +537,7 @@
 					overlay.setMap(map); // 해당 오버레이를 등록
 				})
 			}
+			
 			// 위도,경도로 이동
 			function setCenter(lat,lng){
 				var moveLatLng = new kakao.maps.LatLng(lat,lng);
@@ -500,6 +571,9 @@
 		var dosi = $("#selectState option:selected").val();
 		
 		$('.camping-list').scroll(function() {
+			var sort = $('#sort-value').val();
+			var keyword = $('#keyword-value').val();
+			console.log(sort);
 			var scrollTop = $(this).scrollTop();
 			var boxheight = $(this).height();
 			var listheight = 0;	
@@ -516,7 +590,7 @@
 					$.ajax({
 						type:"GET",
 						url:"maplist.camp",
-						data:{cp:page , city:dosi , status:stat},
+						data:{cp:page , city:dosi , status:stat, keyword:keyword, sort:sort},
 						dataType:"json",
 						beforeSend: function() {
 							dataloading = true;
@@ -533,7 +607,7 @@
 								var sort;
 								if (list.sort == 'CAMP'){
 									sort = "<span class='sbjcat sbjcat3'>글램핑</span>";
-								}else if(list.sort == "NOMAL"){
+								}else if(list.sort == "NORMAL"){
 									sort = "<span class='sbjcat sbjcat2'>캠핑장</span>";
 								}else{
 									sort ="<span class='sbjcat sbjcat1'>카라반</span>";
@@ -593,6 +667,16 @@
 		var radius = 50000;
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
+			var keyword = $('#keyword-value').val();
+		    if(markers2 != null){
+				setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
+			 }
+			if(markers3 != null){ // 드래그 할 때 마다 새로 얻은 마크가 있다면 
+				setMarkers3(null); // 마커들을 지운다.
+			}
+			if(markers != null){
+				setMarkers(null);
+			}
 			$.ajax({
 				type:"GET",
 				url:"mapAllList.camp",
@@ -606,8 +690,10 @@
 					$('#loading').hide();
 				},
 				success:(function(data){
+					
 					$.each(data , function(index , list){
 						var name = list.name;
+						
 						var iwContent = '<div class="overlay_info">';
 						iwContent += "<strong>"+list.name+"</strong>";
 						iwContent += '</div>';
@@ -658,10 +744,10 @@
 						var imageicon;
 						var campsort = list.sort;
 				
-						if(campsort == 'NOMAL'){
-							imageicon = 'resources/images/tent2.png';
+						if(campsort == 'NORMAL'){
+							imageicon = 'resources/images/tent2.png'; // 글램핑
 						}else if(campsort == 'CAMP'){
-							imageicon = 'resources/images/tent1.png';
+							imageicon = 'resources/images/tent1.png'; // 캠핑장
 						}else{
 							imageicon = 'resources/images/tent3.png'; // 카라반 
 						} 
@@ -673,6 +759,7 @@
 					    
 					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 						// 마커를 생성합니다
+						
 						var marker = new kakao.maps.Marker({
 							    position: markerPosition,
 							    clickable:true,
@@ -697,19 +784,25 @@
 					    	    xAnchor: 0.62,
 					    	    yAnchor: 3.0
 					    	}); 
+					    
+						    	// 마커에 마우스 올리면 보이게 하고
+						    	kakao.maps.event.addListener(marker, 'mouseover', function () {
+						    	     overlay.setMap(map);
+						    	});
 					    	
-					    	// 마커에 마우스 올리면 보이게 하고
-					    	kakao.maps.event.addListener(marker, 'mouseover', function() {
-					    	     overlay.setMap(map);
-					    	});
 					    	// 마커에서 마우스 내리면 사라지게 한다.
-					    	kakao.maps.event.addListener(marker, 'mouseout', function() {
-					    	     overlay.setMap(null); 
-					    	});
-					    	
+						    	kakao.maps.event.addListener(marker, 'mouseout', function() {
+						    	     overlay.setMap(null); 
+						    	});
+						    	
 					    	
 					    	kakao.maps.event.addListener(marker, 'click', function() {
-
+					    		
+					    		kakao.maps.event.removeListener(marker, 'mouseover');
+					    		kakao.maps.event.addListener(marker, 'mouseover', function () {
+						    	     overlay.setMap(null);
+						    	});
+					    		
 								if(prevcustovlay){ // 클릭 했던 오버레이가 있으면 
 					    			prevcustovlay.setMap(null);  // 현재 오버레이를 삭제
 					    		}
@@ -745,7 +838,7 @@
 								//---
 								// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 								$('#map').on('click','.close', function(){
-									customeroverlay.setMap(null);
+									prevcustovlay.setMap(null);
 								})
 					    			
 					    		setCenter(latitude,longitude); // 그 마커의 위치로 맵의 중심점(포커스)을 변경
@@ -754,8 +847,13 @@
 								prevcustovlay.setMap(map); // 오버레이 등록
 					    	});
 					    	marker.setMap(map);
+					    	
+					    	
 					    }
 					})
+					if ($('#keyword-value').val()) {
+						$('.campsite-name:eq(0)').trigger('click'); 
+					}
 				})
 			})
 	    })
@@ -765,6 +863,7 @@
 			if(prevcustovlay){  // 드래그 했을 때 오버레이가 남아있으면 
     			prevcustovlay.setMap(null); // 오버레이를 삭제
     		}
+			
 		})
 		
 		
@@ -800,7 +899,6 @@
 						var iwContent = '<div class="overlay_info">';
 						iwContent += "<strong>"+list.name+"</strong>";
 						iwContent += '</div>';
-
 						var content = '<div id="poswrap">';
 						content +="<div class='today_weather'>";
 						content +="<span class='fwimg'><img src='' class='wico'></span>";
@@ -843,7 +941,7 @@
 						var imageicon;
 						var campsort = list.sort;
 				
-						if(campsort == 'NOMAL'){
+						if(campsort == 'NORMAL'){
 							imageicon = 'resources/images/tent2.png';
 						}else if(campsort == 'CAMP'){
 							imageicon = 'resources/images/tent1.png';
@@ -878,7 +976,7 @@
 				 	    	var overlay = new kakao.maps.CustomOverlay({
 					    	    content: iwContent,
 					    	    position: marker.getPosition(), 
-					    	    xAnchor: 0.62,
+					    	    xAnchor: 0.67,
 					    	    yAnchor: 3.0
 					    	}); 
 					    	// 마커에 마우스 올리면 보이게 하고
@@ -891,6 +989,13 @@
 					    	});
 					    	
 					    	kakao.maps.event.addListener(marker, 'click', function() {
+					    		//클릭 이벤트가 발생했을 때, mouseover 효과를 지운다.
+					    		kakao.maps.event.removeListener(marker, 'mouseover');
+					    		kakao.maps.event.addListener(marker, 'mouseover', function () {
+						    	     overlay.setMap(null);
+						    	});
+					    		
+					    		
 								var grid = dfs_xy_conv('toXY', list.latitude, list.longitude);
 								weathers(grid.x, grid.y);
 								
@@ -955,13 +1060,16 @@
 					
 					return clickImage;
 			}
+		
 		// 캠핑 이름 클릭시 위도 경도 획득 및 마커 지우기
 		$(".camping-list").on('click', '.campsite-name', function(event){
+			
+			
 			event.preventDefault();
 			//marker.setMap(null); 마커 지우기 어떻게 작동해야하나
 		    if(markers2 != null){
 				setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
-			    }
+			 }
 			if(markers3 != null){ // 드래그 할 때 마다 새로 얻은 마크가 있다면 
 				setMarkers3(null); // 마커들을 지운다.
 			}
@@ -1086,7 +1194,7 @@
 			
 			if(markers != null){
 				setMarkers(null);
-				}
+			}
 			if(markers2 != null){
 				setMarkers2(null);
 			}
@@ -1258,6 +1366,13 @@
 	    		$('.wwind').append('<span>풍향: '+ws+'m/s 강수확률: '+pop+'%</span>')
 	    	}
 	    })
+	  }
+	  if($('#keyword-value').val()){
+		  var keyword = $("#keyword-value").val();
+		  $('.searchbox').css("display",'block');
+		  $('.fblue2').text(keyword);
+	  }else{
+		  $('.searchbox').css("display",'none');
 	  }
 	</script>
 </body>
