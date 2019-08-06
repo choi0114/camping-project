@@ -17,12 +17,12 @@ public class HomeServiceImpl implements HomeService{
 	private HomeDao homeDao;
 	
 	@Override
-	public int getCountByKeyword(String keyword) {
-		return homeDao.getCountByKeyword(keyword);
+	public int getCountByKeyword(Map<String, Object> map) {
+		return homeDao.getCountByKeyword(map);
 	}
 	
 	@Override
-	public List<CampSite> getCampSitesByKeyword(Map<String, Object> map) {
-		return homeDao.getCampSitesByKeyword(map);
+	public List<CampSite> searchCampSites(Map<String, Object> map) {
+		return homeDao.searchCampSites(map);
 	}
 }

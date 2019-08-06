@@ -20,6 +20,7 @@ public class CampSite {
 	private Date createDate;
 	private String usedYn;
 	private String sido;
+	private String gugun;
 	private MyCampsite myCampsite;
 	
 	public Integer getNo() {
@@ -119,6 +120,12 @@ public class CampSite {
 	public void setUsedYn(String usedYn) {
 		this.usedYn = usedYn;
 	}
+	public String getGugun() {
+		return gugun;
+	}
+	public void setGugun(String gugun) {
+		this.gugun = gugun;
+	}
 	public MyCampsite getMyCampsite() {
 		return myCampsite;
 	}
@@ -130,8 +137,10 @@ public class CampSite {
 		return "CampSite [no=" + no + ", name=" + name + ", sort=" + sort + ", latitude=" + latitude + ", longitude="
 				+ longitude + ", address=" + address + ", tel=" + tel + ", sites=" + sites + ", price=" + price
 				+ ", likes=" + likes + ", hates=" + hates + ", photo=" + photo + ", point=" + point + ", createDate="
-				+ createDate + ", usedYn=" + usedYn + ", sido=" + sido + ", myCampsite=" + myCampsite + "]";
+				+ createDate + ", usedYn=" + usedYn + ", sido=" + sido + ", gugun=" + gugun + ", myCampsite="
+				+ myCampsite + "]";
 	}
+	
 	
 	
 	

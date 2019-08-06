@@ -10,6 +10,6 @@ import com.sample.camping.vo.CampSite;
 @Repository
 public interface HomeDao {
 
-	int getCountByKeyword(String keyword);
-	List<CampSite> getCampSitesByKeyword(Map<String, Object> map);
+	int getCountByKeyword(Map<String, Object> map);
+	List<CampSite> searchCampSites(Map<String, Object> map);
 }
