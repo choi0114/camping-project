@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.camping.dao.ThemeDao">
+
+	<select id="getThemesByCategory" parameterType="string" resultType="theme">
+		select
+			theme_no			no,
+			theme_name			name,
+			theme_image_name	imageName,
+			theme_category		category
+		from
+			camp_themes
+		where
+			theme_category = #{value}
+	</select>
+	
+	<select id="getThemesByCampSite" parameterType="int" resultType="theme">
+		select
+			t.theme_no			no,
+			t.theme_name		name,
+			t.theme_image_name	imageName,
+			t.theme_category	category
+		from
+			camp_campsites cs, camp_theme_connects connects, camp_themes t
+		where
+			cs.campsite_no = connects.campsite_no
+		and
+			connects.theme_no = t.theme_no
+		and
+			cs.campsite_no = #{value}
+	</select>
+</mapper>

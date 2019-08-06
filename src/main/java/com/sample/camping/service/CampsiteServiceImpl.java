@@ -29,4 +29,14 @@ public class CampsiteServiceImpl implements CampsitesService {
 	public Integer selectCampCount(Map<String, Object> map) {
 		return campsiteDao.selectCampCount(map);
 	}
+	
+	@Override
+	public List<CampSite> getCampSiteByTheme(Map<String, Object> map) {
+		return campsiteDao.getCampSiteByTheme(map);
+	}
+	
+	@Override
+	public List<CampSite> get10CampSites(Map<String, Object> map) {
+		return campsiteDao.get10CampSites(map);
+	}
 }

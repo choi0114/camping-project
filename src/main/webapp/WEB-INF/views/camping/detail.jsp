@@ -28,7 +28,7 @@
 					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }"/></p>
 				</div>
 				<div class="col-sm-6 text-right">
-					<p>강원 > 삼척시 > 근덕면</p>
+					<p>${campsite.sido }</p>
 				</div>
 			</div>
 			<div class="row">
@@ -141,90 +141,14 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center" id="theme-box">
+        <c:forEach var="theme" items="${themes }">
             <div>
                 <p>
-                    <img src="/camping/resources/images/themes/27.svg" width="40">
+                    <img src="/camping/resources/images/themes/${theme.imageName }" width="40">
                 </p>
-                <p style="font-size: 12px;">바다낚시</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/48.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">반려동물<br>동반</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/51.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">수세식<br>화장실</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/57.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">온라인예약</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/59.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">와이파이</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/50.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">샤워시설</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/42.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">개수대</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/63.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">전기</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/46.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">동계캠핑</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/58.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">온수제공</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/56.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">오토캠핑</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/65.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">카라반시설</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/69.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">펜션/민박</p>
-            </div>
-            <div>
-                <p>
-                    <img src="/camping/resources/images/themes/54.svg" width="40">
-                </p>
-                <p style="font-size: 12px;">어린이놀이터</p>
-            </div>
+                <p style="font-size: 12px;">${theme.name }</p>
+            </div>        
+        </c:forEach>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -278,7 +202,7 @@
     <div class="row">
         <div class="col-sm-12" style="margin-left: 18px; margin-top: 5px;">
             <p>
-                <span style="margin-right: 28px;">일반야영장 (성수기)</span>
+                <span style="margin-right: 28px;">일반야영장</span>
                 <img src="/camping/resources/images/stick2.png"/>
                 <strong>${campsite.price }</strong>원
             </p>
@@ -469,7 +393,7 @@
 	        <div id="near-campingsite-box" class="slider demo">
 	        	<div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>검봉산 자연휴양림 야영장</strong>
@@ -480,7 +404,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp2.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp2.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>삼척 엘림 캠핑장</strong>
@@ -491,7 +415,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>씨스포빌 카라반</strong>
@@ -502,7 +426,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp4.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp4.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 마을 야영장</strong>
@@ -513,7 +437,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp5.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -524,7 +448,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -535,7 +459,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp7.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -546,7 +470,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp8.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -557,7 +481,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp9.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -568,7 +492,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -579,7 +503,7 @@
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -1088,6 +1012,8 @@
     		});
     		
 			var afterMonth = (months + 1) < 10 ? '0' + (months + 1) : months + 1;
+			var afterDay1 = (days + 1) < 10 ? '0' + (days + 1) : days + 1;
+			var afterDay2 = (days + 2) < 10 ? '0' + (days + 2) : days + 2;
 			
 			var html2 = '<th colspan="' + count0 + '">오늘</th>';
 			if(endDay[months-1] == days) {
@@ -1098,7 +1024,7 @@
 			}
 			if(endDay[months-1]-1 == days) {
 				
-				html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + (day + 1) + ')</th>' 
+				html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + afterDay1 + ')</th>' 
 				  	  + '<th colspan="' + count2 + '">모레 (' + afterMonth + '.01)</th>';
 	            $('#weather-th-box').append(html2);
 				return;
@@ -1117,8 +1043,10 @@
        			return;
 			}
 			
-			html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + (day + 1) + ')</th>'
-   	 	  		  + '<th colspan="' + count2 + '">모레 (' + month + '.' + (day + 2) + ')</th>';
+			
+			
+			html2 += '<th colspan="' + count1 + '">내일 (' + month + '.' + afterDay1 + ')</th>'
+   	 	  		  + '<th colspan="' + count2 + '">모레 (' + month + '.' + afterDay2 + ')</th>';
 
             $('#weather-th-box').append(html2);
     	}
