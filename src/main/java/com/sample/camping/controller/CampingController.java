@@ -68,4 +68,14 @@ public class CampingController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/resonestep.camp")
+	public String resonestep() {
+		return "camping/resonestep";
+	}
+	
+	@RequestMapping("/restwostep.camp")
+	public String restwostep() {
+		return "camping/restwostep";
+	}
 }
