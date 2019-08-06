@@ -2,7 +2,7 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
-public class JoningBoard {
+public class JoiningBoard {
 
 	private Integer no;
 	private String title;

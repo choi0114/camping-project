@@ -8,7 +8,7 @@ public class OpinionComment {
 	private String contents;
 	private Date createDate;
 	private User user;
-	private CampSite campSite;
+	private OpinionBoard opinionBoard;
 	
 	public Integer getNo() {
 		return no;
@@ -34,13 +34,11 @@ public class OpinionComment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public CampSite getCampSite() {
-		return campSite;
+	public OpinionBoard getOpinionBoard() {
+		return opinionBoard;
 	}
-	public void setCampSite(CampSite campSite) {
-		this.campSite = campSite;
+	public void setOpinionBoard(OpinionBoard opinionBoard) {
+		this.opinionBoard = opinionBoard;
 	}
-	
-	
 	
 }

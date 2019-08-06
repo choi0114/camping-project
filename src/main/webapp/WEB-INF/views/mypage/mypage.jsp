@@ -254,10 +254,10 @@
 														<div class="text-right"><small><fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 													</li>
 												</c:forEach>
-												<c:forEach var="joning" items="${boardMap.joning }">
+												<c:forEach var="joining" items="${boardMap.joining }">
 													<li class="list-group-item">
-														<h5>${joning.title }</h5>
-														<div class="text-right"><small><fmt:formatDate value="${joning.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+														<h5>${joining.title }</h5>
+														<div class="text-right"><small><fmt:formatDate value="${joining.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 													</li>
 												</c:forEach>
 												<c:forEach var="opinion" items="${boardMap.opinion }">
@@ -290,27 +290,27 @@
 									</div>
 									<div class="panel-body" style="height: 270px; overflow-y: scroll; position: relative;">
 										<c:choose>
-											<c:when test="${count > 0 }">
+											<c:when test="${not empty commentMap }">
 												<ul class="list-group">
-													<c:forEach var="freeComment" items="${boardMap.freeComment }">
+													<c:forEach var="freeComment" items="${commentMap.freeComment }">
 														<li class="list-group-item">
 															<h4>${freeComment.contents }</h4>
 															<div class="text-right"><small><fmt:formatDate value="${freeComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 														</li>
 													</c:forEach>
-													<c:forEach var="joningComment" items="${boardMap.joningComment }">
+													<c:forEach var="joiningComment" items="${commentMap.joiningComment }">
 														<li class="list-group-item">
-															<h4>${joningComment.contents }</h4>
-															<div class="text-right"><small><fmt:formatDate value="${joningComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
+															<h4>${joiningComment.contents }</h4>
+															<div class="text-right"><small><fmt:formatDate value="${joiningComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 														</li>
 													</c:forEach>
-													<c:forEach var="opinionComment" items="${boardMap.opinionComment }">
+													<c:forEach var="opinionComment" items="${commentMap.opinionComment }">
 														<li class="list-group-item">
 															<h4>${opinionComment.contents }</h4>
 															<div class="text-right"><small><fmt:formatDate value="${opinionComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>
 														</li>
 													</c:forEach>
-													<c:forEach var="reviewComment" items="${boardMap.reviewComment }">
+													<c:forEach var="reviewComment" items="${commentMap.reviewComment }">
 														<li class="list-group-item">
 															<h4>${reviewComment.contents }</h4>
 															<div class="text-right"><small><fmt:formatDate value="${reviewComment.createDate }" pattern="yyyy년 M월 d일"/></small></div>

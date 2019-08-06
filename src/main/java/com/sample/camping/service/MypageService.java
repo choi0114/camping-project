@@ -9,10 +9,13 @@ import com.sample.camping.vo.MyCampsite;
 public interface MypageService {
 
 	Map<String, Object> getBoards(String userId);
+	Map<String, Object> getComments(String userId);
 	Integer getAllCommentCount(String userId);
 	
 	List<LikeCampsite> getLikeCampsiteById(String userId);
 	
 	List<MyCampsite> getMyAddCampById(String userId);
+	
+	
 	
 }
