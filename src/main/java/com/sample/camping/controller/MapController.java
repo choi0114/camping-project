@@ -50,21 +50,18 @@ public class MapController {
 	}
 	
 	@RequestMapping("/map.camp")
-	public String map(Model model , @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status) {
-		
-		System.out.println(status);
+	public String map(Model model , @RequestParam(value = "keyword",required = false, defaultValue = "없음")String name, @RequestParam(value = "city",required = false , defaultValue = "전국")String city, @RequestParam(value="status",required = false, defaultValue = "update") String status,
+					@RequestParam(value = "sort",required = false, defaultValue = "없음")String sort) {
+		System.out.println(sort);
 		Map<String, Object> param = new HashMap<String, Object>();
-		
 		param.put("citys", city);
 		param.put("states", status);
+		param.put("name",name);
+		param.put("sort", sort);
 		
-		
-		model.addAttribute("campsites",mapService.getCampSites(param));
-		model.addAttribute("campCounts",mapService.getCampSitesCount());
-		
-		// List<CampingSites> list = mapService.getCampSites(param);
-		
-		
+			model.addAttribute("campsites",mapService.getCampSites(param));
+			model.addAttribute("campCounts",mapService.getCampSitesCount(param));
+			
 		return "map/main";
 	}
 	
@@ -73,7 +70,9 @@ public class MapController {
 	@RequestMapping("/maplist.camp")
 	@ResponseBody
 	public List<CampSite> maplist(@RequestParam(value = "cp" , required = false, defaultValue = "1") int cp , @RequestParam(value = "city",required = false , defaultValue = "전국")String city
-				,@RequestParam(value="status",required = false, defaultValue = "update")String status){		
+				,@RequestParam(value="status",required = false, defaultValue = "update")String status,
+				@RequestParam(value = "keyword", required = false, defaultValue = "없음")String name,
+				@RequestParam(value="sort", required = false, defaultValue = "없음")String sort){		
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		
@@ -84,6 +83,8 @@ public class MapController {
 		param.put("en", end);
 		param.put("citys",city);
 		param.put("states",status);
+		param.put("name",name);
+		param.put("sort",sort);
 		
 		
 		return mapService.getCampSitesList(param);

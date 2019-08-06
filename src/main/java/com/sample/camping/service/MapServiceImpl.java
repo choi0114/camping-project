@@ -16,6 +16,12 @@ public class MapServiceImpl implements MapService {
 	private MapDao mapDao;
 
 	@Override
+	public List<CampSite> getCampsitesName(String keyword) {
+		// TODO Auto-generated method stub
+		return mapDao.getCampsitesName(keyword);
+	}
+	
+	@Override
 	public List<CampSite> getMoreCampNameAndAdress(Map<String, Object> param) {
 		// TODO Auto-generated method stub
 		return mapDao.getMoreCampNameAndAdress(param);
@@ -47,9 +53,9 @@ public class MapServiceImpl implements MapService {
 	}
 
 	@Override
-	public Integer getCampSitesCount() {
+	public Integer getCampSitesCount(Map<String, Object>param) {
 		// TODO Auto-generated method stub
-		return mapDao.getCampSitesCount();
+		return mapDao.getCampSitesCount(param);
 	}
 	
 @Override

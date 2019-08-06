@@ -44,6 +44,7 @@
 		    text-overflow: ellipsis;
 		    /* overflow: hidden; */
 		    line-height: 1.2;
+		    cursor: pointer;
         }
         #resulttop{
         	 background:#fff;
@@ -139,7 +140,7 @@
                             color: #fff; cursor: pointer; height: 26px; width: 26px; text-align: center; outline: 0; font-size: 13px;}
     </style>
 </head>
-<body ng-app=''>
+<body>
 <div class="detail-Nav" id="container">
     <div class="gnb">
         <ul class="">
@@ -155,14 +156,14 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="#"><img src="resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="home.camp"><img src="resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
-                <li><a href="#">전체</a></li>
-                <li><a href="#">일반캠핑</a></li>
-                <li><a href="#">유료캠핑장</a></li>
-                <li><a href="#">카라반</a></li>
+                <li><a href="map.camp">전체</a></li>
+                <li><a href="map.camp?sort=CAMP">글램핑</a></li>
+                <li><a href="map.camp?sort=CAR">카라반</a></li>
+                <li><a href="map.camp?sort=NORMAL">캠핑장</a></li>
                 <li><a href="#">테마검색</a></li>
                 <li>
                     <a data-toggle="collapse" href="#">캠핑톡</a>
@@ -174,7 +175,7 @@
                 </li>
                 <li class="searchli"> 
                     <div class="topsearch">
-                       <form action="" method="get" id="layout-search-border"> <!--onsubmit-->
+                       <form action="map.camp?resach" method="get" id="layout-search-border"> <!--onsubmit-->
                            <fieldset>
                                 <legend>통합검색 폼</legend>
                                 <input autocomplete="off" type="text" id="totalsearch" class="search-input" name="keyword" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" value="">
@@ -192,11 +193,13 @@
                             <span class="fblack"></span>
                             <span class="count"></span><span class="sodyd">건이 검색되었네요</span><!-- 또는 검색결과가 없습니다. -->
                         </h3>
-                        <div id="resulttop" style="display: block;">
+                        <div class="resultBox">
+	                        <div id="resulttop" style="display: block;">
+	                        </div>
+	                        <div id='more-list-box' class="text-center" style="background: #fff; display: block;">
+	                        	<button id="more-List-Button" class="btn btn-primary" style="width: 100%">더보기</button>
+	                        </div> 
                         </div>
-                        <div id='more-list-box' class="text-center" style="background: #fff; display: block;">
-                        	<button id="more-List-Button" class="btn btn-primary" style="width: 100%">더보기</button>
-                        </div> 
                     </div>
                </li>
                </ul>
@@ -206,6 +209,8 @@
 <script type="text/javascript">
 var prevLength;
 var page = 2;
+var isMoveIntoResultBox = false;
+
 
 $('#more-List-Button').click(function(){
 	var resutl = $('#totalsearch').val();
@@ -218,14 +223,14 @@ $('#more-List-Button').click(function(){
 		dataType:"json",
 		success:(function(data){
 			$.each(data , function(index, list){
-				var content = "<div class='sitem'>";
+				var content = "<div class='sitem' id='"+list.name+"'>";
 				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
 				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
 				content += "</div>";
 				content += "<div class='fl cirght hand'>";
 				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
-				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
-				content +="<a href='#' class='cdirectlink'>"
+				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span></p>"
+				content +="<a href='map.camp?"+list.name+"' class='cdirectlink'>"
 		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
 				content +="</a>"
 				content += "</div>"
@@ -235,6 +240,49 @@ $('#more-List-Button').click(function(){
 		})
 	})
 })
+
+$('#totalsearch').click(function(){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}else{
+		$('#result-box').css('display','none');
+	}
+}) 
+$('#totalsearch').focus(function(){
+	var res = $(this).val();
+	if(res){
+		$('#result-box').css('display','block');
+	}
+})
+
+$('#totalsearch').blur(function(){
+	var res = $(this).val();
+	if (!isMoveIntoResultBox) {
+		$('#result-box').css('display','none');
+	}
+})
+
+$('.searchli').on('mouseenter','.resultBox',function(){
+	isMoveIntoResultBox = true
+	console.log(isMoveIntoResultBox);
+})
+$('.searchli').on('mouseleave','.resultBox',function(){
+	isMoveIntoResultBox = false;
+	console.log(isMoveIntoResultBox);
+	$('#result-box').css('display','none');
+}) 
+
+
+/* $('.searchli').on('click', '.sitem', function() {
+	console.log("아이템 클릭");
+	return false;
+})
+$('.searchli').on('click', '#more-list-box', function() {
+	console.log("아이템 클릭");
+	return false;
+}) */
+
 $('#totalsearch').keyup(function(event){
 	var res = $(this).val();
 	if(res){
@@ -242,6 +290,7 @@ $('#totalsearch').keyup(function(event){
 	}else{
 		$('#result-box').css('display','none');
 	}
+		
 	
 	if(event.keyCode == 8){ // 백스페이스 할 때 마다 keyup 되는거 막기
 		if (prevLength == res.length) {
@@ -250,7 +299,6 @@ $('#totalsearch').keyup(function(event){
 	} else {
 		prevLength = res.length;
 	}
-	
 	$.ajax({
 		type:"GET",
 		url:"nameAndAddress.camp",
@@ -273,7 +321,7 @@ $('#totalsearch').keyup(function(event){
 				content += "<div class='fl cirght hand'>";
 				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
 				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
-				content +="<a href='#' class='cdirectlink'>"
+				content +="<a href='map.camp?keyword="+list.name+"' class='cdirectlink'>"
 		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
 				content +="</a>"
 				content += "</div>"
