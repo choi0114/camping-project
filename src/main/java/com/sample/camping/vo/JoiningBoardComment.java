@@ -2,12 +2,12 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
-public class JoningBoardComment {
+public class JoiningBoardComment {
 
 	private Integer no;
 	private String contents;
 	private Date createDate;
-	private JoningBoard joningBoard;
+	private JoiningBoard joningBoard;
 	private User user;
 	
 	public Integer getNo() {
@@ -28,10 +28,10 @@ public class JoningBoardComment {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public JoningBoard getJoningBoard() {
+	public JoiningBoard getJoningBoard() {
 		return joningBoard;
 	}
-	public void setJoningBoard(JoningBoard joningBoard) {
+	public void setJoningBoard(JoiningBoard joningBoard) {
 		this.joningBoard = joningBoard;
 	}
 	public User getUser() {

@@ -23,16 +23,24 @@ public class MypageServiceImpl implements MypageService{
 		Map<String, Object> boardMap = new HashMap<String, Object>();
 		
 		boardMap.put("free", mypageDao.getFreeBoardById(userId)) ;
-		boardMap.put("joning", mypageDao.getJoningBoardsById(userId));
+		boardMap.put("joining", mypageDao.getJoiningBoardsById(userId));
 		boardMap.put("opinion", mypageDao.getOpinionBoardById(userId));
 		boardMap.put("review", mypageDao.getReviewBoaedById(userId));
 		
-		boardMap.put("freeComment", mypageDao.getFreeBoardCommentById(userId));
-		boardMap.put("joningComment", mypageDao.getJoningBoardCommentById(userId));
-		boardMap.put("opinionComment", mypageDao.getOpinionBoardCommentById(userId));
-		boardMap.put("reviewComment", mypageDao.getReviewBoardCommentById(userId));
-		
 		return boardMap;
+	}
+	
+	@Override
+	public Map<String, Object> getComments(String userId) {
+		
+		Map<String, Object> commentMap = new HashMap<String, Object>();
+		
+		commentMap.put("freeComment", mypageDao.getFreeBoardCommentById(userId));
+		commentMap.put("joiningComment", mypageDao.getJoiningBoardCommentById(userId));
+		commentMap.put("opinionComment", mypageDao.getOpinionBoardCommentById(userId));
+		commentMap.put("reviewComment", mypageDao.getReviewBoardCommentById(userId));
+		
+		return commentMap;
 	}
 	
 	@Override

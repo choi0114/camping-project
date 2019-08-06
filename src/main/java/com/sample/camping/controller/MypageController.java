@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sample.camping.service.BoardService;
 import com.sample.camping.service.MypageService;
 import com.sample.camping.service.UserService;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
+import com.sample.camping.vo.OpinionComment;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -23,8 +25,6 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService myPageService;
-	@Autowired
-	private UserService useService;
 	
 	@RequestMapping("/mypage.camp")
 	public String mypage(HttpSession session, Model model) {
@@ -50,26 +50,33 @@ public class MypageController {
 		Map<String, Object> boardMap = myPageService.getBoards(user.getId());
 		model.addAttribute("boardMap", boardMap);
 		
+		Map<String, Object> commentMap = myPageService.getComments(user.getId());
+		model.addAttribute("commentMap", commentMap);
+		
 		List<LikeCampsite> likeCamp = myPageService.getLikeCampsiteById(user.getId());		
 		model.addAttribute("likeCamp", likeCamp);
-		
-		System.out.println(likeCamp);
 		
 		return "mypage/mypage";
 	}
 	
 	@RequestMapping("/comment.camp")
-	public String comment(HttpSession session) {
+	public String comment(HttpSession session, Model model) {
 		
-		User user = (User) session.getAttribute("LOGUN_USER");
+		User user = (User) session.getAttribute("LOGIN_USER");
 		
-		
+		Map<String, Object> commentMap = myPageService.getComments(user.getId());
+		model.addAttribute("commentMap", commentMap);
 		
 		return "mypage/comment";
 	}
 	
 	@RequestMapping("/post.camp")
-	public String post() {
+	public String post(Model model, HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> boardMap = myPageService.getBoards(user.getId());
+		model.addAttribute("boardMap", boardMap);
 		
 		return "mypage/post";
 	}
