@@ -48,10 +48,9 @@
             width: 1200px;
             margin: 0 auto;
             position: absolute;
-            
             left: 50%;
             margin-left: -600px;
-            top: 45px;
+            top: 30px;
         }
         #container.scrolled {background-color: #383943;}
         li{list-style: none;}
@@ -59,7 +58,7 @@
         .logo h1{margin: 0;}
         
         .topmenu{text-align: center;}
-        .topmenu>ul{display: inline-block; float: left; padding: 0; margin: 24px -60px 18px 60px;}
+        .topmenu>ul{display: inline-block; float: left; padding: 0; margin: 33px -60px 18px 60px;}
         .topmenu>ul>li{float: left; font-size: 18px; margin: 0 32px;}
         .topmenu ul li>a{font-weight: 600; color: #fff; padding: 20px 0px;}
         .topmenu ul li>a:hover{color: #0d7ebf; font-weight: bold;}
@@ -74,7 +73,7 @@
         .topmenu .topsearch legend{display: none}
         .topmenu .topsearch .btn-search{position: absolute; top: 1px; right: 3px; background: none; padding: 0; margin: 0; border: none;
                             color: #fff; cursor: pointer; height: 26px; width: 26px; text-align: center; outline: 0; font-size: 13px;}
-        #container .searchli {position: relative;}
+       /*  #container .searchli {position: relative;}
         #container .topsearch fieldset {position: relative; height: 26px;}
         #container .result-wrap {background: #fff; position: absolute; top: 42px; left: 0; width: 400px; left: 50%; margin-left: -200px;
     							display: none; max-height: 400px; box-shadow: 7px 7px 20px rgba(0,0,0,.28);}
@@ -89,7 +88,7 @@
         #resulttop .sitem .cright .cpath {color: #3EA9CD; margin: 4px 0 5px 0;}
         #resulttop .sitem .cright .sbjval {font-size: 15px;}
         #resulttop .sitem .clink {margin-top: 10px;}
-        .fr {float: right;}
+        .fr {float: right;} */
         
         
     </style>
@@ -97,12 +96,12 @@
 <nav id="container">
     <div class="gnb">
         <ul class="">
-            <li><a href="#">HOME</a></li>
+            <li><a href="/camping/home.camp">HOME</a></li>
             <li><a href="#">공지사항</a></li>
             <c:choose>
             	<c:when test="${empty LOGIN_USER }">
-		            <li><a href="#" id="open-register-modal">회원가입</a></li>
-		            <li><a href="#" id="open-login-modal">로그인</a></li>
+		            <li><a id="open-register-modal">회원가입</a></li>
+		            <li><a id="open-login-modal">로그인</a></li>
             	</c:when>
             	<c:otherwise>
 		            <c:choose>
@@ -113,7 +112,7 @@
 				            <li><a href="mypage/mypage.camp">마이페이지</a></li>
 			            </c:otherwise>
 		            </c:choose>
-			        <li><a href="#"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
+			        <li><a href="mypage/info.camp"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
 			        <li><a href="logout.camp">로그아웃</a></li>
             	</c:otherwise>
             </c:choose>
@@ -121,7 +120,7 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="#"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="/camping/home.camp"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
@@ -131,16 +130,16 @@
                 <li><a href="#">카라반</a></li>
                 <li><a href="#">테마검색</a></li>
                 <li>
-                    <a data-toggle="collapse" href="#">캠핑톡</a>
+                    <a data-toggle="collapse" href="/camping/community/home.camp">캠핑톡</a>
                     <ul>
                         <li><a class="panel-collapse collapse" href="#">가입인사</a></li>
                         <li><a class="panel-collapse collapse" href="#">캠핑 리뷰</a></li>
                         <li><a class="panel-collapse collapse" href="#">자유게시판</a></li>
                     </ul>
                 </li>
-                <li class="searchli">
+                <!-- <li class="searchli">
                     <div class="topsearch">
-                       <form action="" method="get" id="layout-search-border"> <!--onsubmit-->
+                       <form action="" method="get" id="layout-search-border"> onsubmit
                            <fieldset>
                                 <legend>통합검색 폼</legend>
                                 <input autocomplete="off" type="text" id="totalsearch" class="search-input" name="keyword" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" value="">
@@ -152,7 +151,7 @@
                     </div>
                     <div class="result-wrap">
                         <img src="/camping/resources/images/t_arr_blue.png" class="t-arr-blue">
-                        <i class="glyphicon glyphicon-remove-circle hand" aria-hidden="true"></i> <!--onclick 안내창 숨기기-->
+                        <i class="glyphicon glyphicon-remove-circle hand" aria-hidden="true"></i> onclick 안내창 숨기기
                         <h3 id="bot">
                             <span class="fblack">''</span>
                             <span>100건</span>
@@ -172,36 +171,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="resulttop" style="display: block;">
-                            <div class="sitem">
-                                <img src="/camping/resources/images/slide15.jpg" width="80" height="45">
-                                <div class="fl cright hand">
-                                    <p class="cpath">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="/camping/resources/images/direct.svg" width="26" height="26" title="#">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="resulttop" style="display: block;">
-                            <div class="sitem">
-                                <img src="/camping/resources/images/slide15.jpg" width="80" height="45">
-                                <div class="fl cright hand">
-                                    <p class="cpath">충남 > 태안군 > 남면</p>
-                                    <p class="sbjval"><span class="highlight">몽산포 홀리데이파크</span></p>
-                                </div>
-                                <div class="fr clink">
-                                    <a href="#" class="cdirectlink">
-                                        <img src="/camping/resources/images/direct.svg" width="26" height="26" title="#">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -324,6 +295,15 @@
 		</div>
 	</div>
 <script type="text/javascript">
+
+	window.onscroll = function() {scrollFunction()};
+	function scrollFunction() {
+		if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+			$("#container").addClass('scrolled');
+		} else {
+			$("#container").removeClass('scrolled');
+		}
+	}		
 
 $('#abc').on('submit',function(data){
 

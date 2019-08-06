@@ -3,22 +3,32 @@
 
 <mapper namespace="com.sample.camping.dao.HomeDao">
 
-	<select id="getCountByKeyword" parameterType="string" resultType="int">
+	<select id="getCountByKeyword" parameterType="map" resultType="int">
 		select
 			count(*)
 		from
 			camp_campsites
-		where
-			campsite_name like '%' || #{keyword} || '%'
+		<where>
+			<choose>
+				<when test="gubun == 'sido'">
+				campsite_sido = #{city}
+				</when>
+				<when test="gubun == 'gugun'">
+				campsite_gugun = #{city}
+				</when>
+			</choose>
+			<if test="keyword != null">
+				and campsite_name like '%' || #{keyword} || '%'
+			</if>
+		</where>
 	</select>
 	
-	<select id="getCampSitesByKeyword" parameterType="map" resultType="campSite">
+	<select id="searchCampSites" parameterType="map" resultType="campSite">
 		select
 			no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYN, myCampsiteNo
-		from (
-				select
+		from (	select
 					row_number() over(order by CAMPSITE_NO desc) as row_no
-					CAMPSITE_NO			no		
+					,CAMPSITE_NO			no		
 					,CAMPSITE_NAME			name
 					,CAMPSITE_SORT			sort
 					,CAMPSITE_LATITUDE		latitude
@@ -33,13 +43,27 @@
 					,CAMPSITE_POINT			point
 					,CAMPSITE_CREATE_DATE	createDate
 					,CAMPSITE_USED_YN		usedYN
+					,CAMPSITE_SIDO			sido
+					,CAMPSITE_GUGUN			gugun
 					,MY_CAMPSITE_NO			myCampsiteNo
 				from
 					camp_campsites
-				where
-					campsite_name like '%' || #{keyword} || '%'
+				<where>
+					<choose>
+						<when test="gubun == 'sido'">
+						campsite_sido = #{city}
+						</when>
+						<when test="gubun == 'gugun'">
+						campsite_gugun = #{city}
+						</when>
+					</choose>
+					<if test="keyword != null">
+						and campsite_name like '%' || #{keyword} || '%'
+					</if>
+				</where>
 				)
 		where row_no >= #{begin} and row_no &lt;= #{end} 
+		
 	</select>
 
 </mapper>

@@ -499,23 +499,23 @@
     			<div class="mapwrap">
     				<img alt="" src="/camping/resources/images/kmap.gif" usemap="#campMap"   id="Map"> <!-- 마우스오버시 그림바뀌기 -->
     				<map name="campMap" id="campMap">
-					<area shape="poly" onfocus="xxx()" coords="49,59,51,58,56,55,69,46,78,75,66,75,49,74,51,68,48,59" href="javascript:;" alt="서울" class="kmap_02" onclick="sido('서울','','')">
-					<area shape="poly" onfocus="xxx()" coords="47,45,47,45,47,39,51,36,51,29,65,14,80,28,89,34,96,41,93,45,95,59,105,71,102,82,103,88,101,95,85,100,75,105,52,99,45,91,42,83,46,74,79,74,68,46,49,59,43,55,43,47" href="javascript:;" alt="경기" class="kmap_031" onclick="sido('경기','','')">
-					<area shape="poly" onfocus="xxx()" coords="15,53,28,41,42,51,44,58,47,63,51,71,46,73,34,73,22,60,22,54" href="javascript:;" alt="인천" class="kmap_032" onclick="sido('인천','','')">
-					<area shape="poly" onfocus="xxx()" coords="66,17,92,16,103,17,110,9,128,15,140,1,137,10,159,43,189,91,161,92,142,105,136,93,133,89,125,85,104,93,105,72,98,63,113,59,95,64,91,49,100,40,83,32,78,25,86,27" href="javascript:;" alt="강원" class="kmap_033" onclick="sido('강원','','')">
-					<area shape="poly" onfocus="xxx()" coords="40,84,26,101,14,116,26,125,23,131,29,138,34,137,38,145,37,148,37,158,49,164,61,159,62,152,76,154,74,146,72,132,76,126,71,118,78,106,56,100,48,100" href="javascript:;" alt="충남" class="kmap_041" onclick="sido('충남','','')">
-					<area shape="poly" onfocus="xxx()" coords="90,133,72,146,74,153,97,165,91,145,93,133" href="javascript:;" alt="대전" class="kmap_042" onclick="sido('대전','','')">
-					<area shape="poly" onfocus="xxx()" coords="139,97,130,122,121,124,108,134,110,141,114,145,116,153,110,168,99,168,96,160,94,152,92,141,94,125,82,104,91,100,117,84,133,90" href="javascript:;" alt="충북" class="kmap_043" onclick="sido('충북','','')">
-					<area shape="poly" onfocus="xxx()" coords="185,93,169,90,153,94,145,105,135,105,124,118,118,126,111,133,109,142,118,154,109,170,120,175,130,180,140,152,162,164,149,190,154,194,178,179,195,183,189,140,192,109,189,98,179,87" href="javascript:;" alt="경북" class="kmap_054" onclick="sido('경북','','')">
-					<area shape="poly" onfocus="xxx()" coords="147,189,127,188,131,185,132,166,138,149,164,164,145,191" href="javascript:;" alt="대구" class="kmap_053" onclick="sido('대구','','')">
-					<area shape="poly" onfocus="xxx()" coords="167,187,155,195,185,210,195,181,175,181,166,186" href="javascript:;" alt="울산" class="kmap_052" onclick="sido('울산','','')">
-					<area shape="poly" onfocus="xxx()" coords="177,201,135,226,137,230,155,243,183,220,182,211" href="javascript:;" alt="부산" class="kmap_051" onclick="sido('부산','','')">
-					<area shape="poly" onfocus="xxx()" coords="106,172,97,179,93,200,99,218,102,226,110,249,139,247,155,244,139,233,137,223,174,202,159,196,148,188,124,180,107,171" href="javascript:;" alt="경남" class="kmap_055" onclick="sido('경남','','')">
-					<area shape="poly" onfocus="xxx()" coords="42,160,49,164,59,154,74,152,85,160,109,169,95,182,93,208,76,210,55,198,45,199,33,203,35,189,41,176,45,171,41,168,41,161" href="javascript:;" alt="전북" class="kmap_063" onclick="sido('전북','','')">
-					<area shape="poly" onfocus="xxx()" coords="1,274,9,284,26,274,33,268,47,275,64,275,77,271,91,262,92,255,107,252,104,230,96,209,76,211,55,198,26,205,38,217,63,210,69,221,65,230,53,230,44,228,43,221,29,206,7,217,8,233,3,252,1,269" href="javascript:;" alt="전남" class="kmap_061" onclick="sido('전남','','')">
-					<area shape="poly" onfocus="xxx()" coords="44,214,40,218,41,224,47,227,65,230,69,218,58,208,43,213" href="javascript:;" alt="광주" class="kmap_062" onclick="sido('광주','','')">
-					<area shape="poly" onfocus="xxx()" coords="17,306,26,296,46,289,61,292,52,308,42,312,23,313,17,307" href="javascript:;" alt="제주" class="kmap_064" onclick="sido('제주','','')">
-					<area shape="poly" onfocus="xxx()" coords="80,101,73,118,77,125,73,135,74,144,93,136,93,124" href="javascript:;" alt="세종" class="kmap_044" onclick="sido('세종','','')">
+					<area shape="poly" mouseover="xxx()" coords="49,59,51,58,56,55,69,46,78,75,66,75,49,74,51,68,48,59" href="javascript:;" alt="서울" class="kmap-seoul" onclick="sido('서울','','')">
+					<area shape="poly" onfocus="xxx()" coords="47,45,47,45,47,39,51,36,51,29,65,14,80,28,89,34,96,41,93,45,95,59,105,71,102,82,103,88,101,95,85,100,75,105,52,99,45,91,42,83,46,74,79,74,68,46,49,59,43,55,43,47" href="javascript:;" alt="경기" class="kmap-gyeonggi" onclick="sido('경기','','')">
+					<area shape="poly" onfocus="xxx()" coords="15,53,28,41,42,51,44,58,47,63,51,71,46,73,34,73,22,60,22,54" href="javascript:;" alt="인천" class="kmap-inchoen" onclick="sido('인천','','')">
+					<area shape="poly" onfocus="xxx()" coords="66,17,92,16,103,17,110,9,128,15,140,1,137,10,159,43,189,91,161,92,142,105,136,93,133,89,125,85,104,93,105,72,98,63,113,59,95,64,91,49,100,40,83,32,78,25,86,27" href="javascript:;" alt="강원" class="kmap-gangwon" onclick="sido('강원','','')">
+					<area shape="poly" onfocus="xxx()" coords="40,84,26,101,14,116,26,125,23,131,29,138,34,137,38,145,37,148,37,158,49,164,61,159,62,152,76,154,74,146,72,132,76,126,71,118,78,106,56,100,48,100" href="javascript:;" alt="충남" class="kmap-chungnam" onclick="sido('충남','','')">
+					<area shape="poly" onfocus="xxx()" coords="90,133,72,146,74,153,97,165,91,145,93,133" href="javascript:;" alt="대전" class="kmap-daejeon" onclick="sido('대전','','')">
+					<area shape="poly" onfocus="xxx()" coords="139,97,130,122,121,124,108,134,110,141,114,145,116,153,110,168,99,168,96,160,94,152,92,141,94,125,82,104,91,100,117,84,133,90" href="javascript:;" alt="충북" class="kmap-chungbuk" onclick="sido('충북','','')">
+					<area shape="poly" onfocus="xxx()" coords="185,93,169,90,153,94,145,105,135,105,124,118,118,126,111,133,109,142,118,154,109,170,120,175,130,180,140,152,162,164,149,190,154,194,178,179,195,183,189,140,192,109,189,98,179,87" href="javascript:;" alt="경북" class="kmap-gyeongbuk" onclick="sido('경북','','')">
+					<area shape="poly" onfocus="xxx()" coords="147,189,127,188,131,185,132,166,138,149,164,164,145,191" href="javascript:;" alt="대구" class="kmap-daegu" onclick="sido('대구','','')">
+					<area shape="poly" onfocus="xxx()" coords="167,187,155,195,185,210,195,181,175,181,166,186" href="javascript:;" alt="울산" class="kmap-ulsan" onclick="sido('울산','','')">
+					<area shape="poly" onfocus="xxx()" coords="177,201,135,226,137,230,155,243,183,220,182,211" href="javascript:;" alt="부산" class="kmap-busan" onclick="sido('부산','','')">
+					<area shape="poly" onfocus="xxx()" coords="106,172,97,179,93,200,99,218,102,226,110,249,139,247,155,244,139,233,137,223,174,202,159,196,148,188,124,180,107,171" href="javascript:;" alt="경남" class="kmap-gyeongnam" onclick="sido('경남','','')">
+					<area shape="poly" onfocus="xxx()" coords="42,160,49,164,59,154,74,152,85,160,109,169,95,182,93,208,76,210,55,198,45,199,33,203,35,189,41,176,45,171,41,168,41,161" href="javascript:;" alt="전북" class="kmap-jeonbuk" onclick="sido('전북','','')">
+					<area shape="poly" onfocus="xxx()" coords="1,274,9,284,26,274,33,268,47,275,64,275,77,271,91,262,92,255,107,252,104,230,96,209,76,211,55,198,26,205,38,217,63,210,69,221,65,230,53,230,44,228,43,221,29,206,7,217,8,233,3,252,1,269" href="javascript:;" alt="전남" class="kmap-jeonnam" onclick="sido('전남','','')">
+					<area shape="poly" onfocus="xxx()" coords="44,214,40,218,41,224,47,227,65,230,69,218,58,208,43,213" href="javascript:;" alt="광주" class="kmap-gwanju" onclick="sido('광주','','')">
+					<area shape="poly" onfocus="xxx()" coords="17,306,26,296,46,289,61,292,52,308,42,312,23,313,17,307" href="javascript:;" alt="제주" class="kmap-jeju" onclick="sido('제주','','')">
+					<area shape="poly" onfocus="xxx()" coords="80,101,73,118,77,125,73,135,74,144,93,136,93,124" href="javascript:;" alt="세종" class="kmap-sejong" onclick="sido('세종','','')">
 					</map>
     			</div>
     		</div>
@@ -536,23 +536,23 @@
     				<div class="fl selectsido">
     					<select name="cate1" id="cate1" class="searchSelect">	<!-- onchange때 select박스 추가 -->
     						<option value selected>전국</option>
-    						<option value="서울">서울</option>
-    						<option value="경기">경기</option>
-    						<option value="인천">인천</option>
-    						<option value="강원">강원</option>
-    						<option value="충남">충남</option>
-    						<option value="대전">대전</option>
-    						<option value="충북">충북</option>
-    						<option value="세종">세종</option>
-    						<option value="부산">부산</option>
-    						<option value="울산">울산</option>
-    						<option value="대구">대구</option>
-    						<option value="경북">경북</option>
-    						<option value="경남">경남</option>
-    						<option value="전남">전남</option>
-    						<option value="광주">광주</option>
-    						<option value="전북">전북</option>
-    						<option value="제주">제주</option>
+    						<option value="서울특별시">서울</option>
+    						<option value="경기도">경기</option>
+    						<option value="인천광역시">인천</option>
+    						<option value="강원도">강원</option>
+    						<option value="충청남도">충남</option>
+    						<option value="대전광역시">대전</option>
+    						<option value="충청북도">충북</option>
+    						<option value="세종특별자치시">세종</option>
+    						<option value="부산광역시">부산</option>
+    						<option value="울산광역시">울산</option>
+    						<option value="대구광역시">대구</option>
+    						<option value="경상북도">경북</option>
+    						<option value="경상남도">경남</option>
+    						<option value="전라남도">전남</option>
+    						<option value="광주광역시">광주</option>
+    						<option value="전라북도">전북</option>
+    						<option value="제주특별자치시">제주</option>
     						
     					</select>
     					<select name="cate2" id="cate2" class="searchSelect subselect" style="display: inline-block;">	<!-- onchange때 select박스 추가 -->
@@ -567,7 +567,7 @@
     						<option value="은평구">은평구</option>
     						<option value="중랑구">중랑구</option>
     					</select>
-    					<select name="cate3" id="cate3" class="searchSelect subselect" style="display: inline-block;">	<!-- onchange때 select박스 추가 -->
+    					<select name="cate3" id="cate3" class="searchSelect subselect" style="display: none;">	<!-- onchange때 select박스 추가 -->
     						<option value selected>읍면동 전체</option>
     						<option value="상암동">상암동</option>
     						<option value="창천동">창천동</option>
@@ -582,71 +582,8 @@
     				<div class="hide" id="npage">1</div>
     				<div class="hide" id="npage">103</div>
     				<div class="hide" id="npage">615</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
-    				</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
-    				</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
-    				</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
-    				</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
-    				</div>
-    				<div class="items hand col-sm-4">	<!-- onclick: 링크이동 -->
-    					<div class="photo">
-    						<img src="/camping/resources/images/camping1.jpg" class="tm">
-    						<span class="distance">3.7km</span>
-    						<span class="cat" style="color: #91ee6c">유료캠핑장</span>
-    					</div>
-    					<div class="cont">
-    						<p class="tt">송도 스포츠파크 캠핑장</p>
-    						<p class="mcont">인천 > 연수구 > 송도동</p>
-    					</div>
+    				<div class="items hand col-sm-4" id="location-items">	<!-- onclick: 링크이동 -->
+    					
     				</div>
     			</div>
     		</div>
@@ -747,7 +684,6 @@
 			'현재 시간은 '+dt.getHours()+'시 '+dt.getMinutes()+'분 입니다.','찾는 캠핑장이 없으면 관리자를 조르세요', '만든이: 지민, 은정, 동건, 수정, 혜인, 본경'];
 
  	
- 	
 	$("#search-box").focus(function() {
 		$(".search-form").addClass('outlight');
 		$("#random-massage").text(massage[Math.round(Math.random()*massage.length)]);
@@ -778,11 +714,12 @@
 		searchFind(keyword, pno);
 	})
 	
+	/* 검색결과 */
 	function searchFind(keyword, pno) {
 		$.ajax ({
 			type:"get",
 			url:"search.camp",
-			data:{keyword:keyword, pno:pno},
+			data:{keyword:keyword, pno:pno, size:100},
 			dataType:"json",
 			success:function(result) {
 				$("#random-massage").html('<span class="b blue">'+"'"+keyword+"'"+'</span> <span class="b">'+result.count+'건</span> 이 검색되었네요');
@@ -850,9 +787,105 @@
 		alert(name);
 	}
 	
+	/* 맵 */
 	function xxx() {
-		console.log("on");
 	}
+	$(".kmap-seoul").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Seoul.gif');
+	});
+	$(".kmap-gyeonggi").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Gyeonggi.gif');
+	});
+	$(".kmap-inchoen").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Inchoen.gif');
+	});
+	$(".kmap-gangwon").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Gangwon.gif');
+	});
+	$(".kmap-chungnam").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Chungnam.gif');
+	});
+	$(".kmap-chungbuk").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Chungbuk.gif');
+	});
+	$(".kmap-sejong").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Sejong.gif');
+	});
+	$(".kmap-busan").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Busan.gif');
+	});
+	$(".kmap-ulsan").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Ulsan.gif');
+	});
+	$(".kmap-daegu").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Daegu.gif');
+	});
+	$(".kmap-gyeongbuk").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Gyeongbuk.gif');
+	});
+	$(".kmap-gyeongnam").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Gyeongnam.gif');
+	});
+	$(".kmap-gwanju").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Gwangju.gif');
+	});
+	$(".kmap-jeonnam").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Jeonnam.gif');
+	});
+	$(".kmap-jeonbuk").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Jeonbuk.gif');
+	});
+	$(".kmap-jeju").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Jeju.gif');
+	});
+	$(".kmap-daejeon").mouseover(function(event) {
+		$("#Map").attr('src','/camping/resources/images/kmap_Daejeon.gif');
+	});
+
+	/* 지역별 검색 */
+	$("#cate1").change(function() {
+		var gubun = "sido";
+		var city = $(this).val();
+		
+		searchCampSites(gubun, city, 1);
+	})
+	
+	$("#cate2").change(function() {
+		var gubun = "gugun";
+		var city = $(this).val();
+		
+		searchCampSites(gubun, city, 1);
+	})
+	
+	function searchCampSites(a, b, c) {
+		$.ajax({
+			url: "search.camp",
+			data:{gubun:a, city:b, pno:c, size:6},
+			dataType:"json",
+			success: function(data) {
+				
+				$.each(data.items, function(index, camp) {
+					var html = '<div class="photo">';
+					html += '<img src="/camping/resources/images/camping1.jpg" class="tm">';
+					html += '<span class="distance">3.7km</span>';
+					html += '<span class="cat" style="color: #91ee6c">유료캠핑장</span>';
+					html += '</div>';
+					html += '<div class="cont">';
+					html += '<p class="tt">송도 스포츠파크 캠핑장</p>';
+					html += '<p class="mcont">인천 > 연수구 > 송도동</p>';
+					html += '</div>';
+					
+					$("#location-items").append(html);
+					
+				})
+			}
+		})
+		
+	}
+	
+	/* $("#cate1").change(function() {
+		$("#cate2").attr('style', 'display: inline-block');
+	}) */
 	
 	/* 차트 */
 	var myCircle = Circles.create({
