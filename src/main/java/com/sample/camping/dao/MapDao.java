@@ -10,7 +10,7 @@ public interface MapDao {
 	List<CampSite> getCampSites(Map<String, Object> param);
 	List<CampSite> getCampSitesList(Map<String, Object>param);
 	Integer getCampSitesCount(Map<String,Object>param);
-	List<CampSite> getAllCampSites(); 
+	List<CampSite> getAllCampSites(String sort); 
 	CampSite getLatLngCamp(Map<String, Object>param);
 	List<CampSite> getCampNameAndAdress(String keyword);
 	Integer getCampAddressCount(String keyword);

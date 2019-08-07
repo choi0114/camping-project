@@ -273,7 +273,7 @@ WHERE
 AND
 				CAMPSITE_LONGITUDE=#{lng}
 </select>
-<select id="getAllCampSites" resultType="campSite">
+<select id="getAllCampSites" parameterType="string" resultType="campSite">
 		select
 			campsite_no no,
 			campsite_name name,
@@ -293,6 +293,11 @@ AND
 			campsite_sido sido
 		from
 			camp_campsites
+		<where>
+			<if test="sort != '없음'">
+				campsite_sort = #{sort}
+			</if>
+		</where>
 		order by
 			campsite_no desc	
 </select>

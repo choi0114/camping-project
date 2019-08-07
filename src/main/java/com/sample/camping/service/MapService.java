@@ -9,7 +9,7 @@ public interface MapService {
 
 	List<CampSite> getCampSites(Map<String, Object> param);
 	List<CampSite> getCampSitesList(Map<String, Object>param);
-	List<CampSite> getAllCampSites();
+	List<CampSite> getAllCampSites(String sort);
 	Integer getCampSitesCount(Map<String, Object>param);
 	CampSite getLatLngCamp(Map<String, Object>param);
 	List<CampSite> getCampNameAndAdress(String keyword);
