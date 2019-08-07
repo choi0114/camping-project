@@ -25,4 +25,9 @@ public class HomeServiceImpl implements HomeService{
 	public List<CampSite> searchCampSites(Map<String, Object> map) {
 		return homeDao.searchCampSites(map);
 	}
+	
+	@Override
+	public List<CampSite> getGugunBysido(String city) {
+		return homeDao.getGugunBysido(city);
+	}
 }

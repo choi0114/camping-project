@@ -11,6 +11,9 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<logger name="com.sample.camping.dao">
+		<level value="trace" />
+	</logger>
 	<logger name="com.sample.camping">
 		<level value="info" />
 	</logger>

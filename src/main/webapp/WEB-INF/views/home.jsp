@@ -521,15 +521,15 @@
     		</div>
     		<div class="fl kmapright col-sm-9">
     			<div class="head">
-    				<div class="fl total-cnt countbox"><span id="total-cnt">2390</span>개</div>
+    				<div class="fl total-cnt countbox"><span id="total-cnt">0</span>개</div>
     				<div class="fl page-ui">
-	    				<a href="#" class="fl btn-page prev-page">
+	    				<a href="#" class="fl btn-page prev-page" id="btn-prev">
 	    					<i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
 	    				</a>	<!-- 클릭시 클래스 on 추가 -->
 	    				<div class="fl pagestat">
-	    					<span id="nowpage" class="b blue">1</span> / <span id="totalpage">399</span>
+	    					<span id="nowpage" class="b blue">1</span> / <span id="totalpage">1</span>
 	    				</div>
-	    				<a href="#" class="fl btn-page next-page on">
+	    				<a href="#" class="fl btn-page next-page on" id="btn-next">
 	    					<i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
 	    				</a>
     				</div>
@@ -578,14 +578,7 @@
     					캠핑장 등록 및 광고문의
     				</a>
     			</div>
-    			<div class="camp-right-content">
-    				<div class="hide" id="npage">1</div>
-    				<div class="hide" id="npage">103</div>
-    				<div class="hide" id="npage">615</div>
-    				<div class="items hand col-sm-4" id="location-items">	<!-- onclick: 링크이동 -->
-    					
-    				</div>
-    			</div>
+    			
     		</div>
     	</div>
     </div>
@@ -843,39 +836,61 @@
 	});
 
 	/* 지역별 검색 */
+	/* var pno = 1;
+	pno = function({
+		$("#btn-next").click(function(event) {
+			pno++;
+		})
+	}) */
+	
 	$("#cate1").change(function() {
 		var gubun = "sido";
 		var city = $(this).val();
 		
-		searchCampSites(gubun, city, 1);
+		searchCampSites(gubun, city, 1, 6);
 	})
 	
 	$("#cate2").change(function() {
 		var gubun = "gugun";
 		var city = $(this).val();
 		
-		searchCampSites(gubun, city, 1);
+		searchCampSites(gubun, city, 1, 6);
 	})
 	
-	function searchCampSites(a, b, c) {
+	
+	function searchCampSites(a, b, c, d) {
 		$.ajax({
 			url: "search.camp",
-			data:{gubun:a, city:b, pno:c, size:6},
+			data:{gubun:a, city:b, pno:c, size:d},
 			dataType:"json",
 			success: function(data) {
 				
+				console.log(data);
+				$("#total-cnt").text(data.count);
+				$("#totalpage").text(data.pagination.totalPages);
+				
 				$.each(data.items, function(index, camp) {
-					var html = '<div class="photo">';
+					var html = '<div class="camp-right-content">';
+					html += '<div class="items hand col-sm-4" id="location-items">';
+					html += '<div class="photo">';
 					html += '<img src="/camping/resources/images/camping1.jpg" class="tm">';
 					html += '<span class="distance">3.7km</span>';
-					html += '<span class="cat" style="color: #91ee6c">유료캠핑장</span>';
+					if(camp.sort == 'CAMP') {
+						html += '<span class="cat" style="color: #91ee6c">'+camp.sort+'</span>';
+					} else if(camp.sort == 'CAR') {
+						html += '<span class="cat" style="color: #60b7ee">'+camp.sort+'</span>';
+					} else if(camp.sort == 'NORMAL') {
+						html += '<span class="cat" style="color: #f5ad22">'+camp.sort+'</span>';
+					}
 					html += '</div>';
 					html += '<div class="cont">';
-					html += '<p class="tt">송도 스포츠파크 캠핑장</p>';
-					html += '<p class="mcont">인천 > 연수구 > 송도동</p>';
+					html += '<p class="tt">'+camp.name+'</p>';
+					html += '<p class="mcont">'+camp.sido+'>'+camp.gugun+'</p>';
+					html += '</div>';
+					html += '</div>';
 					html += '</div>';
 					
-					$("#location-items").append(html);
+					$(".kmapright .head").after(html);
 					
 				})
 			}

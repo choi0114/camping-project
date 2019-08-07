@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.HomeService;
+import com.sample.camping.vo.Pagination;
 
 @Controller
 public class HomeController {
@@ -38,13 +39,21 @@ public class HomeController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("city", city);
 		param.put("gubun", gubun);
-		param.put("keyword", keyword);
 		param.put("begin", begin);
 		param.put("end", end);
+		if (!keyword.isEmpty()) {
+			param.put("keyword", keyword);
+		}
+		
+		int records = homeService.getCountByKeyword(param);
+		Pagination pagination = new Pagination(pno, size, records);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("count", homeService.getCountByKeyword(param));
+		
+		result.put("count", records);
+		result.put("pagination", pagination);
 		result.put("items", homeService.searchCampSites(param));
+		result.put("gugun", homeService.getGugunBysido(city));
 		
 		return result;
 	}

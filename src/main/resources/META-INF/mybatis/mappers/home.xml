@@ -63,7 +63,12 @@
 				</where>
 				)
 		where row_no >= #{begin} and row_no &lt;= #{end} 
-		
+	</select>
+	
+	<select id="getGugunBysido" parameterType="String" resultType="campSite">
+		SELECT distinct CAMPSITE_GUGUN
+		FROM camp_campsites
+		where campsite_sido = #{city}
 	</select>
 
 </mapper>
