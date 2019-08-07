@@ -44,13 +44,13 @@
 							<a href="detail.do"> 
 								<img src="/camping/resources/images/product/${product.photo }" alt="Nature" style="width: 100%">
 							</a>
+								<h4>${product.name }</h4>
 							<hr>
 							<div class="caption">
-								<h4>${product.name }</h4>
 					
 					
-								<p>${product.price }원</p>
-								<p>${product.summary }</p>
+								<h5>${product.price }원</h5>
+								<h6>${product.summary }</h6>
 								<div class="text-center"><a href="addCart.do?productNo=${product.goodsNo }" class="btn btn-primary">담기</a></div>
 							</div>
 						</div>
@@ -80,10 +80,11 @@
 					var row = '<div class="col-md-4">'
 					row += '<div class="thumbnail">'
 					row += '<a href="detail.do">' 
-					row += '<img src="resources/images/'+product.imgName+'" alt="Nature" style="width: 100%">'
+					row += '<img src="resources/images/'+product.photo+'" alt="Nature" style="width: 100%">'
 					row += '</a>'
 					row += '<div class="caption">'
 					row += '<h4>'+ product.name +'</h4>'
+					row += '<p>'+ product.price +'원</p>'
 					row += '<p>'+ product.price +'원</p>'
 					row += '<div class="text-center"><a href="" class="btn btn-primary">담기</a></div>'
 					row += '</div>'

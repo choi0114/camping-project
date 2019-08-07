@@ -27,7 +27,7 @@ div {
     color: coral;
     text-align: center;
     margin-top: 20px;
-    margin-left: -30px;
+    margin-left: -80px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -48,7 +48,6 @@ div {
 }
 .title {
     margin-top: 20px;
-    margin-left: -35px;
     font-size: 18px;
     font-weight: bolder
 }
@@ -89,8 +88,8 @@ div {
     margin-left: 20px;
    
 }
+
 .like-comment {
-    margin-left: -20px;
     color: #868e96
 }
 .comment {

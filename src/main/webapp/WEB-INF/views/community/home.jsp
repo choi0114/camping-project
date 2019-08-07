@@ -20,7 +20,7 @@
   	
   </style>
 </head>
-<body>
+<body style="background-color:#f7f7f9" >
 <div class="row">
     <div class="col-sm-3 col-sm-offset-2 page-head-left " id="community-sort">
         커뮤니티 > 전체: 최신순
@@ -46,33 +46,36 @@
 </div>
 <hr/>
 <div class="row bottom">
-    <div class="col-sm-2 col-sm-offset-2">
-   		<div class="panel panel-primary">
-   			
-   			<ul class="list-group" id="dept-list-box">
-    			<li class='list-group-item active' data-board-type="0"  id="new" >전체: 최신순 </li>
-    			<li class='list-group-item' data-board-type="1" id="join" >가입인사 게시판 </li>
-    			<li class='list-group-item' data-board-type="2" id="review" >캠핑장 리뷰 게시판 </li>
-    			<li class='list-group-item' data-board-type="3" id="opinion" >캠핑장 의견 게시판 </li>
-    			<li class='list-group-item ' data-board-type="4" id="free" >자유 게시판 </li>
+    <div class="col-sm-2 col-sm-offset-2 ">
+    
+   		<div class="panel panel-default category">
+   			<div class="panel-heading">
+					CATEGORY
+			</div>
+   			<ul class="nav nav-pills nav-stacked" id="dept-list-box">
+    			<li class='item active' data-board-type="0"  id="new" ><a href="#">전체: 최신순 </a></li>
+    			<li class='item' data-board-type="1" id="join" ><a href="#">가입인사 게시판 </a></li>
+    			<li class='item' data-board-type="2" id="review" ><a href="#">캠핑장 리뷰 게시판 </a></li>
+    			<li class='item' data-board-type="3" id="opinion" ><a href="#">캠핑장 의견 게시판 </a></li>
+    			<li class='item' data-board-type="4" id="free" ><a href="#">자유 게시판 </a></li>
    			</ul>
    		</div>
     </div>
     <div class="col-sm-5 " >
         <div class="in-board">
 	        <!-- right-box 시작 -->
-	        <div class="row" style="height:320x;">
-	        	<div class="row join-board " >
+	        <div class="row panel panel-default">
+	        	<div class="row join-board panel-heading" >
 	        		<div class="col-sm-6">
 	        			<div class="row">
-				        	<h3>▶ 가입인사 게시판</h3>
+				        	<h3> 가입인사 게시판</h3>
 	        			</div>
 	        		</div>
 	        		<div class="col-sm-6 text-right more">
 		        		<a  data-pno="1" data-Tnum="1">더보기</a>
 	        		</div>
 	        	</div>
-				<div class="row right-box">
+				<div class="row right-box" style="height:260px;">
 					<table class="table">
 						<colgroup>
 							<col width="70%" />
@@ -99,18 +102,18 @@
 				</div>
 	        </div>
 			
-			 <div class="row" style="height:320px;">
-	        	<div class="row join-board">
+			 <div class="row panel panel-default">
+	        	<div class="row join-board panel-heading">
 	        		<div class="col-sm-6">
 	        			<div class="row">
-				        	<h3>▶ 캠핑장 리뷰 게시판</h3>
+				        	<h3> 캠핑장 리뷰 게시판</h3>
 	        			</div>
 	        		</div>
 	        		<div class="col-sm-6 text-right more">
 		        		<a data-pno="1" data-Tnum="2">더보기</a>
 	        		</div>
 	        	</div>
-				<div class="row right-box">
+				<div class="row right-box"  style="height:260px;">
 					<table class="table">
 						<colgroup>
 							<col width="70%" />
@@ -137,18 +140,18 @@
 				</div>
 	        </div>
 	        
-	         <div class="row" style="height:320px;">
-	        	<div class="row join-board">
+	         <div class="row panel panel-default">
+	        	<div class="row join-board panel-heading">
 	        		<div class="col-sm-6">
 	        			<div class="row">
-				        	<h3>▶ 캠핑장 의견 게시판</h3>
+				        	<h3> 캠핑장 의견 게시판</h3>
 	        			</div>
 	        		</div>
 	        		<div class="col-sm-6 text-right more">
 		        		<a data-pno="1" data-Tnum="3">더보기</a>
 	        		</div>
 	        	</div>
-				<div class="row right-box">
+				<div class="row right-box" style="height:260px;">
 					<table class="table">
 						<colgroup>
 							<col width="70%" />
@@ -175,18 +178,18 @@
 				</div>
 	        </div>
 	        
-	         <div class="row" style="height:320px;">
-	        	<div class="row join-board">
+	         <div class="row panel panel-default">
+	        	<div class="row join-board panel-heading">
 	        		<div class="col-sm-6">
 	        			<div class="row">
-				        	<h3>▶ 자유 게시판</h3>
+				        	<h3> 자유 게시판</h3>
 	        			</div>
 	        		</div>
 	        		<div class="col-sm-6 text-right more">
 		        		<a data-pno="1" data-Tnum="4">더보기</a>
 	        		</div>
 	        	</div>
-				<div class="row right-box">
+				<div class="row right-box" style="height:260px;">
 					<table class="table">
 						<colgroup>
 							<col width="70%" />
@@ -261,7 +264,7 @@
 			
 		})
 		
-		$(".list-group-item").click(function(){
+		$(".item").click(function(){
 			var boardType = $(this).attr("data-board-type");
 			change(boardType);
 			$(this).addClass('active').siblings().removeClass('active');

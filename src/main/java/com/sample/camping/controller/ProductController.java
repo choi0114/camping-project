@@ -92,7 +92,7 @@ public class ProductController {
 		model.addAttribute("new1",productService.selectProductByCatType(newMap));
 		model.addAttribute("recommend",productService.selectProductByCatType(recommendMap));
 		return "product/category";
-	}
+	} 
 	@GetMapping("/delete.camp")
 	public @ResponseBody String addComment( @RequestParam int no){
 		productService.deleteProduct(no);

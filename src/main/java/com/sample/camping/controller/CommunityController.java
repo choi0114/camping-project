@@ -97,8 +97,9 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/write.camp")
-	public String addwrite (BoardForm boardForm) throws IOException {
+	public String addwrite (BoardForm boardForm, HttpSession session) throws IOException {
 		Board board = new Board();
+		User user = (User) session.getAttribute("LOGIN_USER");
 		BeanUtils.copyProperties(boardForm, board);
 		MultipartFile mf = boardForm.getThumbnailUploadFile();
 		String  profileImageSaveDirectory = "/camping-project/src/main/webapp/resources/images/community";
@@ -110,7 +111,7 @@ public class CommunityController {
 				board.setThumbnail(filename);
 				board.setTitle(boardForm.getTitle());
 				board.setContents(boardForm.getContents());
-				board.setUserId("user");
+				board.setUserId(user.getId());
 				boardService.addJoin(board);
 				
 				return "redirect:home.camp";
@@ -120,7 +121,7 @@ public class CommunityController {
 				board.setTitle(boardForm.getTitle());
 				board.setContents(boardForm.getContents());
 				board.setCampsiteNo(boardForm.getCampsiteNo());
-				board.setUserId("user");
+				board.setUserId(user.getId());
 				boardService.addReview(board);
 				
 				return "redirect:home.camp";
@@ -130,7 +131,7 @@ public class CommunityController {
 				board.setTitle(boardForm.getTitle());
 				board.setContents(boardForm.getContents());
 				board.setCampsiteNo(boardForm.getCampsiteNo());
-				board.setUserId("user");
+				board.setUserId(user.getId());
 				boardService.addOpinion(board);
 				
 				return "redirect:home.camp";
@@ -139,7 +140,7 @@ public class CommunityController {
 				board.setThumbnail(filename);
 				board.setTitle(boardForm.getTitle());
 				board.setContents(boardForm.getContents());
-				board.setUserId("user");
+				board.setUserId(user.getId());
 				boardService.addFree(board);
 				
 				return "redirect:home.camp";
@@ -150,14 +151,17 @@ public class CommunityController {
 	
 	@GetMapping("/addComment.camp")
 	public String addComment( @RequestParam int boardType, 
-										  @RequestParam int boardNo, 
-										  @RequestParam String contents){
+							  @RequestParam int boardNo, 
+							  @RequestParam String contents,
+							  HttpSession session ){
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
 		System.out.println(boardType);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("boardType", boardType);
 		map.put("boardNo", boardNo);
 		map.put("contents", contents);
-		map.put("userId", "user");
+		map.put("userId", user.getId());
 		boardService.addComment(map);
 		return "redirect:detail.camp?boardType="+boardType+"&no="+boardNo;
 	}
@@ -190,7 +194,8 @@ public class CommunityController {
 	}
 	@GetMapping("/updateLike.camp")
 	public @ResponseBody String updateLike(@RequestParam int boardType, 
-			@RequestParam int boardNo) {
+			@RequestParam int boardNo, HttpSession session) {
+		User user = (User) session.getAttribute("LOGIN_USER");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Board board = new Board();
 		// 해당 보드를 가져온다

@@ -18,7 +18,7 @@
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </head>
-<body>
+<body style="background-color:#f7f7f9">
     <div class="row">
         <div class="col-sm-1">
         </div>
@@ -30,14 +30,14 @@
     <hr/>
    <div class="row">
        <div class="col-sm-3"></div>
-       <div class="col-sm-6 ">
-       		<div class="text-right" id="click-home">
+       <div class="col-sm-6 panel panel-default">
+       		<div class="text-right" id="click-home"  style="margin-top:20px;">
        			<span style="border:1px solid; margin-top:7px; padding-left:-20px; margin-top:-20px;" class="glyphicon glyphicon glyphicon-list-alt btn-sm" aria-hidden="true">
 	            	<span  class="like">목록으로</span>
 	            </span>
        		</div>
        		
-            <div class="row bottom-line" style="padding-top: 30px;">
+            <div class="row bottom-line " >
                 <div class="col-sm-1 boot">
                    <img class="id-img " src="/camping/resources/images/profilePhoto/${board.profilePhoto }" width="50" border-radius=50% height="50" alt=""/>
                 </div>
@@ -63,8 +63,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-2 sort">
-                    ${sort }
+                <div class="col-sm-1 sort ">
+                   
                 </div>
                 <div class="col-sm-10 title">
                     ${board.title }
