@@ -9,4 +9,9 @@ public interface ProductDao {
 	void addProduct(Product product);
 	List<Product> selectProduct(Map<String, Object> map);
 	void updateProduct(Map<String, Object> map);
+	Integer selectProductCount(Map<String, Object> map);
+	Product selectProductByNo(Integer no);
+	void deleteProduct(Integer no);
+	void modifyGoods(Product product);
+	List<Product> selectProductByCatType(Map<String, Object> map);
 }

@@ -100,5 +100,4 @@
 		and
 			rowno &lt;= #{endNo}
 	</select>
-
-</mapper>
+	</mapper>

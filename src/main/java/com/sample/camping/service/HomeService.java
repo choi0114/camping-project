@@ -11,3 +11,4 @@ public interface HomeService {
 	List<CampSite> searchCampSites(Map<String, Object> map);
 	List<CampSite> getGugunBysido(String city);
 }
+

@@ -336,7 +336,4 @@ $('#totalsearch').keyup(function(event){
 	
 </script>
 </body>
-</html>
-
-    
-
+</html>    

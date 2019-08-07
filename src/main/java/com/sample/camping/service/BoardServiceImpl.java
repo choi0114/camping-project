@@ -148,6 +148,18 @@ public class BoardServiceImpl implements BoardService{
 		commentdao.addComment(map);
 	}
 
+	@Override
+	public void updateLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.updateLike(map);
+	}
+	
+	@Override
+	public void updateHate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.updateHate(map);
+	}
+
 	
 	
 }

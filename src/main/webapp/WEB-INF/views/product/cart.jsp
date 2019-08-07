@@ -15,7 +15,7 @@
     	}
     </style>
 </head>
-<body>
+<body style="background-color:#f7f7f9">
 <div class="container">
   	<div class="page-header">
   		<h1>장바구니</h1>

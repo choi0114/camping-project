@@ -8,8 +8,23 @@ public class Comment {
 	private Date createDate;
 	private Integer boardNo;
 	private String userId;
+	private String userNick;
+	private String profilePhoto;
 	private int boardType;
 	
+	
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
 	public int getBoardType() {
 		return boardType;
 	}

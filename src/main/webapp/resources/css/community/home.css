@@ -4,6 +4,16 @@
     margin-bottom: -20px;
     font-weight: bold;
 }
+a {
+	color: black;
+}
+
+
+.category {
+	width: 90%;
+	
+}
+
 .bottom {
 	padding-top: 20px;
 }
@@ -13,13 +23,10 @@
 }
 .left-box {
 	list-style:none;
-    width:80%;
     font-weight: bold;
     padding-top: 5px;
-    padding-left: -40px;
     padding-bottom: 5px;
     border:1px solid #f1f3f5; 
-    margin-left: 110px;
     background-color: #e9ecef;
 }
 .menu-box {
@@ -37,16 +44,21 @@
 .in-contents {
 	margin-top: 8px;
 }
-
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
 .join-board {
-    margin-left: 50px;
+    
     margin-bottom: 10px;
 }
 .more {
+   
     margin-top: 32px;
 }
 .right-box {
-    margin-left: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
     box-sizing: bordesr-box;
 }
 

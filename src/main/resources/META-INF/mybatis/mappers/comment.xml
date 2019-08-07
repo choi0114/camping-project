@@ -8,53 +8,57 @@
 		<if test="boardType != null">
 			<choose>
 				<when test="boardType == 1">
-					COMMENT_NO					no
-					, COMMENT_CONTENTS			contents
-					, COMMENT_CREATE_DATE		createDate
-					, JOINING_NO				boardNo
-					, USER_ID					userId
-					from CAMP_JOINING_COMMENTS 
+					C.COMMENT_NO					no
+					, C.COMMENT_CONTENTS			contents
+					, C.COMMENT_CREATE_DATE		createDate
+					, C.JOINING_NO				boardNo
+					, U.USER_NICK_NAME			userNick
+					, U.USER_PROFILE_PHOTO			profilePhoto
+					from CAMP_JOINING_COMMENTS C, CAMP_USERS U
 				</when>
 				<when test="boardType == 2">
-					COMMENT_NO					no
-					, COMMENT_CONTENTS			contents
-					, COMMENT_CREATE_DATE		createDate
-					, REVIEW_NO				boardNo
-					, USER_ID					userId					
-					from CAMP_REVIEW_COMMENTS 
+					C.COMMENT_NO					no
+					, C.COMMENT_CONTENTS			contents
+					, C.COMMENT_CREATE_DATE		createDate
+					, C.REVIEW_NO				boardNo
+					, U.USER_NICK_NAME			userNick
+					, U.USER_PROFILE_PHOTO			profilePhoto			
+					from CAMP_REVIEW_COMMENTS  C, CAMP_USERS U
 				</when>
 				<when test="boardType == 3">
 					COMMENT_NO					no
 					, COMMENT_CONTENTS			contents
 					, COMMENT_CREATE_DATE		createDate
 					, OPINION_NO				boardNo
-					, USER_ID					userId					
-					from CAMP_OPINION_COMMENTS 
+					, U.USER_NICK_NAME			userNick
+					, U.USER_PROFILE_PHOTO			profilePhoto				
+					from CAMP_OPINION_COMMENTS  C, CAMP_USERS U
 				</when>
 				<when test="boardType == 4">
 					COMMENT_NO					no
 					, COMMENT_CONTENTS			contents
 					, COMMENT_CREATE_DATE		createDate
 					, FREE_NO				boardNo
-					, USER_ID					userId					
-					
-					from CAMP_FREE_COMMENTS 
+					, U.USER_NICK_NAME			userNick
+					, U.USER_PROFILE_PHOTO			profilePhoto				
+					from CAMP_FREE_COMMENTS  C, CAMP_USERS U
 				</when>
 			</choose>
 		</if>
+		where C.USER_ID = U.USER_ID
 		<if test="boardType != null">
 			<choose>
 				<when test="boardType == 1">
-					where JOINING_NO = #{no}
+					and JOINING_NO = #{no}
 				</when>
 				<when test="boardType == 2">
-					where REVIEW_NO = #{no}
+					and REVIEW_NO = #{no}
 				</when>
 				<when test="boardType == 3">
-					where OPINION_NO = #{no}
+					and OPINION_NO = #{no}
 				</when>
 				<when test="boardType == 4">
-					where FREE_NO = #{no}
+					and FREE_NO = #{no}
 				</when>
 			</choose>
 		</if>
@@ -77,4 +81,5 @@
 			</choose>
 		VALUES (CAMP_COMMENT_SEQ.nextval, #{contents}, sysdate, #{boardNo}, #{userId} )
 	</insert>
+	
 </mapper>
