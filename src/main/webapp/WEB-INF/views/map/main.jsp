@@ -8,16 +8,18 @@
     <title>리스트</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
- <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
     .bbtn2-orange {
     background: #f4902a;
-}
-
+	}
+	.gps-text-box{
+		background-image: 
+	}
 .bbtn2 {
 	float:right;
     display: inline-block;
@@ -402,8 +404,6 @@
 	                   </div>
                 	</div>
                 	<div class="row">
-                			<img id="loading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" style="z-index: 1000; position: absolute; 
-                			left:1050px; top:300px;">;
                 	    <div class="col-sm-12 text-left sear-box">
                 	   <form method="post" action="#">
                 	   <input type="hidden" value="${param.keyword }" id="keyword-value"> <!-- 현재 키워드 유지하기 위해서 숨겨놓음 -->
@@ -488,15 +488,18 @@
                 </div>
                 <div class="col-sm-8 map-box">
                     <div id="map" style="width: 100%; height: 900px; position:relative;">
-                    	<input id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;">
-	                	<button id="location-button" class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">현재위치</button>
-                    </div>
+                    	<input class="gps-text-box" id="location" type="text" disabled="disabled" style="position: absolute; left:70px; top: 23px; z-index:1000;width: 230px;">
+	                	<button id="location-button"  class="btn btn-default btn-sm" style="position: absolute; left:0; top: 20px; z-index: 1000;">위치변경</button>
+						<div id="wrappostcode"
+							style="display: block; width: 500px; height: 500px; margin: 0px; position: relative; z-index: 0; top: 50px; left: 1px;">
+							<img src="resources/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-19px; display: none;"/>
+						</div>
+					</div>
                 </div> 
             </div>            
         </div>
-        
     </div>
-    
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c15f1b097ded46b54909fe59a2a59f85&libraries=services,clusterer,drawing"></script>
 	<script>
 		$('#map').click(function(){
@@ -513,7 +516,7 @@
 			
 			var options = {
 				center: new kakao.maps.LatLng(37.581854899999996, 126.98633099999998),
-				level: 10,
+				level: 8,
 				minLevel: 4,
 				maxLevel: 10
 				
@@ -664,10 +667,14 @@
 		//  맵에서 클릭 했을 때 담을 마커
 		var clickmarkers = [];
 		// 원 지름 ( 반경 내에 마커 찍기 위해서)
+		// GPS 위치 마커 정보
+		var GPSmarkers;
 		var radius = 50000;
+		var sort = $('#sort-value').val();
+		var keyword = $('#keyword-value').val();
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
-			var keyword = $('#keyword-value').val();
+			console.log(sort);
 		    if(markers2 != null){
 				setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
 			 }
@@ -677,18 +684,63 @@
 			if(markers != null){
 				setMarkers(null);
 			}
+			
+			if (navigator.geolocation) {
+			    
+			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			    navigator.geolocation.getCurrentPosition(function(position) {
+			        
+			        var lat = position.coords.latitude, // 위도
+			            lon = position.coords.longitude; // 경도
+			        
+			        var locPosition = new kakao.maps.LatLng(lat, lon)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+			        
+			        // 현재 위치의 위도, 경도를 주소로 변환
+				    var geocoder = new kakao.maps.services.Geocoder();
+	
+				    var callback = function(result, status) {
+				        if (status === kakao.maps.services.Status.OK) {
+	
+				            var address = result[0].address_name; // 행정동 이름
+				            $('#location').val(address);  // Text 셋팅
+				        }
+				    };
+				    
+			  		geocoder.coord2RegionCode(lon, lat, callback);
+			  	  
+			        // 마커
+			        displayMarker(locPosition);
+			        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+			      });
+
+			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+			    
+				alert("GPS 사용불가")
+			    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)    
+			        
+			    displayMarker(locPosition);
+			}
+
+			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+			function displayMarker(locPosition, message) {
+
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({  
+			        position: locPosition
+			    }); 
+			    GPSmarkers=marker;
+			    // 지도 중심좌표를 접속위치로 변경합니다
+				GPSmarkers.setMap(map);
+			    map.setCenter(locPosition);      
+			
+			}
+		})
+		
 			$.ajax({
 				type:"GET",
 				url:"mapAllList.camp",
+				data:{sort:sort},
 				dataType:"json",
-				beforeSend:function(){
-					$('#map').addClass('darkamap');
-
-				},
-				complete:function(){
-					$('#map').removeClass('darkamap');
-					$('#loading').hide();
-				},
 				success:(function(data){
 					
 					$.each(data , function(index , list){
@@ -708,7 +760,13 @@
 						content += "<span class='ww'></span>";
 						content += "</div>";
 						content +="<div class='info'>";
-						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						if(list.sort == "CAMP"){
+							content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+						}else if(list.sort == "CAR"){
+							content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+						}else if(list.sort == 'NORMAL'){
+							content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+						}
 						content +=list.name;
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
@@ -745,11 +803,11 @@
 						var campsort = list.sort;
 				
 						if(campsort == 'NORMAL'){
-							imageicon = 'resources/images/tent2.png'; // 글램핑
+							imageicon = 'resources/images/tent2.png'; // 캠핑장
 						}else if(campsort == 'CAMP'){
-							imageicon = 'resources/images/tent1.png'; // 캠핑장
+							imageicon = 'resources/images/tent1.png'; // 글램핑
 						}else{
-							imageicon = 'resources/images/tent3.png'; // 카라반 
+							imageicon = 'resources/images/tent3.png'; // 카라반
 						} 
 						
 	 					// 마커 이미지 설정
@@ -809,6 +867,7 @@
 								if(prevClickedMarker){
 									prevClickedMarker.setImage(markerImage)
 								}
+								GPSmarkers.setMap(null);
 								// 날씨 구하기
 								var grid = dfs_xy_conv('toXY', list.latitude, list.longitude);
 								weathers(grid.x, grid.y);
@@ -856,7 +915,7 @@
 					}
 				})
 			})
-	    })
+	    
 		
 		// 드래그를 시작 할 때 실행되는 이벤트리스너
 		kakao.maps.event.addListener(map,'dragstart',function(){
@@ -885,14 +944,8 @@
 			$.ajax({
 				type:"GET",
 				url:"mapAllList.camp",
+				data:{sort:sort},
 				dataType:"json",
-				beforeSend:function(){
-					$('#map').addClass('darkamap');
-				},
-				complete:function(){
-					$('#map').removeClass('darkamap');
-					$('#loading').hide();
-				},
 				success:(function(data){
 					$.each(data , function(index , list){
 						var name = list.name;
@@ -906,7 +959,13 @@
 						content += "<span class='ww'></span>";
 						content += "</div>";
 						content +="<div class='info'>";
-						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						if(list.sort == "CAMP"){
+							content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+						}else if(list.sort == "CAR"){
+							content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+						}else if(list.sort == 'NORMAL'){
+							content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+						}
 						content +=list.name;
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
@@ -924,7 +983,7 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>0</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
@@ -1005,6 +1064,7 @@
 								if(prevClickedMarker){
 									prevClickedMarker.setImage(markerImage)
 								}
+								GPSmarkers.setMap(null);
 							    // 클릭 커스텀 오버레이
 								var customeroverlay = new kakao.maps.CustomOverlay({
 									content: content,
@@ -1046,9 +1106,9 @@
 			
 					if(sort == 'CAMP'){
 			    		newIconSrc = 'maptent1.svg';
-					}else if(sort == '캠핑장'){
+					}else if(sort == 'NORMAL'){
 						newIconSrc = 'maptent3.svg';
-					}else{
+					}else if(sort == 'CAR'){
 						newIconSrc = 'maptent2.svg'; // 카라반 
 					}
 			    	
@@ -1138,7 +1198,13 @@
 							content += "<span class='ww'></span>";
 							content += "</div>";
 							content +="<div class='info'>";
-							content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+							if(list.sort == "CAMP"){
+								content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+							}else if(list.sort == "CAR"){
+								content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+							}else if(list.sort == 'NORMAL'){
+								content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+							}
 							content +=list.name;
 							content +="<div class='close' title='닫기'>X</div>";
 							content +="</div>";
@@ -1156,7 +1222,7 @@
 							content +="<a href='#'>"
 							content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 							content += "싫어요"
-							content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+							content += "<span id='conquest_count_914' class='scrap_count'>0</span>"
 							content += "</a>";
 							content += "</div>";
 							content +="</div>";
@@ -1189,9 +1255,51 @@
 			kakao.maps.event.trigger(marker, 'click', null);
 		});
 
+		
+		$('#btnFoldWrap').click(function(){
+			$('#wrappostcode').css('display','none');
+		})
+		
 		// 현재위치 정보
+		
 		$("#location-button").click(function(){
+			$('#wrappostcode').css('z-index','1000');
+			$('#wrappostcode').css('display','block');
+			$('#btnFoldWrap').css('display','block');
+			var element_wrap = document.getElementById("wrappostcode");
 			
+		    daum.postcode.load(function(){
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		            	$("#location").val(data.address);
+		            	GPSmarkers.setMap(null);
+		            	
+		            	var geocoder = new daum.maps.services.Geocoder();
+		            	
+		            	geocoder.addressSearch(data.address, function(results, status) {
+		            		if(status === daum.maps.services.Status.OK){
+		            			var result = results[0]; //첫번째 결과의 값을 활용
+
+		                        // 해당 주소에 대한 좌표를 받아서
+		                        var coords = new daum.maps.LatLng(result.y, result.x);
+		            			
+		            			// 마커생성
+		                        var marker = new daum.maps.Marker({
+		                            position: coords,
+		                        });
+		            			GPSmarkers = marker;
+		                        // 지도 중심을 변경한다.
+		                        GPSmarkers.setMap(map);
+		                        map.setCenter(coords);
+		            		}
+		            	})
+		            	$('#btnFoldWrap').css('display','none');
+		            	$('#wrappostcode').css('z-index','0');
+		            }
+		        }).embed(element_wrap);
+		     })
+		  });
+			/* 
 			if(markers != null){
 				setMarkers(null);
 			}
@@ -1223,8 +1331,7 @@
 			  	  
 			        // 마커
 			        displayMarker(locPosition);
-			        map.setLevel(2);
-			    
+			        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
 			      });
 
 			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -1246,8 +1353,7 @@
 			    // 지도 중심좌표를 접속위치로 변경합니다
 			    map.setCenter(locPosition);      
 			
-			}
-		});
+			} */
 		
 		
 	    //----------------------------------------------------------
@@ -1374,6 +1480,7 @@
 	  }else{
 		  $('.searchbox').css("display",'none');
 	  }
+	  
 	</script>
 </body>
 </html>

@@ -59,9 +59,9 @@ public class MapServiceImpl implements MapService {
 	}
 	
 @Override
-	public List<CampSite> getAllCampSites() {
+	public List<CampSite> getAllCampSites(String sort) {
 		
-		return mapDao.getAllCampSites();
+		return mapDao.getAllCampSites(sort);
 	}
 @Override
 public CampSite getLatLngCamp(Map<String, Object> param) {

@@ -93,9 +93,9 @@ public class MapController {
 	
 	@RequestMapping("/mapAllList.camp") // 맵 전부 가져오기 (mycampingNo 제외) 
 	@ResponseBody
-	public List<CampSite> allCampsit(){
+	public List<CampSite> allCampsit(@RequestParam(value = "sort",required = false,defaultValue = "없음")String sort){
 		
-		return mapService.getAllCampSites();
+		return mapService.getAllCampSites(sort);
 	}
 	
 	@RequestMapping("/mapLatLng.camp")
