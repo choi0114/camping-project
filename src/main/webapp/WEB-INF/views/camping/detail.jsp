@@ -19,16 +19,17 @@
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick.css">
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick-theme.css">
     <script src="/camping/resources/css/campingdetail/slick/slick.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
 	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
-					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }"/></p>
+					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }" pattern="yyyy-MM-dd"/></p>
 				</div>
 				<div class="col-sm-6 text-right">
-					<p>${campsite.sido }</p>
+					<p id="sido-box" data-sido="${campsite.sido }">${campsite.sido }</p>
 				</div>
 			</div>
 			<div class="row">
@@ -60,7 +61,7 @@
 	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-sm-10">
 			<span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
-			<strong style="color: #ff6000">241.3Km</strong> > 
+			<strong style="color: #ff6000" id="distance-box"></strong> > 
 			<strong>${campsite.address }</strong>
 		</div>
         <div class="col-sm-2 pull-right text-center" style="max-height: 100%;">
@@ -149,17 +150,6 @@
                 <p style="font-size: 12px;">${theme.name }</p>
             </div>        
         </c:forEach>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px;">
-        <div class="col-sm-1 text-center">
-            <span class="glyphicon glyphicon-info-sign"></span>
-        </div>
-        <div class="col-sm-11" style="padding-left: 0">
-            삼척시 장호비치캠핑장은 장호관광지내 조성되어 있는 캠핑장으로서 주변 관광지와 어울어져 부모, 가족, 연인과 함께하여
-            많은 추억을 만들 수 있는 곳입니다.<br>
-            주변 관광지로서는 "한국의 나폴리"라 불리는 천혜의 자연경관과 청정해변이 인접하여 타 캠핑장보다 많은 장점을 가지고 있습니다. 또한 각종 체험을 경험하실 수 있고 바다낚시와 싱싱한 회를 즐기실 수도 있습니다.<br>
-            장호비치캠핑장 주변에는 해양레일바이크, 어촌체험마을, 해신당공원, 해상로프웨이 등 강원남부권 최대 해양관광벨트화로 다양한 지역관광을 즐기실 수 있습니다.
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -391,53 +381,64 @@
     <div class="row">
         <div class="col-sm-12 text-center" id="nearby-campingsite-box">
 	        <div id="near-campingsite-box" class="slider demo">
-	        	<div>
+	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
-	                    <strong>검봉산 자연휴양림 야영장</strong>
+	                    <strong>덕풍계곡 솔밭 야영장</strong>
 	                </div>
 	                <div>
-	                    <span>5.4Km</span>
+	                    <span>23.4Km</span>
 	                </div>
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp2.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
-	                    <strong>삼척 엘림 캠핑장</strong>
+	                    <strong>덕풍계곡 솔밭 야영장</strong>
 	                </div>
 	                <div>
-	                    <span>8.3Km</span>
+	                    <span>23.4Km</span>
 	                </div>
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
-	                    <strong>씨스포빌 카라반</strong>
+	                    <strong>덕풍계곡 솔밭 야영장</strong>
 	                </div>
 	                <div>
-	                    <span>14.8Km</span>
+	                    <span>23.4Km</span>
 	                </div>
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp4.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 마을 야영장</strong>
+	                    <strong>덕풍계곡 솔밭 야영장</strong>
 	                </div>
 	                <div>
-	                    <span>22.6Km</span>
+	                    <span>23.4Km</span>
 	                </div>
 	            </div>
 	            <div>
 	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp5.jpg" width="160" style="margin-left: 33px;"/></a>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
+	                </div>
+	                <div style="margin-top: 5px;">
+	                    <strong>덕풍계곡 솔밭 야영장</strong>
+	                </div>
+	                <div>
+	                    <span>23.4Km</span>
+	                </div>
+	            </div>
+	            <div>
+	                <div>
+	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
 	                </div>
 	                <div style="margin-top: 5px;">
 	                    <strong>덕풍계곡 솔밭 야영장</strong>
@@ -479,39 +480,6 @@
 	                    <span>23.4Km</span>
 	                </div>
 	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp9.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
 	        </div>
         </div>
     </div>
@@ -528,7 +496,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -551,7 +519,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -574,7 +542,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -597,7 +565,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -620,7 +588,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -643,7 +611,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -666,7 +634,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -689,7 +657,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -712,7 +680,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -735,7 +703,7 @@
     </div>
     <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
         <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
+            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
         </div>
         <div class="col-sm-10">
             <div style="margin-bottom: 5px;">
@@ -1147,8 +1115,6 @@
     			var o3Value = $(dustInfos).find('o3Value').text();		// 오존 농도
     			var no2Value = $(dustInfos).find('no2Value').text();	// 이산화질소 농도
     			
-    			console.log(data);
-    			
     	    	var html1 = '<p>'
     	            	  + '> <strong>측정장소</strong> : ' + addr
     	            	  + '</p>'
@@ -1368,7 +1334,6 @@
         	data: {serviceKey : serviceKey, latitude : campLatitude, longitude : campLongitude, locdate : locdate},
         	dataType: 'xml',
         	success: function(data) {
-        		console.log(data);
         		var suntime = $(data).find('item');
         		var sunrise = $(suntime).find('sunrise').text();
         		var sunset = $(suntime).find('sunset').text();
@@ -1401,18 +1366,95 @@
     var marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(campLatitude, campLongitude)
-    });
+    })
+    
+    function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+        function deg2rad(deg) {
+            return deg * (Math.PI/180)
+        }
+        
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lng2-lng1);
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c; // Distance in km
+        d = Math.round(d*10)/10;
+        return d;
+    }
+    
 
-    $(document).ready(function(){
-        $('.demo').slick({
-            dots: false,
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            touchMove: false,
-            arrows: true
-        });
+    $(function() {
+	    // Geolocation API에 액세스할 수 있는지를 확인
+	    if (navigator.geolocation) {
+	        //위치 정보를 얻기
+	        navigator.geolocation.getCurrentPosition (function(pos) {
+	        	var myLatitude = pos.coords.latitude;
+	        	var myLongitude = pos.coords.longitude;
 
+	        	var distance = getDistanceFromLatLonInKm(campLatitude, campLongitude, myLatitude, myLongitude);
+			    $('#distance-box').text(distance + 'Km');
+			    console.log('camp : ', campLatitude, ', ', campLongitude);
+			    console.log('my : ', myLatitude, ', ', myLongitude);
+	        	
+			    var sido = $('#sido-box').attr('data-sido');
+			    
+			    
+			    $.ajax({
+			    	url: 'getallcampsites.camp',
+			    	data: {sido: sido},
+			    	dataType: 'json',
+			    	success: function(campsites) {
+			    		
+			    		var nearbyCampsites = [];
+			    		var standardDistance = 100;
+			    		
+			    		$('#near-campingsite-box').empty();
+			    		
+			    		campsites = campsites.filter(function(campsite, index) {
+			    			var nearCSLatitude = campsite.latitude;
+			    			var nearCSLongitude = campsite.longitude;
+			    			var distance = getDistanceFromLatLonInKm(campLatitude, campLongitude, nearCSLatitude, nearCSLongitude);
+			    			campsite.distance = distance;
+			    			
+			    			return distance < 30 && distance != 0;
+			    		}).sort(function(a, b) {
+			    			return a.distance - b.distance;
+			    		}).slice(0, 10);
+			    		
+			    		$.each(campsites, function(index, campsite) {
+			    			
+		    				var html = '<div>'
+		    	                	 + '<div>'
+		                    		 + '<a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>'
+		                			 + '</div>'
+		                			 + '<div style="margin-top: 5px;">'
+		                    		 + '<strong>' + campsite.name + '</strong>'
+		                			 + '</div>'
+		                			 + '<div>'
+		                    		 + '<span>' + campsite.distance + 'Km</span>'
+		                			 + '</div>'
+		           					 + '</div>';
+		    				
+		    				$('#near-campingsite-box').append(html);
+		    			
+			    		});
+			    		 $('.demo').slick({
+		    	            dots: false,
+		    	            slidesToShow: 5,
+		    	            slidesToScroll: 1,
+		    	            touchMove: false,
+		    	            arrows: true
+		    	        });
+			    	}
+			    });
+			    
+	        });
+	    } else {
+	        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+	    }
     });
+    
 </script>
 </body>
 </html>

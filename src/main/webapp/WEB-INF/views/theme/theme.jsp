@@ -14,7 +14,6 @@
 </head>
 <body>
 <div class="container">
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 	
 	<!-- Modal -->
 	<div id="theme-search-modal" class="modal fade" role="dialog">

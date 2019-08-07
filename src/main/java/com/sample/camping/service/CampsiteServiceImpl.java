@@ -39,4 +39,14 @@ public class CampsiteServiceImpl implements CampsitesService {
 	public List<CampSite> get10CampSites(Map<String, Object> map) {
 		return campsiteDao.get10CampSites(map);
 	}
+	
+	@Override
+	public List<CampSite> getAllCampsites() {
+		return campsiteDao.getAllCampsites();
+	}
+	
+	@Override
+	public List<CampSite> getCampsitesBySido(String sido) {
+		return campsiteDao.getCampsitesBySido(sido);
+	}
 }

@@ -14,4 +14,7 @@ public interface CampsiteDao {
 	
 	List<CampSite> getCampSiteByTheme(Map<String, Object> map);
 	List<CampSite> get10CampSites(Map<String, Object> map);
+	
+	List<CampSite> getAllCampsites();
+	List<CampSite> getCampsitesBySido(String sido);
 }
