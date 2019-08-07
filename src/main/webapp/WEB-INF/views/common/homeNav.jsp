@@ -124,13 +124,13 @@
         </div>
         <div class="topmenu">
             <ul>
-                <li><a href="/camping/map.camp?city=서울&satus=update">전체</a></li>
-                <li><a href="#">일반캠핑</a></li>
-                <li><a href="#">유료캠핑장</a></li>
-                <li><a href="#">카라반</a></li>
-                <li><a href="#">테마검색</a></li>
+                <li><a href="map.camp">전체</a></li>
+                <li><a href="map.camp?sort=CAMP">글램핑</a></li>
+                <li><a href="map.camp?sort=CAR">카라반</a></li>
+                <li><a href="map.camp?sort=NORMAL">캠핑장</a></li>
+                <li><a href="themesearch.camp">테마검색</a></li>
                 <li>
-                    <a data-toggle="collapse" href="/camping/community/home.camp">캠핑톡</a>
+                    <a data-toggle="collapse" href="community/home.camp">캠핑톡</a>
                     <ul>
                         <li><a class="panel-collapse collapse" href="#">가입인사</a></li>
                         <li><a class="panel-collapse collapse" href="#">캠핑 리뷰</a></li>

@@ -38,6 +38,14 @@ public class Pagination {
 	public int getPage() {
 		return page;
 	}
+	
+	public int getTotalBlocks() {
+		return totalBlocks;
+	}
+	
+	public int getTotalPages() {
+		return totalPages;
+	}
 
 	// 첫페이지인지 여부를 반환
 	public boolean isFirst() {
