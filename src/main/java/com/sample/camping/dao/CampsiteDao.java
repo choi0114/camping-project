@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.OpinionBoard;
+import com.sample.camping.vo.ReviewBoard;
 
 public interface CampsiteDao {
 	public List<CampSite> selectCampsite (Map<String, Object> map);
@@ -17,4 +19,8 @@ public interface CampsiteDao {
 	
 	List<CampSite> getAllCampsites();
 	List<CampSite> getCampsitesBySido(String sido);
+	
+	List<OpinionBoard> getOpinionByCSNo(int no);
+	List<ReviewBoard> getReviewByCSNo(int no);
+	void updateCampsite(Map<String, Object> map);
 }

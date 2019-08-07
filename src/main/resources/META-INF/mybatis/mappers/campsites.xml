@@ -158,5 +158,55 @@
 		and
 			campsite_used_yn = 'Y'
 	</select>
+	
+	<select id="getOpinionByCSNo" parameterType="int" resultType="opinionBoard">
+		select
+			opinion_no				no,
+			opinion_title			title,
+			opinion_contents		contents,
+			opinion_likes			likes,
+			opinion_hates			hates,
+			opinion_views			views,
+			opinion_thumbnail		thumbnail,
+			opinion_create_date		createDate,
+			user_id					"user.id",
+			campsite_no				"campSite.no"
+		from
+			camp_opinion_boards
+		where
+			campsite_no = #{value}
+	</select>
+	
+	<select id="getReviewByCSNo" parameterType="int" resultType="reviewBoard">
+		select
+			review_no				no,
+			review_title			title,
+			review_contents		contents,
+			review_likes			likes,
+			review_hates			hates,
+			review_views			views,
+			review_thumbnail		thumbnail,
+			review_create_date		createDate,
+			user_id					"user.id",
+			campsite_no				"campSite.no"
+		from
+			camp_review_boards
+		where
+			campsite_no = #{value}
+	</select>
+	
+	<update id="updateCampsite" parameterType="map">
+		update
+			camp_campsites
+		set
+			<if test="sort == 'LIKE'">
+				campsite_likes = #{value}
+			</if>
+			<if test="sort == 'HATE'">
+				campsite_hates = #{value}
+			</if>
+		where
+			campsite_no = #{no}
+	</update>
 
 </mapper>

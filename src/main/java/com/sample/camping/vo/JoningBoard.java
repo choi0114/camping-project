@@ -10,6 +10,7 @@ public class JoningBoard {
 	private Integer likes;
 	private Integer hates;
 	private Integer views;
+	private String thumbnail;
 	private Date createDate;
 	private User user;
 	
@@ -48,6 +49,13 @@ public class JoningBoard {
 	}
 	public void setViews(Integer views) {
 		this.views = views;
+	}
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	public Date getCreateDate() {
 		return createDate;
