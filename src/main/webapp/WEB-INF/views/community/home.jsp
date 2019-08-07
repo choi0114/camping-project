@@ -61,8 +61,8 @@
     <div class="col-sm-5 " >
         <div class="in-board">
 	        <!-- right-box 시작 -->
-	        <div class="row">
-	        	<div class="row join-board ">
+	        <div class="row" style="height:320x;">
+	        	<div class="row join-board " >
 	        		<div class="col-sm-6">
 	        			<div class="row">
 				        	<h3>▶ 가입인사 게시판</h3>
@@ -99,7 +99,7 @@
 				</div>
 	        </div>
 			
-			 <div class="row">
+			 <div class="row" style="height:320px;">
 	        	<div class="row join-board">
 	        		<div class="col-sm-6">
 	        			<div class="row">
@@ -137,7 +137,7 @@
 				</div>
 	        </div>
 	        
-	         <div class="row">
+	         <div class="row" style="height:320px;">
 	        	<div class="row join-board">
 	        		<div class="col-sm-6">
 	        			<div class="row">
@@ -175,7 +175,7 @@
 				</div>
 	        </div>
 	        
-	         <div class="row">
+	         <div class="row" style="height:320px;">
 	        	<div class="row join-board">
 	        		<div class="col-sm-6">
 	        			<div class="row">
@@ -310,7 +310,7 @@
 				                row += '<span style="color: #888;" id="contents-in"> '+board.contents+'</span>';
 					           	row += '</div>';
 					           	row += '<div style="margin-bottom: 10px; padding-left: 40px;">';
-             					row += '<span style="color: #3ea9cd">'+board.userId+'</span>';
+             					row += '<span style="color: #3ea9cd">'+board.userNick+'</span>';
 				          		row += '</div>';
 					           	row += '<div class="text-right" style="margin-bottom: 15px;">';
 				            	row += '<span>'+ board.createDateStr +'</span>';
