@@ -148,7 +148,7 @@
 								
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<span style="font-size: 25px;">${LOGIN_USER.nickName }님 정보</span>
+										<span style="font-size: 25px;">${LOGIN_USER.id }님 정보</span>
 									</div>
 									<div class="panel-body">
 										<ul style="list-style-type: none;">
