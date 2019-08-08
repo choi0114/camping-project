@@ -16,6 +16,6 @@ public interface MypageService {
 	
 	List<MyCampsite> getMyAddCampById(String userId);
 	
-	
+	void updateUser(Map<String, Object> map);
 	
 }

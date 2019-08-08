@@ -1,22 +1,19 @@
 package com.sample.camping.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sample.camping.service.BoardService;
 import com.sample.camping.service.MypageService;
-import com.sample.camping.service.UserService;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
-import com.sample.camping.vo.OpinionComment;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -28,22 +25,9 @@ public class MypageController {
 	
 	@RequestMapping("/mypage.camp")
 	public String mypage(HttpSession session, Model model) {
-		
-		Date date = new Date ( );
-		
-		User user = new User();
-		user.setId("admin");
-		user.setPassword("zxcv1234");
-		user.setName("admin");
-		user.setNickName("admin");
-		user.setEmail("admin@5gcamp.com");
-		user.setPhoneNumber("010-1111-1111");
-		user.setProfilePhoto("default.png");
-		user.setType("ADMIN");
-		user.setCreateDate(date);
-		user.setUsedYn("Y");
-		
-		session.setAttribute("LOGIN_USER", user);
+
+		User user = (User) session.getAttribute("LOGIN_USER");
+		model.addAttribute("LOGIN_USER", user);
 		
 		model.addAttribute("count" ,myPageService.getAllCommentCount(user.getId()));
 		
@@ -149,6 +133,20 @@ public class MypageController {
 	public String out() {
 		
 		return "mypage/out";
+	}
+	
+	@RequestMapping("/outuser.camp")
+	public String outuser(String pw1, String pw2, HttpSession session) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		String md5pw1 = DigestUtils.md5Hex(pw1);
+		if(!user.getPassword().equals(md5pw1)) {
+			return "redirect:/mypage/out.camp?result=fail";
+		}
+		
+		session.invalidate();
+		return "redirect:/mypage/out.camp?result=success";
 	}
 	
 }
