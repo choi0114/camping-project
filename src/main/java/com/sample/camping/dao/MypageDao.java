@@ -1,6 +1,7 @@
 package com.sample.camping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sample.camping.vo.FreeBoard;
 import com.sample.camping.vo.FreeBoardComment;
@@ -31,4 +32,5 @@ public interface MypageDao {
 	
 	List<MyCampsite> getMyAddCampById(String userId);
 	
+	void updateUser(Map<String, Object> map);
 }

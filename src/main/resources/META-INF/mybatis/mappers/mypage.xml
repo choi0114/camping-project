@@ -175,4 +175,30 @@
 			user_id = #{value}
 	</select>
 	
+	<update id="updateUser" parameterType="map">
+		update camp_users
+			set 
+			<if test="password!=null and !password.equals('')">
+				user_password = #{password}
+			</if>
+			<if test="name!=null and !name.equals('')">
+			    user_name          = #{name},
+			</if>
+			<if test="nickName!=null and !nickName.equals('')">
+			    user_nick_name     = #{nickName},
+			</if>
+			<if test="email!=null and !email.equals('')">
+			    user_email         = #{email},
+			</if>
+			<if test="profilePhoto!=null and !profilePhoto.equals('')">
+			    user_profile_photo = #{profilePhoto},
+			</if>
+			<if test="type!=null and !type.equals('')">
+			    user_type          = #{type},
+			</if>
+			<if test="usedYn!=null and !usedYn.equals('')">
+			    user_used_yn       = #{usedYn}
+			</if>
+	</update>
+	
 </mapper>

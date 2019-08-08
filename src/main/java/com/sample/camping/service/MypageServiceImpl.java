@@ -58,4 +58,9 @@ public class MypageServiceImpl implements MypageService{
 		return mypageDao.getMyAddCampById(userId);
 	}
 	
+	@Override
+	public void updateUser(Map<String, Object> map) {
+		mypageDao.updateUser(map);
+	}
+	
 }
