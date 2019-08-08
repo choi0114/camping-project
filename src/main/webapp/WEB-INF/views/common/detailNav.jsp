@@ -136,19 +136,19 @@
 <div class="detail-Nav" id="container">
     <div class="gnb">
         <ul class="">
-            <li><a href="#">HOME</a></li>
+            <li><a href="home.camp">HOME</a></li>
             <li><a href="#">공지사항</a></li>
             <li><a href="#">회원가입</a></li>
             <li><a href="#">로그인</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#"><span style="color: #25a5f0">안녕하세요!#님</span></a></li>
+            <li><a href="mypage.camp">마이페이지</a></li>
+            <li><a href="mypage.camp"><span style="color: #25a5f0">안녕하세요!#님</span></a></li>
             <li><a href="#">로그아웃</a></li>
             <li><a href="#">고객센터</a></li>
         </ul>
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="#"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="home.camp"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
