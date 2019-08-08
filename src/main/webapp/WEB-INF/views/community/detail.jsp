@@ -97,7 +97,7 @@
             <div class="row bottom-line">
             	<form action="addComment.camp" method="get">
 	     			<input type="hidden" value="${boardType }" name="boardType" id="boardType"/>
-	     			<input type="hidden" value="${board.no }" name="boardNo" id="boardNo"/>
+	     			<input type="hidden" value="${board.no }" name="boardNo" id="boardNo"/> 
 	                <div class="col-sm-1">
 	                     <img class="id-img2 " src="/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }" width="60" border-radius=50% height="60" alt=""/>
 	                </div>
