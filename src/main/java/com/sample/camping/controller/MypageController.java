@@ -144,10 +144,10 @@ public class MypageController {
 		if(!user.getPassword().equals(md5pw1)) {
 			return "redirect:/mypage/out.camp?result=fail";
 		}
-		
+		user.setId(user.getId());
 		user.setUsedYn("N");
 		
-		myPageService.updateUser(user);
+		myPageService.updateUserUsedYn(user);
 		
 		session.invalidate();
 		return "redirect:/mypage/out.camp?result=success";

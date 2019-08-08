@@ -60,8 +60,15 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public void updateUser(User user) {
-		mypageDao.updateUser(user);
+	public void updateUserData(User user) {
+		mypageDao.updateUserData(user);
+		
+	}
+	
+	@Override
+	public void updateUserUsedYn(User user) {
+		mypageDao.updateUserUsedYn(user);
+		
 	}
 	
 }

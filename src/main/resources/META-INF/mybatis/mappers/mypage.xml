@@ -173,32 +173,27 @@
 			b.my_campsite_no = a.my_campsite_no
 		and
 			user_id = #{value}
-	</select>
+	</select>		
 	
-	<update id="updateUser" parameterType="user">
-		update camp_users
-			set 
-			<if test="password!=null and !password.equals('')">
-				user_password = #{password}
-			</if>
-			<if test="name!=null and !name.equals('')">
-			    user_name          = #{name},
-			</if>
-			<if test="nickName!=null and !nickName.equals('')">
-			    user_nick_name     = #{nickName},
-			</if>
-			<if test="email!=null and !email.equals('')">
-			    user_email         = #{email},
-			</if>
-			<if test="profilePhoto!=null and !profilePhoto.equals('')">
-			    user_profile_photo = #{profilePhoto},
-			</if>
-			<if test="type!=null and !type.equals('')">
-			    user_type          = #{type},
-			</if>
-			<if test="usedYn!=null and !usedYn.equals('')">
-			    user_used_yn       = #{usedYn}
-			</if>
+	<update id="updateUserData" parameterType="user">
+		update
+			camp_users
+		set 
+			user_password		= #{password}
+			,user_name			= #{name}
+			,user_nick_name		= #{nickName}
+			,user_email			= #{email}
+		where 
+			user_id = #{id}
+	</update>
+	
+	<update id="updateUserUsedYn" parameterType="user">
+		update
+			camp_users
+		set 
+			user_used_yn	= #{usedYn}
+		where 
+			user_id = #{id}
 	</update>
 	
 </mapper>
