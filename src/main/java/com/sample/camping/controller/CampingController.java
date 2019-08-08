@@ -17,6 +17,7 @@ import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.ThemeService;
 import com.sample.camping.view.WeatherXMLView;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.LikeHateCampsite;
 import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.ReviewBoard;
 
@@ -61,9 +62,18 @@ public class CampingController {
 		return campsiteService.getCampSiteByNo(no);
 	}
 	
+	@RequestMapping("/alreadychecked.camp")
+	public @ResponseBody LikeHateCampsite checkedLikeHate(String id, int no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("no", no);
+		
+		return campsiteService.alreadyChecked(map);
+	}
+	
 	@RequestMapping("/getallcampsites.camp")
-	public @ResponseBody List<CampSite> allCampsites(String sido) {
-		return campsiteService.getCampsitesBySido(sido);
+	public @ResponseBody List<CampSite> allCampsites(String gugun) {
+		return campsiteService.getCampsitesByGugun(gugun);
 	}
 	
 	@RequestMapping(value="/weatherxml.camp")

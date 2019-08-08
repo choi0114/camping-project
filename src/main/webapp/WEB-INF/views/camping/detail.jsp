@@ -29,7 +29,7 @@
 					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }" pattern="yyyy-MM-dd"/></p>
 				</div>
 				<div class="col-sm-6 text-right">
-					<p id="sido-box" data-sido="${campsite.sido }">${campsite.sido }</p>
+					<p id="gugun-box" data-gugun="${campsite.gugun }">${campsite.sido } &gt; ${campsite.gugun }</p>
 				</div>
 			</div>
 			<div class="row">
@@ -1284,12 +1284,12 @@
 			    console.log('camp : ', campLatitude, ', ', campLongitude);
 			    console.log('my : ', myLatitude, ', ', myLongitude);
 	        	
-			    var sido = $('#sido-box').attr('data-sido');
+			    var gugun = $('#gugun-box').attr('data-gugun');
 			    
 			    
 			    $.ajax({
 			    	url: 'getallcampsites.camp',
-			    	data: {sido: sido},
+			    	data: {gugun: gugun},
 			    	dataType: 'json',
 			    	success: function(campsites) {
 			    		
@@ -1304,7 +1304,7 @@
 			    			var distance = getDistanceFromLatLonInKm(campLatitude, campLongitude, nearCSLatitude, nearCSLongitude);
 			    			campsite.distance = distance;
 			    			
-			    			return distance < 20 && distance != 0;
+			    			return distance < 30 && distance != 0;
 			    		}).sort(function(a, b) {
 			    			return a.distance - b.distance;
 			    		}).slice(0, 10);
@@ -1454,37 +1454,77 @@
     });
     
     $('#like-campsite-btn').click(function() {
+    	var user = '${LOGIN_USER.id}';
+    	console.log(user);
+    	
+    	if(user == '') {
+    		alert('로그인이 필요한 서비스입니다.');
+    		return false;
+    	}
+    	
+    	$.ajax({
+    		url: 'alreadychecked.camp',
+    		data: {id: user, no: no},
+    		dataType: 'json',
+    		success: function(data) {
+    			if(data) {
+    				alert('이미 반영된 캠핑장입니다.');
+    				return false;
+    			}
+    			
+    			var sort = 'LIKE';
+    	       	var value = $(this).attr('data-likes');
+    	       	
+    	       	alert('추천되었습니다.');
+    	       	value++;
+    	       	
+    	       	$('#like-campsite-btn').empty();
+    	       	
+    	       	$.ajax({
+    	       		url: 'updatecs.camp',
+    	       		data: {no: no, sort: sort, value: value},
+    	       		dataType: 'json',
+    	       		success: function(campsite) {
+    	       			var html = '<span class="glyphicon glyphicon-thumbs-up"></span>'
+    	   						 + '<span> | 추천 ' + campsite.likes + '</span>';
+    	   						 
+    	   				$('#like-campsite-btn').append(html);
+    	       		}
+    	       	});
+    		}
+    	});
+    });
+    
+    $('#hate-campsite-btn').click(function() {
     	var textColor = $(this).css('color');
-    	var sort = 'LIKE';
-    	var value = $(this).attr('data-likes');
-    	console.log(textColor);
+    	var sort = 'HATE';
+    	var value = $(this).attr('data-hates');
     	
     	if(textColor == 'rgb(51, 51, 51)') {
 	    	$(this).css('color', '#32a1ff');
 	    	$(this).css('border-color', '#32a1ff');
-	    	alert('추천되었습니다.');
+	    	alert('비추천되었습니다.');
 	    	value++;
     	} else {
     		$(this).css('color', '#333333');
 	    	$(this).css('border-color', '#cccccc');
-	    	alert('추천이 취소되었습니다.');
+	    	alert('비추천이 취소되었습니다.');
 	 		value--;
     	}
+    	
+    	$(this).empty();
     	
     	$.ajax({
     		url: 'updatecs.camp',
     		data: {no: no, sort: sort, value: value},
     		dataType: 'json',
     		success: function(campsite) {
-    			
+    			var html = '<span class="glyphicon glyphicon-thumbs-down"></span>'
+						 + '<span> | 비추천 ' + campsite.hates + '</span>';
+						 
+				$(this).append(html);
     		}
     	});
-    	
-    	
-    });
-    
-    $('#hate-campsite-btn').click(function() {
-    	
     });
     	
 </script>
