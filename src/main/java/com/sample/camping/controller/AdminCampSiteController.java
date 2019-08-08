@@ -33,6 +33,7 @@ public class AdminCampSiteController {
 
 	@RequestMapping("/form.camp")
 	public String form() {
+		
 		return "admin/campsite/form";
 	}
 	

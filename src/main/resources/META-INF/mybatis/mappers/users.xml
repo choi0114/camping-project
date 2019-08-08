@@ -24,8 +24,8 @@
 		  user_phone_number as phoneNumber,
 		  user_profile_photo as profilePhoto,
 		  user_type as type,
-		  user_usedYn as usedYn,
-		  user_createDate as createDate
+		  user_used_yn as usedYn,
+		  user_create_date as createDate
 		from
 		  camp_users
 		where
@@ -43,8 +43,8 @@
 		  user_phone_number as phoneNumber,
 		  user_profile_photo as profilePhoto,
 		  user_type as type,
-		  user_usedYn as usedYn,
-		  user_createDate as createDate
+		  user_used_yn as usedYn,
+		  user_create_date as createDate
 		from
 		  camp_users
 		where
