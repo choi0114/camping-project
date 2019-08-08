@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sample.camping.dao.MypageDao;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
+import com.sample.camping.vo.User;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -59,8 +60,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public void updateUser(Map<String, Object> map) {
-		mypageDao.updateUser(map);
+	public void updateUser(User user) {
+		mypageDao.updateUser(user);
 	}
 	
 }

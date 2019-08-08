@@ -175,7 +175,7 @@
 			user_id = #{value}
 	</select>
 	
-	<update id="updateUser" parameterType="map">
+	<update id="updateUser" parameterType="user">
 		update camp_users
 			set 
 			<if test="password!=null and !password.equals('')">

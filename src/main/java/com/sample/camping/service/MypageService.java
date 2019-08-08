@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
+import com.sample.camping.vo.User;
 
 public interface MypageService {
 
@@ -16,6 +17,6 @@ public interface MypageService {
 	
 	List<MyCampsite> getMyAddCampById(String userId);
 	
-	void updateUser(Map<String, Object> map);
+	void updateUser(User user);
 	
 }
