@@ -94,6 +94,6 @@
 		  campsite_sido as sido
 		from
 		  camp_campsites
-		where campsite_no = #{value}  
+		where campsite_no = #{no}  
 		</select>
 </mapper>
