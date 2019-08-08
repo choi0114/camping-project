@@ -58,6 +58,7 @@ public class AdminCampSiteController {
 		
 		model.addAttribute("listCamp", adminCampSiteService.getCampingSitesAll(param));
 		return "admin/campsite/list";
+		
 	}
 	
 }

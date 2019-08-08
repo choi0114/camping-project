@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -91,12 +93,12 @@
 											<label class="label-padding">이미지첨부</label>
 										</div>
 										<div class="col-xs-11">
-											<input type="file" name="imageFile" id="imageFile" />
+											<input type="file" name="imageFile" id="imageFile" value="${campSite.photo }"/>
 										</div>
 									</div>
 									
 									<div class="text-right">
-										<input type="submit" class="btn btn-warning" value="등록"> 
+										<input type="submit" class="btn btn-default" value="수정"> 
 										<a class="btn btn-default" href="list.camping?pno=${param.pno }">취소</a>
 									</div>
 								</form>
