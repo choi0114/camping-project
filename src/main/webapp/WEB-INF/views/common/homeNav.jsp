@@ -190,7 +190,7 @@
 			</div>
 			<div class="modal-body">
 					<div class="form-group">
-						<label for="email">아이디</label>
+						<label for="id">아이디</label>
 						<div class="input-group pb-modalreglog-input-group">
 							<input type="text" class="form-control" id="id" name="id"
 								placeholder="아이디"> <span class="input-group-addon"><span

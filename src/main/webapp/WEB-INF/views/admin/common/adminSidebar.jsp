@@ -65,7 +65,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
               <li><a href="" class=${menu eq 'main'?'sidebar-active':'' }>관리자 메인</a></li>
-              <li><a href="" class=${menu eq 'manage'?'sidebar-active':'' }>캠핑장 관리</a></li>
+              <li><a href="list.camp?pno=1" class=${menu eq 'manage'?'sidebar-active':'' }>캠핑장 관리</a></li>
               <li><a href="" class=${menu eq 'admit'?'sidebar-active':'' }>승인 관리</a></li>
               <li><a href="" class=${menu eq 'goods'?'sidebar-active':'' }>캠핑용품 관리</a></li>
               <li><a href="" class=${menu eq 'notice'?'sidebar-active':'' }>공지 사항</a></li>

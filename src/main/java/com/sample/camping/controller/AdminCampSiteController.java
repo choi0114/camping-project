@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.sample.camping.service.AdminCampSiteService;
 import com.sample.camping.vo.AdminPagination;
+import com.sample.camping.vo.CampSite;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,7 +22,11 @@ public class AdminCampSiteController {
 	
 	
 	@RequestMapping("/detail.camp")
-	public String detail() {
+	public String detail(Model model, @RequestParam("no")int no) {
+		CampSite campSite = adminCampSiteService.getCampingSitesbyNo(no);
+		model.addAttribute("campSite",campSite);
+		
+		
 		return "admin/campsite/detail";
 	}
 	
@@ -62,4 +67,6 @@ public class AdminCampSiteController {
 		
 	}
 	
+	
+
 }

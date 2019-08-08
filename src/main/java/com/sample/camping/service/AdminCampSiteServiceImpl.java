@@ -30,7 +30,7 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 	
 	@Override
 	public CampSite getCampingSitesbyNo(int no) {
-		return campSiteDao.getCampingSitesbyNo(no);
+		return campSiteDao.getCampingSitesByNo(no);
 	}
 	
 	@Override

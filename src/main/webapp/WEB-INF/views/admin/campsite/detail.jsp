@@ -45,7 +45,7 @@
 					<div class="container">
 						<h1 class="admin-buttom">캠핑장 관리</h1>
 						<div class="well">
-							<form method="post" action="add.camp" enctype="multipart/form-data" onsubmit="checkfield(event)">
+							<form method="post" action="detail.camp" enctype="multipart/form-data" onsubmit="checkfield(event)">
 								<input type="hidden" name="pno" value="${param.pno }">
 									<div class="form-group">
 										<div class="row">
@@ -99,7 +99,7 @@
 									
 									<div class="text-right">
 										<input type="submit" class="btn btn-default" value="수정"> 
-										<a class="btn btn-default" href="list.camping?pno=${param.pno }">취소</a>
+										<a class="btn btn-default" href="list.camp?pno=${param.pno }">취소</a>
 									</div>
 								</form>
 							</div>
