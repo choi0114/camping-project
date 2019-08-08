@@ -223,7 +223,7 @@ $('#more-List-Button').click(function(){
 				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
 				content += "</div>";
 				content += "<div class='fl cirght hand'>";
-				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"><span style='font-size:12px;'>"+list.gugun+"</span></p>"
 				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span></p>"
 				content +="<a href='map.camp?"+list.name+"' class='cdirectlink'>"
 		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
@@ -318,7 +318,7 @@ $('#totalsearch').keyup(function(event){
 				}
 				content += "</div>";
 				content += "<div class='fl cirght hand'>";
-				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
+				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"><span style='font-size:12px;'>"+list.gugun+"</span></p>"
 				content += "<p class='sbjval'><span class='highlight'>"+list.name+"</span>"
 				content +="<a href='map.camp?keyword="+list.name+"' class='cdirectlink'>"
 		        content +="<img class='imgresult' src='resources/images/direct.svg'  width='26' height='26' >"
