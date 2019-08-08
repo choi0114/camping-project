@@ -126,10 +126,10 @@
         <div class="topmenu">
             <ul>
                 <li><a href="/camping/map.camp?city=서울&satus=update">전체</a></li>
-                <li><a href="#">일반캠핑</a></li>
-                <li><a href="#">유료캠핑장</a></li>
-                <li><a href="#">카라반</a></li>
-                <li><a href="#">테마검색</a></li>
+                <li><a href="/camping/map.">일반캠핑</a></li>
+                <li><a href="/camping/">글램핑</a></li>
+                <li><a href="/camping/">카라반</a></li>
+                <li><a href="/camping/themesearch.camp">테마검색</a></li>
                 <li>
                     <a data-toggle="collapse" href="#">캠핑톡</a>
                     <ul>

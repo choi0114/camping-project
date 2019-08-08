@@ -22,7 +22,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body data-campsite-no="${campsite.no }">
-	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
+	<%@ include file="../common/detailNav.jsp" %>
+	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }" style="padding-top: 120px;">
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
@@ -47,8 +48,8 @@
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 					<span> | 추천 ${campsite.likes }</span>
 				</button>
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-thumbs-down" id="hate-campsite-btn" data-hates="${campsite.hates }"></span>
+				<button class="btn btn-default" id="hate-campsite-btn" data-hates="${campsite.hates }">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
 					<span> | 비추천 ${campsite.hates }</span>
 				</button>
 				<button class="btn btn-default" style="margin-left: 20px;" id="opinion-btn">
@@ -380,107 +381,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center" id="nearby-campingsite-box">
-	        <div id="near-campingsite-box" class="slider demo">
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp7.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp8.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	        </div>
+	        <div id="near-campingsite-box" class="slider demo"></div>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -1309,6 +1210,7 @@
 			    			return a.distance - b.distance;
 			    		}).slice(0, 10);
 			    		
+			    		console.log(campsites);
 			    		$.each(campsites, function(index, campsite) {
 			    			
 		    				var html = '<div>'
@@ -1496,33 +1398,43 @@
     });
     
     $('#hate-campsite-btn').click(function() {
-    	var textColor = $(this).css('color');
-    	var sort = 'HATE';
-    	var value = $(this).attr('data-hates');
+    	var user = '${LOGIN_USER.id}';
+    	console.log(user);
     	
-    	if(textColor == 'rgb(51, 51, 51)') {
-	    	$(this).css('color', '#32a1ff');
-	    	$(this).css('border-color', '#32a1ff');
-	    	alert('비추천되었습니다.');
-	    	value++;
-    	} else {
-    		$(this).css('color', '#333333');
-	    	$(this).css('border-color', '#cccccc');
-	    	alert('비추천이 취소되었습니다.');
-	 		value--;
+    	if(user == '') {
+    		alert('로그인이 필요한 서비스입니다.');
+    		return false;
     	}
     	
-    	$(this).empty();
-    	
     	$.ajax({
-    		url: 'updatecs.camp',
-    		data: {no: no, sort: sort, value: value},
+    		url: 'alreadychecked.camp',
+    		data: {id: user, no: no},
     		dataType: 'json',
-    		success: function(campsite) {
-    			var html = '<span class="glyphicon glyphicon-thumbs-down"></span>'
-						 + '<span> | 비추천 ' + campsite.hates + '</span>';
-						 
-				$(this).append(html);
+    		success: function(data) {
+    			if(data) {
+    				alert('이미 반영된 캠핑장입니다.');
+    				return false;
+    			}
+    			
+    			var sort = 'HATE';
+    	       	var value = $(this).attr('data-hates');
+    	       	
+    	       	alert('비추천되었습니다.');
+    	       	value--;
+    	       	
+    	       	$('#hate-campsite-btn').empty();
+    	       	
+    	       	$.ajax({
+    	       		url: 'updatecs.camp',
+    	       		data: {no: no, sort: sort, value: value},
+    	       		dataType: 'json',
+    	       		success: function(campsite) {
+    	       			var html = '<span class="glyphicon glyphicon-thumbs-down"></span>'
+    	   						 + '<span> | 비추천 ' + campsite.hates + '</span>';
+    	   						 
+    	   				$('#hate-campsite-btn').append(html);
+    	       		}
+    	       	});
     		}
     	});
     });
