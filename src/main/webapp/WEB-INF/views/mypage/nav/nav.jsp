@@ -20,7 +20,6 @@
 				<li><a href="/camping/mypage/mail.camp" 	class="${submenu eq 'mail' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/mail.svg" width="18" height="20"></span> 쪽지</a></li>
 				<li><a href="/camping/mypage/friend.camp" 	class="${submenu eq 'freind' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/friend.svg" width="18" height="20"></span> 팔로우</a></li>
 				<li><a href="/camping/mypage/info.camp" 	class="${submenu eq 'info' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/info.svg" width="18" height="20"></span> 정보수정</a></li>
-				<li><a href="/camping/mypage/pw.camp" 		class="${submenu eq 'pw' ? 'selected' : ''  }">			<span class="ico"><img src="/camping/resources/images/mypage/pw.svg" width="18" height="20"></span> 비번변경</a></li>
 				<li><a href="/camping/mypage/out.camp" 		class="${submenu eq 'out' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/out.svg" width="18" height="20"></span> 회원탈퇴</a></li>
 			</ul>
 		</div>

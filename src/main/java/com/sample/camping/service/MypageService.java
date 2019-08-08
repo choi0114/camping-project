@@ -17,6 +17,7 @@ public interface MypageService {
 	
 	List<MyCampsite> getMyAddCampById(String userId);
 	
-	void updateUser(User user);
+	void updateUserData(User user);
+	void updateUserUsedYn(User user);
 	
 }
