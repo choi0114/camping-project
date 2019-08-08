@@ -14,6 +14,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .noimg{
+    	    	position: relative;
+  			  left: -16px;
+   			 top: -6px;
+    }
     .detail-link{
         display: inline-block;
 	   	padding: 0 10px;
@@ -429,12 +434,19 @@
 	                            <option value="경기" ${param.city eq '경기' ? 'selected' : "" }>경기</option>
 	                            <option value="인천" ${param.city eq '인천' ? 'selected' : "" }>인천</option>
 	                            <option value="부산" ${param.city eq '부산' ? 'selected' : "" }>부산</option>
+	                            <option value="울산" ${param.city eq '울산' ? 'selected' : "" }>울산</option>
+	                            <option value="대구" ${param.city eq '대구' ? 'selected' : "" }>대구</option>
 	                            <option value="세종" ${param.city eq '세종' ? 'selected' : "" }>세종</option>
+	                            <option value="충청남도" ${param.city eq '충청남도' ? 'selected' : "" }>충남</option>
 	                            <option value="대전" ${param.city eq '대전' ? 'selected' : "" }>대전</option>
-	                            <option value="충청" ${param.city eq '충청' ? 'selected' : "" }>충청도</option>
-	                            <option value="경상" ${param.city eq '경상' ? 'selected' : "" }>경상도</option>
-	                            <option value="전라" ${param.city eq '전라' ? 'selected' : "" }>전라도</option>
-	                            <option value="제주특별자치도" ${param.city eq '제주특별자치도' ? 'selected' : "" }>제주도</option>
+	                            <option value="충청북도" ${param.city eq '충청북도' ? 'selected' : "" }>충북</option>
+	                            <option value="경상북도" ${param.city eq '경상북도' ? 'selected' : "" }>경북</option>
+	                            <option value="경상남도" ${param.city eq '경상남도' ? 'selected' : "" }>경남</option>
+	                            <option value="전라남도" ${param.city eq '전라남도' ? 'selected' : ""}>전남</option>
+	                            <option value="전라북도" ${param.city eq '전라북도' ? 'selected' : "" }>전북</option>
+	                            <option value="광주" ${param.city eq '광주' ? 'selected' : "" }>광주</option>
+	                            <option value="강원" ${param.city eq '강원' ? 'selected' : "" }>강원</option>
+	                            <option value="제주특별자치도" ${param.city eq '제주특별자치도' ? 'selected' : "" }>제주</option>
                            </select>
                 	   </form>
                 	    </div>
@@ -466,7 +478,12 @@
                 	       <div class="col-sm-12 col-xs-4 list-box">   
                                <div class="left-photo">
                                     <img src="resources/images/update.png" class="new">
-                                    <img class="tm" src="resources/images/campsite/${campsite.photo }"> <!-- 캠핑 사진-->                                  
+                                    <c:if test="${campsite.photo eq null }">
+	                                    <img class="tm" src="resources/images/campsite/noimg.jpg"> <!-- 캠핑 사진-->                                  
+                                    </c:if>
+                                    <c:if test="${campsite.photo ne null }">
+	                                    <img class="tm" src="resources/images/campsite/${campsite.photo }"> <!-- 캠핑 사진-->                                  
+                                    </c:if>
                                </div>
                                <div class="content">
                                    <div class="subject">	
@@ -487,8 +504,8 @@
                                    </div>
                                    <div class="cont"> <!-- 캠핑장 주소 -->
                                       <p class="location">
-                                         	
-                                          <span class="address2">${campsite.sido }</span>
+                                    	<span class="address2">${campsite.sido }></span>
+                                    	<span class="address1">${campsite.gugun }</span>
                                       </p>
                                       <ul>
                                         <li class="address">${campsite.address }</li>         
@@ -634,7 +651,11 @@
 								var row = "<div class='col-sm-12 col-xs-4 list-box'>";
 									row+= "<div class='left-photo'>";
 									row+= "<img src='resources/images/update.png' class='new'>";
-									row+= "<img class='tm' src='resources/images/campsite/"+list.photo+"'>";
+									if(list.photo == null){
+										row+= "<img class='tm' src='resources/images/campsite/noimg.jpg'>";
+									}else{
+										row+= "<img class='tm' src='resources/images/campsite/"+list.photo+"'>";
+									}
 									row+= "</div>";
 									row+= "<div class='content'>";
 									row+= "<div class='subject'>";
@@ -689,7 +710,6 @@
 		var keyword = $('#keyword-value').val();
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
-			console.log(sort);
 		    if(markers2 != null){
 				setMarkers2(null); // 처음에 전체를 담았던 배열을 지운다.
 			 }
@@ -699,15 +719,11 @@
 			if(markers != null){
 				setMarkers(null);
 			}
-			
 			if (navigator.geolocation) {
-			    
 			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
 			    navigator.geolocation.getCurrentPosition(function(position) {
-			        
 			        var lat = position.coords.latitude, // 위도
 			            lon = position.coords.longitude; // 경도
-			        
 			        var locPosition = new kakao.maps.LatLng(lat, lon)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 			        
 			        // 현재 위치의 위도, 경도를 주소로 변환
@@ -720,9 +736,7 @@
 				            $('#location').val(address);  // Text 셋팅
 				        }
 				    };
-				    
 			  		geocoder.coord2RegionCode(lon, lat, callback);
-			  	  
 			        // 마커
 			        displayMarker(locPosition);
 			        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
@@ -786,7 +800,11 @@
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+						if(list.photo != null){
+							content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+						}else{
+							content += "<div class='img'> <img src='resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+						}
 						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
@@ -849,6 +867,7 @@
 					      path: [c1, c2]
 					    });
 					    var dist = poly.getLength(); // m 단위로 리턴
+					    var a = dist / 1000;
 					    if (dist < radius) {
 					    	
 					    	// 오버레이 생성
@@ -883,7 +902,6 @@
 								if(prevClickedMarker){
 									prevClickedMarker.setImage(markerImage)
 								}
-								GPSmarkers.setMap(null);
 								// 날씨 구하기
 								var grid = dfs_xy_conv('toXY', list.latitude, list.longitude);
 								weathers(grid.x, grid.y);
@@ -986,8 +1004,11 @@
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
-						content += "<div class='btn_vote_scrap'>"
+						if(list.photo != null){
+							content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+						}else{
+							content += "<div class='img'> <img src='resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+						}						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
@@ -1081,7 +1102,6 @@
 								if(prevClickedMarker){
 									prevClickedMarker.setImage(markerImage)
 								}
-								GPSmarkers.setMap(null);
 							    // 클릭 커스텀 오버레이
 								var customeroverlay = new kakao.maps.CustomOverlay({
 									content: content,
@@ -1226,10 +1246,11 @@
 							content +="<div class='close' title='닫기'>X</div>";
 							content +="</div>";
 							content +="<div class='body'>";
-							if(list.photo == null){
-							content += "<div class='img'> <img src='resources/images/campsite/noimg.jpg' width='125' height='80' class='tm'></div>"
+							if(list.photo != null){
+								content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
 							}else{
-							content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"							}
+								content += "<div class='img'> <img src='resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+							}
 							content += "<div class='btn_vote_scrap'>"
 							content +="<div style='float: right'>"
 							content +="<a href='#'>"
