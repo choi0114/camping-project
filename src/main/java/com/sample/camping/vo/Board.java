@@ -12,12 +12,33 @@ public class Board {
 	private Integer hates;
 	private Integer views;
 	private Date createDate;
+	private String userNick;
 	private String userId;
+	private String profilePhoto;
+	private String campsiteName;
 	private Integer campsiteNo;
 	private Integer commentCnt;
 	private String thumbnail;
 	
 
+	public String getCampsiteName() {
+		return campsiteName;
+	}
+	public void setCampsiteName(String campsiteName) {
+		this.campsiteName = campsiteName;
+	}
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
 	public Integer getCommentCnt() {
 		return commentCnt;
 	}
