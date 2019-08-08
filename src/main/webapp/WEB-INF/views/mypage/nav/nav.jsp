@@ -4,7 +4,7 @@
 <div class="sidemenu">
 
 			<div class="memberinfobox">
-				<h3 id="mypage-title"><span id="high-light">${LOGIN_USER.nickName }</span>님 마이페이지</h3>
+				<h3 id="mypage-title"><span id="high-light">${LOGIN_USER.id }</span>님 마이페이지</h3>
 			</div>
 			<ul class="mymenu">
 				<li><a href="/camping/mypage/mypage.camp" 	class="${submenu eq 'mypage' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/1.svg" width="18" height="20"></span> 마이페이지</a></li>
