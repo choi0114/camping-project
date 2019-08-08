@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +26,18 @@
 		<c:set var="menu" value="campsite" />
 		<%@ include file="../common/adminSidebar.jsp"%>
 	</div>
-	<div class="col-xs-11">
+		<div class="col-xs-11">	
+			<div class="row">
+		    <div class="col-sm-11 page-head-right text-right">
+		       <form class="form-inline" action="list.camp">
+		           <div class="form-group">
+		                <label>캠핑장 이름</label>
+		            	<input class="form-control" type="text" id="keyword" name="keyword" minlength="2" maxlength="10">
+		            	<button class="form-control" type="submit" class="btn btn-default" id="btn_header_search">검색</button>
+		           </div>
+		      </form>
+		    </div>
+		</div>
 		<div class="container-top">
 			<table class="table table-hover">
 				<thead>
@@ -38,109 +51,53 @@
 					</tr>
 				</thead>
 				<tbody> 
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">1</td>
-						<td class="text-center"><a href="">용산캠핑장</a></td>
-						<td class="text-center">100000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">2</td>
-						<td class="text-center"><a href="">선재캠핑장</a></td>
-						<td class="text-center">100000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">3</td>
-						<td class="text-center"><a href="">대부도캠핑장</a></td>
-						<td class="text-center">100000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">4</td>
-						<td class="text-center"><a href="">여의도캠핑장</a></td>
-						<td class="text-center">100000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
-					<tr>
-						<td class="text-center"><input type="checkbox"></td>
-						<td class="text-center">5</td>
-						<td class="text-center"><a href="">송도캠핑장</a></td>
-						<td class="text-center">140000</td>
-						<td class="text-center">2019-07-19</td>
-						<td class="text-center">영업중</td>
-					</tr>
+					<c:choose>
+							<c:when test="${not empty listCamp }">
+								<c:forEach var="campSite" items="${listCamp }">				
+									<tr>
+										<td class="text-center"><input type="checkbox" name="campsiteNo" value="${campSite.no }"></td>
+										<td class="text-center">${campSite.no }</td>
+										<td class="text-center"><a href="detail.camp?pno=${param.pno }&no=${campSite.no }">${campSite.name }</a></td>
+										<td class="text-center">${campSite.price }</td>
+										<td class="text-center"><fmt:formatDate value="${campSite.createDate }" pattern="yyyy-MM-dd" /></td>
+										<td class="text-center">${campSite.usedYn }</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+					   <c:otherwise>
+					   		<tr>
+								<td colspan="5" class="text-center">조회된 글이 없습니다.</td>
+							</tr>
+					   </c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 			<div class="row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">
-					<a href="" class="btn btn-default">영업여부변경</a> <a href=""
-						class="btn btn-default">수정</a> <a href="" class="btn btn-default">삭제</a>
-					<a href="" class="btn btn-default">등록</a>
+					<a href="" class="btn btn-default">영업여부변경</a> 
+					<a href="" class="btn btn-default">수정</a> 
+					<a href="" class="btn btn-default">삭제</a>
 				</div>
 			</div>
 			<div class="text-center">
 				<ul class="pagination">
 					<li><a href="">&laquo;</a></li>
-					<li><a href="">1</a></li>
-					<li><a href="">2</a></li>
-					<li><a href="">3</a></li>
-					<li><a href="">4</a></li>
-					<li><a href="">5</a></li>
+					<li><a href="list.camp?pno=1">1</a></li>
+					<li><a href="list.camp?pno=2">2</a></li>
+					<li><a href="list.camp?pno=3">3</a></li>
+					<li><a href="list.camp?pno=4">4</a></li>
+					<li><a href="list.camp?pno=5">5</a></li>
 					<li><a href="">&raquo;</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(function() {
+		
+	})
+	</script>
 </body>
 </html>

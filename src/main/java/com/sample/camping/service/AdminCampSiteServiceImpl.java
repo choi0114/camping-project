@@ -23,9 +23,18 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 	
 	@Override
 	public List<CampSite> getCampingSitesAll(Map<String, Object> param) {
-
-		return null;
+		List<CampSite> campSite = campSiteDao.getCampingSitesAll(param);
+		
+		return campSite;
 	}
 	
+	@Override
+	public CampSite getCampingSitesbyNo(int no) {
+		return campSiteDao.getCampingSitesbyNo(no);
+	}
 	
+	@Override
+	public int getCampingSitesCount(Map<String, Object> map) {
+		return campSiteDao.getCampingSitesCount(map);
+	}
 }
