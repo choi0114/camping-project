@@ -311,7 +311,11 @@ $('#totalsearch').keyup(function(event){
 			$.each(data , function(index, list){
 				var content = "<div class='sitem'>";
 				content += "<div class='imgBox' style='float: left; padding-left: 10px;'>"
-				content += "<img src='resources/images/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				if(list.photo == null){
+				content += "<img src='resources/images/campsite/noimg.jpg' width='80' height='45' class='img-thumbnail'>"
+				}else{
+				content += "<img src='resources/images/campsite/"+list.photo+"' width='80' height='45' class='img-thumbnail'>"
+				}
 				content += "</div>";
 				content += "<div class='fl cirght hand'>";
 				content += "<p class='cpath' style='font-size: 12px;'>"+list.sido+"</p>"
