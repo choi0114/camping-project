@@ -287,7 +287,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <%@ include file="../common/detailNav.jsp" %>
+    <div class="container" style="padding-top: 100px;">
         <div class="row">
             <div class="col-sm-12"> <!-- 총 12 나눔 -->
                 <div class="col-sm-4 camping">

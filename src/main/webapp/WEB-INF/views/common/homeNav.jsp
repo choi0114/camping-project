@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
     <style>
         body {
             font-size: 12px;
@@ -90,9 +89,7 @@
         #resulttop .sitem .clink {margin-top: 10px;}
         .fr {float: right;} */
         
-        
     </style>
-
 <nav id="container">
     <div class="gnb">
         <ul class="">

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sample.camping.dao.CampsiteDao;
 import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.ThemeService;
 import com.sample.camping.view.WeatherXMLView;
@@ -35,6 +34,8 @@ public class CampingController {
 		model.addAttribute("campsite", campsiteService.getCampSiteByNo(no));
 		model.addAttribute("themes", themeService.getThemesByCampSite(no));
 		model.addAttribute("opinions", campsiteService.getOpinionByCSNo(no));
+		model.addAttribute("jjim", campsiteService.getJjimCountByNo(no));
+		model.addAttribute("opinionCount", campsiteService.getOpinionCountByCSNo(no));
 		
 		return "camping/detail";
 	}

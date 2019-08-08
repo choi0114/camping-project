@@ -42,7 +42,7 @@
 			<div class="col-sm-12">
 				<button class="btn btn-default" id="jjim-campsite-btn">
 					<span class="glyphicon glyphicon-heart-empty"></span>
-					<span> | 찜 8</span>
+					<span> | 찜 ${jjim }</span>
 				</button>
 				<button class="btn btn-default" style="margin-left: 20px;" id="like-campsite-btn" data-likes="${campsite.likes }">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
@@ -54,7 +54,7 @@
 				</button>
 				<button class="btn btn-default" style="margin-left: 20px;" id="opinion-btn">
 					<span class="glyphicon glyphicon-pencil"></span>
-					<span> | 의견 0</span>
+					<span> | 의견 ${opinionCount }</span>
 				</button>
 			</div>
 		</div>
@@ -1352,7 +1352,21 @@
     });
     
     $('#jjim-campsite-btn').click(function() {
+    	var user = '${LOGIN_USER.id}';
+    	console.log(user);
     	
+    	if(user == '') {
+    		alert('로그인이 필요한 서비스입니다.');
+    		return false;
+    	}
+    	
+    	var isMove = confirm('찜한 캠핑장에 추가되었습니다. 해당 페이지로 이동하시겠습니까?');
+    	
+    	if(isMove) {
+    		location.href = '../mypage/clip.camp';
+    	} else {
+    		return false;
+    	}
     });
     
     $('#like-campsite-btn').click(function() {

@@ -164,6 +164,15 @@
 			campsite_used_yn = 'Y'
 	</select>
 	
+	<select id="getOpinionCountByCSNo" parameterType="int" resultType="int">
+		select
+			count(*)
+		from
+			camp_opinion_boards
+		where
+			campsite_no = #{value}
+	</select>
+	
 	<select id="getOpinionByCSNo" parameterType="int" resultType="opinionBoard">
 		select
 			opinion_no				no,
@@ -226,6 +235,15 @@
 			user_id = #{id}
 		and
 			campsite_no = #{no}
+	</select>
+	
+	<select id="getJjimCountByNo" parameterType="int" resultType="int">
+		select
+			count(*)
+		from
+			camp_like_campsite
+		where
+			campsite_no = #{value}
 	</select>
 
 </mapper>

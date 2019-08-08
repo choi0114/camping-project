@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
         #resultImg{position: absolute;left: 331px;top: 90px;}
@@ -155,7 +156,7 @@
                 <li><a href="map.camp?sort=CAMP">글램핑</a></li>
                 <li><a href="map.camp?sort=CAR">카라반</a></li>
                 <li><a href="map.camp?sort=NORMAL">캠핑장</a></li>
-                <li><a href="#">테마검색</a></li>
+                <li><a href="themesearch.camp">테마검색</a></li>
                 <li>
                     <a data-toggle="collapse" href="#">캠핑톡</a>
                     <ul style="display: none;">
@@ -197,6 +198,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script type="text/javascript">
 var prevLength;
 var page = 2;

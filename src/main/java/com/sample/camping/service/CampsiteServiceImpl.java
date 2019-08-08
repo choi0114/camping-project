@@ -72,4 +72,14 @@ public class CampsiteServiceImpl implements CampsitesService {
 	public LikeHateCampsite alreadyChecked(Map<String, Object> map) {
 		return campsiteDao.alreadyChecked(map);
 	}
+	
+	@Override
+	public int getJjimCountByNo(int no) {
+		return campsiteDao.getJjimCountByNo(no);
+	}
+	
+	@Override
+	public int getOpinionCountByCSNo(int no) {
+		return campsiteDao.getOpinionCountByCSNo(no);
+	}
 }
