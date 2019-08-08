@@ -27,7 +27,7 @@ div {
     color: coral;
     text-align: center;
     margin-top: 20px;
-    margin-left: -30px;
+    margin-left: -80px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -48,7 +48,6 @@ div {
 }
 .title {
     margin-top: 20px;
-    margin-left: -35px;
     font-size: 18px;
     font-weight: bolder
 }
@@ -76,7 +75,6 @@ div {
 }
 .like {
     margin-top: 2px;
-    margin-left: -5px;
 
 }
 .write-comment {
@@ -90,8 +88,8 @@ div {
     margin-left: 20px;
    
 }
+
 .like-comment {
-    margin-left: -20px;
     color: #868e96
 }
 .comment {
@@ -108,8 +106,8 @@ div {
     margin-top: 30px;
     width: 70px;
     font-size: 15px;
-    color: coral;
-    border: coral 1px solid;
+    color: #32a1ff;
+    border: #32a1ff 1px solid;
 }
 .comment-nick {
     font-weight: bold;

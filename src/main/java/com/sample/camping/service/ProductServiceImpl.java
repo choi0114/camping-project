@@ -36,9 +36,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public void deleteProduct(Integer no) {
-		
 		productDao.deleteProduct(no);
-		
 	}
 	@Override
 	public void modifyGoods(Product product) {

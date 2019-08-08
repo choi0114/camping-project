@@ -94,8 +94,9 @@ public class ProductController {
 		return "product/category";
 	} 
 	@GetMapping("/delete.camp")
-	public @ResponseBody String addComment( @RequestParam int no){
+	public @ResponseBody String delete( @RequestParam int no){
 		productService.deleteProduct(no);
+		System.out.println("번호"+no);
 		return "redirect:adminProduct.camp";
 	}
 	@PostMapping("/addProduct.camp")
@@ -146,7 +147,7 @@ public class ProductController {
 		product.setGoodsSort(form.getSort());
 		product.setLongSummary(form.getLongSummary());
 		System.out.println(product);
-		System.out.println(form.getCategory());
+		System.out.println(form.getLongSummary());
 		
 		productService.modifyGoods(product);
 		

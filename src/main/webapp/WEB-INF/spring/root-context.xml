@@ -13,9 +13,14 @@
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe"
+		p:username="hr"
+		p:password="zxcv1234"/>
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver"
 		p:url="jdbc:oracle:thin:@192.168.10.53:1521:xe"
 		p:username="camping"
-		p:password="zxcv1234"/>
+		p:password="zxcv1234"/> -->
 			
 	<!-- 
 		mybatis의 핵심객체 SqlSessionFactory를 스프링의 빈으로 등록한다.
