@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.Board;
+import com.sample.camping.vo.Comment;
 
 public interface BoardDao {
 	void addJoin(Board board);
@@ -26,4 +27,9 @@ public interface BoardDao {
 	Board selectOpinionByNo(int no);
 	Board selectReviewByNo(int no);
 	Board selectFreeByNo(int no);
+	List<Comment> commentByBoardNo(Map<String, Object> map);
+	void addComment(Map<String, Object> map);
+	void updateLike(Map<String, Object> map);
+	void updateHate(Map<String, Object> map);
+	
 }

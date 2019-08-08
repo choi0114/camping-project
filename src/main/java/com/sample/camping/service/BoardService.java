@@ -29,4 +29,7 @@ public interface BoardService {
 	Board selectFreeByNo(int no);
 	List<Comment> commentByBoardNo(Map<String, Object> map);
 	void addComment(Map<String, Object> map);
+	void updateLike(Map<String, Object> map);
+	void updateHate(Map<String, Object> map);
+	
 }

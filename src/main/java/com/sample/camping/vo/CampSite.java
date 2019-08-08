@@ -22,7 +22,6 @@ public class CampSite {
 	private String sido;
 	private String gugun;
 	private MyCampsite myCampsite;
-	private String gugun;
 	
 	public Integer getNo() {
 		return no;
@@ -134,12 +133,7 @@ public class CampSite {
 		this.myCampsite = myCampsite;
 	}
 	
-	public String getGugun() {
-		return gugun;
-	}
-	public void setGugun(String gugun) {
-		this.gugun = gugun;
-	}
+
 	@Override
 	public String toString() {
 		return "CampSite [no=" + no + ", name=" + name + ", sort=" + sort + ", latitude=" + latitude + ", longitude="

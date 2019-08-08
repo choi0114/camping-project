@@ -2,6 +2,8 @@ package com.sample.camping.vo;
 
 import java.util.Date;
 
+import com.sample.camping.utils.DateUtils;
+
 public class Product {
 	private Integer goodsNo;
 	private String name;
@@ -100,8 +102,20 @@ public class Product {
 	public Integer getStock() {
 		return stock;
 	}
+	public String getCreateDateStr() {
+		return DateUtils.dateToString(createDate);
+	}
+	
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+	@Override
+	public String toString() {
+		return "Product [goodsNo=" + goodsNo + ", name=" + name + ", price=" + price + ", photo=" + photo
+				+ ", goodsSort=" + goodsSort + ", summary=" + summary + ", longSummary=" + longSummary
+				+ ", goodsCategory=" + goodsCategory + ", forsale=" + forsale + ", goodsPoint=" + goodsPoint
+				+ ", goodsLike=" + goodsLike + ", hate=" + hate + ", createDate=" + createDate + ", stock=" + stock
+				+ "]";
 	}
 
 	
