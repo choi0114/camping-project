@@ -22,7 +22,7 @@ public class CampSite {
 	private String sido;
 	private String gugun;
 	private MyCampsite myCampsite;
-	private String gugun;
+
 	
 	public Integer getNo() {
 		return no;
@@ -132,13 +132,6 @@ public class CampSite {
 	}
 	public void setMyCampsite(MyCampsite myCampsite) {
 		this.myCampsite = myCampsite;
-	}
-	
-	public String getGugun() {
-		return gugun;
-	}
-	public void setGugun(String gugun) {
-		this.gugun = gugun;
 	}
 	@Override
 	public String toString() {
