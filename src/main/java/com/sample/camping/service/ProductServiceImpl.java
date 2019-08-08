@@ -13,6 +13,7 @@ import com.sample.camping.vo.Product;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDao productDao;
+	
 	@Override
 	public void addProduct(Product product) {
 		productDao.addProduct(product);
@@ -24,6 +25,28 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void updateProduct(Map<String, Object> map) {
 		productDao.updateProduct(map);
+	}
+	@Override
+	public Integer selectProductCount(Map<String, Object> map) {
+		return productDao.selectProductCount(map);
+	}
+	@Override
+	public Product selectProductByNo(Integer no) {
+		return productDao.selectProductByNo(no);
+	}
+	@Override
+	public void deleteProduct(Integer no) {
+		
+		productDao.deleteProduct(no);
+		
+	}
+	@Override
+	public void modifyGoods(Product product) {
+		productDao.modifyGoods(product);
+	}
+	@Override
+	public List<Product> selectProductByCatType(Map<String, Object> map) {
+		return productDao.selectProductByCatType(map);
 	}
 
 }
