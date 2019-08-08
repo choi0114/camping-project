@@ -9,4 +9,6 @@ public interface AdminCampSiteService {
 
 	void addCampSite(CampSite campSite);
 	List<CampSite> getCampingSitesAll(Map<String, Object> param);
+	CampSite getCampingSitesbyNo(int no);
+	public int getCampingSitesCount(Map<String, Object> map);
 }

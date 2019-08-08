@@ -13,8 +13,19 @@
 			(#{campsite_seq.nextval}, #{name}, #{price}, #{createDate}, #{usedYn})
 	</insert>	
 
+	<select id="getCampingSitesCount" parameterType="map"  resultType="int">
+		select count(*)
+		from	  
+		  camp_campsites
+		<where>
+			<if test="keyword != null"> 
+				campsite_name like '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</select>
+
 	<!-- 모든 캠핑장 출력 -->
-	<select id="getCampingSitesAll" parameterType="string" resultType="campSite">
+	<select id="getCampingSitesAll" parameterType="map" resultType="campSite">
 		select 
 		  campsite_no as no,
 		  campsite_name as name,
@@ -32,9 +43,57 @@
 		  campsite_create_date as createDate,
 		  campsite_used_yn as usedYn,
 		  campsite_sido as sido
-		from
-		  camp_campsites 	  
+	from(
+		select
+		  row_number() over(order by campsite_no desc) as row_no,
+		  campsite_no,
+		  campsite_name,
+		  campsite_sort,
+		  campsite_latitude,
+		  campsite_longitude,
+		  campsite_address,
+		  campsite_tel,
+		  campsite_sites,
+		  campsite_price,
+		  campsite_likes,
+		  campsite_hates,
+		  campsite_photo,
+		  campsite_point,
+		  campsite_create_date,
+		  campsite_used_yn,
+		  campsite_sido
+	from	  
+		  camp_campsites
+	<where>
+		<if test="keyword != null"> 
+			campsite_name like '%' || #{keyword} || '%'
+		</if>
+	</where>
+		  )
+	where row_no >= #{begin} and row_no &lt;= #{end}
 	</select>
-
 	
+	<!-- 디테일 정보 출력 -->
+		<select id="getCampingSitesByNo" parameterType="int" resultType="campSite">
+		select 
+		  campsite_no as no, 
+		  campsite_name as name,
+		  campsite_sort as sort,
+		  campsite_latitude as latitude,
+		  campsite_longitude as longitude,
+		  campsite_address as address,
+		  campsite_tel as tel,
+		  campsite_sites as sites,
+		  campsite_price as price,
+		  campsite_likes as likes,
+		  campsite_hates as hates,
+		  campsite_photo as photo,
+		  campsite_point as point,
+		  campsite_create_date as createDate,
+		  campsite_used_yn as usedYn,
+		  campsite_sido as sido
+		from
+		  camp_campsites
+		where campsite_no = #{value}  
+		</select>
 </mapper>
