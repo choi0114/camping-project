@@ -14,6 +14,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .detail-link{
+        display: inline-block;
+	   	padding: 0 10px;
+	    border: 1px #ddd solid;
+	    font-weight: 700;
+	    color: #000;
+	    height: 26px;
+	    line-height: 27px;
+	    margin-top:50px;
+	    position: relative;
+  	    left: 197px;
+	   }
     .bbtn2-orange {
     background: #f4902a;
 	}
@@ -248,7 +260,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 0
+            z-index: 0;
+            width: 160px;
+            height: 90px;
+        
         }
     .cont {
         font-size: 12px;
@@ -451,7 +466,7 @@
                 	       <div class="col-sm-12 col-xs-4 list-box">   
                                <div class="left-photo">
                                     <img src="resources/images/update.png" class="new">
-                                    <img class="tm" src="resources/images/camping.png"> <!-- 캠핑 사진-->                                  
+                                    <img class="tm" src="resources/images/campsite/${campsite.photo }"> <!-- 캠핑 사진-->                                  
                                </div>
                                <div class="content">
                                    <div class="subject">	
@@ -619,7 +634,7 @@
 								var row = "<div class='col-sm-12 col-xs-4 list-box'>";
 									row+= "<div class='left-photo'>";
 									row+= "<img src='resources/images/update.png' class='new'>";
-									row+= "<img class='tm' src='resources/images/camping.png'>";
+									row+= "<img class='tm' src='resources/images/campsite/"+list.photo+"'>";
 									row+= "</div>";
 									row+= "<div class='content'>";
 									row+= "<div class='subject'>";
@@ -771,7 +786,7 @@
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
 						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
@@ -784,13 +799,14 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'></span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
 						content +="<div class='desc'>"
 						content +="<div class='jibun'>"+list.address+"</div>"
 						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 						content+="</div>";
 						content+="</div>";
 						content+="</div>";
@@ -970,7 +986,7 @@
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
 						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
@@ -990,6 +1006,7 @@
 						content +="<div class='desc'>"
 						content +="<div class='jibun'>"+list.address+"</div>"
 						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 						content+="</div>";
 						content+="</div>";
 						content+="</div>";
@@ -1209,7 +1226,10 @@
 							content +="<div class='close' title='닫기'>X</div>";
 							content +="</div>";
 							content +="<div class='body'>";
-							content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+							if(list.photo == null){
+							content += "<div class='img'> <img src='resources/images/campsite/noimg.jpg' width='125' height='80' class='tm'></div>"
+							}else{
+							content += "<div class='img'> <img src='resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"							}
 							content += "<div class='btn_vote_scrap'>"
 							content +="<div style='float: right'>"
 							content +="<a href='#'>"
@@ -1229,6 +1249,7 @@
 							content +="<div class='desc'>"
 							content +="<div class='jibun'>"+list.address+"</div>"
 							content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+							content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 							content+="</div>";
 							content+="</div>";
 							content+="</div>";
