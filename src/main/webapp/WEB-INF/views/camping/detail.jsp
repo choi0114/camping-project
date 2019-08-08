@@ -19,16 +19,18 @@
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick.css">
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick-theme.css">
     <script src="/camping/resources/css/campingdetail/slick/slick.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body>
-	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
+<body data-campsite-no="${campsite.no }">
+	<%@ include file="../common/detailNav.jsp" %>
+	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }" style="padding-top: 120px;">
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
-					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }"/></p>
+					<p>업데이트 : <fmt:formatDate value="${campsite.createDate }" pattern="yyyy-MM-dd"/></p>
 				</div>
 				<div class="col-sm-6 text-right">
-					<p>${campsite.sido }</p>
+					<p id="gugun-box" data-gugun="${campsite.gugun }">${campsite.sido } &gt; ${campsite.gugun }</p>
 				</div>
 			</div>
 			<div class="row">
@@ -38,15 +40,15 @@
 		</div>
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-sm-12">
-				<button class="btn btn-default">
+				<button class="btn btn-default" id="jjim-campsite-btn">
 					<span class="glyphicon glyphicon-heart-empty"></span>
 					<span> | 찜 8</span>
 				</button>
-				<button class="btn btn-default" style="margin-left: 20px;">
+				<button class="btn btn-default" style="margin-left: 20px;" id="like-campsite-btn" data-likes="${campsite.likes }">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 					<span> | 추천 ${campsite.likes }</span>
 				</button>
-				<button class="btn btn-default">
+				<button class="btn btn-default" id="hate-campsite-btn" data-hates="${campsite.hates }">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 					<span> | 비추천 ${campsite.hates }</span>
 				</button>
@@ -60,7 +62,7 @@
 	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-sm-10">
 			<span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
-			<strong style="color: #ff6000">241.3Km</strong> > 
+			<strong style="color: #ff6000" id="distance-box"></strong> > 
 			<strong>${campsite.address }</strong>
 		</div>
         <div class="col-sm-2 pull-right text-center" style="max-height: 100%;">
@@ -149,17 +151,6 @@
                 <p style="font-size: 12px;">${theme.name }</p>
             </div>        
         </c:forEach>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px;">
-        <div class="col-sm-1 text-center">
-            <span class="glyphicon glyphicon-info-sign"></span>
-        </div>
-        <div class="col-sm-11" style="padding-left: 0">
-            삼척시 장호비치캠핑장은 장호관광지내 조성되어 있는 캠핑장으로서 주변 관광지와 어울어져 부모, 가족, 연인과 함께하여
-            많은 추억을 만들 수 있는 곳입니다.<br>
-            주변 관광지로서는 "한국의 나폴리"라 불리는 천혜의 자연경관과 청정해변이 인접하여 타 캠핑장보다 많은 장점을 가지고 있습니다. 또한 각종 체험을 경험하실 수 있고 바다낚시와 싱싱한 회를 즐기실 수도 있습니다.<br>
-            장호비치캠핑장 주변에는 해양레일바이크, 어촌체험마을, 해신당공원, 해상로프웨이 등 강원남부권 최대 해양관광벨트화로 다양한 지역관광을 즐기실 수 있습니다.
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -390,129 +381,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12 text-center" id="nearby-campingsite-box">
-	        <div id="near-campingsite-box" class="slider demo">
-	        	<div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>검봉산 자연휴양림 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>5.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp2.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>삼척 엘림 캠핑장</strong>
-	                </div>
-	                <div>
-	                    <span>8.3Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>씨스포빌 카라반</strong>
-	                </div>
-	                <div>
-	                    <span>14.8Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp4.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 마을 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>22.6Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp5.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp7.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp8.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp9.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp3.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	            <div>
-	                <div>
-	                    <a href="#"><img src="/camping/resources/images/mypage/camp1.jpg" width="160" style="margin-left: 33px;"/></a>
-	                </div>
-	                <div style="margin-top: 5px;">
-	                    <strong>덕풍계곡 솔밭 야영장</strong>
-	                </div>
-	                <div>
-	                    <span>23.4Km</span>
-	                </div>
-	            </div>
-	        </div>
+	        <div id="near-campingsite-box" class="slider demo"></div>
         </div>
     </div>
     <div class="row" style="margin-top: 40px;">
@@ -526,235 +395,112 @@
             </ul>
         </div>
     </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="/camping/resources/images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
-        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
-            <img src="images/camp4.jpg" width="130px" height="130px"/>
-        </div>
-        <div class="col-sm-10">
-            <div style="margin-bottom: 5px;">
-                <span style="font-size: 18px;">[삼척] 장호비치캠핑장 카라반 1박 2일</span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #888;">
-                    삼척 장호비치캠핑장 다녀왔어요. 지난 3월 다녀온 동해 망상오토캠핑리조트 카라반에 이은 두 번째 삼척 카라반
-                    이용 후기 시작해 보겠습니다. 장호비치캠핑장 강원도 삼척시 근덕면 장호1길 41 삼척 장호비치캠핑장 주소 강원도
-                    삼척시 근덕면 장호 1길 41 전화번호 033. 576. 0884~5 #삼척장호항카라반 2017...
-                </span>
-            </div>
-            <div style="margin-bottom: 10px;">
-                <span style="color: #3ea9cd">김콩씨네</span>
-            </div>
-            <div class="text-right" style="margin-bottom: 15px;">
-                <span>2019-05-09</span>
-            </div>
-        </div>
+    <div class="row">
+    	<div class="col-sm-12" id="board-box">
+    	<c:choose>
+    		<c:when test="${not empty opinions }">
+    			<c:forEach var="opinion" items="${opinions }">
+    				<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
+				        <div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="camp4.jpg">
+				            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px" style="cursor: pointer;"/>
+				        </div>
+				        <a href="#">
+					        <div class="col-sm-10">
+					            <div style="margin-bottom: 5px;">
+					                <span style="font-size: 18px; color: #000;">${opinion.title }</span>
+					            </div>
+					            <div style="margin-bottom: 10px;">
+					                <span style="color: #888;">
+					                    ${opinion.contents }
+					                </span>
+					            </div>
+					            <div style="margin-bottom: 10px;">
+					                <span style="color: #3ea9cd">${opinion.user.nickName }</span>
+					            </div>
+					            <div class="text-right" style="margin-bottom: 15px;">
+					                <span style="color: #000;"><fmt:formatDate value="${opinion.createDate }" pattern="yyyy-MM-dd"/></span>
+					            </div>
+					        </div>
+				        </a>
+				    </div>
+    			</c:forEach>
+    		</c:when>
+    		<c:otherwise>
+    			<div class="row" style="margin-top: 40px;">
+    				<div class="col-sm-12 text-center">
+    					<p>등록된 의견글이 없습니다.</p>
+    				</div>
+    			</div>
+    		</c:otherwise>
+    	</c:choose>
+    		<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
+		        <div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="camp4.jpg">
+		            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px" style="cursor: pointer;"/>
+		        </div>
+		        <a href="#">
+			        <div class="col-sm-10">
+			            <div style="margin-bottom: 5px;">
+			                <span style="font-size: 18px; color: #000;">제목</span>
+			            </div>
+			            <div style="margin-bottom: 10px;">
+			                <span style="color: #888;">
+			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+			                </span>
+			            </div>
+			            <div style="margin-bottom: 10px;">
+			                <span style="color: #3ea9cd">닉네임</span>
+			            </div>
+			            <div class="text-right" style="margin-bottom: 15px;">
+			                <span style="color: #000;">2019-08-03</span>
+			            </div>
+			        </div>
+		        </a>
+		    </div>
+		    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
+		        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
+		            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
+		        </div>
+		        <div class="col-sm-10">
+		            <div style="margin-bottom: 5px;">
+		                <span style="font-size: 18px;">${opinion.title }</span>
+		            </div>
+		            <div style="margin-bottom: 10px;">
+		                <span style="color: #888;">
+		                    ${opinion.contents }
+		                </span>
+		            </div>
+		            <div style="margin-bottom: 10px;">
+		                <span style="color: #3ea9cd">${opinion.user.nickName }</span>
+		            </div>
+		            <div class="text-right" style="margin-bottom: 15px;">
+		                <span><fmt:formatDate value="${opinion.createDate }" pattern="yyyy-MM-dd"/></span>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
+		        <div class="col-sm-2 text-center" style="margin-bottom: 10px;">
+		            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px"/>
+		        </div>
+		        <div class="col-sm-10">
+		            <div style="margin-bottom: 5px;">
+		                <span style="font-size: 18px;">${opinion.title }</span>
+		            </div>
+		            <div style="margin-bottom: 10px;">
+		                <span style="color: #888;">
+		                    ${opinion.contents }
+		                </span>
+		            </div>
+		            <div style="margin-bottom: 10px;">
+		                <span style="color: #3ea9cd">${opinion.user.nickName }</span>
+		            </div>
+		            <div class="text-right" style="margin-bottom: 15px;">
+		                <span><fmt:formatDate value="${opinion.createDate }" pattern="yyyy-MM-dd"/></span>
+		            </div>
+		        </div>
+		    </div>
+    	</div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-12 text-center">
@@ -790,6 +536,16 @@
             </button>
         </div>
     </div>
+    
+	<div id="campsite-photo-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+	  		<!-- Modal content-->
+		    <div class="modal-content">
+		      	<div class="modal-body text-center">
+		      	</div>
+		    </div>
+	  	</div>
+	</div>
     
 </div>
 <script type="text/javascript">
@@ -1147,8 +903,6 @@
     			var o3Value = $(dustInfos).find('o3Value').text();		// 오존 농도
     			var no2Value = $(dustInfos).find('no2Value').text();	// 이산화질소 농도
     			
-    			console.log(data);
-    			
     	    	var html1 = '<p>'
     	            	  + '> <strong>측정장소</strong> : ' + addr
     	            	  + '</p>'
@@ -1368,7 +1122,6 @@
         	data: {serviceKey : serviceKey, latitude : campLatitude, longitude : campLongitude, locdate : locdate},
         	dataType: 'xml',
         	success: function(data) {
-        		console.log(data);
         		var suntime = $(data).find('item');
         		var sunrise = $(suntime).find('sunrise').text();
         		var sunset = $(suntime).find('sunset').text();
@@ -1401,18 +1154,291 @@
     var marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(campLatitude, campLongitude)
-    });
+    })
+    
+    function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+        function deg2rad(deg) {
+            return deg * (Math.PI/180)
+        }
+        
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lng2-lng1);
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c; // Distance in km
+        d = Math.round(d*10)/10;
+        return d;
+    }
+    
 
-    $(document).ready(function(){
-        $('.demo').slick({
-            dots: false,
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            touchMove: false,
-            arrows: true
-        });
+    $(function() {
+	    // Geolocation API에 액세스할 수 있는지를 확인
+	    if (navigator.geolocation) {
+	        //위치 정보를 얻기
+	        navigator.geolocation.getCurrentPosition (function(pos) {
+	        	var myLatitude = pos.coords.latitude;
+	        	var myLongitude = pos.coords.longitude;
 
+	        	var distance = getDistanceFromLatLonInKm(campLatitude, campLongitude, myLatitude, myLongitude);
+			    $('#distance-box').text(distance + 'Km');
+			    console.log('camp : ', campLatitude, ', ', campLongitude);
+			    console.log('my : ', myLatitude, ', ', myLongitude);
+	        	
+			    var gugun = $('#gugun-box').attr('data-gugun');
+			    
+			    
+			    $.ajax({
+			    	url: 'getallcampsites.camp',
+			    	data: {gugun: gugun},
+			    	dataType: 'json',
+			    	success: function(campsites) {
+			    		
+			    		var nearbyCampsites = [];
+			    		var standardDistance = 100;
+			    		
+			    		$('#near-campingsite-box').empty();
+			    		
+			    		campsites = campsites.filter(function(campsite, index) {
+			    			var nearCSLatitude = campsite.latitude;
+			    			var nearCSLongitude = campsite.longitude;
+			    			var distance = getDistanceFromLatLonInKm(campLatitude, campLongitude, nearCSLatitude, nearCSLongitude);
+			    			campsite.distance = distance;
+			    			
+			    			return distance < 30 && distance != 0;
+			    		}).sort(function(a, b) {
+			    			return a.distance - b.distance;
+			    		}).slice(0, 10);
+			    		
+			    		console.log(campsites);
+			    		$.each(campsites, function(index, campsite) {
+			    			
+		    				var html = '<div>'
+		    	                	 + '<div>'
+		                    		 + '<a href="detail.camp?no=' + campsite.no + '"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>'
+		                			 + '</div>'
+		                			 + '<div style="margin-top: 5px;">'
+		                    		 + '<strong>' + campsite.name + '</strong>'
+		                			 + '</div>'
+		                			 + '<div>'
+		                    		 + '<span>' + campsite.distance + 'Km</span>'
+		                			 + '</div>'
+		           					 + '</div>';
+		    				
+		    				$('#near-campingsite-box').append(html);
+		    			
+			    		});
+			    		 $('.demo').slick({
+		    	            dots: false,
+		    	            slidesToShow: 5,
+		    	            slidesToScroll: 1,
+		    	            touchMove: false,
+		    	            arrows: true
+		    	        });
+			    	}
+			    });
+			    
+	        });
+	    } else {
+	        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+	    }
     });
+    
+    var no = $('body').attr('data-campsite-no');
+    
+    $('#opinion-box').click(function() {
+    	$(this).addClass('active').siblings().removeClass('active');
+    	
+    	$.ajax({
+    		url: 'opinions.camp?no=' + no,
+    		dataType: 'json',
+    		success: function(opinions) {
+    			$('#board-box').empty();
+    			
+    			if(opinions.length == 0) {
+    				var html = '<div class="row" style="margin-top: 40px;">'
+   							 + '<div class="col-sm-12 text-center">'
+							 + '<p>등록된 의견글이 없습니다.</p>'
+						 	 + '</div>'
+							 + '</div>';
+						 
+					$('#board-box').append(html);
+    			}
+    			
+    			$.each(opinions, function(index, opinion) {
+    				var html = '<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">'
+				        	 + '<div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="' + opinion.thumbnail + '">'
+		            		 + '<img src="/camping/resources/images/mypage/' + opinion.thumbnail + '" width="130px" height="130px"/>'
+		        			 + '</div>'
+		        			 + '<a href="#">'
+		        			 + '<div class="col-sm-10">'
+		            		 + '<div style="margin-bottom: 5px;">'
+		                	 + '<span style="font-size: 18px;">' + opinion.title + '</span>'
+		            		 + '</div>'
+		            		 + '<div style="margin-bottom: 10px;">'
+		                	 + '<span style="color: #888;">' + opinion.contents + '</span>'
+				             + '</div>'
+		            		 + '<div style="margin-bottom: 10px;">'
+		                	 + '<span style="color: #3ea9cd">' + opinion.user.nickName + '</span>'
+		            		 + '</div>'
+		            		 + '<div class="text-right" style="margin-bottom: 15px;">'
+		                	 + '<span>' + opinion.createDate + '</span>'
+		            		 + '</div>'
+		        			 + '</div>'
+		        			 + '</a>'
+		    				 + '</div>';
+		    				 
+		    		$('#board-box').append(html);
+    			});
+    		}
+    	});
+    });
+    
+    $('#review-box').click(function() {
+    	$(this).addClass('active').siblings().removeClass('active');
+    	
+    	$.ajax({
+    		url: 'reviews.camp?no=' + no,
+    		dataType: 'json',
+    		success: function(reviews) {
+    			$('#board-box').empty();
+    			
+    			if(reviews.length == 0) {
+    				var html = '<div class="row" style="margin-top: 40px;">'
+        					 + '<div class="col-sm-12 text-center">'
+							 + '<p>등록된 리뷰글이 없습니다.</p>'
+							 + '</div>'
+							 + '</div>';
+							 
+					$('#board-box').append(html);
+    			} else {
+	    			$.each(reviews, function(index, review) {
+	    				var html = '<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">'
+					        	 + '<div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="' + review.thumbnail + '">'
+			            		 + '<img src="/camping/resources/images/mypage/' + review.thumbnail + '" width="130px" height="130px"/>'
+			        			 + '</div>'
+			        			 + '<a href="#">'
+			        			 + '<div class="col-sm-10">'
+			            		 + '<div style="margin-bottom: 5px;">'
+			                	 + '<span style="font-size: 18px;">' + review.title + '</span>'
+			            		 + '</div>'
+			            		 + '<div style="margin-bottom: 10px;">'
+			                	 + '<span style="color: #888;">' + review.contents + '</span>'
+					             + '</div>'
+			            		 + '<div style="margin-bottom: 10px;">'
+			                	 + '<span style="color: #3ea9cd">' + review.user.nickName + '</span>'
+			            		 + '</div>'
+			            		 + '<div class="text-right" style="margin-bottom: 15px;">'
+			                	 + '<span>' + review.createDate + '</span>'
+			            		 + '</div>'
+			        			 + '</div>'
+			        			 + '</a>'
+			    				 + '</div>';
+			    				 
+			    		$('#board-box').append(html);
+	    			});
+    			}
+    			
+    		}
+    	});
+    });
+    
+    $('.photo-box').click(function() {
+    	var photo = $(this).attr('data-photo');
+    	$('.modal-body').empty();
+    	$('.modal-body').append('<img src="/camping/resources/images/mypage/camp4.jpg"/>');
+    	
+    	$('#campsite-photo-modal').modal('show');
+    });
+    
+    $('#jjim-campsite-btn').click(function() {
+    	
+    });
+    
+    $('#like-campsite-btn').click(function() {
+    	var user = '${LOGIN_USER.id}';
+    	console.log(user);
+    	
+    	if(user == '') {
+    		alert('로그인이 필요한 서비스입니다.');
+    		return false;
+    	}
+    	
+    	$.ajax({
+    		url: 'alreadychecked.camp',
+    		data: {id: user, no: no},
+    		dataType: 'json',
+    		success: function(data) {
+    			if(data) {
+    				alert('이미 반영된 캠핑장입니다.');
+    				return false;
+    			}
+    			
+    			var sort = 'LIKE';
+    	       	var value = $(this).attr('data-likes');
+    	       	
+    	       	alert('추천되었습니다.');
+    	       	value++;
+    	       	
+    	       	$('#like-campsite-btn').empty();
+    	       	
+    	       	$.ajax({
+    	       		url: 'updatecs.camp',
+    	       		data: {no: no, sort: sort, value: value},
+    	       		dataType: 'json',
+    	       		success: function(campsite) {
+    	       			var html = '<span class="glyphicon glyphicon-thumbs-up"></span>'
+    	   						 + '<span> | 추천 ' + campsite.likes + '</span>';
+    	   						 
+    	   				$('#like-campsite-btn').append(html);
+    	       		}
+    	       	});
+    		}
+    	});
+    });
+    
+    $('#hate-campsite-btn').click(function() {
+    	var user = '${LOGIN_USER.id}';
+    	console.log(user);
+    	
+    	if(user == '') {
+    		alert('로그인이 필요한 서비스입니다.');
+    		return false;
+    	}
+    	
+    	$.ajax({
+    		url: 'alreadychecked.camp',
+    		data: {id: user, no: no},
+    		dataType: 'json',
+    		success: function(data) {
+    			if(data) {
+    				alert('이미 반영된 캠핑장입니다.');
+    				return false;
+    			}
+    			
+    			var sort = 'HATE';
+    	       	var value = $(this).attr('data-hates');
+    	       	
+    	       	alert('비추천되었습니다.');
+    	       	value--;
+    	       	
+    	       	$('#hate-campsite-btn').empty();
+    	       	
+    	       	$.ajax({
+    	       		url: 'updatecs.camp',
+    	       		data: {no: no, sort: sort, value: value},
+    	       		dataType: 'json',
+    	       		success: function(campsite) {
+    	       			var html = '<span class="glyphicon glyphicon-thumbs-down"></span>'
+    	   						 + '<span> | 비추천 ' + campsite.hates + '</span>';
+    	   						 
+    	   				$('#hate-campsite-btn').append(html);
+    	       		}
+    	       	});
+    		}
+    	});
+    });
+    	
 </script>
 </body>
 </html>

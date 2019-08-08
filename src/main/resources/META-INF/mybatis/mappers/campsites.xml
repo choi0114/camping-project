@@ -21,7 +21,8 @@
 			campsite_create_date	createDate,
 			campsite_used_yn		usedYn,
 			campsite_sido			sido,
-			my_campsite_no			"myCampsite.no"
+			my_campsite_no			"myCampsite.no",
+			campsite_gugun			gugun
 		from
 			camp_campsites
 		where
@@ -46,11 +47,14 @@
 			cs.campsite_create_date		createDate,
 			cs.campsite_used_yn			usedYn,
 			cs.campsite_sido			sido,
-			cs.my_campsite_no			"myCampsite.no"
+			cs.my_campsite_no			"myCampsite.no",
+			cs.campsite_gugun			gugun
 		from
 			camp_campsites cs, camp_theme_connects connects
 		where
 			cs.campsite_no = connects.campsite_no
+		and
+			cs.campsite_used_yn = 'Y'
 		and
 			connects.theme_no in 
 		<foreach collection="themeNos" item="item" index="index" open="(" close=")" separator=",">
@@ -61,7 +65,7 @@
 	<select id="get10CampSites" parameterType="map" resultType="campsite">
 		select
 			no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo,
-			point, createDate, usedYn, sido, "myCampsite.no"
+			point, createDate, usedYn, sido, "myCampsite.no", gugun
 		from (
 			select
 				row_number() over (order by no) rowno, X.*
@@ -83,11 +87,14 @@
 					cs.campsite_create_date		createDate,
 					cs.campsite_used_yn			usedYn,
 					cs.campsite_sido			sido,
-					cs.my_campsite_no			"myCampsite.no"
+					cs.my_campsite_no			"myCampsite.no",
+					cs.campsite_gugun			gugun
 				from
 					camp_campsites cs, camp_theme_connects connects
 				where
 					cs.campsite_no = connects.campsite_no
+				and
+					cs.campsite_used_yn = 'Y'
 				and
 					connects.theme_no in
 					<foreach collection="themeNos" item="item" index="index" open="(" close=")" separator=",">
@@ -99,6 +106,126 @@
 			rowno >= #{startNo}
 		and
 			rowno &lt;= #{endNo}
+	</select>
+	
+	<select id="getAllCampsites" resultType="campsite">
+		select
+			campsite_no				no,
+			campsite_name			name,
+			campsite_sort			sort,
+			campsite_latitude		latitude,
+			campsite_longitude		longitude,
+			campsite_address		address,
+			campsite_tel			tel,
+			campsite_sites			sites,
+			campsite_price			price,
+			campsite_likes			likes,
+			campsite_hates			hates,
+			campsite_photo			photo,
+			campsite_point			point,
+			campsite_create_date	createDate,
+			campsite_used_yn		usedYn,
+			campsite_sido			sido,
+			my_campsite_no			"myCampsite.no",
+			campsite_gugun			gugun
+		from
+			camp_campsites
+		where
+			campsite_used_yn = 'Y'
+		order by
+			campsite_no
+	</select>
+	
+	<select id="getCampsitesByGugun" parameterType="string" resultType="campsite">
+		select
+			campsite_no				no,
+			campsite_name			name,
+			campsite_sort			sort,
+			campsite_latitude		latitude,
+			campsite_longitude		longitude,
+			campsite_address		address,
+			campsite_tel			tel,
+			campsite_sites			sites,
+			campsite_price			price,
+			campsite_likes			likes,
+			campsite_hates			hates,
+			campsite_photo			photo,
+			campsite_point			point,
+			campsite_create_date	createDate,
+			campsite_used_yn		usedYn,
+			campsite_sido			sido,
+			my_campsite_no			"myCampsite.no",
+			campsite_gugun			gugun
+		from
+			camp_campsites
+		where
+			campsite_gugun = #{value}
+		and
+			campsite_used_yn = 'Y'
+	</select>
+	
+	<select id="getOpinionByCSNo" parameterType="int" resultType="opinionBoard">
+		select
+			opinion_no				no,
+			opinion_title			title,
+			opinion_contents		contents,
+			opinion_likes			likes,
+			opinion_hates			hates,
+			opinion_views			views,
+			opinion_thumbnail		thumbnail,
+			opinion_create_date		createDate,
+			user_id					"user.id",
+			campsite_no				"campSite.no"
+		from
+			camp_opinion_boards
+		where
+			campsite_no = #{value}
+	</select>
+	
+	<select id="getReviewByCSNo" parameterType="int" resultType="reviewBoard">
+		select
+			review_no				no,
+			review_title			title,
+			review_contents		contents,
+			review_likes			likes,
+			review_hates			hates,
+			review_views			views,
+			review_thumbnail		thumbnail,
+			review_create_date		createDate,
+			user_id					"user.id",
+			campsite_no				"campSite.no"
+		from
+			camp_review_boards
+		where
+			campsite_no = #{value}
+	</select>
+	
+	<update id="updateCampsite" parameterType="map">
+		update
+			camp_campsites
+		set
+			<if test="sort == 'LIKE'">
+				campsite_likes = #{value}
+			</if>
+			<if test="sort == 'HATE'">
+				campsite_hates = #{value}
+			</if>
+		where
+			campsite_no = #{no}
+	</update>
+	
+	<select id="alreadyChecked" parameterType="map" resultType="likeHateCampsite">
+		select
+			like_hate_no			no,
+			campsite_no				"campsite.no",
+			user_id					"user.id",
+			like_hate_create_date	createDate
+		from
+			camp_like_hate_campsites
+		where
+			user_id = #{id}
+		and
+			campsite_no = #{no}
 	</select>
 
 </mapper>

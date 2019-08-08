@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
-		
-		}
-        body {
-            font-size: 12px;
-            font-weight: 400;
-        }
         #resultImg{position: absolute;left: 331px;top: 90px;}
         
        #resulttop .sitem .cright {
@@ -139,8 +132,6 @@
         .topmenu .topsearch .btn-search{position: absolute; top: 1px; right: 3px; background: none; padding: 0; margin: 0; border: none;
                             color: #fff; cursor: pointer; height: 26px; width: 26px; text-align: center; outline: 0; font-size: 13px;}
     </style>
-</head>
-<body>
 <div class="detail-Nav" id="container">
     <div class="gnb">
         <ul class="">
@@ -156,7 +147,7 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="home.camp"><img src="resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="#"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
@@ -332,11 +323,4 @@ $('#totalsearch').keyup(function(event){
 			})
 		})
 	})
-	
-	
 </script>
-</body>
-</html>
-
-    
-

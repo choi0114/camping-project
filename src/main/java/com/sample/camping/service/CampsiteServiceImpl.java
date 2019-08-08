@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.CampsiteDao;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.LikeHateCampsite;
+import com.sample.camping.vo.OpinionBoard;
+import com.sample.camping.vo.ReviewBoard;
 
 @Service
 public class CampsiteServiceImpl implements CampsitesService {
@@ -38,5 +41,35 @@ public class CampsiteServiceImpl implements CampsitesService {
 	@Override
 	public List<CampSite> get10CampSites(Map<String, Object> map) {
 		return campsiteDao.get10CampSites(map);
+	}
+	
+	@Override
+	public List<CampSite> getAllCampsites() {
+		return campsiteDao.getAllCampsites();
+	}
+	
+	@Override
+	public List<CampSite> getCampsitesByGugun(String gugun) {
+		return campsiteDao.getCampsitesByGugun(gugun);
+	}
+	
+	@Override
+	public List<OpinionBoard> getOpinionByCSNo(int no) {
+		return campsiteDao.getOpinionByCSNo(no);
+	}
+	
+	@Override
+	public List<ReviewBoard> getReviewByCSNo(int no) {
+		return campsiteDao.getReviewByCSNo(no);
+	}
+	
+	@Override
+	public void updateCampsite(Map<String, Object> map) {
+		campsiteDao.updateCampsite(map);
+	}
+	
+	@Override
+	public LikeHateCampsite alreadyChecked(Map<String, Object> map) {
+		return campsiteDao.alreadyChecked(map);
 	}
 }

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.LikeHateCampsite;
+import com.sample.camping.vo.OpinionBoard;
+import com.sample.camping.vo.ReviewBoard;
 
 public interface CampsitesService {
 
@@ -13,4 +16,13 @@ public interface CampsitesService {
 	
 	List<CampSite> getCampSiteByTheme(Map<String, Object> map);
 	List<CampSite> get10CampSites(Map<String, Object> map);
+	
+	List<CampSite> getAllCampsites();
+	List<CampSite> getCampsitesByGugun(String gugun);
+	
+	List<OpinionBoard> getOpinionByCSNo(int no);
+	List<ReviewBoard> getReviewByCSNo(int no);
+	void updateCampsite(Map<String, Object> map);
+	
+	LikeHateCampsite alreadyChecked(Map<String, Object> map);
 }
