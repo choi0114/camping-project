@@ -1,7 +1,6 @@
 package com.sample.camping.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.sample.camping.vo.FreeBoard;
 import com.sample.camping.vo.FreeBoardComment;
@@ -13,6 +12,7 @@ import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.OpinionComment;
 import com.sample.camping.vo.ReviewBoard;
 import com.sample.camping.vo.ReviewBoardComment;
+import com.sample.camping.vo.User;
 
 public interface MypageDao {
 
@@ -32,5 +32,5 @@ public interface MypageDao {
 	
 	List<MyCampsite> getMyAddCampById(String userId);
 	
-	void updateUser(Map<String, Object> map);
+	void updateUser(User user);
 }

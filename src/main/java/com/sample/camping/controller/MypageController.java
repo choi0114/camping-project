@@ -145,6 +145,10 @@ public class MypageController {
 			return "redirect:/mypage/out.camp?result=fail";
 		}
 		
+		user.setUsedYn("N");
+		
+		myPageService.updateUser(user);
+		
 		session.invalidate();
 		return "redirect:/mypage/out.camp?result=success";
 	}
