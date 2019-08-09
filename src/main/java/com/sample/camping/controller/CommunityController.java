@@ -102,7 +102,7 @@ public class CommunityController {
 		User user = (User) session.getAttribute("LOGIN_USER");
 		BeanUtils.copyProperties(boardForm, board);
 		MultipartFile mf = boardForm.getThumbnailUploadFile();
-		String  profileImageSaveDirectory = "/camping-project/src/main/webapp/resources/images/community";
+		String  profileImageSaveDirectory = "C:/Users/RealBird/git/camping-project/src/main/webapp/resources/images/community";
 		if(!mf.isEmpty()) {
 			String filename = mf.getOriginalFilename();
 				

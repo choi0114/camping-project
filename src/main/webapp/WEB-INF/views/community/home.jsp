@@ -21,215 +21,218 @@
   </style>
 </head>
 <body style="background-color:#f7f7f9" >
-<div class="row">
-    <div class="col-sm-3 col-sm-offset-2 page-head-left " id="community-sort">
-        커뮤니티 > 전체: 최신순
-    </div>
-    <div class="col-sm-5 page-head-right">
-       <form class="form-inline">
-           <div class="form-group pull-right">
-                <select class="form-control" id="boardType">
-                    <option value="1">가입인사</option>
-                    <option value="2">캠핑장 리뷰</option>
-                    <option value="3">캠핑장 의견</option>
-                    <option value="4">자유</option>
-                </select> 
-                <select class="form-control" id="sort">
-                    <option value="title">제목</option>
-                    <option value="contents">내용</option>
-                </select>
-            <input class="form-control" type="text" id="keyword" minlength="2" maxlength="10">
-            <button class="form-control" type="button" class="btn btn-default" id="btn_header_search">검색</button>
-           </div>
-      </form>
-    </div>
-</div>
-<hr/>
-<div class="row bottom">
-    <div class="col-sm-2 col-sm-offset-2 ">
-    
-   		<div class="panel panel-default category">
-   			<div class="panel-heading">
-					CATEGORY
-			</div>
-   			<ul class="nav nav-pills nav-stacked" id="dept-list-box">
-    			<li class='item active' data-board-type="0"  id="new" ><a href="#">전체: 최신순 </a></li>
-    			<li class='item' data-board-type="1" id="join" ><a href="#">가입인사 게시판 </a></li>
-    			<li class='item' data-board-type="2" id="review" ><a href="#">캠핑장 리뷰 게시판 </a></li>
-    			<li class='item' data-board-type="3" id="opinion" ><a href="#">캠핑장 의견 게시판 </a></li>
-    			<li class='item' data-board-type="4" id="free" ><a href="#">자유 게시판 </a></li>
-   			</ul>
-   		</div>
-    </div>
-    <div class="col-sm-5 " >
-        <div class="in-board">
-	        <!-- right-box 시작 -->
-	        <div class="row panel panel-default">
-	        	<div class="row join-board panel-heading" >
-	        		<div class="col-sm-6">
-	        			<div class="row">
-				        	<h3> 가입인사 게시판</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-6 text-right more">
-		        		<a  data-pno="1" data-Tnum="1">더보기</a>
-	        		</div>
-	        	</div>
-				<div class="row right-box" style="height:260px;">
-					<table class="table">
-						<colgroup>
-							<col width="70%" />
-							<col width="10%" />
-							<col width="20%" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th>제목</th>
-								<th>조회수</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="join" items="${joins }">
-								<tr>
-									<td><a class="title" href='detail.camp?no=${join.no }&boardType=1' >${join.title }</a></td>
-									<td>${join.views }</td>
-									<td><fmt:formatDate value="${join.createDate }"/> </td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-	        </div>
-			
-			 <div class="row panel panel-default">
-	        	<div class="row join-board panel-heading">
-	        		<div class="col-sm-6">
-	        			<div class="row">
-				        	<h3> 캠핑장 리뷰 게시판</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-6 text-right more">
-		        		<a data-pno="1" data-Tnum="2">더보기</a>
-	        		</div>
-	        	</div>
-				<div class="row right-box"  style="height:260px;">
-					<table class="table">
-						<colgroup>
-							<col width="70%" />
-							<col width="10%" />
-							<col width="20%" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th>제목</th>
-								<th>조회수</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="review" items="${reviews }">
-								<tr>
-									<td><a class="title"  href='detail.camp?no=${review.no }&boardType=2' >${review.title }</a></td>
-									<td>${review.views }</td>
-									<td><fmt:formatDate value="${review.createDate }"/> </td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-	        </div>
-	        
-	         <div class="row panel panel-default">
-	        	<div class="row join-board panel-heading">
-	        		<div class="col-sm-6">
-	        			<div class="row">
-				        	<h3> 캠핑장 의견 게시판</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-6 text-right more">
-		        		<a data-pno="1" data-Tnum="3">더보기</a>
-	        		</div>
-	        	</div>
-				<div class="row right-box" style="height:260px;">
-					<table class="table">
-						<colgroup>
-							<col width="70%" />
-							<col width="10%" />
-							<col width="20%" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th>제목</th>
-								<th>조회수</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="opinion" items="${opinions }">
-								<tr>
-									<td><a class="title" href='detail.camp?no=${opinion.no }&boardType=3' >${opinion.title }</a></td>
-									<td>${opinion.views }</td>
-									<td><fmt:formatDate value="${opinion.createDate }"/> </td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-	        </div>
-	        
-	         <div class="row panel panel-default">
-	        	<div class="row join-board panel-heading">
-	        		<div class="col-sm-6">
-	        			<div class="row">
-				        	<h3> 자유 게시판</h3>
-	        			</div>
-	        		</div>
-	        		<div class="col-sm-6 text-right more">
-		        		<a data-pno="1" data-Tnum="4">더보기</a>
-	        		</div>
-	        	</div>
-				<div class="row right-box" style="height:260px;">
-					<table class="table">
-						<colgroup>
-							<col width="70%" />
-							<col width="10%" />
-							<col width="20%" />
-						</colgroup>
-												
-						<thead>
-							<tr>
-								<th>제목</th>
-								<th>조회수</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="free" items="${frees }">
-								<tr>
-									<td><a class="title" href='detail.camp?no=${free.no }&boardType=4' >${free.title }</a></td>
-									<td>${free.views }</td>
-									<td><fmt:formatDate value="${free.createDate }"/> </td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-	        </div>
-	
-				<!-- 끝 -->
-	        <div class="row">
-	            <div class="col-sm-4 col-sm-offset-8 text-right">
-	                <button type="button" onclick="location.href='write.camp'" class="btn btn-default write-button" >글쓰기</button>
-	            </div>
-	        </div>
-        </div>
-	    <div class="row text-center">
-		    <ul class="pagination " id="board-page-box" >
-		    	
-			</ul>
+<%@ include file="../common/detailNav.jsp" %>
+<div style="padding-top: 120px;">
+	<div class="row">
+	    <div class="col-sm-3 col-sm-offset-2 page-head-left " id="community-sort">
+	        커뮤니티 > 전체: 최신순
 	    </div>
-    </div>
+	    <div class="col-sm-5 page-head-right">
+	       <form class="form-inline">
+	           <div class="form-group pull-right">
+	                <select class="form-control" id="boardType">
+	                    <option value="1">가입인사</option>
+	                    <option value="2">캠핑장 리뷰</option>
+	                    <option value="3">캠핑장 의견</option>
+	                    <option value="4">자유</option>
+	                </select> 
+	                <select class="form-control" id="sort">
+	                    <option value="title">제목</option>
+	                    <option value="contents">내용</option>
+	                </select>
+	            <input class="form-control" type="text" id="keyword" minlength="2" maxlength="10">
+	            <button class="form-control" type="button" class="btn btn-default" id="btn_header_search">검색</button>
+	           </div>
+	      </form>
+	    </div>
+	</div>
+	<hr/>
+	<div class="row bottom">
+	    <div class="col-sm-2 col-sm-offset-2 ">
+	    
+	   		<div class="panel panel-default category">
+	   			<div class="panel-heading">
+						CATEGORY
+				</div>
+	   			<ul class="nav nav-pills nav-stacked" id="dept-list-box">
+	    			<li class='item active' data-board-type="0"  id="new" ><a href="#">전체: 최신순 </a></li>
+	    			<li class='item' data-board-type="1" id="join" ><a href="#">가입인사 게시판 </a></li>
+	    			<li class='item' data-board-type="2" id="review" ><a href="#">캠핑장 리뷰 게시판 </a></li>
+	    			<li class='item' data-board-type="3" id="opinion" ><a href="#">캠핑장 의견 게시판 </a></li>
+	    			<li class='item' data-board-type="4" id="free" ><a href="#">자유 게시판 </a></li>
+	   			</ul>
+	   		</div>
+	    </div>
+	    <div class="col-sm-5 " >
+	        <div class="in-board">
+		        <!-- right-box 시작 -->
+		        <div class="row panel panel-default">
+		        	<div class="row join-board panel-heading" >
+		        		<div class="col-sm-6">
+		        			<div class="row">
+					        	<h3> 가입인사 게시판</h3>
+		        			</div>
+		        		</div>
+		        		<div class="col-sm-6 text-right more">
+			        		<a  data-pno="1" data-Tnum="1">더보기</a>
+		        		</div>
+		        	</div>
+					<div class="row right-box" style="height:260px;">
+						<table class="table">
+							<colgroup>
+								<col width="70%" />
+								<col width="10%" />
+								<col width="20%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="join" items="${joins }">
+									<tr>
+										<td><a class="title" href='detail.camp?no=${join.no }&boardType=1' >${join.title }</a></td>
+										<td>${join.views }</td>
+										<td><fmt:formatDate value="${join.createDate }"/> </td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+		        </div>
+				
+				 <div class="row panel panel-default">
+		        	<div class="row join-board panel-heading">
+		        		<div class="col-sm-6">
+		        			<div class="row">
+					        	<h3> 캠핑장 리뷰 게시판</h3>
+		        			</div>
+		        		</div>
+		        		<div class="col-sm-6 text-right more">
+			        		<a data-pno="1" data-Tnum="2">더보기</a>
+		        		</div>
+		        	</div>
+					<div class="row right-box"  style="height:260px;">
+						<table class="table">
+							<colgroup>
+								<col width="70%" />
+								<col width="10%" />
+								<col width="20%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="review" items="${reviews }">
+									<tr>
+										<td><a class="title"  href='detail.camp?no=${review.no }&boardType=2' >${review.title }</a></td>
+										<td>${review.views }</td>
+										<td><fmt:formatDate value="${review.createDate }"/> </td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+		        </div>
+		        
+		         <div class="row panel panel-default">
+		        	<div class="row join-board panel-heading">
+		        		<div class="col-sm-6">
+		        			<div class="row">
+					        	<h3> 캠핑장 의견 게시판</h3>
+		        			</div>
+		        		</div>
+		        		<div class="col-sm-6 text-right more">
+			        		<a data-pno="1" data-Tnum="3">더보기</a>
+		        		</div>
+		        	</div>
+					<div class="row right-box" style="height:260px;">
+						<table class="table">
+							<colgroup>
+								<col width="70%" />
+								<col width="10%" />
+								<col width="20%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="opinion" items="${opinions }">
+									<tr>
+										<td><a class="title" href='detail.camp?no=${opinion.no }&boardType=3' >${opinion.title }</a></td>
+										<td>${opinion.views }</td>
+										<td><fmt:formatDate value="${opinion.createDate }"/> </td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+		        </div>
+		        
+		         <div class="row panel panel-default">
+		        	<div class="row join-board panel-heading">
+		        		<div class="col-sm-6">
+		        			<div class="row">
+					        	<h3> 자유 게시판</h3>
+		        			</div>
+		        		</div>
+		        		<div class="col-sm-6 text-right more">
+			        		<a data-pno="1" data-Tnum="4">더보기</a>
+		        		</div>
+		        	</div>
+					<div class="row right-box" style="height:260px;">
+						<table class="table">
+							<colgroup>
+								<col width="70%" />
+								<col width="10%" />
+								<col width="20%" />
+							</colgroup>
+													
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="free" items="${frees }">
+									<tr>
+										<td><a class="title" href='detail.camp?no=${free.no }&boardType=4' >${free.title }</a></td>
+										<td>${free.views }</td>
+										<td><fmt:formatDate value="${free.createDate }"/> </td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+		        </div>
+		
+					<!-- 끝 -->
+		        <div class="row">
+		            <div class="col-sm-4 col-sm-offset-8 text-right">
+		                <button type="button" onclick="location.href='write.camp'" class="btn btn-default write-button" >글쓰기</button>
+		            </div>
+		        </div>
+	        </div>
+		    <div class="row text-center">
+			    <ul class="pagination " id="board-page-box" >
+			    	
+				</ul>
+		    </div>
+	    </div>
+	</div>
 </div>
 <script type="text/javascript">
 	function change(boardType) {
@@ -299,8 +302,14 @@
 							var menu = "자유게시판";
 						}
 						if(boards.length){
+							var row1 = '<div class="row">';
+							row1 += '<h3 class="text-left" style="padding-left:30px;">'+menu+'</h3>';
+							row1 += '<hr>';
+							row1 += '</div>';
+							$(".in-board").append(row1);
 							$.each(boards, function(index, board){
 								var row = '<div class="row right-box">';
+								row += '<div class="row" style="border-bottom: 1px solid #ddd;">';
 								row += '<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">';
 								row += '<div class="col-sm-2 text-center" style="margin-bottom: 10px;">';
 					           	row += '<img src="/camping/resources/images/community/'+ board.thumbnail +'" width="130px" height="130px"/>';
@@ -309,7 +318,7 @@
 					          	row += '<div style="margin-bottom: 5px; padding-left: 40px;">';
 				            	row += '<span style="font-size: 18px;"><a class="title" href="detail.camp?no='+board.no+'&boardType='+boardType+'" >'+board.title+'</a></span>';
 					           	row += '</div>';
-				                row += '<div  class="contents"  style="margin-bottom: 10px; padding-left: 40px;">';
+				                row += '<div  class="contents"  style="margin-bottom: 10px; min-height: 54px; padding-left: 40px;">';
 				                row += '<span style="color: #888;" id="contents-in"> '+board.contents+'</span>';
 					           	row += '</div>';
 					           	row += '<div style="margin-bottom: 10px; padding-left: 40px;">';

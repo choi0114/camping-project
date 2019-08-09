@@ -19,6 +19,8 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body style="background-color:#f7f7f9">
+<%@ include file="../common/detailNav.jsp" %>
+<div style="padding-top: 120px;">
     <div class="row">
         <div class="col-sm-1">
         </div>
@@ -140,6 +142,7 @@
        <div class="col-sm-3">
        </div>
    </div>
+</div>
    <script type="text/javascript">
    		$(function(){
    			$("#click-home").click(function(){
