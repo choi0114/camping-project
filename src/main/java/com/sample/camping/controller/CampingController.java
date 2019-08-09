@@ -51,25 +51,33 @@ public class CampingController {
 	}
 	
 	@RequestMapping("/updatecs.camp")
-	public @ResponseBody CampSite likes(int no, String sort, int value) {
+	public @ResponseBody CampSite likes(int no, String sort, int value, String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("no", no);
 		map.put("sort", sort);
 		map.put("value", value);
+		map.put("id", id);
+		System.out.println("no : " + no + ", sort : " + sort + ", value : " + value);
 		
 		campsiteService.updateCampsite(map);
+		campsiteService.insertLikeHate(map);
 		
 		return campsiteService.getCampSiteByNo(no);
 	}
 	
 	@RequestMapping("/alreadychecked.camp")
-	public @ResponseBody LikeHateCampsite checkedLikeHate(String id, int no) {
+	public @ResponseBody Map<String, Object> checkedLikeHate(String id, int no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("no", no);
+		System.out.println("id : " + id + ", no : " + no);
+		LikeHateCampsite site = campsiteService.alreadyChecked(map);
+		System.out.println("site : " + site);
 		
-		return campsiteService.alreadyChecked(map);
+		map.put("site", site);
+		
+		return map;
 	}
 	
 	@RequestMapping("/getallcampsites.camp")

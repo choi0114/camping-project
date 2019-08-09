@@ -1383,13 +1383,14 @@
     		data: {id: user, no: no},
     		dataType: 'json',
     		success: function(data) {
-    			if(data) {
+    			console.log(data);
+    			if(data.site != null) {
     				alert('이미 반영된 캠핑장입니다.');
     				return false;
     			}
     			
     			var sort = 'LIKE';
-    	       	var value = $(this).attr('data-likes');
+    	       	var value = $('#like-campsite-btn').attr('data-likes');
     	       	
     	       	alert('추천되었습니다.');
     	       	value++;
@@ -1398,7 +1399,7 @@
     	       	
     	       	$.ajax({
     	       		url: 'updatecs.camp',
-    	       		data: {no: no, sort: sort, value: value},
+    	       		data: {no: no, sort: sort, value: value, id: user},
     	       		dataType: 'json',
     	       		success: function(campsite) {
     	       			var html = '<span class="glyphicon glyphicon-thumbs-up"></span>'
@@ -1431,7 +1432,7 @@
     			}
     			
     			var sort = 'HATE';
-    	       	var value = $(this).attr('data-hates');
+    	       	var value = $('#hate-campsite-btn').attr('data-hates');
     	       	
     	       	alert('비추천되었습니다.');
     	       	value--;

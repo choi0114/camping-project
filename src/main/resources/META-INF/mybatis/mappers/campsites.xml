@@ -237,6 +237,13 @@
 			campsite_no = #{no}
 	</select>
 	
+	<insert id="insertLikeHate" parameterType="map">
+		insert into camp_like_hate_campsites
+			(like_hate_no, campsite_no, user_id)
+		values
+			(camp_like_hate_seq.nextval, #{no}, #{id})
+	</insert>
+	
 	<select id="getJjimCountByNo" parameterType="int" resultType="int">
 		select
 			count(*)

@@ -82,4 +82,9 @@ public class CampsiteServiceImpl implements CampsitesService {
 	public int getOpinionCountByCSNo(int no) {
 		return campsiteDao.getOpinionCountByCSNo(no);
 	}
+	
+	@Override
+	public void insertLikeHate(Map<String, Object> map) {
+		campsiteDao.insertLikeHate(map);
+	}
 }

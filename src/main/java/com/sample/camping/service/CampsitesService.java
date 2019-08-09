@@ -27,4 +27,5 @@ public interface CampsitesService {
 	LikeHateCampsite alreadyChecked(Map<String, Object> map);
 	int getJjimCountByNo(int no);
 	int getOpinionCountByCSNo(int no);
+	void insertLikeHate(Map<String, Object> map);
 }
