@@ -248,6 +248,12 @@
     	
     	#btn-more{width: 100%; height: 40px; font-weight: bold;}
    		#search-result .more-button{text-align: center;}
+   		
+   		/* 탑버튼 */
+   		#move-top-btn {position: fixed; bottom: 70px; right: 70px;display: none; z-index: 999; width: 50px; height: 50px;
+   						background: #333; line-height: 60px;}
+   		#move-top-btn i {font-size: x-large; margin-left: 11px;}
+
     </style>
 </head>
 
@@ -301,33 +307,34 @@
 	            </div>
 	            <div class="row flex-wrapper">
 					<div class="col-sm-3 text-center">
-						<a href="#">
+						<a>
 							<div class="circle" id="circles-1"></div>
 							<div class="sitename">전체</div>
 						</a>
 					</div>
 					<div class="col-sm-3 text-center">
-						<a href="#">
+						<a>
 							<div class="circle" id="circles-2"></div>
-							<div class="sitename">일반캠핑</div>
+							<div class="sitename">글램핑</div>
 						</a>
 					</div>
 					<div class="col-sm-3 text-center">
-						<a href="#">
+						<a>
 							<div class="circle" id="circles-3"></div>
-							<div class="sitename">유료캠핑장</div>
+							<div class="sitename">카라반</div>
 						</a>
 					</div>
 					<div class="col-sm-3 text-center">
-						<a href="#">
+						<a>
 							<div class="circle" id="circles-4"></div>
-							<div class="sitename">카라반</div>
+							<div class="sitename">캠핑장</div>
 						</a>
 					</div>
 	            </div>
 	            <div class="maincamp">
 	                <h2><span>New</span> &amp; Update</h2>
-	                <div class="owl-carousel">	
+	                <div class="owl-carousel">
+	                <c:forEach var="item" items="${items }">
 	                    <div class="maincols">
 	                        <div class="twrap">
 	                            <div class="thumb hand">
@@ -342,128 +349,10 @@
 	                        </div>
 	                        <div class="text">
 	                            <p style="color: #f5ad22">일반캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
+	                            <p>${item.name }</p>
 	                        </div>
 	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide2.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #91ee6c">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide3.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #60b7ee">카라반</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide4.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #f5ad22">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide5.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #f5ad22">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide6.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #f5ad22">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide7.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #f5ad22">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
-	                    <div class="maincols">
-	                        <div class="twrap">
-	                            <div class="thumb hand">
-	                                <div class="border"></div>
-	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide8.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
-	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
-	                                </a>
-	                            </div>
-	                        </div>
-	                        <div class="text">
-	                            <p style="color: #91ee6c">유료캠핑장</p>
-	                            <p>백미리 희망 캠핑장</p>
-	                        </div>
-	                    </div>
+	                </c:forEach>	
 	                </div>
 	            </div>
 	        </div>
@@ -643,16 +532,36 @@
     	</div>
     </div>
     </div>
+    <a id="move-top-btn" href="#"><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></a>
+
 </body>
 <script type="text/javascript">
 
-	/* 지역별 버튼 눌렀을 때 스크롤 내려가기
+	/* 지역별 버튼 눌렀을 때 스크롤 내려가기 */
 		$('.btn-sido').click(function() {
-	    	viewscrollwrap.animate({
-	        	scrollTop: $("#camping-map").offset().top
+			$('html, body').animate({
+	        	scrollTop: 1010
 	   	 	}, 600);
 		});
- 	*/
+ 	
+ 	/* top버튼 */
+ 	$(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $('#move-top-btn').fadeIn();
+            } else {
+                $('#move-top-btn').fadeOut();
+            }
+        });
+        
+        $("#move-top-btn").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+ 	
  	
  	/* 검색창 */
  	var pno = 1;
@@ -705,7 +614,7 @@
 				
 				$.each(result.items, function(index,camp) {
 					
-					var html = '<li class="list-group-item" id="keyword-item">';
+					var html = '<li class="list-group-item" id="keyword-item" keyword-name="'+camp.name+'">';
             		html += '<div class="row">';
             		html += '<div class="col-xs-3 list-image">';
             		html += '<img alt="" src="/camping/resources/images/slide1.jpg" width="80" height="45">';
@@ -746,10 +655,13 @@
 		})
 	}
 	
+	$(".btn-search").click(function() {
+		var keyword = $("#search-box").val();
+		location.href = "map.camp?keyword=" + keyword;
+	})
 	$("#search-result").on('click', '#keyword-item', function() {
 		var keyword = $("#search-box").val();
-		console.log(keyword);
-		location.href = "map.camp?keyword" + keyword;
+		location.href = "map.camp?keyword=" + $(this).attr('keyword-name');
 	})
 	
 	$(".keyword-del").click(function() {
@@ -768,9 +680,19 @@
 		
 		$(".keyword-del").show();
 	});
-
-	/* function sido(name) {
-		alert(name);
+	
+	/* 슬라이드 
+	function updateList() {
+		$.ajax ({
+			url:"update.camp",
+			dataType:"json",
+			success:function(result) {
+				
+				$.each(result.items, function(index, camp) {
+					
+				})
+			}
+		})
 	} */
 	
 	/* 맵 */
@@ -978,6 +900,21 @@
 		if(nowpage > 1) {
 			nowpage--;
 			$("#nowpage").text(nowpage);
+			$("#btn-prev").addClass('on');
+		}
+		
+		if(nowpage == 1) {
+			$("#btn-prev").removeClass('on');
+		}
+		
+		if(totalpage == nowpage) {
+			$("#btn-next").removeClass('on');
+		}
+		
+		if(city2 != "") {
+			searchCampSites("gugun", city2, nowpage, 6);
+		} else {
+			searchCampSites("sido", city1, nowpage, 6);
 		}
 	})
 	
@@ -995,7 +932,6 @@
 		
 		if(nowpage > 1) {
 			$("#btn-prev").addClass('on');
-			$("#btn-next").removeClass('on');
 		}
 		
 		if(totalpage == nowpage) {
@@ -1078,13 +1014,26 @@
     	location.href = "detail.camp?no=" + $(this).attr('data-no');
     });
 
+	/* 차트링크이동 */
+	$("#circles-1").click(function() {
+		location.href = "map.camp?";
+	})
+	$("#circles-2").click(function() {
+		location.href = "map.camp?sort=CAMP";
+	})
+	$("#circles-3").click(function() {
+		location.href = "map.camp?sort=CAR";
+	})
+	$("#circles-4").click(function() {
+		location.href = "map.camp?sort=NORMAL";
+	})
 	
 	/* 차트 */
 	var myCircle = Circles.create({
 		  id:                  'circles-1',
 		  radius:              75,
-		  value:               2388,
-		  maxValue:            2388,
+		  value:               parseInt('${total}'),
+		  maxValue:            parseInt('${total}'),
 		  width:               5,
 		  text:                function(value){return value;},
 		  colors:              ['#fff', '#fff'],
@@ -1100,8 +1049,8 @@
 	var myCircle = Circles.create({
 		  id:                  'circles-2',
 		  radius:              75,
-		  value:               282,
-		  maxValue:            2388,
+		  value:               parseInt('${car}'),
+		  maxValue:            parseInt('${total}'),
 		  width:               5,
 		  text:                function(value){return value;},
 		  colors:              ['#fff', '#ff5000'],
@@ -1117,8 +1066,8 @@
 	var myCircle = Circles.create({
 		  id:                  'circles-3',
 		  radius:              75,
-		  value:               1587,
-		  maxValue:            2388,
+		  value:               parseInt('${normal}'),
+		  maxValue:            parseInt('${total}'),
 		  width:               5,
 		  text:                function(value){return value;},
 		  colors:              ['#fff', '#33cc33'],
@@ -1134,8 +1083,8 @@
 	var myCircle = Circles.create({
 		  id:                  'circles-4',
 		  radius:              75,
-		  value:               519,
-		  maxValue:            2388,
+		  value:               parseInt('${camp}'),
+		  maxValue:				parseInt('${total}'),
 		  width:               5,
 		  text:                function(value){return value;},
 		  colors:              ['#fff', '#0099ff'],

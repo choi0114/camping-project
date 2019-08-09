@@ -70,5 +70,40 @@
 		FROM camp_campsites
 		where campsite_sido = #{city}
 	</select>
+	
+	<select id="getCampSitesByUpdate" resultType="campSite">
+		select no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYn, sido, gugun
+		from (select
+				campsite_no no,
+				campsite_name name,
+				campsite_sort sort,
+				campsite_latitude latitude,
+				campsite_longitude longitude,
+				campsite_address address,
+				campsite_tel tel,
+				campsite_sites sites,
+				campsite_price price,
+				campsite_likes likes,
+				campsite_hates hates,
+				campsite_photo photo,
+				campsite_point point,
+				campsite_create_date createDate,
+				campsite_used_yn usedYn,
+				campsite_sido sido,
+				campsite_gugun gugun
+			from
+				camp_campsites
+			order by
+				campsite_no desc)
+		where rownum &lt;= 20	
+	</select>
+	
+	<select id="getCounts" resultType="hashmap">
+		select (select count(*) from camp_campsites) TOTAL,
+			(select count(*) from camp_campsites where CAMPSITE_SORT = 'CAR') CAR,
+			(select count(*) from camp_campsites where CAMPSITE_SORT = 'NORMAL') NORMAL,
+			(select count(*) from camp_campsites where CAMPSITE_SORT = 'CAMP') CAMP
+		from  dual
+	</select>
 
 </mapper>

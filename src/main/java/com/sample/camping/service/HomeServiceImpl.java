@@ -30,4 +30,14 @@ public class HomeServiceImpl implements HomeService{
 	public List<CampSite> getGugunBysido(String city) {
 		return homeDao.getGugunBysido(city);
 	}
+	
+	@Override
+	public List<CampSite> getCampSitesByUpdate() {
+		return homeDao.getCampSitesByUpdate();
+	}
+	
+	@Override
+	public Map<String, Object> getCounts() {
+		return homeDao.getCounts();
+	}
 }
