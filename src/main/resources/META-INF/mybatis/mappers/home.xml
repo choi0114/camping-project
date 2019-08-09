@@ -25,7 +25,7 @@
 	
 	<select id="searchCampSites" parameterType="map" resultType="campSite">
 		select
-			no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYN, myCampsiteNo
+			no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYN, myCampsiteNo, sido, gugun
 		from (	select
 					row_number() over(order by CAMPSITE_NO desc) as row_no
 					,CAMPSITE_NO			no		
@@ -65,8 +65,8 @@
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 	</select>
 	
-	<select id="getGugunBysido" parameterType="String" resultType="campSite">
-		SELECT distinct CAMPSITE_GUGUN
+	<select id="getGugunBysido" parameterType="string" resultType="campsite">
+		SELECT distinct CAMPSITE_GUGUN gugun
 		FROM camp_campsites
 		where campsite_sido = #{city}
 	</select>
