@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.AdminCampSiteDao;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.Statistics;
 
 @Service
 public class AdminCampSiteServiceImpl implements AdminCampSiteService {
@@ -16,6 +17,21 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 	@Autowired
 	private AdminCampSiteDao campSiteDao;
 	
+	@Override
+	public List<Statistics> gugunStatistics() {
+		// TODO Auto-generated method stub
+		return campSiteDao.gugunStatistics();
+	}
+	@Override
+	public List<Statistics> sidoStatistics() {
+		// TODO Auto-generated method stub
+		return campSiteDao.sidoStatistics();
+	}
+	@Override
+	public List<Statistics> campsiteStatistics() {
+		// TODO Auto-generated method stub
+		return campSiteDao.campsiteStatistics();
+	}	
 	@Override
 	public void addCampSite(CampSite campSite) {
 		
