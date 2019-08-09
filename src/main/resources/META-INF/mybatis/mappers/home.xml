@@ -69,6 +69,7 @@
 		SELECT distinct CAMPSITE_GUGUN
 		FROM camp_campsites
 		where campsite_sido = #{city}
+		
 	</select>
 
 </mapper>

@@ -836,12 +836,6 @@
 	});
 
 	/* 지역별 검색 */
-	/* var pno = 1;
-	pno = function({
-		$("#btn-next").click(function(event) {
-			pno++;
-		})
-	}) */
 	
 	$("#cate1").change(function() {
 		var gubun = "sido";
