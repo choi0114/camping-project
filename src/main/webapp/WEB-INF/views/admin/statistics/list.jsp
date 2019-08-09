@@ -111,7 +111,7 @@ $(function(){
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="chart-box" id="chart_div" style="padding-top: 50px; ">
-						</div
+						</div>
 					</div>
 				</div>
 				<div class="row">
