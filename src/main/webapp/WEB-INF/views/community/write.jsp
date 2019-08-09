@@ -14,6 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 	<div class="row">
 		<div class="col-sm-5 col-sm-offset-2 page-head-left">
 			<span>커뮤니티 > 게시글작성</span>

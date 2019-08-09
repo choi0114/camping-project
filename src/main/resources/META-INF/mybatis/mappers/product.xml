@@ -3,10 +3,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.sample.camping.dao.ProductDao">
-	<delete id="deleteProduct" parameterType="int">
-		delete from CAMP_GOODS
+	<select id=""></select>
+	<insert id="addCart" parameterType="map">
+		insert into CAMP_CARTS (
+			CART_NO
+			,CART_CREATE_DATE
+			,USER_ID
+			,GOODS_NO
+		)
+		values (CAMP_CART_SEQ.nextval, sysdate, #{userId},#{goodsNo}) 
+	</insert>
+	<select id="selectCartByUser" parameterType="map" resultType="cart">
+		select
+			CART_NO no
+			,CART_CREATE_DATE createDate
+			,USER_ID userId
+			, GOODS_NO goodsNo
+		from CAMP_CARTS
+		where USER_ID = #{userId}
+		
+	</select>
+	<select id="selectCartCount" parameterType="map" resultType="int">
+		select
+			count(*)
+		from CAMP_CARTS
+		where USER_ID = #{userId}
+		and GOODS_NO = #{goodsNo}
+	</select>
+	<update id="deleteProduct" parameterType="int">
+		
+		update CAMP_GOODS
+		set GOODS_YN = 'N'
 		where GOODS_NO = #{value}
-	</delete>
+		
+	</update>
 	<update id="modifyGoods" parameterType="product">
 		update CAMP_GOODS
 		set 
@@ -33,11 +63,11 @@
 			, GOODS_CATEGORY
 			, GOODS_LONG_SUMMARY
 			, GOODS_FORSALE
+			, GOODS_YN
 		)
-		values (CAMP_GOODS_SEQ.nextval, #{name}, #{price}, #{photo}, #{stock}, #{goodsSort}, #{summary}, #{goodsCategory}, #{longSummary}, 'Y') 
+		values (CAMP_GOODS_SEQ.nextval, #{name}, #{price}, #{photo}, #{stock}, #{goodsSort}, #{summary}, #{goodsCategory}, #{longSummary}, 'Y', 'Y') 
 	</insert>
 	<select id="selectProductForsale" parameterType="map" resultType="product">
-		
 		select
 			GOODS_NO				goodsNo
 			, GOODS_NAME			name
@@ -69,14 +99,115 @@
 					, GOODS_CATEGORY
 					, GOODS_LONG_SUMMARY
 					, GOODS_FORSALE
+					, GOODS_YN
 				from CAMP_GOODS
 				<if test="keyword != null">
 					where GOODS_NAME = like '%' || #{keyword} || '%'
 				</if>
 				)
-		where (row_no >= #{begin} and row_no &lt;= #{end})
+		
+		<if test="cat != null">
+			where GOODS_STOCK not in(0)
+			and GOODS_FORSALE = 'Y'
+			and GOODS_YN = 'Y'
+			and GOODS_CATEGORY = #{cat}
+			order by GOODS_NO asc
+		</if>
+		<if test="type != null">
+			where GOODS_STOCK not in(0)
+			and GOODS_FORSALE = 'Y'
+			and GOODS_YN = 'Y'
+			and GOODS_SORT = #{type}
+			order by GOODS_NO asc
+		</if>
+		
+		
+	</select>
+	<select id="selectProductNewBy3" resultType="product">
+		select
+			GOODS_NO				goodsNo
+			, GOODS_NAME			name
+			, GOODS_PRICE			price
+			, GOODS_PHOTO			photo
+			, GOODS_STOCK			stock
+			, GOODS_SORT			goodsSort
+			, GOODS_SUMMARY			summary
+			, GOODS_CATEGORY		goodsCategory
+			, GOODS_LONG_SUMMARY	longSummary
+			, GOODS_POINT			goodsPoint
+			, GOODS_LIKES			goodsLike
+			, GOODS_HATES			hate
+			, GOODS_CREATE_DATE		createDate
+			, GOODS_FORSALE			forsale
+		from (	select
+					ROW_NUMBER() OVER (ORDER BY GOODS_NO DESC) AS row_no
+					, GOODS_NO
+					, GOODS_NAME
+					, GOODS_PRICE
+					, GOODS_PHOTO
+					, GOODS_POINT
+					, GOODS_LIKES
+					, GOODS_HATES
+					, GOODS_CREATE_DATE
+					, GOODS_STOCK
+					, GOODS_SORT
+					, GOODS_SUMMARY
+					, GOODS_CATEGORY
+					, GOODS_LONG_SUMMARY
+					, GOODS_FORSALE
+					, GOODS_YN
+				from CAMP_GOODS
+				
+				)
+		where (row_no >= 1 and row_no &lt;= 3)
 		and GOODS_STOCK not in(0)
 		and GOODS_FORSALE = 'Y'
+		and GOODS_YN = 'Y'
+		and GOODS_SORT = 'NEW'
+		order by GOODS_NO asc
+		
+	</select>
+	<select id="selectProductRecommendBy3"  resultType="product">
+		select
+			GOODS_NO				goodsNo
+			, GOODS_NAME			name
+			, GOODS_PRICE			price
+			, GOODS_PHOTO			photo
+			, GOODS_STOCK			stock
+			, GOODS_SORT			goodsSort
+			, GOODS_SUMMARY			summary
+			, GOODS_CATEGORY		goodsCategory
+			, GOODS_LONG_SUMMARY	longSummary
+			, GOODS_POINT			goodsPoint
+			, GOODS_LIKES			goodsLike
+			, GOODS_HATES			hate
+			, GOODS_CREATE_DATE		createDate
+			, GOODS_FORSALE			forsale
+		from (	select
+					ROW_NUMBER() OVER (ORDER BY GOODS_NO DESC) AS row_no
+					, GOODS_NO
+					, GOODS_NAME
+					, GOODS_PRICE
+					, GOODS_PHOTO
+					, GOODS_POINT
+					, GOODS_LIKES
+					, GOODS_HATES
+					, GOODS_CREATE_DATE
+					, GOODS_STOCK
+					, GOODS_SORT
+					, GOODS_SUMMARY
+					, GOODS_CATEGORY
+					, GOODS_LONG_SUMMARY
+					, GOODS_FORSALE
+					, GOODS_YN
+				from CAMP_GOODS
+				
+				)
+		where (row_no >= 1 and row_no &lt;= 3)
+		and GOODS_STOCK not in(0)
+		and GOODS_FORSALE = 'Y'
+		and GOODS_YN = 'Y'
+		and GOODS_SORT = 'RECOMMEND'
 		order by GOODS_NO asc
 		
 	</select>
@@ -114,12 +245,14 @@
 					, GOODS_CATEGORY
 					, GOODS_LONG_SUMMARY
 					, GOODS_FORSALE
+					, GOODS_YN
 				from CAMP_GOODS
 				<if test="keyword != null">
 					where GOODS_NAME like '%' || #{keyword} || '%'
 				</if>
 				)
 		where (row_no >= #{begin} and row_no &lt;= #{end})
+		and GOODS_YN = 'Y'
 		order by GOODS_NO asc
 		
 	</select>
@@ -127,8 +260,9 @@
 		
 		select count(*)
 		from CAMP_GOODS
+		where GOODS_YN = 'Y'
 		<if test="keyword != null">
-			where GOODS_NAME like '%' || #{keyword} || '%'
+			and GOODS_NAME like '%' || #{keyword} || '%'
 		</if>
 				
 		
@@ -151,6 +285,7 @@
 			, GOODS_FORSALE			forsale
 		from CAMP_GOODS
 		where GOODS_NO = #{no}
+		and GOODS_YN = 'Y'
 	</select>
 	<select id="selectProductByCatType" parameterType="map" resultType="product">
 		

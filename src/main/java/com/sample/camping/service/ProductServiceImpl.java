@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.ProductDao;
+import com.sample.camping.vo.Cart;
 import com.sample.camping.vo.Product;
 
 @Service
@@ -36,9 +37,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	@Override
 	public void deleteProduct(Integer no) {
-		
 		productDao.deleteProduct(no);
-		
 	}
 	@Override
 	public void modifyGoods(Product product) {
@@ -48,5 +47,28 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> selectProductByCatType(Map<String, Object> map) {
 		return productDao.selectProductByCatType(map);
 	}
-
+	@Override
+	public List<Product> selectProductNewBy3() {
+		return productDao.selectProductNewBy3();
+	}
+	@Override
+	public List<Product> selectProductRecommendBy3() {
+		return productDao.selectProductRecommendBy3();
+	}
+	@Override
+	public List<Product> selectProductForsale(Map<String, Object> map) {
+		return productDao.selectProductForsale(map);
+	}
+	@Override
+	public void addCart(Map<String, Object> map) {
+		productDao.addCart(map);
+	}
+	@Override
+	public List<Cart> selectCartByUser(Map<String, Object> map) {
+		return productDao.selectCartByUser(map);
+	}
+	@Override
+	public Integer selectCartCount(Map<String, Object> map) {
+		return productDao.selectCartCount(map);
+	}
 }
