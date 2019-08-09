@@ -1,6 +1,7 @@
 package com.sample.camping.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.HomeService;
+import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.Pagination;
 
 @Controller
@@ -21,7 +23,16 @@ public class HomeController {
 	private HomeService homeService;
 
 	@RequestMapping("/home.camp")
-	public String home() {
+	public String home(Model model) {
+		
+		Map<String, Object> map = homeService.getCounts();
+		
+		model.addAttribute("total", map.get("TOTAL"));
+		model.addAttribute("car", map.get("CAR"));
+		model.addAttribute("normal", map.get("NORMAL"));
+		model.addAttribute("camp", map.get("CAMP"));
+		
+		model.addAttribute("items", homeService.getCampSitesByUpdate());
 		
 		return "home";
 	}
@@ -57,6 +68,16 @@ public class HomeController {
 		
 		return result;
 	}
+	
+	/*
+	 * @RequestMapping("/update.camp") public @ResponseBody Map<String, Object>
+	 * updateList() {
+	 * 
+	 * Map<String, Object> result = new HashMap<String, Object>();
+	 * result.put("items", homeService.getCampSitesByUpdate());
+	 * 
+	 * return result; }
+	 */
 	
 	
 }

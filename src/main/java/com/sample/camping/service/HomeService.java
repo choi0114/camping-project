@@ -10,4 +10,6 @@ public interface HomeService {
 	int getCountByKeyword(Map<String, Object> map);
 	List<CampSite> searchCampSites(Map<String, Object> map);
 	List<CampSite> getGugunBysido(String city);
+	List<CampSite> getCampSitesByUpdate();
+	Map<String, Object> getCounts();
 }
