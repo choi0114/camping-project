@@ -20,7 +20,6 @@ public class MapServiceImpl implements MapService {
 		// TODO Auto-generated method stub
 		return mapDao.getCampsitesName(keyword);
 	}
-	
 	@Override
 	public List<CampSite> getMoreCampNameAndAdress(Map<String, Object> param) {
 		// TODO Auto-generated method stub

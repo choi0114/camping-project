@@ -16,5 +16,4 @@ public interface MapService {
 	Integer getCampAddressCount(String keyword);
 	List<CampSite> getMoreCampNameAndAdress(Map<String, Object>param);
 	List<CampSite> getCampsitesName(String keyword);
-
 }

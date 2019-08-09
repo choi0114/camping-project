@@ -20,6 +20,7 @@ SELECT
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
 					campsite_sido sido,
+					campsite_gugun gugun,
 					my_campsite_no "myCampsite.no"	
 FROM
 					 CAMP_CAMPSITES
@@ -27,7 +28,7 @@ where
 					campsite_name like '%'|| #{keyword} || '%' or campsite_address like '%' || #{keyword} || '%'
 </select>
 <select id="getMoreCampNameAndAdress" parameterType="Map" resultType="campSite">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido,gugun
 FROM (select X.* , row_number() over (order by no desc) row_no
 			from(SELECT 
 					campsite_no no,
@@ -45,7 +46,8 @@ FROM (select X.* , row_number() over (order by no desc) row_no
 					campsite_point point,
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
-					campsite_sido sido
+					campsite_sido sido,
+					campsite_gugun gugun
 				FROM
 					 CAMP_CAMPSITES A
 				where
@@ -58,7 +60,7 @@ AND
 	row_no &lt;= #{end}	
 </select>
 <select id="getCampNameAndAdress" parameterType="string" resultType="campSite">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido,gugun
 FROM (select X.* , row_number() over (order by no desc) row_no
 			from(SELECT 
 					campsite_no no,
@@ -76,7 +78,8 @@ FROM (select X.* , row_number() over (order by no desc) row_no
 					campsite_point point,
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
-					campsite_sido sido
+					campsite_sido sido,
+					campsite_gugun gugun
 				FROM
 					 CAMP_CAMPSITES A
 				where
@@ -113,7 +116,7 @@ where
 -->
 </select>
 <select id="getCampSites" parameterType="Map" resultType="campSite">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido,gugun
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -146,6 +149,7 @@ FROM (select X.* , row_number() over (
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
 					campsite_sido sido,
+					campsite_gugun gugun,
 					my_campsite_no "myCampsite.no",
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
@@ -172,7 +176,7 @@ AND
 
 </select>
 <select id="getCampSitesList" parameterType="Map" resultType="campSite">
-SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido
+SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido,gugun
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
 											order by no  desc
@@ -205,6 +209,7 @@ FROM (select X.* , row_number() over (
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
 					campsite_sido sido,
+					campsite_gugun gugun,
 					my_campsite_no "myCampsite.no",
 											(select   count(*)
 											from CAMP_REVIEW_BOARDS B
@@ -265,6 +270,7 @@ SELECT
 					campsite_create_date createDate,
 					campsite_used_yn usedYn,
 					campsite_sido sido,
+					campsite_gugun gugun,
 					my_campsite_no "myCampsite.no"
 FROM
 					CAMP_CAMPSITES
@@ -272,6 +278,30 @@ WHERE
 				CAMPSITE_LATITUDE=#{lat}
 AND
 				CAMPSITE_LONGITUDE=#{lng}
+</select>
+<select id="getAllgugun" parameterType="string" resultType="campSite">
+		select
+			campsite_no no,
+			campsite_name name,
+			campsite_sort sort,
+			campsite_latitude latitude,
+			campsite_longitude longitude,
+			campsite_address address,
+			campsite_tel tel,
+			campsite_sites sites,
+			campsite_price price,
+			campsite_likes likes,
+			campsite_hates hates,
+			campsite_photo photo,
+			campsite_point point,
+			campsite_create_date createDate,
+			campsite_used_yn usedYn,
+			campsite_sido sido,
+			campsite_gugun gugun
+		from
+			camp_campsites
+		where
+			campsite_gugun like '%'|| #{gugun} || '%'
 </select>
 <select id="getAllCampSites" parameterType="string" resultType="campSite">
 		select
@@ -290,7 +320,8 @@ AND
 			campsite_point point,
 			campsite_create_date createDate,
 			campsite_used_yn usedYn,
-			campsite_sido sido
+			campsite_sido sido,
+			campsite_gugun gugun
 		from
 			camp_campsites
 		<where>

@@ -1,11 +1,11 @@
 package com.sample.camping.form;
 
-import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductForm {
 	private String name;
+	private int no;
 	private int price;
 	private MultipartFile photo;
 	private String sort;
@@ -15,6 +15,12 @@ public class ProductForm {
 	private int stock;
 	
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getName() {
 		return name;
 	}
@@ -63,6 +69,12 @@ public class ProductForm {
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	@Override
+	public String toString() {
+		return "ProductForm [name=" + name + ", no=" + no + ", price=" + price + ", photo=" + photo + ", sort=" + sort
+				+ ", summary=" + summary + ", longSummary=" + longSummary + ", category=" + category + ", stock="
+				+ stock + "]";
 	}
 	
 }
