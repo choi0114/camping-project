@@ -216,9 +216,9 @@
 										<span style="font-size: 20px;">내가 쓴 게시글</span>
 										<a href="post.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
 									</div>
-									<div class="panel-body" style="height: 250px; overflow-y: scroll;">
+									<div class="panel-body" style="height: 250px; overflow-y: scroll; position: relative;">
 										<c:choose>
-										<c:when test="${not empty boardMap }">
+										<c:when test="${boardMap eq ''and not empty boardMap }">
 											<ul class="list-group">
 												<c:forEach var="free" items="${boardMap.free }">
 													<li class="list-group-item">
@@ -247,8 +247,8 @@
 											</ul>
 										</c:when>
 										<c:otherwise>
-											<div style="text-align: center;">
-												<p>내가 작성한 게시글이 없습니다.</p>
+											<div>
+												<p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">내가 작성한 게시글이 없습니다.</p>
 											</div>
 										</c:otherwise>
 										</c:choose>
@@ -262,7 +262,7 @@
 									</div>
 									<div class="panel-body" style="height: 270px; overflow-y: scroll; position: relative;">
 										<c:choose>
-											<c:when test="${not empty commentMap }">
+											<c:when test="${commentMap eq ''and not empty commentMap }">
 												<ul class="list-group">
 													<c:forEach var="freeComment" items="${commentMap.freeComment }">
 														<li class="list-group-item">

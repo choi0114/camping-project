@@ -16,7 +16,6 @@
 <style>
 	.msg {color: red;}
 	.user-outter {
-		border: 1px solid black;
 	    background-color: #fff;
 	    display: inline-block;
 	    position: absolute;
@@ -27,8 +26,8 @@
 	    padding: 30px;
 	}
 	.ps1, .ps2 {float: left;}
-	.ps1 {margin-right: 30px;}
 	#sidewrap{position: relative;}
+	.ps1 {margin-right: 30px;}
 </style>
 </head>
 <body>

@@ -118,15 +118,37 @@ public class MypageController {
 	}
 
 	@RequestMapping("/info.camp")
-	public String info() {
+	public String info(HttpSession session, Model model) {
+		
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		model.addAttribute("USER", user);
 		
 		return "mypage/info";
 	}
-
-	@RequestMapping("/pw.camp")
-	public String pw() {
+	
+	@RequestMapping("change.camp")
+	public String change(String pw1, String pw2, String pw3, String email, String nick, HttpSession session, Model model) {
+		User user = (User) session.getAttribute("LOGIN_USER");
 		
-		return "mypage/pw";
+		String md5pw = DigestUtils.md5Hex(pw1);
+		
+		if(!user.getPassword().equals(md5pw)) {
+			model.addAttribute("USER", user);
+			return "redirect:/mypage/info.camp?result=fail";
+		}
+		
+		user.setId(user.getId());
+		user.setNickName(nick);
+		user.setEmail(email);
+		String md5pw2 = DigestUtils.md5Hex(pw2);
+		System.out.println(email);
+		user.setPassword(md5pw2);
+		
+		myPageService.updateUserData(user);
+		
+		session.invalidate();
+		return "redirect:/mypage/info.camp?result=success";
 	}
 
 	@RequestMapping("/out.camp")
