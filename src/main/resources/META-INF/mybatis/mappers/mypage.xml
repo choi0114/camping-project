@@ -180,7 +180,6 @@
 			camp_users
 		set 
 			user_password		= #{password}
-			,user_name			= #{name}
 			,user_nick_name		= #{nickName}
 			,user_email			= #{email}
 		where 

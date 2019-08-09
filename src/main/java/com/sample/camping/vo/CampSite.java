@@ -23,6 +23,7 @@ public class CampSite {
 	private String gugun;
 	private MyCampsite myCampsite;
 	
+	
 	public Integer getNo() {
 		return no;
 	}
