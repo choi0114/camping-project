@@ -9,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.sample.camping.service.AdminCampSiteService;
 import com.sample.camping.vo.AdminPagination;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.Statistics;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,6 +22,30 @@ public class AdminCampSiteController {
 	
 	@Autowired
 	private AdminCampSiteService adminCampSiteService;
+	
+	@RequestMapping("/statistics.camp")
+	public String stats() {
+		
+		return "admin/statistics/list";
+	}
+	@RequestMapping("/statosticsValue.camp")
+	@ResponseBody
+	public List<Statistics> value(){
+		
+		return adminCampSiteService.campsiteStatistics();
+	}
+	@RequestMapping("/gugunstat.camp")
+	@ResponseBody
+	public List<Statistics> gugunstatistics(){
+		
+		return adminCampSiteService.gugunStatistics();
+	}
+	@RequestMapping("/sidostat.camp")
+	@ResponseBody
+	public List<Statistics> sidostatistics(){
+		
+		return adminCampSiteService.sidoStatistics();
+	}
 	
 	
 	@RequestMapping("/detail.camp")

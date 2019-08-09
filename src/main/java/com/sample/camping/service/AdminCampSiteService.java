@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.Statistics;
 
 public interface AdminCampSiteService {
 
@@ -14,4 +15,9 @@ public interface AdminCampSiteService {
 	void updateCampingSitesByNo(CampSite campSite); 
 	void deleteCampingSite(int[] campsiteNo);
 	void deleteCampingSites(int[] campsiteNo);
+	List<Statistics> campsiteStatistics();
+	//지역별 통계
+	List<Statistics> sidoStatistics();
+	//구군별 통계
+	List<Statistics> gugunStatistics();
 }
