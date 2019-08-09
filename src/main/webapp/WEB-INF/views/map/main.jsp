@@ -428,24 +428,25 @@
                 	   <form method="post" action="#">
                 	   <input type="hidden" value="${param.keyword }" id="keyword-value"> <!-- 현재 키워드 유지하기 위해서 숨겨놓음 -->
                 	   <input type="hidden" value="${param.sort }" id="sort-value">
+                	   <input type="hidden" value="${param.city }" id="city-value">
                            <select class="searchSelect" id="selectState" name="state">
 	                            <option value="">전국</option>
-	                            <option value="서울" ${param.city eq '서울' ? 'selected' : "" }>서울</option>
-	                            <option value="경기" ${param.city eq '경기' ? 'selected' : "" }>경기</option>
-	                            <option value="인천" ${param.city eq '인천' ? 'selected' : "" }>인천</option>
-	                            <option value="부산" ${param.city eq '부산' ? 'selected' : "" }>부산</option>
-	                            <option value="울산" ${param.city eq '울산' ? 'selected' : "" }>울산</option>
-	                            <option value="대구" ${param.city eq '대구' ? 'selected' : "" }>대구</option>
-	                            <option value="세종" ${param.city eq '세종' ? 'selected' : "" }>세종</option>
+	                            <option value="서울특별시" ${param.city eq '서울특별시' ? 'selected' : "" }>서울</option>
+	                            <option value="경기도" ${param.city eq '경기도' ? 'selected' : "" }>경기</option>
+	                            <option value="인천광역시" ${param.city eq '인천광역시' ? 'selected' : "" }>인천</option>
+	                            <option value="부산광역시" ${param.city eq '부산광역시' ? 'selected' : "" }>부산</option>
+	                            <option value="울산광역시" ${param.city eq '울산광역시' ? 'selected' : "" }>울산</option>
+	                            <option value="대구광역시" ${param.city eq '대구광역시' ? 'selected' : "" }>대구</option>
+	                            <option value="세종특별자치시" ${param.city eq '세종특별자치시' ? 'selected' : "" }>세종</option>
 	                            <option value="충청남도" ${param.city eq '충청남도' ? 'selected' : "" }>충남</option>
-	                            <option value="대전" ${param.city eq '대전' ? 'selected' : "" }>대전</option>
+	                            <option value="대전광역시" ${param.city eq '대전광역시' ? 'selected' : "" }>대전</option>
 	                            <option value="충청북도" ${param.city eq '충청북도' ? 'selected' : "" }>충북</option>
 	                            <option value="경상북도" ${param.city eq '경상북도' ? 'selected' : "" }>경북</option>
 	                            <option value="경상남도" ${param.city eq '경상남도' ? 'selected' : "" }>경남</option>
 	                            <option value="전라남도" ${param.city eq '전라남도' ? 'selected' : ""}>전남</option>
 	                            <option value="전라북도" ${param.city eq '전라북도' ? 'selected' : "" }>전북</option>
-	                            <option value="광주" ${param.city eq '광주' ? 'selected' : "" }>광주</option>
-	                            <option value="강원" ${param.city eq '강원' ? 'selected' : "" }>강원</option>
+	                            <option value="광주광역시" ${param.city eq '광주광역시' ? 'selected' : "" }>광주</option>
+	                            <option value="강원도" ${param.city eq '강원도' ? 'selected' : "" }>강원</option>
 	                            <option value="제주특별자치도" ${param.city eq '제주특별자치도' ? 'selected' : "" }>제주</option>
                            </select>
                 	   </form>
@@ -504,7 +505,7 @@
                                    </div>
                                    <div class="cont"> <!-- 캠핑장 주소 -->
                                       <p class="location">
-                                    	<span class="address2">${campsite.sido }></span>
+                                        	<a href="map.camp?city=${campsite.sido }"><span class="address2">${campsite.sido }></span></a>
                                     	<span class="address1">${campsite.gugun }</span>
                                       </p>
                                       <ul>
@@ -607,8 +608,8 @@
 		
 		$('.camping-list').scroll(function() {
 			var sort = $('#sort-value').val();
-			var keyword = $('#keyword-value').val();
-			console.log(sort);
+			//var keyword = $('#keyword-value').val();
+			console.log(keyword);
 			var scrollTop = $(this).scrollTop();
 			var boxheight = $(this).height();
 			var listheight = 0;	
@@ -666,7 +667,7 @@
 									row+="</div>";
 									row+="<div class='cont'>";
 									row+="<p class='location'>";
-									row+="<span class='address2'>"+list.sido+"</span>";
+									row+="<a href='map.camp?city="+list.sido+"'><span class='address2'>"+list.sido+"> </span></a><span>"+list.gugun+"</span>";
 									row+="</p>";
 									row+="<ul>";
 									row+="<li class='address'>"+list.address+"</li>";
@@ -708,6 +709,7 @@
 		var radius = 50000;
 		var sort = $('#sort-value').val();
 		var keyword = $('#keyword-value').val();
+		var city = $('#city-value').val();
 		// 페이지 들어오자마자 반경 내에 마커 찍기 
 		$(function(){
 		    if(markers2 != null){
@@ -724,7 +726,41 @@
 			    navigator.geolocation.getCurrentPosition(function(position) {
 			        var lat = position.coords.latitude, // 위도
 			            lon = position.coords.longitude; // 경도
-			        var locPosition = new kakao.maps.LatLng(lat, lon)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+			        if(city == '서울특별시'){
+				        var locPosition = new kakao.maps.LatLng(37.566317,126.977828)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '인천광역시'){
+				        var locPosition = new kakao.maps.LatLng(37.456255,126.704701)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '부산광역시'){
+				        var locPosition = new kakao.maps.LatLng(35.180471,129.075573)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '울산광역시'){
+				        var locPosition = new kakao.maps.LatLng(35.538761,129.311297)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '대구광역시'){
+				        var locPosition = new kakao.maps.LatLng(35.871553,128.601219)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '세종특별자치시'){
+				        var locPosition = new kakao.maps.LatLng(36.480058,127.289039)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '충청남도'){
+				        var locPosition = new kakao.maps.LatLng(36.658991,126.672802)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '대전광역시'){
+				        var locPosition = new kakao.maps.LatLng(36.350384,127.384633)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '충청북도'){
+				        var locPosition = new kakao.maps.LatLng(36.635387,127.491426)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '경상북도'){
+				        var locPosition = new kakao.maps.LatLng(36.576153,128.505368)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '경상남도'){
+				        var locPosition = new kakao.maps.LatLng(35.237802,128.691941)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '전라남도'){
+				        var locPosition = new kakao.maps.LatLng(34.816229,126.464225)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '전라북도'){
+				        var locPosition = new kakao.maps.LatLng(35.819448,127.106373)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '광주광역시'){
+				        var locPosition = new kakao.maps.LatLng(35.159070,126.853172)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '강원도'){
+				        var locPosition = new kakao.maps.LatLng(37.880072,127.727908)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else if(city == '제주특별자치도'){
+				        var locPosition = new kakao.maps.LatLng(33.500030,126.529945)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }else{
+				        var locPosition = new kakao.maps.LatLng(lat,lon)// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				 }
 			        
 			        // 현재 위치의 위도, 경도를 주소로 변환
 				    var geocoder = new kakao.maps.services.Geocoder();
@@ -737,8 +773,7 @@
 				        }
 				    };
 			  		geocoder.coord2RegionCode(lon, lat, callback);
-			        // 마커
-			        displayMarker(locPosition);
+				    displayMarker(locPosition);
 			        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
 			      });
 
@@ -760,7 +795,8 @@
 			    GPSmarkers=marker;
 			    // 지도 중심좌표를 접속위치로 변경합니다
 				GPSmarkers.setMap(map);
-			    map.setCenter(locPosition);      
+			    map.setCenter(locPosition);
+			    
 			
 			}
 		})
@@ -810,14 +846,14 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 						content +="좋아요";
-						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+						content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
 						content +="</a>";
 						content +="</div>";
 						content +="<div style='float: right;'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'></span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
@@ -1013,14 +1049,14 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 						content +="좋아요";
-						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+						content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
 						content +="</a>";
 						content +="</div>";
 						content +="<div style='float: right;'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>0</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
@@ -1256,14 +1292,14 @@
 							content +="<a href='#'>"
 							content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 							content +="좋아요";
-							content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+							content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
 							content +="</a>";
 							content +="</div>";
 							content +="<div style='float: right;'>"
 							content +="<a href='#'>"
 							content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 							content += "싫어요"
-							content += "<span id='conquest_count_914' class='scrap_count'>0</span>"
+							content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 							content += "</a>";
 							content += "</div>";
 							content +="</div>";
@@ -1333,6 +1369,7 @@
 		                        // 지도 중심을 변경한다.
 		                        GPSmarkers.setMap(map);
 		                        map.setCenter(coords);
+		                        console.log(coords);
 		            		}
 		            	})
 		            	$('#btnFoldWrap').css('display','none');
@@ -1368,7 +1405,6 @@
 				            $('#location').val(address);  // Text 셋팅
 				        }
 				    };
-				    
 			  		geocoder.coord2RegionCode(lon, lat, callback);
 			  	  
 			        // 마커
@@ -1396,7 +1432,6 @@
 			    map.setCenter(locPosition);      
 			
 			} */
-		
 		
 	    //----------------------------------------------------------
 	    // 기상청 홈페이지에서 발췌한 변환 함수
@@ -1522,7 +1557,6 @@
 	  }else{
 		  $('.searchbox').css("display",'none');
 	  }
-	  
 	</script>
 </body>
 </html>
