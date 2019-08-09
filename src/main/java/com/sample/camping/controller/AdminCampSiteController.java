@@ -42,6 +42,20 @@ public class AdminCampSiteController {
 		return "admin/campsite/form";
 	}
 	
+	@RequestMapping("listUpdate.camp")
+	public String listUpdate(Model model, @RequestParam("no")int no) {
+		CampSite campsite = adminCampSiteService.getCampingSitesbyNo(no);
+		String str = campsite.getUsedYn();
+		if(str.equals("Y")) {
+			campsite.setUsedYn("N");
+		} else if(str.equals("N")) {
+			campsite.setUsedYn("Y");
+		}
+		model.addAttribute("campsite", campsite);
+		return "redirect:admin/campsite/list?no="+no;
+	}
+	
+	
 	@RequestMapping("/list.camp")
 	public String search(
 			  @RequestParam (value="keyword", required = false, defaultValue = "") String keyword
@@ -66,7 +80,19 @@ public class AdminCampSiteController {
 		return "admin/campsite/list";
 		
 	}
+	@RequestMapping("/delete.camp")
+	public String deleteCamp(int[] campsiteNo) {
 	
+		adminCampSiteService.deleteCampingSite(campsiteNo);
+		return "redirect:list.camp";
+	}
+	
+	@RequestMapping("/deletes.camp")
+	public String deleteCamps(int[] campsiteNo) {
+	
+		adminCampSiteService.deleteCampingSites(campsiteNo);
+		return "redirect:list.camp";
+	}
 	
 
 }

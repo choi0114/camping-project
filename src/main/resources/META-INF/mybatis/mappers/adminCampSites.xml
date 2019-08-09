@@ -74,7 +74,7 @@
 	</select>
 	
 	<!-- 디테일 정보 출력 -->
-		<select id="getCampingSitesByNo" parameterType="int" resultType="campSite">
+	<select id="getCampingSitesByNo" parameterType="int" resultType="campSite">
 		select 
 		  campsite_no as no, 
 		  campsite_name as name,
@@ -91,9 +91,37 @@
 		  campsite_point as point,
 		  campsite_create_date as createDate,
 		  campsite_used_yn as usedYn,
-		  campsite_sido as sido
+		  campsite_sido as sido,
+		  campsite_gugun as gugun
+	
 		from
 		  camp_campsites
 		where campsite_no = #{no}  
-		</select>
+	</select>
+	
+	<!-- 캠핑장 업데이트 -->	
+	<update id="updateCampingSitesByNo" parameterType="campSite">
+		update
+		  camp_campsites
+		set
+		  campsite_name = #{name},
+		  campsite_sort = #{sort},
+		  campsite_latitude = #{latitude},
+		  campsite_longitude = #{longitude},
+		  campsite_address = #{address},
+		  campsite_tel = #{tel},
+		  campsite_sites = #{sites},
+		  campsite_price = #{price},
+		  campsite_likes = #{likes},
+		  campsite_hates = #{hates},
+		  campsite_photo = #{photo},
+		  campsite_point = #{point},
+		  campsite_create_date = #{createDate},
+		  campsite_used_yn = #{usedYn},
+		  campsite_sido = #{sido}	,
+		  campsite_gugun = #{gugun}
+		where
+		  campsite_no = #{no}  
+	</update>
+	
 </mapper>

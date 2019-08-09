@@ -380,9 +380,6 @@ $("#btn-login").click(function() {
 	});
 	
 })
-/* $('#ab').on('submit',function(data){
-	
-}) */
 	
 	$('#open-login-modal').click(function() {
 		$("#login-modal").modal("show")

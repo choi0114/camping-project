@@ -26,6 +26,9 @@
 		<c:set var="menu" value="campsite" />
 		<%@ include file="../common/adminSidebar.jsp"%>
 	</div>
+		<div class="col-xs-6">
+			<h1 class="admin-buttom">공지사항</h1>
+		</div>
 		<div class="col-xs-11">	
 	       <form class="form-inline" action="list.camp" id='list-form'>
 			<div class="row">
@@ -44,9 +47,8 @@
 						<th class="admin-check"></th>
 						<th class="text-center">번호</th>
 						<th class="text-center">캠핑장명</th>
-						<th class="text-center">가격</th>
+						<th class="text-center">제목</th>
 						<th class="text-center">등록일</th>
-						<th class="text-center">영업여부</th>
 					</tr>
 				</thead>
 				<tbody> 

@@ -37,4 +37,29 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 	public int getCampingSitesCount(Map<String, Object> map) {
 		return campSiteDao.getCampingSitesCount(map);
 	}
+	
+	@Override
+	public void updateCampingSitesByNo(CampSite campSite) {
+		campSiteDao.updateCampingSitesByNo(campSite);
+	}
+	
+	@Override
+	public void deleteCampingSite(int[] campsiteNo) {
+		
+		for (Integer no : campsiteNo) {
+			CampSite campSite = campSiteDao.getCampingSitesByNo(no);
+			campSite.setUsedYn("N");
+			campSiteDao.updateCampingSitesByNo(campSite);
+		}
+	}
+	
+	@Override
+	public void deleteCampingSites(int[] campsiteNo) {
+		
+		for (Integer no : campsiteNo) {
+			CampSite campSites = campSiteDao.getCampingSitesByNo(no);
+			campSites.setUsedYn("Y");
+			campSiteDao.updateCampingSitesByNo(campSites);
+		}
+	}
 }

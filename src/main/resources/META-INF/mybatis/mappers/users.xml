@@ -29,6 +29,8 @@
 		from
 		  camp_users
 		where
+		  user_used_yn = 'Y'
+		and  
 		  user_id = #{value}  	  
 	</select>
 
@@ -48,6 +50,8 @@
 		from
 		  camp_users
 		where
+		  user_used_yn = 'Y'
+		and 
 		  user_name = #{value}  	  
 	</select>
 </mapper>
