@@ -11,6 +11,7 @@ public interface ProductDao {
 	List<Product> selectProduct(Map<String, Object> map);
 	void updateProduct(Map<String, Object> map);
 	Integer selectProductCount(Map<String, Object> map);
+	Integer selectCartCount(Map<String, Object> map);
 	Product selectProductByNo(Integer no);
 	void deleteProduct(Integer no);
 	void modifyGoods(Product product);

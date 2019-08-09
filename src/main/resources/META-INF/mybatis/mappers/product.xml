@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.sample.camping.dao.ProductDao">
+	<select id=""></select>
 	<insert id="addCart" parameterType="map">
 		insert into CAMP_CARTS (
 			CART_NO
@@ -14,12 +15,20 @@
 	</insert>
 	<select id="selectCartByUser" parameterType="map" resultType="cart">
 		select
-			CART_NO
-			,CART_CREATE_DATE
-			,USER_ID
-			,GOODS_NO
+			CART_NO no
+			,CART_CREATE_DATE createDate
+			,USER_ID userId
+			, GOODS_NO goodsNo
 		from CAMP_CARTS
 		where USER_ID = #{userId}
+		
+	</select>
+	<select id="selectCartCount" parameterType="map" resultType="int">
+		select
+			count(*)
+		from CAMP_CARTS
+		where USER_ID = #{userId}
+		and GOODS_NO = #{goodsNo}
 	</select>
 	<update id="deleteProduct" parameterType="int">
 		

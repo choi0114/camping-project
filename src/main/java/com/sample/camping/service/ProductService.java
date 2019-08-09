@@ -10,6 +10,7 @@ public interface ProductService {
 	void addProduct(Product product);
 	List<Product> selectProduct(Map<String, Object> map);
 	void updateProduct(Map<String, Object> map);
+	Integer selectCartCount(Map<String, Object> map);
 	Integer selectProductCount(Map<String, Object> map);
 	Product selectProductByNo(Integer no);
 	void deleteProduct(Integer no);

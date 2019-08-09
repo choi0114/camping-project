@@ -2,6 +2,7 @@ package com.sample.camping.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sample.camping.form.CartForm;
 import com.sample.camping.form.ProductForm;
 import com.sample.camping.service.ProductService;
+import com.sample.camping.vo.Cart;
 import com.sample.camping.vo.Pagination;
 import com.sample.camping.vo.Product;
 import com.sample.camping.vo.User;
@@ -82,23 +85,57 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/cart.camp")
-	public String cart(Model model , HttpSession session) {
+	public String cart(Model model , HttpSession session, int check) {
 		User user = (User)session.getAttribute("LOGIN_USER");
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", user.getId());
-		productService.selectCartByUser(map);
+		List<Cart> carts= productService.selectCartByUser(map);
+		List<CartForm> cartForms = new ArrayList<CartForm>();
+		
+		
+		for(Cart cart : carts) {
+			int gno = cart.getGoodsNo();
+			Product product = productService.selectProductByNo(gno);
+			String name = product.getName();
+			int price = product.getPrice();
+			int productCount = productService.selectCartCount(map);
+			int totalPrice = productCount * price;
+			String photo = product.getPhoto();
+			map.put("goodsNo", gno);
+			
+			CartForm cartform = new CartForm();
+			cartform.setPhoto(photo);
+			cartform.setCount(productCount);
+			cartform.setCreateDate(cart.getCreateDate());
+			cartform.setName(name);
+			cartform.setPrice(totalPrice);
+			
+			cartForms.add(cartform);
+		}
+		System.out.println("장바구니폼" + cartForms);
+		model.addAttribute("carts", cartForms);
 		return "product/cart";
 	}
 	
 	@GetMapping("/addCart.camp")
 	public String addCart( @RequestParam int no , HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		User user = (User) session.getAttribute("LOGIN_USER");
 		map.put("userId", user.getId());
 		map.put("goodsNo", no);
-		productService.addCart(map);
+		int check = productService.selectCartCount(map);
 		
-		return "product/cart";
+		
+		if(check == 0) {
+			productService.addCart(map);
+			return "redirect:cart.camp?";
+			
+		} else {
+			
+			return "redirect:category.camp?";
+		}
 	} 
 	
 	@GetMapping("/getCategoryCat.camp")

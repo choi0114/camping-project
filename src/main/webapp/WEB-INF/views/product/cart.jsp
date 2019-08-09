@@ -34,21 +34,23 @@
   					<table class="table">
   						<thead>
   							<tr>
-  								<th></th>
+  								<th>썸네일</th>
   								<th>상품명</th>
   								<th>가격</th>
+  								<th>개수</th>
   								<th>등록일</th>
-  								<th></th>
+  								<th>삭제</th>
   							</tr>
   						</thead>
   						<tbody>
   							<c:forEach var="cart" items="${carts }">
 	  							<tr>
 	  								<td>
-	  									<img src="resources/images/${cart.productImgName }" alt="Nature" style="width: 120px; height:100px">
+	  									<img src="/camping/resources/images/product/${cart.photo }" alt="Nature" style="width: 120px; height:100px">
 	  								</td>
-	  								<td>${cart.productName }</td>
-	  								<td>${cart.productPrice }</td>
+	  								<td>${cart.name }</td>
+	  								<td>${cart.price }</td>
+	  								<td>${cart.count }</td>
 	  								<td><fmt:formatDate value="${cart.createDate }"/> </td>
 	  								<td><a href="" class="btn btn-danger btn-sm">삭제</a></td>
 	  							</tr>

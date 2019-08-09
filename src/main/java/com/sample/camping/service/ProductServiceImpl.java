@@ -67,4 +67,8 @@ public class ProductServiceImpl implements ProductService {
 	public List<Cart> selectCartByUser(Map<String, Object> map) {
 		return productDao.selectCartByUser(map);
 	}
+	@Override
+	public Integer selectCartCount(Map<String, Object> map) {
+		return productDao.selectCartCount(map);
+	}
 }

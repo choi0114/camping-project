@@ -146,7 +146,7 @@
 		var no = $(this).attr("data-no");
 		console.log(no);
 	
-				location.href = "addCart.camp?no="+ no
+		location.href = "addCart.camp?no="+ no
 		
 	})
 	
