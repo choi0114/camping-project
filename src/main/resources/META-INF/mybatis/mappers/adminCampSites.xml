@@ -42,7 +42,8 @@
 		  campsite_point as point,
 		  campsite_create_date as createDate,
 		  campsite_used_yn as usedYn,
-		  campsite_sido as sido
+		  campsite_sido as sido,
+		  campsite_gugun as gugun
 	from(
 		select
 		  row_number() over(order by campsite_no desc) as row_no,
@@ -61,7 +62,8 @@
 		  campsite_point,
 		  campsite_create_date,
 		  campsite_used_yn,
-		  campsite_sido
+		  campsite_sido,
+		  campsite_gugun 
 	from	  
 		  camp_campsites
 	<where>
@@ -118,7 +120,7 @@
 		  campsite_point = #{point},
 		  campsite_create_date = #{createDate},
 		  campsite_used_yn = #{usedYn},
-		  campsite_sido = #{sido}	,
+		  campsite_sido = #{sido},
 		  campsite_gugun = #{gugun}
 		where
 		  campsite_no = #{no}  

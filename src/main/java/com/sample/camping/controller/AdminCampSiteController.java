@@ -72,10 +72,8 @@ public class AdminCampSiteController {
 		
 		int records = adminCampSiteService.getCampingSitesCount(param);
 		AdminPagination adminPagination = new AdminPagination(pno, 10, records);
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("pagination",adminPagination);
 		
-		
+		model.addAttribute("pagination",adminPagination);
 		model.addAttribute("listCamp", adminCampSiteService.getCampingSitesAll(param));
 		return "admin/campsite/list";
 		

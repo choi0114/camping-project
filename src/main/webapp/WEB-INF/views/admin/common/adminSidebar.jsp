@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
 <head>
 	<title>Bootstrap Example</title>
 	<meta charset="utf-8">
@@ -60,12 +58,15 @@
         #admin-contents {margin-top: 60px;}
     </style>
 </head>
-<body>
+<script type="text/javascript">
+	var link = document.location.href;
+	console.log(link);
+</script>
 	<div id="page-wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
               <li><a href="" class=${menu eq 'main'?'sidebar-active':'' }>관리자 메인</a></li>
-              <li><a href="list.camp?pno=1" class=${menu eq 'manage'?'sidebar-active':'' }>캠핑장 관리</a></li>
+              <li><a href="list.camp?sort=LIST&pno=1" class=${param.sort eq 'LIST'?'sidebar-active':'' }>캠핑장 관리</a></li>
               <li><a href="" class=${menu eq 'admit'?'sidebar-active':'' }>승인 관리</a></li>
               <li><a href="" class=${menu eq 'goods'?'sidebar-active':'' }>캠핑용품 관리</a></li>
               <li><a href="" class=${menu eq 'notice'?'sidebar-active':'' }>공지 사항</a></li>
@@ -74,5 +75,3 @@
             </ul>
         </div>
     </div>
-</body>
-</html>
