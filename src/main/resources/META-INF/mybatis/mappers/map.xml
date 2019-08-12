@@ -127,16 +127,16 @@ where
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido,gugun
 FROM (select X.* , row_number() over (	
 										<if test="states == 'update'">
-											order by no  desc
+											order by no  asc
 										</if>
 										<if test="states == 'price'">
-											order by price desc
+											order by price asc
 										</if>
 										<if test="states == 'comment'">
-											order by cnt desc
+											order by cnt asc
 										</if>
 										<if test="states == 'like'">
-											order by likes desc
+											order by likes asc
 										</if>
 										
 										) row_no
