@@ -26,6 +26,8 @@ FROM
 					 CAMP_CAMPSITES
 where
 					campsite_name like '%'|| #{keyword} || '%' or campsite_address like '%' || #{keyword} || '%'
+and
+					campsite_used_yn = 'Y'
 </select>
 <select id="getMoreCampNameAndAdress" parameterType="Map" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido,gugun
@@ -58,6 +60,9 @@ WHERE
 	row_no >= #{start}
 AND
 	row_no &lt;= #{end}	
+and
+	usedYn = 'Y'
+
 </select>
 <select id="getCampNameAndAdress" parameterType="string" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido,gugun
@@ -84,12 +89,15 @@ FROM (select X.* , row_number() over (order by no desc) row_no
 					 CAMP_CAMPSITES A
 				where
 					campsite_name like '%'|| #{nameAndAddress} || '%' or campsite_address like '%' || #{nameAndAddress} || '%'
+				
 						) X
 			) 
 WHERE
 	row_no >= 1
 AND
 	row_no &lt;= 10
+AND
+	usedYn = 'Y'
 <!--
 SELECT  
 					campsite_no no,
@@ -173,7 +181,8 @@ WHERE
 	row_no >= 1
 AND
 	row_no &lt;= 10
-
+AND
+	usedYn = 'Y'
 </select>
 <select id="getCampSitesList" parameterType="Map" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,"myCampsite.no",cnt,sido,gugun
@@ -226,7 +235,10 @@ FROM (select X.* , row_number() over (
 					<if test="sort != '없음'">
 						campsite_sort like '%' || #{sort} || '%'
 					</if>
+					and
+						campsite_used_yn = 'Y'
 				</where>
+					
 					) X
 				) 
 		WHERE
@@ -250,6 +262,8 @@ FROM (select X.* , row_number() over (
 					<if test="sort != '없음'">
 						campsite_sort like '%' || #{sort} || '%'
 			</if>
+			and
+				campsite_used_yn = 'Y'
 	</where>
 </select>
 <select id="getLatLngCamp" parameterType="map" resultType="campSite">
@@ -328,6 +342,8 @@ AND
 			<if test="sort != '없음'">
 				campsite_sort = #{sort}
 			</if>
+			and
+				campsite_used_yn = 'Y'
 		</where>
 		order by
 			campsite_no desc	
