@@ -154,7 +154,7 @@
 			a.user_id = #{value}
 	</select>
 	
-	<select id="getMyAddCampById" parameterType="string" resultType="myCampsite">
+	<select id="getMyAddCampById" parameterType="string" resultType="myCampSite">
 		select 
 			a.my_campsite_no no,
 			a.my_campsite_status status,
@@ -195,4 +195,53 @@
 			user_id = #{id}
 	</update>
 	
+	<insert id="addCampSite" parameterType="campSite">
+		insert 
+			into camp_campsites (
+				campsite_no,
+				campsite_name,
+				campsite_sort,
+				campsite_latitude,
+				campsite_longitude,
+				campsite_address,
+				campsite_tel,
+				campsite_sites,
+				campsite_price,
+				campsite_photo,
+				my_campsite_no,
+				campsite_sido,
+				campsite_gugun
+			)
+		values ( camp_camping_site_seq.nextval, #{name}, #{sort}, #{latitude}, #{longitude}, #{address}, #{tel}, #{sites}, #{price}, #{photo}, #{myCampsite.no}, #{sido}, #{gugun})
+	</insert>
+	
+	<insert id="addMyCampSite" parameterType="myCampSite">
+		insert
+		into camp_my_campsites (
+			my_campsite_no,
+			user_id
+			)
+		values ( camp_camping_site_seq.nextval, #{user.id})
+	</insert>
+	
+	
+	<select id="getMyCampSiteById" parameterType="string" resultType="myCampSite">
+		select 
+			no,
+			status,
+			createDate,
+			userId
+		from
+			(select my_campsite_no as no,
+					  my_campsite_status as status,
+					  my_campsite_create_date as createDate,
+					  user_id as userId
+			from 
+					camp_my_campsites
+			order by my_campsite_create_date desc)
+		where 
+			userId = #{value}
+		and 
+			rownum &lt;= 1
+	</select>
 </mapper>

@@ -12,7 +12,6 @@
 				<li><a href="/camping/mypage/addCamp.camp" 	class="${submenu eq 'addCamp' ? 'selected' : ''  }">	<span class="ico"><img src="/camping/resources/images/mypage/tent.svg" width="18" height="20"></span> 내가 등록한 캠핑장</a></li>
 			</c:if>
 				<li><a href="/camping/mypage/clip.camp" 	class="${submenu eq 'clip' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/2.svg" width="18" height="20"></span> 찜한 캠핑장</a></li>
-				<li><a href="/camping/mypage/conquest.camp" class="${submenu eq 'conquest' ? 'selected' : ''  }">	<span class="ico"><img src="/camping/resources/images/mypage/3.svg" width="18" height="20"></span> 정복한 캠핑장</a></li>
 				<li><a href="/camping/mypage/post.camp" 	class="${submenu eq 'post' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/post.svg" width="18" height="20"></span> 게시물</a></li>
 				<li><a href="/camping/mypage/comment.camp" 	class="${submenu eq 'comment' ? 'selected' : ''  }">	<span class="ico"><img src="/camping/resources/images/mypage/comment.svg" width="18" height="20"></span> 댓글</a></li>
 				<li><a href="/camping/mypage/oneline.camp" 	class="${submenu eq 'online' ? 'selected' : ''  }">		<span class="ico"><img src="/camping/resources/images/mypage/oneline.svg" width="18" height="20"></span> 한줄의견</a></li>

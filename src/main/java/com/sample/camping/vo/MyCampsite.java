@@ -16,10 +16,10 @@ public class MyCampsite {
 	public void setNo(Integer no) {
 		this.no = no;
 	}
-	public String getstatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setstatus(String status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public Date getCreateDate() {
@@ -40,5 +40,7 @@ public class MyCampsite {
 	public void setCampSite(CampSite campSite) {
 		this.campSite = campSite;
 	}
+	
+	
 	
 }

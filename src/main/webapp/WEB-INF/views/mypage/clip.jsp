@@ -64,7 +64,7 @@
 										<c:when test="${like.campSite.sort eq 'CAR' }">
 										자동차야영장
 									</c:when>
-										<c:otherwise>
+									<c:otherwise>
 										일반야영장
 									</c:otherwise>
 									</c:choose>

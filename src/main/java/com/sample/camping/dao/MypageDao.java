@@ -2,6 +2,7 @@ package com.sample.camping.dao;
 
 import java.util.List;
 
+import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.FreeBoard;
 import com.sample.camping.vo.FreeBoardComment;
 import com.sample.camping.vo.JoiningBoard;
@@ -34,4 +35,10 @@ public interface MypageDao {
 	
 	void updateUserData(User user);
 	void updateUserUsedYn(User user);
+	
+	void addCampSite(CampSite campSite);
+	
+	void addMyCampSite(MyCampsite mycampsite);
+	
+	MyCampsite getMyCampSiteById(String userId);
 }
