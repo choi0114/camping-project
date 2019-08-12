@@ -13,6 +13,7 @@ public class FreeBoard {
 	private String thumbnail;
 	private Date createDate;
 	private User user;
+	private int cnt;
 	public Integer getNo() {
 		return no;
 	}
@@ -67,6 +68,12 @@ public class FreeBoard {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 	

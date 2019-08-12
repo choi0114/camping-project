@@ -94,7 +94,7 @@
 			from
 				camp_campsites
 			order by
-				campsite_no desc)
+				campsite_no asc)
 		where rownum &lt;= 20	
 	</select>
 	
@@ -107,17 +107,57 @@
 	</select>
 	
 	<select id="getAllReviewBoard" resultType="reviewBoard">
+		select *
+		from (
+			select
+				A.review_no no,
+				A.review_title title,
+				A.review_contents contents,
+				A.review_likes likes,
+				A.review_hates hates,
+				A.review_views,
+				A.review_create_date createDate,
+				(select count(*) from camp_review_comments where review_no = A.review_no) cnt
+			from
+				camp_review_boards A
+			order by A.review_no desc
+		)
+		where 
+			rownum &lt;= 7
+	</select>
+	
+	<select id="getAllFreeBoard" resultType="freeBoard">
+		select *
+		from (
+			select
+				A.Free_no no,
+				A.free_title title,
+				A.free_contents contents,
+				A.free_likes likes,
+				A.free_hates hates,
+				A.free_views views,
+				A.free_create_date createDate,
+				(select count(*) from camp_free_comments where free_no = A.free_no) cnt
+			from
+				camp_free_boards A
+			order by A.free_no desc
+		)
+		where
+			rownum &lt;= 7
+	</select>
+	
+	<select id="getAllNoticeBoard" resultType="noticeBoard">
 		select
-			review_no no,
-			review_title title,
-			review_contents contents,
-			review_likes likes,
-			review_hates hates,
-			review_views,
-			review_create_date createDate
+			notice_no no,
+			notice_title title,
+			notice_contents contents,
+			notice_likes likes,
+			notice_hates hates,
+			notice_views views,
+			notice_create_date createDate
 		from
-			camp_review_boards
-		where rownum &lt;= 7
+			camp_notice_boards
+			
 	</select>
 
 </mapper>

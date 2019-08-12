@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.FreeBoard;
+import com.sample.camping.vo.NoticeBoard;
 import com.sample.camping.vo.ReviewBoard;
 
 @Repository
@@ -17,4 +19,6 @@ public interface HomeDao {
 	List<CampSite> getCampSitesByUpdate();
 	Map<String, Object> getCounts();
 	List<ReviewBoard> getAllReviewBoard();
+	List<FreeBoard> getAllFreeBoard();
+	List<NoticeBoard> getAllNoticeBoard();
 }

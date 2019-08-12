@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.HomeDao;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.FreeBoard;
+import com.sample.camping.vo.NoticeBoard;
 import com.sample.camping.vo.ReviewBoard;
 
 @Service
@@ -45,5 +47,15 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public List<ReviewBoard> getAllReviewBoard() {
 		return homeDao.getAllReviewBoard();
+	}
+	
+	@Override
+	public List<FreeBoard> getAllFreeBoard() {
+		return homeDao.getAllFreeBoard();
+	}
+	
+	@Override
+	public List<NoticeBoard> getAllNoticeBoard() {
+		return homeDao.getAllNoticeBoard();
 	}
 }
