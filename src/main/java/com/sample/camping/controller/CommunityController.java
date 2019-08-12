@@ -285,8 +285,8 @@ public class CommunityController {
 	@GetMapping("/board.camp")
 	public @ResponseBody Map<String , Object> board(@RequestParam int boardType,
 													@RequestParam (value = "pno", required = false, defaultValue = "1") int pno,
-													@RequestParam String keyword,
-													@RequestParam String sort) {
+													@RequestParam (value = "keyword", required = false, defaultValue = "")String keyword,
+													@RequestParam (value = "sort", required = false, defaultValue = "")String sort) {
 		Map<String , Object> map = new HashMap<String, Object>();
 		
 		Map<String , Object> selectmap = new HashMap<String, Object>();

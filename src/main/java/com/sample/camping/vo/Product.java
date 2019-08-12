@@ -19,8 +19,21 @@ public class Product {
 	private Integer hate;
 	private Date createDate;
 	private Integer stock;
+	private String isInCart;
+	private String isInCartUser;
 	
-	
+	public String getIsInCartUser() {
+		return isInCartUser;
+	}
+	public void setIsInCartUser(String isInCartUser) {
+		this.isInCartUser = isInCartUser;
+	}
+	public String getIsInCart() {
+		return isInCart;
+	}
+	public void setIsInCart(String isInCart) {
+		this.isInCart = isInCart;
+	}
 	public String getForsale() {
 		return forsale;
 	}

@@ -5,11 +5,25 @@ import java.util.Date;
 public class CartForm {
 	private String name;
 	private int price;
+	private int no;
 	private int count;
 	private String photo;
 	private Date createDate;
+	private Integer cartNo;
 	
 	
+	public Integer getCartNo() {
+		return cartNo;
+	}
+	public void setCartNo(Integer cartNo) {
+		this.cartNo = cartNo;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getPhoto() {
 		return photo;
 	}

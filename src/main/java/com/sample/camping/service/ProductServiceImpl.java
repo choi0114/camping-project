@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.sample.camping.dao.ProductDao;
 import com.sample.camping.vo.Cart;
 import com.sample.camping.vo.Product;
+import com.sample.camping.vo.ProductOrder;
+import com.sample.camping.vo.ProductPurchase;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -70,5 +72,38 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Integer selectCartCount(Map<String, Object> map) {
 		return productDao.selectCartCount(map);
+	}
+	@Override
+	public void deleteCart(Integer no) {
+		productDao.deleteCart(no);
+	}
+	@Override
+	public void modifyCart(Map<String, Object> map) {
+		productDao.modifyCart(map);
+		
+	}
+	@Override
+	public void addOrder(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		productDao.addOrder(map);
+	}
+	@Override
+	public void addPurchase(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		productDao.addPurchase(map);
+	}
+	@Override
+	public void delPurchase() {
+		// TODO Auto-generated method stub
+		productDao.delPurchase();
+	}
+	@Override
+	public List<ProductPurchase> selectPurchase() {
+		// TODO Auto-generated method stub
+		return productDao.selectPurchase();
+	}
+	@Override
+	public List<ProductOrder> selectOrder(Map<String, Object> map) {
+		return productDao.selectOrder(map);
 	}
 }
