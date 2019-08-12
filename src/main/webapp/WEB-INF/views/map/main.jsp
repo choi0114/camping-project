@@ -491,13 +491,13 @@
 	
                                     <a href="#" class="campsite-name" data-Lat="${campsite.latitude }" data-lng="${campsite.longitude }">
                                     <c:if test="${campsite.sort eq 'CAMP' }">
-                                		<span class="sbjcat sbjcat3">글램핑</span><!--캠핑장분류--> 
+                                		<span class="sbjcat sbjcat1">글램핑</span><!--캠핑장분류--> 
                                     </c:if>
                                      <c:if test="${campsite.sort eq 'NORMAL' }">
                                 		<span class="sbjcat sbjcat2">캠핑장</span><!--캠핑장분류--> 
                                     </c:if>
                                      <c:if test="${campsite.sort eq 'CAR' }">
-                                		<span class="sbjcat sbjcat1">카라반</span><!--캠핑장분류--> 
+                                		<span class="sbjcat sbjcat3">카라반</span><!--캠핑장분류--> 
                                     </c:if>
 									                                
                                      	${campsite.name } <!-- 캠핑장 이름 -->
@@ -642,11 +642,11 @@
 								
 								var sort;
 								if (list.sort == 'CAMP'){
-									sort = "<span class='sbjcat sbjcat3'>글램핑</span>";
+									sort = "<span class='sbjcat sbjcat1'>글램핑</span>"; 
 								}else if(list.sort == "NORMAL"){
 									sort = "<span class='sbjcat sbjcat2'>캠핑장</span>";
 								}else{
-									sort ="<span class='sbjcat sbjcat1'>카라반</span>";
+									sort ="<span class='sbjcat sbjcat3'>카라반</span>";
 								}
 								
 								var row = "<div class='col-sm-12 col-xs-4 list-box'>";
@@ -826,7 +826,7 @@
 						content += "</div>";
 						content +="<div class='info'>";
 						if(list.sort == "CAMP"){
-							content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+							content +="<div class='title'> <span class='cat cat3'>글램핑</span>"; 
 						}else if(list.sort == "CAR"){
 							content +="<div class='title'> <span class='cat cat3'>카라반</span>";
 						}else if(list.sort == 'NORMAL'){
