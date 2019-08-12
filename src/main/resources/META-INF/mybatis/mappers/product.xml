@@ -3,25 +3,77 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.sample.camping.dao.ProductDao">
-	<select id=""></select>
+	<select id="selectPurchase" resultType="productPurchase">
+		select
+			PURCHASE_NO purchaseNo
+			,CART_NO cartNo
+			,GOODS_NO goodsNo
+			,PURCHASE_AMOUNT amount
+			,PURCHASE_YN 
+		from CAMP_PURCHASES
+		where PURCHASE_YN = 'Y' 
+		
+	</select>
+	<update id="delPurchase">
+		update CAMP_PURCHASES 
+		set PURCHASE_YN = 'N'
+	</update>
+	<insert id="addPurchase" parameterType="map">
+		insert into CAMP_PURCHASES (
+			PURCHASE_NO
+			,CART_NO
+			,GOODS_NO
+			,PURCHASE_AMOUNT
+			,PURCHASE_YN 
+		)
+		values (CAMP_CART_SEQ.nextval, #{cartNo}, #{goodsNo}, #{amount},'Y') 
+	</insert>
+
+	<select id="selectOrder" parameterType="map" resultType="productOrder">
+		select
+			ORDER_NO			orderNo
+			,ORDER_CREATE_DATE	createDate
+			,USER_ID			userId
+			,PURCHASE_NO 		purchaseNo
+			,ORDER_Number 		orderNum
+			,ORDER_PRICE		price
+			,ORDER_ADDRESS		address
+		from CAMP_ORDERS 
+		where USER_ID = #{userId}
+		and PURCHASE_NO = #{purchaseNo}
+	</select>
+	<insert id="addOrder" parameterType="map">
+		insert into CAMP_ORDERS (
+			ORDER_NO
+			,ORDER_CREATE_DATE
+			,USER_ID
+			,PURCHASE_NO
+			,ORDER_Number 
+			,ORDER_PRICE
+			,ORDER_ADDRESS
+		)
+		values (CAMP_CART_SEQ.nextval, sysdate, #{userId},#{purchaseNo}, #{orderNum}, #{price}, #{address}) 
+	</insert>
 	<insert id="addCart" parameterType="map">
 		insert into CAMP_CARTS (
 			CART_NO
 			,CART_CREATE_DATE
+			,CART_AMOUNT
 			,USER_ID
 			,GOODS_NO
 		)
-		values (CAMP_CART_SEQ.nextval, sysdate, #{userId},#{goodsNo}) 
+		values (CAMP_CART_SEQ.nextval, sysdate,#{amount}, #{userId},#{goodsNo}) 
 	</insert>
 	<select id="selectCartByUser" parameterType="map" resultType="cart">
 		select
 			CART_NO no
 			,CART_CREATE_DATE createDate
+			,CART_AMOUNT amount
 			,USER_ID userId
 			, GOODS_NO goodsNo
 		from CAMP_CARTS
 		where USER_ID = #{userId}
-		
+	
 	</select>
 	<select id="selectCartCount" parameterType="map" resultType="int">
 		select
@@ -30,6 +82,19 @@
 		where USER_ID = #{userId}
 		and GOODS_NO = #{goodsNo}
 	</select>
+	<update id="modifyCart" parameterType="map">
+		
+		update CAMP_CARTS
+		set CART_AMOUNT = #{amount}
+		where CART_NO = #{no}
+		
+	</update>
+	<delete id="deleteCart" parameterType="int">
+		
+		delete From CAMP_CARTS
+		where CART_NO = #{value}
+		
+	</delete>
 	<update id="deleteProduct" parameterType="int">
 		
 		update CAMP_GOODS
@@ -101,25 +166,21 @@
 					, GOODS_FORSALE
 					, GOODS_YN
 				from CAMP_GOODS
+				<if test="cat != null">
+					where GOODS_FORSALE = 'Y'
+					and GOODS_YN = 'Y'
+					and GOODS_CATEGORY = #{cat}
+				</if>
+				<if test="type != null">
+					where GOODS_FORSALE = 'Y'
+					and GOODS_YN = 'Y'
+					and GOODS_SORT = #{type}
+				</if>
 				<if test="keyword != null">
-					where GOODS_NAME = like '%' || #{keyword} || '%'
+					and GOODS_NAME = like '%' || #{keyword} || '%'
 				</if>
 				)
 		
-		<if test="cat != null">
-			where GOODS_STOCK not in(0)
-			and GOODS_FORSALE = 'Y'
-			and GOODS_YN = 'Y'
-			and GOODS_CATEGORY = #{cat}
-			order by GOODS_NO asc
-		</if>
-		<if test="type != null">
-			where GOODS_STOCK not in(0)
-			and GOODS_FORSALE = 'Y'
-			and GOODS_YN = 'Y'
-			and GOODS_SORT = #{type}
-			order by GOODS_NO asc
-		</if>
 		
 		
 	</select>
@@ -157,13 +218,11 @@
 					, GOODS_FORSALE
 					, GOODS_YN
 				from CAMP_GOODS
-				
+				where GOODS_FORSALE = 'Y'
+				and GOODS_YN = 'Y'
+				and GOODS_SORT = 'NEW'
 				)
 		where (row_no >= 1 and row_no &lt;= 3)
-		and GOODS_STOCK not in(0)
-		and GOODS_FORSALE = 'Y'
-		and GOODS_YN = 'Y'
-		and GOODS_SORT = 'NEW'
 		order by GOODS_NO asc
 		
 	</select>
@@ -201,13 +260,11 @@
 					, GOODS_FORSALE
 					, GOODS_YN
 				from CAMP_GOODS
-				
+				where GOODS_FORSALE = 'Y'
+				and GOODS_YN = 'Y'
+				and GOODS_SORT = 'RECOMMEND'
 				)
 		where (row_no >= 1 and row_no &lt;= 3)
-		and GOODS_STOCK not in(0)
-		and GOODS_FORSALE = 'Y'
-		and GOODS_YN = 'Y'
-		and GOODS_SORT = 'RECOMMEND'
 		order by GOODS_NO asc
 		
 	</select>
@@ -247,12 +304,12 @@
 					, GOODS_FORSALE
 					, GOODS_YN
 				from CAMP_GOODS
+				where GOODS_YN = 'Y'
 				<if test="keyword != null">
-					where GOODS_NAME like '%' || #{keyword} || '%'
+					and GOODS_NAME like '%' || #{keyword} || '%'
 				</if>
 				)
 		where (row_no >= #{begin} and row_no &lt;= #{end})
-		and GOODS_YN = 'Y'
 		order by GOODS_NO asc
 		
 	</select>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.OrderComparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -18,16 +19,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.camping.form.CartForm;
+import com.sample.camping.form.OrderForm;
 import com.sample.camping.form.ProductForm;
+import com.sample.camping.form.PurchaseForm;
 import com.sample.camping.service.ProductService;
 import com.sample.camping.vo.Cart;
 import com.sample.camping.vo.Pagination;
 import com.sample.camping.vo.Product;
+import com.sample.camping.vo.ProductOrder;
+import com.sample.camping.vo.ProductPurchase;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -35,6 +41,100 @@ import com.sample.camping.vo.User;
 public class ProductController {
 	@Autowired
 	ProductService productService;
+	
+	@RequestMapping("/purchase.camp")
+	public String purchase(Model model) {
+		
+		List<ProductPurchase> purchases = productService.selectPurchase();
+		List<PurchaseForm> purchaseForms = new ArrayList<PurchaseForm>();
+		for(ProductPurchase purchase: purchases) {
+			PurchaseForm form = new PurchaseForm();
+			Product product = productService.selectProductByNo(purchase.getGoodsNo());
+			
+			form.setAmount(purchase.getAmount());
+			form.setCartNo(purchase.getCartNo());
+			form.setGoodsName(product.getName());
+			form.setGoodsNo(purchase.getGoodsNo());
+			form.setGoodsPhoto(product.getPhoto());
+			form.setGoodsPrice(product.getPrice()*purchase.getAmount());
+			form.setPurchaseNo(purchase.getPurchaseNo());
+			
+			purchaseForms.add(form);
+		}
+		
+		
+		
+		model.addAttribute("purchases",purchaseForms);
+		
+		return "product/purchase";
+	} 
+	@RequestMapping("/addPurchase.camp")
+	public String addPurchase(String cartNo, String goodsNo,String cartCount) {
+		productService.delPurchase();	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cartNo", cartNo);
+		map.put("goodsNo", goodsNo);
+		map.put("amount", cartCount);
+		productService.addPurchase(map);
+		productService.deleteCart(Integer.parseInt(cartNo));
+	
+		
+		return "redirect:purchase.camp";
+	} 
+	@RequestMapping("/order.camp")
+	public String order(HttpSession session,String no, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) session.getAttribute("LOGIN_USER");
+		map.put("userId",user.getId());
+		map.put("purchaseNo",Integer.parseInt(no));
+		List<ProductOrder> orders= productService.selectOrder(map);
+		List<ProductPurchase> purchases= productService.selectPurchase();
+		
+		List<OrderForm> form1 = new ArrayList<OrderForm>();
+		
+		ProductOrder order1= new ProductOrder();
+			for(ProductOrder order : orders) {
+				for(ProductPurchase purchase :purchases) {
+				
+					OrderForm form = new OrderForm();
+					Product product = productService.selectProductByNo(purchase.getGoodsNo());
+					form.setAmount(purchase.getAmount());
+					form.setProductName(product.getName());
+					form.setPhoto(product.getPhoto());
+					form.setPrice(product.getPrice());
+					order1.setAddress(order.getAddress());
+					order1.setPrice(order.getPrice());
+					form1.add(form);
+				
+			}
+		}
+		
+		
+		model.addAttribute("form", form1);
+		model.addAttribute("order", order1);
+		
+		
+		return "product/order";
+	} 
+
+	@RequestMapping("/addOrder.camp")
+	public String addOrder(HttpSession session, String no, String price, String addr) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) session.getAttribute("LOGIN_USER");
+		List<ProductPurchase> p = productService.selectPurchase();
+		map.put("orderNum", no);
+		for(ProductPurchase pro :p) {
+			
+			map.put("userId",user.getId());
+			map.put("purchaseNo", pro.getPurchaseNo());
+			map.put("price", Integer.parseInt(price));
+			map.put("address", addr);
+			productService.addOrder(map);
+		}
+		
+		
+		return "redirect:order.camp?no="+no;
+	} 
 	
 	@RequestMapping("/adminProduct.camp")
 	public String adminProduct(Model model) {
@@ -79,13 +179,32 @@ public class ProductController {
 		return product;
 	}
 	
+	@RequestMapping("/detail.camp")
+	public String detail(Model model, int no) {
+		Product product = productService.selectProductByNo(no);
+		model.addAttribute("product",product);
+		return "product/detail";
+	}
+	@RequestMapping("/deleteCart.camp")
+	public  @ResponseBody void deleteCart( @RequestParam int no) {
+		 productService.deleteCart(no);
+	}
+	@RequestMapping("/modifyCart.camp")
+	public  @ResponseBody void deleteCart(@RequestParam int no, @RequestParam int amount) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		map.put("amount", amount);
+		
+		productService.modifyCart(map);
+	}
+
 	@RequestMapping("/products.camp")
 	public String products() {
 		return "product/products";
 	}
 	
 	@RequestMapping("/cart.camp")
-	public String cart(Model model , HttpSession session, int check) {
+	public String cart(Model model , HttpSession session) {
 		User user = (User)session.getAttribute("LOGIN_USER");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -100,16 +219,17 @@ public class ProductController {
 			String name = product.getName();
 			int price = product.getPrice();
 			int productCount = productService.selectCartCount(map);
-			int totalPrice = productCount * price;
 			String photo = product.getPhoto();
 			map.put("goodsNo", gno);
 			
 			CartForm cartform = new CartForm();
+			cartform.setCartNo(cart.getNo());
+			cartform.setNo(gno);
 			cartform.setPhoto(photo);
-			cartform.setCount(productCount);
+			cartform.setCount(cart.getAmount());
 			cartform.setCreateDate(cart.getCreateDate());
 			cartform.setName(name);
-			cartform.setPrice(totalPrice);
+			cartform.setPrice(price);
 			
 			cartForms.add(cartform);
 		}
@@ -119,22 +239,23 @@ public class ProductController {
 	}
 	
 	@GetMapping("/addCart.camp")
-	public String addCart( @RequestParam int no , HttpSession session) {
+	public String addCart( @RequestParam int no , HttpSession session, @RequestParam int amount) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		User user = (User) session.getAttribute("LOGIN_USER");
 		map.put("userId", user.getId());
 		map.put("goodsNo", no);
+		map.put("amount", amount);
 		int check = productService.selectCartCount(map);
 		
 		
 		if(check == 0) {
 			productService.addCart(map);
-			return "redirect:cart.camp?";
+			return "redirect:cart.camp";
 			
 		} else {
 			
-			return "redirect:category.camp?";
+			return "redirect:category.camp";
 		}
 	} 
 	
@@ -161,16 +282,67 @@ public class ProductController {
 		
 		return map1;
 	} 
+
 	
+	
+	@RequestMapping("/detailLogin.camp")
+	public  @ResponseBody String detailLogin(HttpSession session, @RequestParam int no , @RequestParam int amount) {
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Product product =  productService.selectProductByNo(no);
+		
+		map.put("userId", user.getId());
+		map.put("goodsNo", no);
+		
+		int check = productService.selectCartCount(map);
+		System.out.println("check:"+check);
+		
+		if(check == 0 ) {
+			product.setIsInCart("N");
+		} else {
+			product.setIsInCart("Y");
+		}
+		String cart = product.getIsInCart();
+		System.out.println("cart:"+cart);
+		System.out.println("user.getId():"+user.getId());
+		return cart;
+	}
+	@RequestMapping("/categoryLogin.camp")
+	public  @ResponseBody String categoryLogin(HttpSession session, @RequestParam int no ) {
+		User user = (User) session.getAttribute("LOGIN_USER");
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		Product product =  productService.selectProductByNo(no);
+
+			map.put("userId", user.getId());
+			map.put("goodsNo", no);
+			
+			int check = productService.selectCartCount(map);
+			System.out.println("check:"+check);
+			
+			if(check == 0 ) {
+				product.setIsInCart("N");
+			} else {
+				product.setIsInCart("Y");
+			}
+		String cart = product.getIsInCart();
+		System.out.println("cart:"+cart);
+		System.out.println("user.getId():"+user.getId());
+		return cart;
+	}
 	@RequestMapping("/category.camp")
-	public String category(Model model) {
+	public String category(Model model, String cart) {
 		Map<String, Object> newMap = new HashMap<String, Object>();
 		Map<String, Object> recommendMap = new HashMap<String, Object>();
 		
 		newMap.put("type", "NEW");
 		recommendMap.put("type","RECOMMEND");
 		List<Product> new1 = productService.selectProductNewBy3();
+		
 		List<Product> recommend = productService.selectProductRecommendBy3();
+		
+		model.addAttribute("cart", cart);
 		model.addAttribute("new1", new1);
 		model.addAttribute("recommend", recommend);
 		return "product/category";

@@ -6,7 +6,17 @@ public class Cart {
 	private Integer no;
 	private Date createDate;
 	private String userId; 
+	private Integer amount; 
 	private Integer goodsNo;
+	
+	
+	
+	public Integer getAmount() {
+		return amount;
+	}
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 	public Integer getNo() {
 		return no;
 	}
