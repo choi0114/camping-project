@@ -14,6 +14,8 @@ public class ReviewBoard {
 	private Date createDate;
 	private User user;
 	private CampSite campSite;
+	private int cnt;
+	
 	public Integer getNo() {
 		return no;
 	}
@@ -74,6 +76,12 @@ public class ReviewBoard {
 	}
 	public void setCampSite(CampSite campSite) {
 		this.campSite = campSite;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 	

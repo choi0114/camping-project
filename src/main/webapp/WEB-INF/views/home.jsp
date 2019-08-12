@@ -202,8 +202,6 @@
     	.searchSelect:focus, .searchSelect:active, .searchSelect:hover {border: 1px solid #25a5f0;}
     	#camping-map.maininfo .head .selectsido .searchSelect{width: 80px;}
     	#camping-map.maininfo .head .selectsido .subselect{width: 125px;}
-    	#camping-map.maininfo .head .adq {display: inline-block; padding: 7px 55px 0 0; color: black; font-weight: bold; font-size: 13px;}
-    	#camping-map.maininfo .head .adq:hover{color: #0f8dd7; text-decoration: none;}
     	#camping-map.maininfo .campinfo-wrap .kmapright .items {width: 283px; margin: 7px 40px 30px 0; float: left;}
 		#camping-map.maininfo .campinfo-wrap .kmapright .items .photo {width: 283px; height: 168px;
 																position: relative; overflow: hidden;}
@@ -248,6 +246,7 @@
     	
     	#btn-more{width: 100%; height: 40px; font-weight: bold;}
    		#search-result .more-button{text-align: center;}
+   		#bookmark{width: 17px;}
    		
    		/* 탑버튼 */
    		#move-top-btn {position: fixed; bottom: 70px; right: 70px;display: none; z-index: 999; width: 50px; height: 50px;
@@ -340,10 +339,10 @@
 	                            <div class="thumb hand">
 	                                <div class="border"></div>
 	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/slide1.jpg" alt="##캠핑장" width="450" class="tm">
-	                                <p class="distance">334.9km</p>
+	                                <img src="/camping/resources/images/campsite/${item.photo }" alt="##캠핑장" width="450" class="tm">
 	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i>
+	                                    <img alt="" src="/camping/resources/images/bookmark.png" id="bookmark" aria-hidden="true">
+	                                    <img alt="" src="/camping/resources/images/bookmark2.png" id="bookmark" aria-hidden="true">
 	                                </a>
 	                            </div>
 	                        </div>
@@ -366,17 +365,15 @@
     				<h2 class="fl">알려드립니다</h2>
     				<a href="#" class="glyphicon glyphicon-plus more"></a>
     			</div>
+    			<c:forEach var="notice" items="${notices }">
     			<div class="notice">
     				<span class="date">1개월 전</span>
-    				<a href="#">오지/노지 정보는 단계적 회원서비스로 변경합니다.</a>
+    				<a href="#">${notice.title }</a>
     			</div>
-    			<div class="notice">
-    				<span class="date">1개월 전</span>
-    				<a href="#">캠핑장별 미세먼지 정보 서비스 복구 완료</a>
-    			</div>
+    			</c:forEach>
     		</div>
     		<div class="fr rb">
-    			<a href="#" ><img src="#" alt="홍보" style="width: 700px; height:100px; background-color: red"></a>
+    			<a href="#" ><img src="/camping/resources/images/ㅎㅎㅎ.png" alt="안전한캠핑" style="width: 700px; height:100px; background-color: red"></a>
     		</div>
     	</div>
     </div>
@@ -448,10 +445,6 @@
     						<option value selected>시군구 전체</option>
     					</select>
     				</div>
-    				<a href="#" class="fr adq">
-    					<i class="glyphicon glyphicon-info-sign" aria-hidden="true"></i>
-    					캠핑장 등록 및 광고문의
-    				</a>
     			</div>
     			
     		</div>
@@ -468,7 +461,9 @@
     			<c:forEach var="review" items="${reviews }">
     			<dd>
     				<a href="#">&gt;  ${review.title }</a>
-    				<span class="comment">1</span>
+    				<c:if test="${review.cnt > 1}">
+    				<span class="comment">${review.cnt }</span>
+    				</c:if>
     			</dd>
     			</c:forEach>
     		</dl>
@@ -478,34 +473,14 @@
     				<br>자유게시판
     				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
     			</dt>
+    			<c:forEach var="free" items="${frees }">
     			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
+    				<a href="#">&gt;  ${free.title }</a>
+    				<c:if test="${free.cnt > 1}">
+    				<span class="comment">${free.cnt }</span>
+    				</c:if>
     			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  오지/노지 자리 선정시 알아두면 좋은 법규</a>
-    				<span class="comment">1</span>
-    			</dd>
+    			</c:forEach>
     		</dl>
     	</div>
     </div>
@@ -658,20 +633,6 @@
 		
 		$(".keyword-del").show();
 	});
-	
-	/* 슬라이드 
-	function updateList() {
-		$.ajax ({
-			url:"update.camp",
-			dataType:"json",
-			success:function(result) {
-				
-				$.each(result.items, function(index, camp) {
-					
-				})
-			}
-		})
-	} */
 	
 	/* 맵 */
 	function xxx() {
@@ -867,7 +828,6 @@
 	
 
 	/* 지역별 */
-	
 	$("#btn-prev").click(function(event) {
 		event.preventDefault();
 		var city1 = $("#cate1").val();
@@ -953,7 +913,6 @@
 					html += '<div class="items hand col-sm-4" id="location-items" style="cursor:pointer">';
 					html += '<div class="photo">';
 					html += '<img src="/camping/resources/images/camping1.jpg" class="tm">';
-					html += '<span class="distance">3.7km</span>';
 					if(camp.sort == 'CAMP') {
 						html += '<span class="cat" style="color: #91ee6c">'+camp.sort+'</span>';
 					} else if(camp.sort == 'CAR') {

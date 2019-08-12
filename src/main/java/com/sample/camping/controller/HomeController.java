@@ -34,6 +34,8 @@ public class HomeController {
 		
 		model.addAttribute("items", homeService.getCampSitesByUpdate());
 		model.addAttribute("reviews", homeService.getAllReviewBoard());
+		model.addAttribute("frees", homeService.getAllFreeBoard());
+		model.addAttribute("notices", homeService.getAllNoticeBoard());
 		
 		return "home";
 	}
