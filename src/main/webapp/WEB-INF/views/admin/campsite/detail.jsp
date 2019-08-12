@@ -18,6 +18,9 @@
   </style>
     </head>
     <style>
+    	.image {
+    		width: 376px;
+    	}
         .margin-div {
             margin-top: 15px;
         }
@@ -34,7 +37,7 @@
         	margin-bottom: 10px;
         }
 	    </style>
-			<body>
+			<body style="background-color:#f7f7f9">
 				<c:set var="menu" value="campsite" />
 				<%@ include file="../common/adminNavi.jsp"%>
 				<div class="row">
@@ -90,10 +93,10 @@
 									<div class="form-group"></div>
 									<div class="row">
 										<div class="col-xs-1 admin-line-height margin-btn">
-											<label class="label-padding">이미지첨부</label>
+											<label class="label-padding">이미지</label>
 										</div>
 										<div class="col-xs-11">
-											<img src="/camping/resources/images/campsite/${campSite.photo }"/>
+											<img class="image" src="/camping/resources/images/campsite/${campSite.photo }"/>
 										</div>
 									</div>
 									<div class="text-right">

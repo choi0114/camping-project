@@ -16,11 +16,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 .container-top {
-	padding-top: 60px;
+	padding-top: 30px;
 }
 </style>
 </head>
-<body>
+<body style="background-color:#f7f7f9">
 	<%@ include file="../common/adminNavi.jsp"%>
 	<div class="col-xs-1">
 		<c:set var="menu" value="campsite" />
@@ -30,7 +30,7 @@
 	       <form class="form-inline" action="list.camp" id='list-form'>
 			<div class="row">
 			    <div class="col-sm-11 page-head-right text-right">
-			           <div class="form-group">
+			           <div class="form-group" style="margin-top:15px">
 			                <label>캠핑장 이름</label>
 			            	<input class="form-control" type="text" id="keyword" name="keyword">
 			            	<button class="form-control" type="submit" class="btn btn-default" id="btn_header_search">검색</button>
@@ -82,13 +82,25 @@
 		</div>
 			<div class="text-center">
 				<ul class="pagination">
-					<li><a href="">&laquo;</a></li>
-					<li><a href="list.camp?pno=1">1</a></li>
-					<li><a href="list.camp?pno=2">2</a></li>
-					<li><a href="list.camp?pno=3">3</a></li>
-					<li><a href="list.camp?pno=4">4</a></li>
-					<li><a href="list.camp?pno=5">5</a></li>
-					<li><a href="">&raquo;</a></li>
+					<c:choose>
+						<c:when test="${pagination.first }">
+							<li><a href="">&laquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="list.camp?pno=${pagination.page - 1 }">&laquo;</a></li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="num" begin="${pagination.begin }" end="${pagination.end }">
+						<li class="${pagination.page == num ? 'active' : '' }"><a href="list.camp?pno=${num }">${num }</a></li>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pagination.last }">
+							<li><a href="">&raquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="list.camp?pno=${pagination.page + 1 }">&raquo;</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
    	  	</form>
