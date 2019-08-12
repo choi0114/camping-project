@@ -4,7 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.sample.camping.dao.AdminCampSiteDao">
-	
+	<select id="campsiteStatistics" resultType="statistics">
+		select
+			 campsite_sort sort,count(*) count 
+		from 
+			camp_campsites 
+		group by 
+			campsite_sort
+	</select>
+	<select id="gugunStatistics" resultType="statistics">
+		select CAMPSITE_GUGUN gugun, count(*) count from CAMP_CAMPSITES GROUP by campsite_gugun
+	</select>
+	<select id="sidoStatistics" resultType="statistics">
+		select CAMPSITE_SIDO sido, count(*) count  from CAMP_CAMPSITES GROUP by campsite_sido
+	</select>
 	<!-- 캠핑장 추가 -->
 	<insert id="addCampSite" parameterType="campSite">
 		insert into camp_campsites
@@ -42,7 +55,8 @@
 		  campsite_point as point,
 		  campsite_create_date as createDate,
 		  campsite_used_yn as usedYn,
-		  campsite_sido as sido
+		  campsite_sido as sido,
+		  campsite_gugun as gugun
 	from(
 		select
 		  row_number() over(order by campsite_no desc) as row_no,
@@ -61,7 +75,8 @@
 		  campsite_point,
 		  campsite_create_date,
 		  campsite_used_yn,
-		  campsite_sido
+		  campsite_sido,
+		  campsite_gugun 
 	from	  
 		  camp_campsites
 	<where>
@@ -118,7 +133,7 @@
 		  campsite_point = #{point},
 		  campsite_create_date = #{createDate},
 		  campsite_used_yn = #{usedYn},
-		  campsite_sido = #{sido}	,
+		  campsite_sido = #{sido},
 		  campsite_gugun = #{gugun}
 		where
 		  campsite_no = #{no}  

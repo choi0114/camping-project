@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sample.camping.dao.AdminNoticeBoardDao">
+	
+	<!-- 공지사항 추가 -->
+	<insert id="addNotice" parameterType="noticeBoard">
+		insert into camp_notice_boards
+			(notice_no, notice_title, notice_contents)
+		values
+			(camp_board_seq.nextval, #{title}, #{contents})
+	</insert>	
+
+	<!-- 모든 공지사항 출력 -->
+	<select id="getNoticeAll" parameterType="map" resultType="noticeBoard">
+		select
+			notice_no as no,
+			notice_title as title,
+			notice_contents as contents,
+			notice_likes as likes,
+			notice_hates as hates,
+			notice_views as views,
+			notice_create_date as createDate
+		from(
+		select
+		  	row_number() over(order by notice_no desc) as row_no,	
+		  	notice_no,
+			notice_title,
+			notice_contents,
+			notice_likes,
+			notice_hates,
+			notice_views,
+			notice_create_date
+		from
+			camp_notice_boards
+		<where>
+			<if test="keyword != null"> 
+				notice_no like '%' || #{keyword} || '%'
+			</if>
+		</where>
+			  )
+		where row_no >= #{begin} and row_no &lt;= #{end}		
+	</select>
+	
+	<!--  디테일 공지사항 -->
+	<select id="getNoticeByNo" parameterType="int" resultType="noticeBoard">
+		select
+			notice_no as no,
+			notice_title as title,
+			notice_contents as contents,
+			notice_likes as likes,
+			notice_hates as hates,
+			notice_views as views,
+			notice_create_date as createDate
+		from
+			camp_notice_boards
+		where notice_no = #{no}		
+	</select>
+	
+	<!-- 공지사항 업데이트 -->
+	<update id="updateNoticeByNo" parameterType="noticeBoard">
+		update
+			camp_notice_boards
+		set
+			notice_no = #{no},
+			notice_title = #{title},
+			notice_contents = #{contents},
+			notice_likes = #{likes},
+			notice_hates = #{hates},
+			notice_views = #{views},
+			notice_create_date = #{createDate}	
+		where
+			notice_no = #{no}				
+	</update>	
+	
+	<select id="getNoticeCount" parameterType="map" resultType="int">
+		select count(*)
+		from
+			camp_notice_boards
+		<where>
+			<if test="keyword != null"> 
+				notice_no like '%' || #{keyword} || '%'
+			</if>
+		</where>
+	</select>	
+	
+</mapper>
