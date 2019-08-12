@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.CampsiteDao;
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.LikeHateCampsite;
 import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.ReviewBoard;
@@ -86,5 +87,15 @@ public class CampsiteServiceImpl implements CampsitesService {
 	@Override
 	public void insertLikeHate(Map<String, Object> map) {
 		campsiteDao.insertLikeHate(map);
+	}
+	
+	@Override
+	public void insertJjim(Map<String, Object> map) {
+		campsiteDao.insertJjim(map);
+	}
+	
+	@Override
+	public LikeCampsite getJjimByNoId(Map<String, Object> map) {
+		return campsiteDao.getJjimByNoId(map);
 	}
 }

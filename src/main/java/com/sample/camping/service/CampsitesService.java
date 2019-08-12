@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.LikeHateCampsite;
 import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.ReviewBoard;
@@ -28,4 +29,7 @@ public interface CampsitesService {
 	int getJjimCountByNo(int no);
 	int getOpinionCountByCSNo(int no);
 	void insertLikeHate(Map<String, Object> map);
+	
+	void insertJjim(Map<String, Object> map);
+	LikeCampsite getJjimByNoId(Map<String, Object> map);
 }

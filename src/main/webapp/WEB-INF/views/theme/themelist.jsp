@@ -14,6 +14,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
+    .noimg{
+    	    	position: relative;
+  			  left: -16px;
+   			 top: -6px;
+    }
+    .detail-link{
+        display: inline-block;
+	   	padding: 0 10px;
+	    border: 1px #ddd solid;
+	    font-weight: 700;
+	    color: #000;
+	    height: 26px;
+	    line-height: 27px;
+	    margin-top:50px;
+	    position: relative;
+  	    left: 197px;
+	   }
+	   
     .darkamap{
     	opacity: .2;
     	background-color: black;
@@ -151,7 +169,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 0
+            z-index: 0;
+            width: 160px;
+            height: 90px;
         }
     .cont {
         font-size: 12px;
@@ -345,7 +365,12 @@
                 	       <div class="col-sm-12 col-xs-4 list-box">   
                                <div class="left-photo">
                                     <img src="/camping/resources/images/update.png" class="new">
-                                    <img class="tm" src="/camping/resources/images/camping.png"> <!-- 캠핑 사진-->                                  
+                                    <c:if test="${campsite.photo eq null }">
+	                                    <img class="tm" src="resources/images/campsite/noimg.jpg"> <!-- 캠핑 사진-->                                  
+                                    </c:if>
+                                    <c:if test="${campsite.photo ne null }">
+	                                    <img class="tm" src="resources/images/campsite/${campsite.photo }"> <!-- 캠핑 사진-->                                  
+                                    </c:if>                                  
                                </div>
                                <div class="content">
                                    <div class="subject">	
@@ -504,8 +529,8 @@
 								
 								var row = "<div class='col-sm-12 col-xs-4 list-box'>";
 									row+= "<div class='left-photo'>";
-									row+= "<img src='resources/images/update.png' class='new'>";
-									row+= "<img class='tm' src='resources/images/camping.png'>";
+									row+= "<img src='/camping/resources/images/update.png' class='new'>";
+									row+= "<img class='tm' src='/camping/resources/images/" + list.photo + "'>";
 									row+= "</div>";
 									row+= "<div class='content'>";
 									row+= "<div class='subject'>";
@@ -583,12 +608,22 @@
 						content += "날씨 정보 (미정)";
 						content +="</div>";
 						content +="<div class='info'>";
-						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						if(list.sort == "CAMP"){
+							content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+						}else if(list.sort == "CAR"){
+							content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+						}else if(list.sort == 'NORMAL'){
+							content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+						}
 						content +=list.name;
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						if(list.photo != null){
+							content += "<div class='img'> <img src='/camping/resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+						}else{
+							content += "<div class='img'> <img src='/camping/resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+						}
 						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
@@ -601,13 +636,14 @@
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
 						content +="<div class='desc'>"
 						content +="<div class='jibun'>"+list.address+"</div>"
 						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 						content+="</div>";
 						content+="</div>";
 						content+="</div>";
@@ -620,11 +656,11 @@
 						var campsort = list.sort;
 				
 						if(campsort == 'NOMAL'){
-							imageicon = 'resources/images/tent2.png';
+							imageicon = '/camping/resources/images/tent2.png';
 						}else if(campsort == 'CAMP'){
-							imageicon = 'resources/images/tent1.png';
+							imageicon = '/camping/resources/images/tent1.png';
 						}else{
-							imageicon = 'resources/images/tent3.png'; // 카라반 
+							imageicon = '/camping/resources/images/tent3.png'; // 카라반 
 						} 
 						
 	 					// 마커 이미지 설정
@@ -760,31 +796,42 @@
 						content += "날씨 정보 (미정)";
 						content +="</div>";
 						content +="<div class='info'>";
-						content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+						if(list.sort == "CAMP"){
+							content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+						}else if(list.sort == "CAR"){
+							content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+						}else if(list.sort == 'NORMAL'){
+							content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+						}
 						content +=list.name;
 						content +="<div class='close' title='닫기'>X</div>";
 						content +="</div>";
 						content +="<div class='body'>";
-						content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+						if(list.photo != null){
+							content += "<div class='img'> <img src='/camping/resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+						}else{
+							content += "<div class='img'> <img src='/camping/resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+						}
 						content += "<div class='btn_vote_scrap'>"
 						content +="<div style='float: right'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 						content +="좋아요";
-						content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+						content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
 						content +="</a>";
 						content +="</div>";
 						content +="<div style='float: right;'>"
 						content +="<a href='#'>"
 						content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 						content += "싫어요"
-						content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+						content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 						content += "</a>";
 						content += "</div>";
 						content +="</div>";
 						content +="<div class='desc'>"
 						content +="<div class='jibun'>"+list.address+"</div>"
 						content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+						content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 						content+="</div>";
 						content+="</div>";
 						content+="</div>";
@@ -796,11 +843,11 @@
 						var campsort = list.sort;
 				
 						if(campsort == 'NOMAL'){
-							imageicon = 'resources/images/tent2.png';
+							imageicon = '/camping/resources/images/tent2.png';
 						}else if(campsort == 'CAMP'){
-							imageicon = 'resources/images/tent1.png';
+							imageicon = '/camping/resources/images/tent1.png';
 						}else{
-							imageicon = 'resources/images/tent3.png'; // 카라반 
+							imageicon = '/camping/resources/images/tent3.png'; // 카라반 
 						} 
 						
 	 					// 마커 이미지 설정
@@ -896,7 +943,7 @@
 						newIconSrc = 'maptent2.svg'; // 카라반 
 					}
 			    	
-			    	var imageSrc = 'resources/images/'+newIconSrc, // 마커이미지의 주소입니다    
+			    	var imageSrc = '/camping/resources/images/'+newIconSrc, // 마커이미지의 주소입니다    
 					imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 					imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 					    
@@ -933,7 +980,7 @@
 			}else{
 				icon = 'maptent2.svg'; // 카라반 
 			}
-			var imageSrc = 'resources/images/'+icon, // 마커이미지의 주소입니다  
+			var imageSrc = '/camping/resources/images/'+icon, // 마커이미지의 주소입니다  
 		    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 		     
@@ -970,31 +1017,42 @@
 							content += "날씨 정보 (미정)";
 							content +="</div>";
 							content +="<div class='info'>";
-							content +="<div class='title'> <span class='cat cat3'>글램핑/카라반</span>";
+							if(list.sort == "CAMP"){
+								content +="<div class='title'> <span class='cat cat3'>글램핑</span>";
+							}else if(list.sort == "CAR"){
+								content +="<div class='title'> <span class='cat cat3'>카라반</span>";
+							}else if(list.sort == 'NORMAL'){
+								content +="<div class='title'> <span class='cat cat3'>캠핑장</span>";
+							}
 							content +=list.name;
 							content +="<div class='close' title='닫기'>X</div>";
 							content +="</div>";
 							content +="<div class='body'>";
-							content += "<div class='img'> <img src='https://www.5gcamp.com/files/camping//2018/10/14/b83cb7183f6b48f810610b521b49a2e3.jpg' width='125' height='80' class='tm'></div>"
+							if(list.photo != null){
+								content += "<div class='img'> <img src='/camping/resources/images/campsite/"+list.photo+"' width='125' height='80' class='tm'></div>"
+							}else{
+								content += "<div class='img'> <img src='/camping/resources/images/campsite/noimg.jpg' width='125' height='80' id=''></div>"
+							}
 							content += "<div class='btn_vote_scrap'>"
 							content +="<div style='float: right'>"
 							content +="<a href='#'>"
 							content +="<i class='fa fa-bookmark-o' aria-hidden='true'></i>"
 							content +="좋아요";
-							content +="<span id='scrap_count_914' class='scrap_count'>0</span>"
+							content +="<span id='scrap_count_914' class='scrap_count'>"+list.likes+"</span>"
 							content +="</a>";
 							content +="</div>";
 							content +="<div style='float: right;'>"
 							content +="<a href='#'>"
 							content +="<i class='fa fa-flag-o' aria-hidden='true'></i>"
 							content += "싫어요"
-							content += "<span id='conquest_count_914' class='scrap_count'>0&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+							content += "<span id='conquest_count_914' class='scrap_count'>"+list.hates+"</span>"
 							content += "</a>";
 							content += "</div>";
 							content +="</div>";
 							content +="<div class='desc'>"
 							content +="<div class='jibun'>"+list.address+"</div>"
 							content+="<i class='fa fa-phone-square' aria-hidden='true'>"+list.tel+"</i>"
+							content+="<div><a href='detail.camp?no="+list.no+"' class='detail-link'>상세정보</a></div>"
 							content+="</div>";
 							content+="</div>";
 							content+="</div>";
