@@ -47,21 +47,22 @@ FROM (select X.* , row_number() over (order by no desc) row_no
 					campsite_photo photo,
 					campsite_point point,
 					campsite_create_date createDate,
-					c usedYn,
+					campsite_used_yn usedYn,
 					campsite_sido sido,
 					campsite_gugun gugun
 				FROM
 					 CAMP_CAMPSITES A
 				where
 					campsite_name like '%'|| #{result} || '%' or campsite_address like '%' || #{result} || '%'
-				and
-					campsite_used_yn = 'Y'
 						) X
 			) 
 WHERE
 	row_no >= #{start}
 AND
 	row_no &lt;= #{end}	
+and
+	usedYn = 'Y'
+
 </select>
 <select id="getCampNameAndAdress" parameterType="string" resultType="campSite">
 SELECT no,name,sort,latitude,longitude,address,tel,sites,price,likes,hates,photo,point,createDate,usedYn,sido,gugun
