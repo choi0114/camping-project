@@ -1,5 +1,8 @@
 package com.sample.camping.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +12,19 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.code.geocoder.Geocoder;
+import com.google.code.geocoder.GeocoderRequestBuilder;
+import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderRequest;
+import com.google.code.geocoder.model.GeocoderResult;
+import com.google.code.geocoder.model.GeocoderStatus;
+import com.google.code.geocoder.model.LatLng;
 import com.sample.camping.service.MypageService;
+import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
 import com.sample.camping.vo.User;
@@ -87,6 +100,67 @@ public class MypageController {
 		return "mypage/addCamp";
 	}
 	
+	@RequestMapping("/adddetail.camp")
+	public String detail() {
+		
+		return "mypage/adddetail";
+	}
+	
+	@RequestMapping("/detail.camp")
+	public String detail(String name, String sort, String address, String tel, Double latitude, Double longitude, int sites, int price, MultipartFile photo, HttpSession session) throws Exception {
+		String savePath = "C:/Users/JHTA/git/camping-project/src/main/webapp/resources/images/campsite";
+		MyCampsite mycamp = new MyCampsite();
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		mycamp.setUser(user);
+		
+		myPageService.addMyCampSite(mycamp);
+		
+		MyCampsite myCampSite = myPageService.getMyCampSiteById(user.getId());
+		
+		CampSite campSite = new CampSite();
+		campSite.setName(name);
+		campSite.setSort(sort);
+		campSite.setAddress(address);
+		campSite.setTel(tel);
+		campSite.setLatitude(latitude);
+		campSite.setLongitude(longitude);
+		campSite.setSites(sites);
+		campSite.setPrice(price);
+		campSite.setMyCampsite(myCampSite);
+		
+		System.out.println(name);
+		System.out.println(sort);
+		System.out.println(address);
+		System.out.println(tel);
+		System.out.println(latitude);
+		System.out.println(longitude);
+		System.out.println(sites);
+		System.out.println(price);
+		
+		if (!photo.isEmpty()) {
+			String filename = photo.getOriginalFilename();
+			
+			FileCopyUtils.copy(photo.getInputStream(), new FileOutputStream(new File(savePath, filename)));
+			System.out.println(filename);
+			
+			campSite.setPhoto(filename);
+		} 
+		
+		
+		String[] as = address.split(" ");
+		
+		String sido = as[0];
+		campSite.setSido(sido);
+		
+		String gugun = as[1];
+		campSite.setGugun(gugun);
+		
+		myPageService.addCampSite(campSite);
+		
+		return "redirect:/mypage/addCamp.camp";
+	}
+	
 	@RequestMapping("/conquest.camp")
 	public String conquest() {
 		
@@ -113,6 +187,8 @@ public class MypageController {
 
 	@RequestMapping("/friend.camp")
 	public String friend() {
+		
+		
 		
 		return "mypage/friend";
 	}
@@ -175,4 +251,38 @@ public class MypageController {
 		return "redirect:/mypage/out.camp?result=success";
 	}
 	
+	public static Float[] geoCoding(String location) {
+
+		if (location == null)  
+		return null;
+		Geocoder geocoder = new Geocoder();
+
+		// setAddress : 변환하려는 주소 (경기도 성남시 분당구 등)
+
+		// setLanguate : 인코딩 설정
+
+		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
+
+		GeocodeResponse geocoderResponse;
+
+		try {
+			geocoderResponse = geocoder.geocode(geocoderRequest);
+				
+			if (geocoderResponse.getStatus() == GeocoderStatus.OK & !geocoderResponse.getResults().isEmpty()) {
+				GeocoderResult geocoderResult=geocoderResponse.getResults().iterator().next();
+				LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
+		
+				Float[] coords = new Float[2];
+				coords[0] = latitudeLongitude.getLat().floatValue();
+				coords[1] = latitudeLongitude.getLng().floatValue();
+				return coords;
+			}
+		
+		} catch (IOException ex) {
+			
+			ex.printStackTrace();
+		}
+		
+		return null;
+		}
 }

@@ -190,25 +190,6 @@
 										</c:otherwise>
 									</c:choose>
 								</div>
-								
-								<div class="panel panel-default">
-									<div class="panel-heading" style="text-align: center;">
-										<span style="font-size: 20px;">정복한 캠핑장</span>
-										<a href="conquest.camp" class="pull-right"><img src="/camping/resources/images/mypage/plus.svg" class="more"></a>
-									</div>
-									<div class="panel-body">
-										<c:choose>
-											<c:when test="${empty likeCamp }">
-												
-											</c:when>
-											<c:otherwise>
-												<div style="text-align: center;">
-													<p>정복한 캠핑장이 없습니다.</p>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
-								</div>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="panel panel-default">

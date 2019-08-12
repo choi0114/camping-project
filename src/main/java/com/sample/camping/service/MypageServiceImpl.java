@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sample.camping.dao.MypageDao;
+import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
 import com.sample.camping.vo.User;
@@ -69,6 +70,21 @@ public class MypageServiceImpl implements MypageService{
 	public void updateUserUsedYn(User user) {
 		mypageDao.updateUserUsedYn(user);
 		
+	}
+	
+	@Override
+	public void addCampSite(CampSite campSite) {
+		mypageDao.addCampSite(campSite);
+	}
+	
+	@Override
+	public void addMyCampSite(MyCampsite myCampsite) {
+		mypageDao.addMyCampSite(myCampsite);
+	}
+	
+	@Override
+	public MyCampsite getMyCampSiteById(String userId) {
+		return mypageDao.getMyCampSiteById(userId);
 	}
 	
 }

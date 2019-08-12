@@ -13,20 +13,24 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+	#container{position: relative;}
+</style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 
 	<div id="sidewrap">
 	<c:set var="submenu" value="addCamp" />
 		<%@ include file="nav/nav.jsp"%>
 		<div class="container" style="margin-left: 350px;">
 			<div class="page-header">
-				<h2>내가 등록한 캠핑장</h2>
+				<h2>내가 등록한 캠핑장<span style="float: right;"><a href="adddetail.camp" class="btn btn-primary">캠핑장 등록</a></span></h2>
 			</div>
 			<div class="page-body">
 				<c:choose>
 					<c:when test="${not empty addCamp }">
-						<ul class="list-group" style="height: 750px; overflow-y: scroll;">
+						<ul class="list-group" style="height: 720px; overflow-y: scroll;">
 							<c:forEach var="add" items="${addCamp }" >
 								<li class="list-group-item">
 									<h4>이름 : <a href="../detail.camp?no=${add.campSite.no }">${add.campSite.name }</a></h4>
@@ -37,7 +41,7 @@
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<div class="row" style="padding-top: 250px;">
+					<div class="row" style="padding-top: 250px;">
 						<div class="text-center">
 							<p><img src="/camping/resources/images/mypage/danger.svg" style="max-width: 250px;"></p>
 							<h2>등록한 캠핑장이 없습니다.</h2>
