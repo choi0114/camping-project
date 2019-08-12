@@ -32,7 +32,7 @@
         	margin-bottom: 10px;
         }
 	    </style>
-			<body>
+			<body style="background-color:#f7f7f9">
 				<c:set var="menu" value="campsite" />
 				<%@ include file="../common/adminNavi.jsp"%>
 				<div class="row">

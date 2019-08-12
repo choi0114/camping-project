@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Bootstrap Example</title>
+<title>5g 캠핑(###국내 No.1###)</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -16,92 +16,171 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 .container-top {
-	padding-top: 60px;
+	padding-top: 30px;
+}
+
+.title-box {
+	cursor: pointer;
 }
 </style>
 </head>
-<body>
+<body style="background-color:#f7f7f9">
 	<%@ include file="../common/adminNavi.jsp"%>
 	<div class="col-xs-1">
-		<c:set var="menu" value="campsite" />
+		<c:set var="menu" value="manage" />
 		<%@ include file="../common/adminSidebar.jsp"%>
 	</div>
-		<div class="col-xs-6">
-			<h1 class="admin-buttom">공지사항</h1>
-		</div>
+		<div class="container" >
 		<div class="col-xs-11">	
-	       <form class="form-inline" action="list.camp" id='list-form'>
 			<div class="row">
-			    <div class="col-sm-11 page-head-right text-right">
-			           <div class="form-group">
-			                <label>캠핑장 이름</label>
-			            	<input class="form-control" type="text" id="keyword" name="keyword">
-			            	<button class="form-control" type="submit" class="btn btn-default" id="btn_header_search">검색</button>
+			    <div class="col-sm-11">
+			           <div class="form-group pull-right"  style="margin-top:15px">
+			                <label>공지사항 내용</label>
+			            	<input type="text" id="keyword" name="keyword">
+			            	<button type="submit" class="btn btn-default" id="btn_header_search">검색</button>
 			           </div>
 			    </div>
 			</div>
-		<div class="container-top">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th class="admin-check"></th>
-						<th class="text-center">번호</th>
-						<th class="text-center">캠핑장명</th>
-						<th class="text-center">제목</th>
-						<th class="text-center">등록일</th>
-					</tr>
-				</thead>
-				<tbody> 
-					<c:choose>
-							<c:when test="${not empty listCamp }">
-								<c:forEach var="campSite" items="${listCamp }">				
-									<tr>
-										<td class="text-center"><input type="checkbox" name="campsiteNo" value="${campSite.no }"></td>
-										<td class="text-center">${campSite.no }</td>
-										<td class="text-center"><a href="detail.camp?pno=${param.pno }&no=${campSite.no }">${campSite.name }</a></td>
-										<td class="text-center">${campSite.price }</td>
-										<td class="text-center"><fmt:formatDate value="${campSite.createDate }" pattern="yyyy-MM-dd" /></td>
-										<td class="text-center">${campSite.usedYn }</td>
-									</tr>
-								</c:forEach>
-							</c:when>
-					   <c:otherwise>
-					   		<tr>
-								<td colspan="5" class="text-center">조회된 글이 없습니다.</td>
-							</tr>
-					   </c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-		</div>
-		<div class="row">
+        <table class="table">
+            <colgroup>
+                <col width="10%">
+                <col width="10%">
+                <col width="60%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>1</td>
+                    <td class="title-box">공지사항</td>
+                    <td>2019-08-08</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>1</td>
+                    <td class="title-box">공지사항</td>
+                    <td>2019-08-08</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>1</td>
+                    <td class="title-box">공지사항</td>
+                    <td>2019-08-08</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>1</td>
+                    <td class="title-box">공지사항</td>
+                    <td>2019-08-08</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">  	
-				<button type="button"  class="btn btn-default" id="btn-yes-campingsite">영업개시</button>
-				<button type="button"  class="btn btn-default" id="btn-no-campingsite">영업종료</button>
+				<button type="button"  class="btn btn-default" id="btn-yes-campingsite">수정</button>
+				<button type="button"  class="btn btn-default" id="btn-no-campingsite">등록</button>
+				<button type="button"  class="btn btn-default" id="btn-no-campingsite">삭제</button>
 			</div>
 		</div>
 			<div class="text-center">
 				<ul class="pagination">
-					<li><a href="">&laquo;</a></li>
-					<li><a href="list.camp?pno=1">1</a></li>
-					<li><a href="list.camp?pno=2">2</a></li>
-					<li><a href="list.camp?pno=3">3</a></li>
-					<li><a href="list.camp?pno=4">4</a></li>
-					<li><a href="list.camp?pno=5">5</a></li>
-					<li><a href="">&raquo;</a></li>
+					<c:choose>
+						<c:when test="${pagination.first }">
+							<li><a href="">&laquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="list.camp?pno=${pagination.page - 1 }">&laquo;</a></li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="num" begin="${pagination.begin }" end="${pagination.end }">
+						<li class="${pagination.page == num ? 'active' : '' }"><a href="noticeList.camp?pno=${num }">${num }</a></li>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pagination.last }">
+							<li><a href="">&raquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="noticeList.camp?pno=${pagination.page + 1 }">&raquo;</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
-   	  	</form>
-	</div>
-	<script type="text/javascript">
-		$("#btn-no-campingsite").click(function() {
-			$("#list-form").attr("action", "delete.camp").submit();
-		});
-		$("#btn-yes-campingsite").click(function() {
-			$("#list-form").attr("action", "deletes.camp").submit();
-		});
-	</script>
+    </div>
+    <script type="text/javascript">
+    	$('tbody tr:odd').hide();
+    
+    	$('tbody tr:even').click(function() {
+    		$(this).next().toggle();
+    	});
+    </script>
 </body>
 </html>

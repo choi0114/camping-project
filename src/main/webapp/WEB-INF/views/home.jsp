@@ -155,7 +155,7 @@
         .owl-carousel .owl-nav button.owl-prev{left: -17px;}
         .owl-carousel .owl-nav button.owl-next{right: -17px;}
         .wrap{width: 100%;}
-        .inner-wrap{width: 100%; height: 100vh; overflow: hidden}
+        .inner-wrap{width: 100%; height: 100%; overflow: hidden}
         .inner-wrap .mainwrap{position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;}
         .container .flex-wrapper {margin-top: 110px; margin-left: 236px;;}
         .container .flex-wrapper .text-center{width: 18%}
@@ -226,7 +226,7 @@
     	#comm dl {float: left; padding: 0; margin: 0 40px 0 0; width: 270px;}
     	#comm dt {font-size: 1.3rem; font-weight: bold; margin-bottom: 16px; color: #393b46; line-height: 1.7;}
     	#comm .more {margin-right: 20px; margin-top: 5px; float: right; color: #999; font-size: small;}
-    	#comm dd {padding: 8px 0px; margin: 0; font-size: 14px; line-height: 1; width: 251px;}
+    	#comm dd {padding: 3px 0px; margin: 0; font-size: 14px; width: 251px;}
     	#comm dd a {color: #5f6273; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
     				display: inline-block; width: 244px;}
     	#comm .comment {font-size: 11px; color: #ff6000; float: right;}
@@ -465,34 +465,12 @@
     				<br>캠핑리뷰
     				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
     			</dt>
+    			<c:forEach var="review" items="${reviews }">
     			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
+    				<a href="#">&gt;  ${review.title }</a>
     				<span class="comment">1</span>
     			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
-    			<dd>
-    				<a href="#">&gt;  바다뷰! 좋아하시는분들께 캠핑장 공유드려요~</a>
-    				<span class="comment">1</span>
-    			</dd>
+    			</c:forEach>
     		</dl>
     		<dl class="col-sm-6 nomargin">
     			<dt class="sbj">

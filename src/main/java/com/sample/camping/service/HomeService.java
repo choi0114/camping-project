@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.ReviewBoard;
 
 public interface HomeService {
 
@@ -12,4 +13,5 @@ public interface HomeService {
 	List<CampSite> getGugunBysido(String city);
 	List<CampSite> getCampSitesByUpdate();
 	Map<String, Object> getCounts();
+	List<ReviewBoard> getAllReviewBoard();
 }

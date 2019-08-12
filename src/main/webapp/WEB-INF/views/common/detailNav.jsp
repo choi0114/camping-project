@@ -138,12 +138,24 @@
         <ul class="">
             <li><a href="home.camp">HOME</a></li>
             <li><a href="#">공지사항</a></li>
-            <li><a id="open-register-modal">회원가입</a></li>
-            <li><a id="open-login-modal">로그인</a></li>
-            <li><a href="mypage.camp">마이페이지</a></li>
-            <li><a href="mypage.camp"><span style="color: #25a5f0">안녕하세요!#님</span></a></li>
-            <li><a href="logout.camp">로그아웃</a></li>
-            <li><a href="#">고객센터</a></li>
+            <c:choose>
+            	<c:when test="${empty LOGIN_USER }">
+		            <li><a id="open-register-modal">회원가입</a></li>
+		            <li><a id="open-login-modal">로그인</a></li>
+            	</c:when>
+            	<c:otherwise>
+		            <c:choose>
+			            <c:when test="${LOGIN_USER.id eq 'admin'}">
+				            <li><a href="admin/list.camp">관리자페이지</a></li>
+			            </c:when>
+			            <c:otherwise>
+				            <li><a href="mypage.camp">마이페이지</a></li>
+			            </c:otherwise>
+		            </c:choose>
+			        <li><a href="mypage.camp"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
+			        <li><a href="logout.camp">로그아웃</a></li>
+            	</c:otherwise>
+            </c:choose>
         </ul>
     </div>
     <div class="header-wrap">

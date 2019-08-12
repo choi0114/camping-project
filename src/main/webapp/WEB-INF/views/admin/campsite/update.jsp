@@ -34,7 +34,7 @@
         	margin-bottom: 10px;
         }
 	    </style>
-			<body>
+			<body style="background-color:#f7f7f9">
 				<c:set var="menu" value="campsite" />
 				<div class="col-xs-11">
 					<div class="container">

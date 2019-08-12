@@ -33,6 +33,7 @@ public class HomeController {
 		model.addAttribute("camp", map.get("CAMP"));
 		
 		model.addAttribute("items", homeService.getCampSitesByUpdate());
+		model.addAttribute("reviews", homeService.getAllReviewBoard());
 		
 		return "home";
 	}
