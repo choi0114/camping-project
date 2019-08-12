@@ -78,44 +78,6 @@
             <strong>${campsite.tel }</strong>
         </div>
     </div>
-    <div class="row text-center" id="info-button-box">
-        <div class="col-sm-offset-2 col-sm-1">
-            <a href="#">
-            	<img src="/camping/resources/images/reservation.svg" width="45"/>
-            </a>
-            <p>실시간예약</p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <img src="/camping/resources/images/website.svg" width="45"/>
-            </a>
-            <p>웹사이트</p>
-        </div>
-        <div class="col-sm-1">
-            <img src="/camping/resources/images/stick.png"/>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <img src="/camping/resources/images/roadview.svg" width="45"/>
-            </a>
-            <p>로드뷰</p>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <img src="/camping/resources/images/navigation.svg" width="45"/>
-            </a>
-            <p>길찾기</p>
-        </div>
-        <div class="col-sm-1">
-            <img src="/camping/resources/images/stick.png"/>
-        </div>
-        <div class="col-sm-1">
-            <a href="#">
-                <img src="/camping/resources/images/share2.svg" width="45"/>
-            </a>
-            <p>공유하기</p>
-        </div>
-    </div>
     <div class="row" style="margin-top: 40px;">
         <div class="col-sm-6" style="padding-left: 0;">
             <div style="background-color: #555; float: left; padding: 5px 15px;">
@@ -389,9 +351,6 @@
             <ul class="nav nav-tabs">
                 <li class="active" id="opinion-box"><a>의견</a></li>
                 <li id="review-box"><a>리뷰</a></li>
-                <li><a>주변 행사안내</a></li>
-                <li><a>주변 관광지</a></li>
-                <li><a>주변 맛집</a></li>
             </ul>
         </div>
     </div>
@@ -1214,9 +1173,13 @@
 			    		$.each(campsites, function(index, campsite) {
 			    			
 		    				var html = '<div>'
-		    	                	 + '<div>'
-		                    		 + '<a href="detail.camp?no=' + campsite.no + '"><img src="/camping/resources/images/mypage/camp6.jpg" width="160" style="margin-left: 33px;"/></a>'
-		                			 + '</div>'
+		    	                	 + '<div>';
+		    	                	 if(campsite.photo != null) {
+		    	                		 html += '<a href="detail.camp?no=' + campsite.no + '"><img src="/camping/resources/images/campsite/' + campsite.photo + '" width="160" style="margin-left: 33px;"/></a>';
+		    	                	 } else {
+		    	                		 html += '<a href="detail.camp?no=' + campsite.no + '"><img src="/camping/resources/images/campsite/noimg.jpg" width="160" style="margin-left: 33px;"/></a>'
+		    	                	 }
+		                		html += '</div>'
 		                			 + '<div style="margin-top: 5px;">'
 		                    		 + '<strong>' + campsite.name + '</strong>'
 		                			 + '</div>'
@@ -1346,27 +1309,37 @@
     $('.photo-box').click(function() {
     	var photo = $(this).attr('data-photo');
     	$('.modal-body').empty();
-    	$('.modal-body').append('<img src="/camping/resources/images/mypage/camp4.jpg"/>');
+    	$('.modal-body').append('<img src="/camping/resources/images/mypage/' + photo + '"/>');
     	
     	$('#campsite-photo-modal').modal('show');
     });
     
     $('#jjim-campsite-btn').click(function() {
-    	var user = '${LOGIN_USER.id}';
-    	console.log(user);
     	
     	if(user == '') {
     		alert('로그인이 필요한 서비스입니다.');
     		return false;
     	}
     	
-    	var isMove = confirm('찜한 캠핑장에 추가되었습니다. 해당 페이지로 이동하시겠습니까?');
+    	$.ajax({
+	    	var user = '${LOGIN_USER.id}';
+	    	var no = $('body').attr('data-campsite-no');
+
+	    	url: 'alreadyjjim.camp',
+    		data: {id: user, no: no},
+    		dataType: 'json',
+    		success: function(jjim) {
+    			console.log(jjim);
+    			if(jjim) {
+    				alert('이미 찜한 캠핑장입니다.');
+    				return false;
+    			} else {
+			    	alert('찜한 캠핑장에 추가되었습니다.');
+			    	location.href = 'jjim.camp?no=' + no + '&id=' + user;    				
+    			}
+    		}
+    	});
     	
-    	if(isMove) {
-    		location.href = '../mypage/clip.camp';
-    	} else {
-    		return false;
-    	}
     });
     
     $('#like-campsite-btn').click(function() {
@@ -1383,13 +1356,14 @@
     		data: {id: user, no: no},
     		dataType: 'json',
     		success: function(data) {
-    			if(data) {
+    			console.log(data);
+    			if(data.site != null) {
     				alert('이미 반영된 캠핑장입니다.');
     				return false;
     			}
     			
     			var sort = 'LIKE';
-    	       	var value = $(this).attr('data-likes');
+    	       	var value = $('#like-campsite-btn').attr('data-likes');
     	       	
     	       	alert('추천되었습니다.');
     	       	value++;
@@ -1398,7 +1372,7 @@
     	       	
     	       	$.ajax({
     	       		url: 'updatecs.camp',
-    	       		data: {no: no, sort: sort, value: value},
+    	       		data: {no: no, sort: sort, value: value, id: user},
     	       		dataType: 'json',
     	       		success: function(campsite) {
     	       			var html = '<span class="glyphicon glyphicon-thumbs-up"></span>'
@@ -1431,7 +1405,7 @@
     			}
     			
     			var sort = 'HATE';
-    	       	var value = $(this).attr('data-hates');
+    	       	var value = $('#hate-campsite-btn').attr('data-hates');
     	       	
     	       	alert('비추천되었습니다.');
     	       	value--;

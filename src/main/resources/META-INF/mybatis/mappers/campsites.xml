@@ -237,6 +237,13 @@
 			campsite_no = #{no}
 	</select>
 	
+	<insert id="insertLikeHate" parameterType="map">
+		insert into camp_like_hate_campsites
+			(like_hate_no, campsite_no, user_id)
+		values
+			(camp_like_hate_seq.nextval, #{no}, #{id})
+	</insert>
+	
 	<select id="getJjimCountByNo" parameterType="int" resultType="int">
 		select
 			count(*)
@@ -244,6 +251,27 @@
 			camp_like_campsite
 		where
 			campsite_no = #{value}
+	</select>
+	
+	<insert id="insertJjim" parameterType="map">
+		insert into camp_like_campsite
+			(like_campsite_no, user_id, campsite_no)
+		values
+			(camp_camping_site_seq.nextval, #{id}, #{no})
+	</insert>
+	
+	<select id="getJjimByNoId" parameterType="map" resultType="likeCampsite">
+		select
+			like_campsite_no			no,
+			like_campsite_create_date	createDate,
+			user_id						"user.id",
+			campsite_no					"campSite.no"
+		from
+			camp_like_campsite
+		where
+			user_id = #{id}
+		and
+			campsite_no = #{no}
 	</select>
 
 </mapper>
