@@ -485,6 +485,7 @@
     	</div>
     </div>
     </div>
+    
     <a id="move-top-btn" href="#"><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></a>
 
 </body>
@@ -912,7 +913,7 @@
 					var html = '<div class="camp-right-content" data-no="'+camp.no+'">';
 					html += '<div class="items hand col-sm-4" id="location-items" style="cursor:pointer">';
 					html += '<div class="photo">';
-					html += '<img src="/camping/resources/images/camping1.jpg" class="tm">';
+					html += '<img src="/camping/resources/images/campsite/'+camp.photo+'" class="tm">';
 					if(camp.sort == 'CAMP') {
 						html += '<span class="cat" style="color: #91ee6c">'+camp.sort+'</span>';
 					} else if(camp.sort == 'CAR') {
