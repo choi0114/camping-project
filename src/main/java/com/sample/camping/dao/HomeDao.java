@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.sample.camping.vo.CampSite;
+import com.sample.camping.vo.ReviewBoard;
 
 @Repository
 public interface HomeDao {
@@ -15,4 +16,5 @@ public interface HomeDao {
 	List<CampSite> getGugunBysido(String city);
 	List<CampSite> getCampSitesByUpdate();
 	Map<String, Object> getCounts();
+	List<ReviewBoard> getAllReviewBoard();
 }

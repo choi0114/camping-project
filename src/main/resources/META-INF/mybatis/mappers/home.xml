@@ -65,7 +65,7 @@
 		where row_no >= #{begin} and row_no &lt;= #{end} 
 	</select>
 	
-	<select id="getGugunBysido" parameterType="string" resultType="campsite">
+	<select id="getGugunBysido" parameterType="string" resultType="campSite">
 		SELECT distinct CAMPSITE_GUGUN gugun
 		FROM camp_campsites
 		where campsite_sido = #{city}
@@ -104,6 +104,20 @@
 			(select count(*) from camp_campsites where CAMPSITE_SORT = 'NORMAL') NORMAL,
 			(select count(*) from camp_campsites where CAMPSITE_SORT = 'CAMP') CAMP
 		from  dual
+	</select>
+	
+	<select id="getAllReviewBoard" resultType="reviewBoard">
+		select
+			review_no no,
+			review_title title,
+			review_contents contents,
+			review_likes likes,
+			review_hates hates,
+			review_views,
+			review_create_date createDate
+		from
+			camp_review_boards
+		where rownum &lt;= 7
 	</select>
 
 </mapper>
