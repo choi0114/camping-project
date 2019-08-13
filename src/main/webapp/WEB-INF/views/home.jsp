@@ -421,7 +421,7 @@
     				</div>
     				<div class="fl selectsido">
     					<select name="cate1" id="cate1" class="searchSelect">	<!-- onchange때 select박스 추가 -->
-    						<option class="all" value="" selected>전국</option>
+    						<option class="all" value="all" selected>전국</option>
     						<option class="seoul" value="서울특별시">서울</option>
     						<option class="gyeonggi" value="경기도">경기</option>
     						<option class="inchoen" value="인천광역시">인천</option>
@@ -850,6 +850,11 @@
 			$("#btn-next").removeClass('on');
 		}
 		
+		if (city1 == 'all') {
+			searchCampSites("all", '', nowpage, 6);
+			return;
+		}
+		
 		if(city2 != "") {
 			searchCampSites("gugun", city2, nowpage, 6);
 		} else {
@@ -877,6 +882,11 @@
 			$("#btn-next").removeClass('on');
 		}
 		
+		if (city1 == 'all') {
+			searchCampSites("all", '', nowpage, 6);
+			return;
+		}
+		
 		if(city2 != "") {
 			searchCampSites("gugun", city2, nowpage, 6);
 		} else {
@@ -886,14 +896,17 @@
 	
 	$("#cate1").change(function() {
 		var city = $(this).val();
+		$("#nowpage").text("1");
 		searchCampSites("sido", city, 1, 6);
 	})
 	
 	$("#cate2").change(function() {
 		var city = $(this).val();
+		$("#nowpage").text("1");
 		searchCampSites("gugun", city, 1, 6);
 	})
 	
+	searchCampSites("all", '', 1, 6);
 	
 	function searchCampSites(a, b, c, d) {
 		console.log(a,b,c,d);
