@@ -21,8 +21,12 @@
 			$('#board-table').DataTable();
 		});
 	</script>
+<style>
+	#container{position: relative !important;}
+</style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 <!-- http://localhost/camping/community/detail.camp?no=66&boardType=1 -->
 	<div id="sidewrap">
 		<c:set var="submenu" value="post" />

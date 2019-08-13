@@ -40,10 +40,11 @@ function addr_search() {
 		margin-right: 0 1%;
 	}
 	.pac-container{ z-index: 1500 !important; }
-
+	#container{position: relative !important;}
 </style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 <div class="container">
 <h1>캠핑장 추가</h1>
 	<div class="well">

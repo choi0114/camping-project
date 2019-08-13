@@ -27,12 +27,14 @@
 	}
 .repro {float: left;}
 #sidewrap{position: relative;}
+	#container{position: relative !important;}
 </style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 
 	<div id="sidewrap">
-	<c:set var="submenu" value="out" />
+	<c:set var="submenu" value="info" />
 		<%@ include file="nav/nav.jsp"%>
 		<div class="scrollarea tse-scrollable" style="height: 780px;">
 			<div class="tse-scroll-content scrollwrapbox" style="padding: 15px;">

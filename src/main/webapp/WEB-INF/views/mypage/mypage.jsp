@@ -132,10 +132,11 @@
 .round img {
 	max-width: 370px;
 }
+	#container{position: relative !important;}
 </style>
 </head>
-
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 	<div id="sidewrap">
 	<c:set var="submenu" value="mypage" />
 		<%@ include file="nav/nav.jsp"%>

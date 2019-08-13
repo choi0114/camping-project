@@ -19,8 +19,12 @@
             $("#comment-table").DataTable();
         });
     </script>
+<style>
+	#container{position: relative !important;}
+</style>
 </head>
 <body>
+<%@ include file="../common/detailNav.jsp" %>
 	<div id="sidewrap">
 		<c:set var="submenu" value="comment" />
 		<%@ include file="nav/nav.jsp" %>

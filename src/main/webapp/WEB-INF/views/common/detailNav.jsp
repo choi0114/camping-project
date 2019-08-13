@@ -132,9 +132,8 @@
         .topmenu .topsearch legend{display: none}
         .topmenu .topsearch .btn-search{position: absolute; top: 1px; right: 3px; background: none; padding: 0; margin: 0; border: none;
                             color: #fff; cursor: pointer; height: 26px; width: 26px; text-align: center; outline: 0; font-size: 13px;}
-        #container{position: relative;}
     </style>
-<div class="detail-Nav" id="container">
+<div class="detail-Nav" id="container" >
     <div class="gnb">
         <ul class="">
             <li><a href="home.camp">HOME</a></li>
