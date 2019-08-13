@@ -44,4 +44,20 @@ public class AdminNoticeBoardController {
 	}
 	
 	
+	@RequestMapping("/noticeAdd.camp")
+	public String addNotice(int no, String title, String contents) {
+		
+		
+		NoticeBoard noticeBoard = new NoticeBoard();
+		noticeBoard.setNo(no);
+		noticeBoard.setTitle(title);
+		noticeBoard.setContents(contents);
+		adminNoticeBoardService.addNotice(noticeBoard);
+		
+		return "admin/notice/list";
+	}
+		
+			
+	
+	
 }

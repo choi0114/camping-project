@@ -12,12 +12,15 @@
 		group by 
 			campsite_sort
 	</select>
+	
 	<select id="gugunStatistics" resultType="statistics">
 		select CAMPSITE_GUGUN gugun, count(*) count from CAMP_CAMPSITES GROUP by campsite_gugun
 	</select>
+	
 	<select id="sidoStatistics" resultType="statistics">
 		select CAMPSITE_SIDO sido, count(*) count  from CAMP_CAMPSITES GROUP by campsite_sido
 	</select>
+	
 	<!-- 캠핑장 추가 -->
 	<insert id="addCampSite" parameterType="campSite">
 		insert into camp_campsites
@@ -36,7 +39,8 @@
 			</if>
 		</where>
 	</select>
-
+	
+	
 	<!-- 모든 캠핑장 출력 -->
 	<select id="getCampingSitesAll" parameterType="map" resultType="campSite">
 		select 
@@ -56,37 +60,40 @@
 		  campsite_create_date as createDate,
 		  campsite_used_yn as usedYn,
 		  campsite_sido as sido,
-		  campsite_gugun as gugun
+		  campsite_gugun as gugun,
+		  my_campsite_status "myCampsite.status"
 	from(
 		select
 		  row_number() over(order by campsite_no desc) as row_no,
-		  campsite_no,
-		  campsite_name,
-		  campsite_sort,
-		  campsite_latitude,
-		  campsite_longitude,
-		  campsite_address,
-		  campsite_tel,
-		  campsite_sites,
-		  campsite_price,
-		  campsite_likes,
-		  campsite_hates,
-		  campsite_photo,
-		  campsite_point,
-		  campsite_create_date,
-		  campsite_used_yn,
-		  campsite_sido,
-		  campsite_gugun 
+		  A.campsite_no,
+		  A.campsite_name,
+		  A.campsite_sort,
+		  A.campsite_latitude,
+		  A.campsite_longitude,
+		  A.campsite_address,
+		  A.campsite_tel,
+		  A.campsite_sites,
+		  A.campsite_price,
+		  A.campsite_likes,
+		  A.campsite_hates,
+		  A.campsite_photo,
+		  A.campsite_point,
+		  A.campsite_create_date,
+		  A.campsite_used_yn,
+		  A.campsite_sido,
+		  A.campsite_gugun,
+		  B.my_campsite_status
 	from	  
-		  camp_campsites
-	<where>
+		  camp_campsites A, camp_my_campsites B
+	where
+		  A.my_campsite_no = B.my_campsite_no
 		<if test="keyword != null"> 
-			campsite_name like '%' || #{keyword} || '%'
+			and campsite_name like '%' || #{keyword} || '%'
 		</if>
-	</where>
 		  )
 	where row_no >= #{begin} and row_no &lt;= #{end}
 	</select>
+	
 	
 	<!-- 디테일 정보 출력 -->
 	<select id="getCampingSitesByNo" parameterType="int" resultType="campSite">
@@ -109,6 +116,32 @@
 		  campsite_sido as sido,
 		  campsite_gugun as gugun
 	
+		from
+		  camp_campsites
+		where campsite_no = #{no}  
+	</select>
+	
+	<!-- 디테일 정보 출력 -->
+	<select id="getCampingSiteByNo" parameterType="int" resultType="campSite">
+		select 
+		  campsite_no as no, 
+		  campsite_name as name,
+		  campsite_sort as sort,
+		  campsite_latitude as latitude,
+		  campsite_longitude as longitude,
+		  campsite_address as address,
+		  campsite_tel as tel,
+		  campsite_sites as sites,
+		  campsite_price as price,
+		  campsite_likes as likes,
+		  campsite_hates as hates,
+		  campsite_photo as photo,
+		  campsite_point as point,
+		  campsite_create_date as createDate,
+		  campsite_used_yn as usedYn,
+		  campsite_sido as sido,
+		  campsite_gugun as gugun,
+		  myCampsite "myCampsite.no" 
 		from
 		  camp_campsites
 		where campsite_no = #{no}  
