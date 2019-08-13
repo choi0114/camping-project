@@ -44,9 +44,16 @@ public class AdminCampSiteServiceImpl implements AdminCampSiteService {
 		return campSite;
 	}
 	
+	
+	
 	@Override
 	public CampSite getCampingSitesbyNo(int no) {
 		return campSiteDao.getCampingSitesByNo(no);
+	}
+	
+	@Override
+	public CampSite getCampingSitebyNo(int no) {
+		return campSiteDao.getCampingSiteByNo(no);
 	}
 	
 	@Override

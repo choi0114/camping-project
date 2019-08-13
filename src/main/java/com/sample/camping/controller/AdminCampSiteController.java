@@ -82,6 +82,21 @@ public class AdminCampSiteController {
 		return "redirect:admin/campsite/list?no="+no;
 	}
 	
+	@RequestMapping("listUpdates.camp")
+	public String listUpdates(Model model, @RequestParam("no")int no) {
+		CampSite campsites = adminCampSiteService.getCampingSitebyNo(no);
+		String str = campsites.getMyCampsite().getstatus();
+		if(str.equals("Y")) {
+			campsites.getMyCampsite().setstatus("N");
+		} else if(str.equals("N")) {
+			campsites.getMyCampsite().setstatus("Y");
+		}
+		model.addAttribute("campsite", campsites);
+		return "redirect:admin/approve/list?no="+no;
+	}
+	
+	
+	
 	
 	@RequestMapping("/list.camp")
 	public String search(
@@ -105,6 +120,30 @@ public class AdminCampSiteController {
 		return "admin/campsite/list";
 		
 	}
+	
+	@RequestMapping("/approve.camp")
+	public String searches(
+			  @RequestParam (value="keyword", required = false, defaultValue = "") String keyword
+			, @RequestParam (value = "pno", required = false, defaultValue = "1") int pno, Model model) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		int begin = (pno - 1)*10 + 1;
+		int end = pno*10;
+		param.put("begin", begin);
+		param.put("end", end);
+		if (!keyword.isEmpty()) {
+			param.put("keyword", keyword);
+		}
+		
+		int records = adminCampSiteService.getCampingSitesCount(param);
+		AdminPagination adminPagination = new AdminPagination(pno, 10, records);
+		
+		model.addAttribute("pagination",adminPagination);
+		model.addAttribute("listCamp", adminCampSiteService.getCampingSitesAll(param));
+		return "admin/approve/list";
+		
+	}
+	
 	@RequestMapping("/delete.camp")
 	public String deleteCamp(int[] campsiteNo) {
 	

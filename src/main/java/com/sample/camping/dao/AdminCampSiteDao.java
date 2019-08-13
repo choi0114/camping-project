@@ -11,6 +11,7 @@ public interface AdminCampSiteDao {
 	void addCampSite(CampSite campSite);
 	List<CampSite> getCampingSitesAll(Map<String, Object> param);
 	CampSite getCampingSitesByNo(int no);
+	CampSite getCampingSiteByNo(int no);
 	public int getCampingSitesCount(Map<String, Object> map);
 	
 	// 상품 업데이트

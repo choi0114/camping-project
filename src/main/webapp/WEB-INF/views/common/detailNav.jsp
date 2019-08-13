@@ -214,7 +214,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<form class="pb-modalreglog-form-reg" method="post" action="login.camp" id="ab">
-			<div class="modal-header">
+			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -529,7 +529,7 @@ $('#totalsearch').keyup(function(event){
 				dataType:"text",
 				success:function(result) {
 					if(result == "success"){
-						location.href="home.camp";
+						location.href=location.href.substring(location.href.lastIndexOf("/") + 1);
 					} else {
 						alert("로그인 실패");
 					}

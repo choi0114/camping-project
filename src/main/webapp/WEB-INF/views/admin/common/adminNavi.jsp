@@ -30,7 +30,7 @@
 <body>
 	<div class="navbar admin-navi varbottom" id="navi-border">
 	    <div class="container">
-	        <div class="navbar-header"><a href=""><img src="../resources/images/5g_logo1.png"/></a></div>
+	        <div class="navbar-header"><a href="/camping/home.camp"><img src="../resources/images/5g_logo1.png"/></a></div>
 	       
 	        <ul class="nav navbar-nav navbar-right" >
 	            <li><a href="" class="admin-navi-font-sub">관리자 페이지</a></li>

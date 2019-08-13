@@ -55,7 +55,7 @@
             background: #fff;
             color: black !important;
     	}
-        #admin-contents {margin-top: 60px;}
+        #admin-contents {margin-top: 60px;} 
     </style>
 </head>
 <script type="text/javascript">
@@ -65,13 +65,12 @@
 	<div id="page-wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-              <li><a href="" class=${menu eq 'main'?'sidebar-active':'' }>관리자 메인</a></li>
+              <li><a href="statistics.camp?sort=Statistics" class=${param.sort eq 'Statistics'?'sidebar-active':'' }>관리자 메인</a></li>
               <li><a href="list.camp?sort=LIST&pno=1" class=${param.sort eq 'LIST'?'sidebar-active':'' }>캠핑장 관리</a></li>
-              <li><a href="" class=${menu eq 'admit'?'sidebar-active':'' }>승인 관리</a></li>
+              <li><a href="approve.camp?sort=Approve" class=${param.sort eq 'Approve'?'sidebar-active':'' }>승인 관리</a></li>
               <li><a href="" class=${menu eq 'goods'?'sidebar-active':'' }>캠핑용품 관리</a></li>
-              <li><a href="" class=${menu eq 'notice'?'sidebar-active':'' }>공지 사항</a></li>
-              <li><a href="" class=${menu eq 'qna'?'sidebar-active':'' }>문의 현황</a></li>
-              <li><a href="" class=${menu eq 'stats'?'sidebar-active':'' }>통  계</a></li>
+              <li><a href="noticeList.camp?sort=Notice" class=${param.sort eq 'Notice'?'sidebar-active':'' }>공지 사항</a></li>
+              <li><a href="statistics.camp?sort=Statistics2" class=${param.sort eq 'Statistics2'?'sidebar-active':'' }>통  계</a></li>
             </ul>
         </div>
     </div>
