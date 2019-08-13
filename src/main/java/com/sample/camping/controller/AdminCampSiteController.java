@@ -85,11 +85,11 @@ public class AdminCampSiteController {
 	@RequestMapping("listUpdates.camp")
 	public String listUpdates(Model model, @RequestParam("no")int no) {
 		CampSite campsites = adminCampSiteService.getCampingSitebyNo(no);
-		String str = campsites.getMyCampsite().getstatus();
+		String str = campsites.getMyCampsite().getStatus();
 		if(str.equals("Y")) {
-			campsites.getMyCampsite().setstatus("N");
+			campsites.getMyCampsite().setStatus("N");
 		} else if(str.equals("N")) {
-			campsites.getMyCampsite().setstatus("Y");
+			campsites.getMyCampsite().setStatus("Y");
 		}
 		model.addAttribute("campsite", campsites);
 		return "redirect:admin/approve/list?no="+no;
