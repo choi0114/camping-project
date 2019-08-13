@@ -13,6 +13,7 @@ import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.OpinionComment;
 import com.sample.camping.vo.ReviewBoard;
 import com.sample.camping.vo.ReviewBoardComment;
+import com.sample.camping.vo.Scrap;
 import com.sample.camping.vo.User;
 
 public interface MypageDao {
@@ -41,4 +42,6 @@ public interface MypageDao {
 	void addMyCampSite(MyCampsite mycampsite);
 	
 	MyCampsite getMyCampSiteById(String userId);
+	
+	List<Scrap> getScrapById(String userId);
 }

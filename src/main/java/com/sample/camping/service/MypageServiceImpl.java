@@ -11,6 +11,7 @@ import com.sample.camping.dao.MypageDao;
 import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
+import com.sample.camping.vo.Scrap;
 import com.sample.camping.vo.User;
 
 @Service
@@ -85,6 +86,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public MyCampsite getMyCampSiteById(String userId) {
 		return mypageDao.getMyCampSiteById(userId);
+	}
+	
+	@Override
+	public List<Scrap> getScrapById(String userId) {
+		return mypageDao.getScrapById(userId);
 	}
 	
 }

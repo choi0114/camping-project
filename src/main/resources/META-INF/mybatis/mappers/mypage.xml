@@ -244,4 +244,17 @@
 		and 
 			rownum &lt;= 1
 	</select>
+	
+	<select id="getScrapById" parameterType="string" resultType="scrap">
+		select 
+			scrap_no no,
+			scrap_create_date createDate,
+			user_id "user.id",
+			review_no "review.no"
+		from 
+			camp_scraps
+		where 
+			user_id = #{userId}
+	</select>
+	
 </mapper>
