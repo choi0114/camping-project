@@ -54,7 +54,7 @@
 						<div class="round" style="margin-top: 40px;">
 							<div class="photo">
 								<a href="../detail.camp?no=${like.campSite.no }"> <img
-									src="/camping/resources/images/1.jpg" class="image-thumbnail" />
+									src="/camping/resources/images/campsite/${like.campSite.photo }" class="image-thumbnail" />
 								</a>
 							</div>
 							<div class="content">
