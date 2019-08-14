@@ -487,7 +487,7 @@
     </div>
     
     <a id="move-top-btn" href="#"><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></a>
-
+<%@ include file="common/footer.jsp" %>
 </body>
 <script type="text/javascript">
 
