@@ -87,18 +87,18 @@
 							<li><a href="">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="list.camp?pno=${pagination.page - 1 }">&laquo;</a></li>
+							<li><a href="list.camp?sort=${param.sort }&pno=${pagination.page - 1 }">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="num" begin="${pagination.begin }" end="${pagination.end }">
-						<li class="${pagination.page == num ? 'active' : '' }"><a href="list.camp?pno=${num }">${num }</a></li>
+						<li class="${pagination.page == num ? 'active' : '' }"><a href="list.camp?sort=${param.sort }&pno=${num }">${num }</a></li>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pagination.last }">
 							<li><a href="">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="list.camp?pno=${pagination.page + 1 }">&raquo;</a></li>
+							<li><a href="list.camp?sort=${param.sort }&pno=${pagination.page + 1 }">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
