@@ -34,7 +34,7 @@
 	        <div class="navbar-header"><a href="/camping/home.camp"><img src="../resources/images/5g_logo1.png" width="172px;"/></a></div>
 	       
 	        <ul class="nav navbar-nav navbar-right" >
-	            <li><a href="" class="admin-navi-font-sub">관리자 페이지</a></li>
+	            <li><a href="/camping/admin/list.camp?sort=LIST&pno=1" class="admin-navi-font-sub">관리자 페이지</a></li>
 	        </ul>
 	    </div>
 	</div>

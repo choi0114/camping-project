@@ -148,7 +148,7 @@
             	<c:otherwise>
 		            <c:choose>
 			            <c:when test="${LOGIN_USER.id eq 'admin'}">
-				            <li><a href="/camping/admin/list.camp">관리자페이지</a></li>
+				            <li><a href="/camping/admin/list.camp?sort=LIST&pno=1">관리자페이지</a></li>
 			            </c:when>
 			            <c:otherwise>
 				            <li><a href="/camping/mypage/mypage.camp">마이페이지</a></li>
@@ -520,7 +520,7 @@ $('#totalsearch').keyup(function(event){
 			
 			$.ajax({
 				type:"POST",
-				url:"login.camp",
+				url:"/camping/login.camp",
 				data:{id:id, password:pws},
 				dataType:"text",
 				success:function(result) {

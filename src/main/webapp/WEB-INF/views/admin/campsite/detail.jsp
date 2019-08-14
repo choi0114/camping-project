@@ -110,9 +110,6 @@
 											<img class="image" src="/camping/resources/images/campsite/${campSite.photo }"/>
 										</div>
 									</div>
-									<div class="col-sm-1">
-	                    			 <img class="id-img2 " src="/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }" width="60" border-radius=50% height="60" alt=""/>
-	               					 </div>
 									<div class="text-right">
 										<input type="submit" class="btn btn-default" value="수정"> 
 										<a class="btn btn-default" href="list.camp?pno=${param.pno }">취소</a>
