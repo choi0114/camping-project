@@ -6,6 +6,7 @@
 <html lang="ko">
 <head>
 <title>5gCamping :: 1박 2일</title>
+<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
