@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>5gCamping</title>
+<title>5gCamping :: 1박 2일</title>
+<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 <link rel="stylesheet" href="/camping/resources/css/mypage/sys.css">
 <link rel="stylesheet" href="/camping/resources/css/mypage/mypage.css">
 <link rel="stylesheet" href="/camping/resources/css/main.css">

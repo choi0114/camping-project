@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Bootstrap Example</title>
+	<title>5gCamping :: 1박 2일</title>
+	<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -24,7 +25,7 @@
 </head>
 <body style="background-color: #f7f7f9;" data-user="${LOGIN_USER.id }" data-notice-no="${notice.no }">
 <%@ include file="../common/detailNav.jsp" %>
-<div class="container">
+<div class="container" style="padding-top: 100px;">
 	<div class="page-header">
 		<span style="font-size: 24px; font-weight: 500;">오지캠핑 공지사항</span>
 		<button class="btn btn-border-group pull-right" onclick="history.back()">돌아가기</button>
