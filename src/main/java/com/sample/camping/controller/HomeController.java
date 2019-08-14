@@ -72,15 +72,19 @@ public class HomeController {
 		return result;
 	}
 	
-	/*
-	 * @RequestMapping("/update.camp") public @ResponseBody Map<String, Object>
-	 * updateList() {
-	 * 
-	 * Map<String, Object> result = new HashMap<String, Object>();
-	 * result.put("items", homeService.getCampSitesByUpdate());
-	 * 
-	 * return result; }
-	 */
+	@RequestMapping("addbookmark.camp")
+	public @ResponseBody String addbookmark(String id, int no) {
+		
+		
+		
+		return "redirect:/camping/home.camp";
+	}
 	
+	@RequestMapping("delbookmark.camp")
+	public @ResponseBody String delbookmark(int no) {
+		
+		
+		return "redirect:/camping/home.camp";
+	}
 	
 }

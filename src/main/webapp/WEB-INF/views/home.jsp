@@ -246,7 +246,6 @@
     	
     	#btn-more{width: 100%; height: 40px; font-weight: bold;}
    		#search-result .more-button{text-align: center;}
-   		#bookmark{width: 17px;}
    		
    		/* 탑버튼 */
    		#move-top-btn {position: fixed; bottom: 70px; right: 70px;display: none; z-index: 999; width: 50px; height: 50px;
@@ -339,16 +338,24 @@
 	                            <div class="thumb hand">
 	                                <div class="border"></div>
 	                                <span class="nwt">U</span>
-	                                <img src="/camping/resources/images/campsite/${item.photo }" alt="##캠핑장" width="450" class="tm">
+	                                <img src="/camping/resources/images/campsite/${item.PHOTO }" alt="##캠핑장" width="450" class="tm">
 	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
-	                                    <img alt="" src="/camping/resources/images/bookmark.png" id="bookmark" aria-hidden="true">
-	                                    <img alt="" src="/camping/resources/images/bookmark2.png" id="bookmark" aria-hidden="true">
+	                                <c:if test="${not empty LOGIN_USER }">
+	                                	<c:choose>
+	                                	<c:when test="${not empty item.LIKENO }">
+		                                    <img alt="" src="/camping/resources/images/bookmark2.png" data-no="${item.NO }" class="bookmark-del" style="width:17px;"  aria-hidden="true">
+	                                	</c:when>
+	                                	<c:otherwise>
+		                                    <img alt="" src="/camping/resources/images/bookmark.png" data-no="${item.NO }" class="bookmark-add" style="width:17px;" aria-hidden="true">
+	                                	</c:otherwise>
+	                               		 </c:choose>
+	                                </c:if>
 	                                </a>
 	                            </div>
 	                        </div>
 	                        <div class="text">
 	                            <p style="color: #f5ad22">일반캠핑장</p>
-	                            <p>${item.name }</p>
+	                            <p>${item.NAME }</p>
 	                        </div>
 	                    </div>
 	                </c:forEach>	
@@ -363,7 +370,7 @@
     		<div class="fl lb">
     			<div class="notice-title">
     				<h2 class="fl">알려드립니다</h2>
-    				<a href="#" class="glyphicon glyphicon-plus more"></a>
+    				<a class="glyphicon glyphicon-plus more" id="notice-btn"></a>
     			</div>
     			<c:forEach var="notice" items="${notices }">
     			<div class="notice">
@@ -456,7 +463,7 @@
     			<dt class="sbj">
     				<img alt="" src="/camping/resources/images/review.svg" style="width: 50px; height: 50px;">
     				<br>캠핑리뷰
-    				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
+    				<a class="glyphicon glyphicon-plus fr more" id="review-btn"></a>
     			</dt>
     			<c:forEach var="review" items="${reviews }">
     			<dd>
@@ -471,7 +478,7 @@
     			<dt class="sbj">
     				<img alt="" src="/camping/resources/images/board.svg" style="width: 50px; height: 50px;">
     				<br>자유게시판
-    				<a href="#" class="glyphicon glyphicon-plus fr more"></a>
+    				<a class="glyphicon glyphicon-plus fr more" id="free-btn"></a>
     			</dt>
     			<c:forEach var="free" items="${frees }">
     			<dd>
@@ -491,6 +498,21 @@
 </body>
 <script type="text/javascript">
 
+	/* $(".bookmark-add").click(function() {
+		var session = 
+		var campsiteNo = $(this).attr("data-no");
+		$.ajax ({
+			type:"get",
+			url:"addbookmark.camp"
+			data:{no:campsiteNo, },
+			dataType:"json",
+			success:function(result)
+		})
+	})
+	$(".bookmark-del").click(function() {
+		var campsiteNo = $(this).attr("data-no");
+	}) */
+	
 	/* 지역별 버튼 눌렀을 때 스크롤 내려가기 */
 		$('.btn-sido').click(function() {
 			$('html, body').animate({
@@ -520,11 +542,12 @@
  	/* 검색창 */
  	var pno = 1;
  	var dt = new Date();
- 	var massage = ['추천검색 결과와 실제 결과는 다를수 있어요','검색어 입력 후 엔터 또는 버튼 클릭하세요', '행정구역 검색시 두글자만 입력(예: 부산)','읍면동 이름으로 검색 가능합니다',
-			'저는 구글이 아닙니다. 살살 검색해주세요','하단 검색 추천과 실제 검색결과는 다를수 있어요','다음에 또 만나요','우리 같이 캠핑갈까요?','응수쌤 천재입니다',
-			'검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?','오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay()+4)+'일 입니다.','JHTA로 오세요~',
+ 	var massage = ['저는 구글이 아닙니다. 살살 검색해주세요','응수쌤 천재입니다', '검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?',
+ 			'오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay())+'일 입니다.','JHTA로 오세요~',
 			'현재 시간은 '+dt.getHours()+'시 '+dt.getMinutes()+'분 입니다.','찾는 캠핑장이 없으면 관리자를 조르세요', '만든이: 지민, 은정, 동건, 수정, 혜인, 본경'];
 
+ 	/* '추천검색 결과와 실제 결과는 다를수 있어요','검색어 입력 후 엔터 또는 버튼 클릭하세요', '행정구역 검색시 두글자만 입력(예: 부산)','읍면동 이름으로 검색 가능합니다',
+ 	'하단 검색 추천과 실제 검색결과는 다를수 있어요','다음에 또 만나요','우리 같이 캠핑갈까요?', */
  	
 	$("#search-box").focus(function() {
 		$(".search-form").addClass('outlight');
@@ -897,12 +920,16 @@
 	$("#cate1").change(function() {
 		var city = $(this).val();
 		$("#nowpage").text("1");
+		$("#btn-next").addClass('on');
+		$("#btn-prev").removeClass('on');
 		searchCampSites("sido", city, 1, 6);
 	})
 	
 	$("#cate2").change(function() {
 		var city = $(this).val();
 		$("#nowpage").text("1");
+		$("#btn-next").addClass('on');
+		$("#btn-prev").removeClass('on');
 		searchCampSites("gugun", city, 1, 6);
 	})
 	
@@ -964,7 +991,17 @@
     $('.kmapright').on('click', '.camp-right-content', function() {
     	location.href = "detail.camp?no=" + $(this).attr('data-no');
     });
-
+	
+	$("#notice-btn").click(function() {
+		location.href = "notice.camp";
+	})
+	$("#review-btn").click(function() {
+		location.href = "community/home.camp";
+	})
+	$("#free-btn").click(function() {
+		location.href = "community/home.camp";
+	})
+	
 	/* 차트링크이동 */
 	$("#circles-1").click(function() {
 		location.href = "map.camp?";

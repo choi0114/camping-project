@@ -35,7 +35,7 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	@Override
-	public List<CampSite> getCampSitesByUpdate() {
+	public List<Map<String, Object>> getCampSitesByUpdate() {
 		return homeDao.getCampSitesByUpdate();
 	}
 	
@@ -57,5 +57,15 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public List<NoticeBoard> getAllNoticeBoard() {
 		return homeDao.getAllNoticeBoard();
+	}
+	
+	@Override
+	public void addBookmark(String id, int no) {
+		homeDao.addBookmark(id, no);
+	}
+	
+	@Override
+	public void deleteBookmark(int no) {
+		homeDao.deleteBookmark(no);
 	}
 }

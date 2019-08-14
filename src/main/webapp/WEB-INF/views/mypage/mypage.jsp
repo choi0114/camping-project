@@ -176,7 +176,7 @@
 														</li>
 													</div>
 													<div class="col-sm-4">
-														<a href="../detail.camp?no=${like.campSite.no }"><img src="/camping/resources/images/1.jpg" style="width: 200px;"></a>
+														<a href="../detail.camp?no=${like.campSite.no }"><img src="/camping/resources/images/campsite/${like.campSite.photo }" style="width: 150px; padding-bottom: 10px;"></a>
 													</div>
 												</div>
 												</c:forEach>

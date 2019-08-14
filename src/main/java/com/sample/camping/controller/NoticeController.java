@@ -1,7 +1,6 @@
 package com.sample.camping.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,10 @@ public class NoticeController {
 	
 	@RequestMapping("/noticedetail.camp")
 	public String noticeDetail(int no, Model model) {
+		int count = noticeService.getAllNoticeCommentsByNo(no).size();
 		model.addAttribute("notice", noticeService.getNoticeByNo(no));
 		model.addAttribute("comments", noticeService.getAllNoticeCommentsByNo(no));
-		model.addAttribute("count", noticeService.getAllNoticeCommentsByNo(no).size());
+		model.addAttribute("count", count);
 		
 		return "notice/detail";
 	}

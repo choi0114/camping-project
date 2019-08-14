@@ -72,7 +72,7 @@
     <div class="gnb">
         <ul class="">
             <li><a href="/camping/home.camp">HOME</a></li>
-            <li><a href="/camping/noticedetail.camp">공지사항</a></li>
+            <li><a href="/camping/notice.camp">공지사항</a></li>
             <c:choose>
             	<c:when test="${empty LOGIN_USER }">
 		            <li><a id="open-register-modal">회원가입</a></li>

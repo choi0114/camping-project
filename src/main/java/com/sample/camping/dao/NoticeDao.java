@@ -12,4 +12,5 @@ public interface NoticeDao {
 	NoticeBoard getNoticeByNo(int no);
 	List<NoticeComment> getAllNoticeCommentsByNo(int no);
 	void insertComment(Map<String, Object> map);
+	List<NoticeComment> get10Comments(Map<String, Object> map);
 }
