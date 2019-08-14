@@ -16,9 +16,11 @@ public interface HomeDao {
 	int getCountByKeyword(Map<String, Object> map);
 	List<CampSite> searchCampSites(Map<String, Object> map);
 	List<CampSite> getGugunBysido(String city);
-	List<CampSite> getCampSitesByUpdate();
+	List<Map<String, Object>> getCampSitesByUpdate();
 	Map<String, Object> getCounts();
 	List<ReviewBoard> getAllReviewBoard();
 	List<FreeBoard> getAllFreeBoard();
 	List<NoticeBoard> getAllNoticeBoard();
+	void addBookmark(String id, int no);
+	void deleteBookmark(int no);
 }
