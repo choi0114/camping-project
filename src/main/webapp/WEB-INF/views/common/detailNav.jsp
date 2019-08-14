@@ -109,13 +109,15 @@
         #container .gnb ul li > a:hover {color: #0d7ebf; font-weight: bold;}
         #container a {text-decoration: none;}
         #container .header-wrap {
-            width: 1200px;
+            width: 1500px;
             margin: 0 auto;
             position: absolute;
             left: 50%;
             margin-left: -900px;
             top: 30px;
         }
+        
+        #container .header-wrap .logo img{width: 172px;}
         #container.scrolled {background-color: #383943;}
         li{list-style: none;}
         .logo{display: inline-block; float: left; margin: 8px 0 0 0;}
@@ -136,8 +138,8 @@
 <div class="detail-Nav" id="container" >
     <div class="gnb">
         <ul class="">
-            <li><a href="home.camp">HOME</a></li>
-            <li><a href="#">공지사항</a></li>
+            <li><a href="/camping/home.camp">HOME</a></li>
+            <li><a href="/camping/notice.camp">공지사항</a></li>
             <c:choose>
             	<c:when test="${empty LOGIN_USER }">
 		            <li><a id="open-register-modal">회원가입</a></li>
@@ -146,14 +148,14 @@
             	<c:otherwise>
 		            <c:choose>
 			            <c:when test="${LOGIN_USER.id eq 'admin'}">
-				            <li><a href="admin/list.camp">관리자페이지</a></li>
+				            <li><a href="/camping/admin/list.camp">관리자페이지</a></li>
 			            </c:when>
 			            <c:otherwise>
-				            <li><a href="mypage.camp">마이페이지</a></li>
+				            <li><a href="/camping/mypage/mypage.camp">마이페이지</a></li>
 			            </c:otherwise>
 		            </c:choose>
-			        <li><a href="mypage.camp"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
-			        <li><a href="logout.camp">로그아웃</a></li>
+			        <li><a href="/camping/mypage/mypage.camp"><span style="color: #25a5f0">안녕하세요! ${LOGIN_USER.id }님</span></a></li>
+			        <li><a href="/camping/logout.camp">로그아웃</a></li>
             	</c:otherwise>
             </c:choose>
         </ul>
@@ -164,19 +166,13 @@
         </div>
         <div class="topmenu">
             <ul>
-                <li><a href="map.camp">전체</a></li>
-                <li><a href="map.camp?sort=CAMP">글램핑</a></li>
-                <li><a href="map.camp?sort=CAR">카라반</a></li>
-                <li><a href="map.camp?sort=NORMAL">캠핑장</a></li>
-                <li><a href="themesearch.camp">테마검색</a></li>
-                <li>
-                    <a data-toggle="collapse" href="#">캠핑톡</a>
-                    <ul style="display: none;">
-                        <li><a class="panel-collapse collapse" href="#">가입인사</a></li>
-                        <li><a class="panel-collapse collapse" href="#">캠핑 리뷰</a></li>
-                        <li><a class="panel-collapse collapse" href="#">자유게시판</a></li>
-                    </ul>
-                </li>
+                <li><a href="/camping/map.camp">전체</a></li>
+                <li><a href="/camping/map.camp?sort=CAMP">글램핑</a></li>
+                <li><a href="/camping/map.camp?sort=CAR">카라반</a></li>
+                <li><a href="/camping/map.camp?sort=NORMAL">캠핑장</a></li>
+                <li><a href="/camping/themesearch.camp">테마검색</a></li>
+                <li><a  href="/camping/community/home.camp">캠핑톡</a></li>
+                <li><a href="/camping/product/category.camp">캠핑용품</a></li>
                 <li class="searchli"> 
                     <div class="topsearch">
                        <form action="map.camp?resach" method="get" id="layout-search-border"> <!--onsubmit-->
