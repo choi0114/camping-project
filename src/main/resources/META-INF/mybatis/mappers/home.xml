@@ -96,6 +96,7 @@
 				camp_campsites A, camp_like_campsite B
 			where
 				A.campsite_no = B.campsite_no(+)
+				and campsite_used_Yn = 'Y'
 			order by
 				A.campsite_no asc)
 		where rownum &lt;= 20	
@@ -176,7 +177,7 @@
 	
 	<delete id="deleteBookmark" parameterType="int">
 		delete from camp_like_campsite
-		where campsite_no = ${no}
+		where like_campsite_no = ${no}
 	</delete>
 
 </mapper>

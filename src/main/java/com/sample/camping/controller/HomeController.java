@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.HomeService;
 import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.Pagination;
+import com.sample.camping.vo.User;
 
 @Controller
 public class HomeController {
@@ -73,9 +76,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping("addbookmark.camp")
-	public @ResponseBody String addbookmark(String id, int no) {
+	public String addbookmark(int no, HttpSession session) {
 		
+		User user = (User)session.getAttribute("LOGIN_USER");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", user.getId());
+		map.put("no", no);
 		
+		homeService.addBookmark(map);
 		
 		return "redirect:/camping/home.camp";
 	}
