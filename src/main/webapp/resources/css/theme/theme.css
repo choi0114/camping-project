@@ -22,6 +22,7 @@
 .facbox button {
 	border: none;
 	margin: 10px;
+	background-color: #fff;
 }
 
 .facbox button p {

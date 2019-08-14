@@ -25,7 +25,7 @@
 		        	<button type="button" class="close" data-dismiss="modal" onclick="history.back();">&times;</button>
 		        	<div class="row">
 		        		<div class="col-sm-2">
-		        			<h2 style="color: #25a5f0;">테마검색</h2>
+		        			<h3 style="color: #25a5f0;">테마검색</h3>
 		        		</div>
 		        		<div class="col-sm-8" style="color: #aaa; margin-top: 18px;">
 		        			<p>원하는 캠핑 스타일을 선택 후 상단우측 또는 하단 검색버튼을 클릭하세요.
