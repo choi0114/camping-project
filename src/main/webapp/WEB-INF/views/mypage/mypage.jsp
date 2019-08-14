@@ -191,6 +191,35 @@
 										</c:otherwise>
 									</c:choose>
 								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3>프로필 사진 변경</h3>
+									</div>
+									<form method="post">
+										<div class="rephoto">
+											<div class="avatar" style="background: url(/camping/resources/images/profilePhoto/default.png) center center no-repeat; background-size: 100%;"></div>
+											<div class="msg">
+												회원님을 알릴 수 있는 사진을 등록해 주세요.
+												<br>
+												등록된 사진은 회원님의 개시물이나 댓글등에 사용됩니다.
+												<br>
+												사진 크기는 180 X 180px 이상 크기로 등록하세요.
+											</div>
+											<div class="clear"></div>
+											<div class="upload">
+												<span id="filename"></span>
+												<label for="upFile">사진선택
+													<input type="file" name="upfile" class="upfile" id="upFile" >
+												</label>
+												<button type="submit" class="bbtn2 bbtn2-gray" style="height: 30px; line-height: 30px;">
+													<i><img src="/camping/resources/images/mypage/photo-camera.png" style="width: 14px; height: 14px; color: #fff;"></i>
+													사진등록
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								
 							</div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="panel panel-default">
