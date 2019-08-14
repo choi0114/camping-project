@@ -57,7 +57,7 @@
 									<tr>
 										<td class="text-center"><input type="checkbox" name="campsiteNo" value="${campSite.no }"></td>
 										<td class="text-center">${campSite.no }</td>
-										<td class="text-center"><a href="detail.camp?pno=${param.pno }&no=${campSite.no }" style="color: #000;">${campSite.name }</a></td>
+										<td class="text-center"><a href="detail.camp?sort=LIST&pno=${param.pno }&no=${campSite.no }" style="color: #000;">${campSite.name }</a></td>
 										<td class="text-center">${campSite.price }</td>
 										<td class="text-center"><fmt:formatDate value="${campSite.createDate }" pattern="yyyy-MM-dd" /></td>
 										<td class="text-center">${campSite.usedYn }</td>

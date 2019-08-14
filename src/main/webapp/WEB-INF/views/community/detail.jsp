@@ -6,7 +6,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>커뮤니티 상세페이지</title>
+	<title>5gCamping :: 1박 2일</title>
+	<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
@@ -21,14 +22,6 @@
 <body style="background-color:#f7f7f9">
 <%@ include file="../common/detailNav.jsp" %>
 <div style="padding-top: 120px;">
-    <div class="row">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-6 page-head-left" style="padding-bottom: 10px;">
-            <span>커뮤니티 > </span>
-        </div>
-        
-    </div>
     <hr/>
    <div class="row">
        <div class="col-sm-3"></div>
