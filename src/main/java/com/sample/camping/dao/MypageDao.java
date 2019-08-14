@@ -37,6 +37,8 @@ public interface MypageDao {
 	void updateUserData(User user);
 	void updateUserUsedYn(User user);
 	
+	void updateUserProfilePhoto(User user);
+	
 	void addCampSite(CampSite campSite);
 	
 	void addMyCampSite(MyCampsite mycampsite);

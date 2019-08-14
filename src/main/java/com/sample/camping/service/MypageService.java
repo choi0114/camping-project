@@ -22,6 +22,8 @@ public interface MypageService {
 	void updateUserData(User user);
 	void updateUserUsedYn(User user);
 	
+	void updateUserProfilePhoto(User user);
+	
 	void addCampSite(CampSite campSite);
 	void addMyCampSite(MyCampsite myCampsite);
 	MyCampsite getMyCampSiteById(String userId);
