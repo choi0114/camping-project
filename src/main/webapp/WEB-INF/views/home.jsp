@@ -335,7 +335,7 @@
 	                <c:forEach var="item" items="${items }">
 	                    <div class="maincols">
 	                        <div class="twrap">
-	                            <div class="thumb hand">
+	                            <div class="thumb hand" data-no="${item.NO }">
 	                                <div class="border"></div>
 	                                <span class="nwt">U</span>
 	                                <img src="/camping/resources/images/campsite/${item.PHOTO }" alt="##캠핑장" width="450" class="tm">
@@ -498,6 +498,9 @@
 </body>
 <script type="text/javascript">
 
+	$(".thumb").click(function() {
+		 location.href = "detail.camp?no=" + $(this).attr("data-no");;
+	})
 	/* $(".bookmark-add").click(function() {
 		var session = 
 		var campsiteNo = $(this).attr("data-no");
