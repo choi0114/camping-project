@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<title>마이페이지</title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/camping/resources/css/mypage/sys.css">
 	<link rel="stylesheet" href="/camping/resources/css/mypage/mypage.css">
@@ -50,8 +52,8 @@
 							
 							<c:forEach var="free" items="${commentMap.freeComment }">
 							<tr>
-							<input type="hidden" id="no" value="${free.freeBoard.no }">
-							<input type="hidden" id="boardType" value="4">
+								<input type="hidden" id="no" value="${free.freeBoard.no }">
+								<input type="hidden" id="boardType" value="4">
 								<td>${comment.freeBoard.title }</td>
 								<td>${free.contents }</td>
 								<td><fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/></td>
@@ -60,8 +62,8 @@
 							
 							<c:forEach var="joining" items="${commentMap.joiningComment }">
 							<tr>
-							<input type="hidden" id="no" value="${joining.joiningBoard.no }">
-							<input type="hidden" id="boardType" value="1">
+								<input type="hidden" id="no" value="${joining.joiningBoard.no }">
+								<input type="hidden" id="boardType" value="1">
 								<td>${joining.joiningBoard.title }</td>
 								<td>${joining.contents }</td>
 								<td><fmt:formatDate value="${joining.createDate }" pattern="yyyy년 M월 d일"/>}</td>
@@ -70,8 +72,8 @@
 							
 							<c:forEach var="opinion" items="${commentMap.opinionComment }">
 							<tr>
-							<input type="hidden" id="no" value="${opinion.opinionBoard.no }">
-							<input type="hidden" id="boardType" value="3">
+								<input type="hidden" id="no" value="${opinion.opinionBoard.no }">
+								<input type="hidden" id="boardType" value="3">
 								<td>${opinion.opinionBoard.title }</td>
 								<td>${opinion.contents }</td>
 								<td><fmt:formatDate value="${opinion.createDate }" pattern="yyyy년 M월 d일"/></td>
@@ -80,8 +82,8 @@
 							
 							<c:forEach var="review" items="${commentMap.reviewComment }">
 							<tr>
-							<input type="hidden" id="no" value="${review.reviewBoard.no }">
-							<input type="hidden" id="boardType" value="2">
+								<input type="hidden" id="no" value="${review.reviewBoard.no }">
+								<input type="hidden" id="boardType" value="2">
 								<td>${review.reviewBoard.title }</td>
 								<td>${review.contents}</td>
 								<td><fmt:formatDate value="${review.createDate }" pattern="yyyy년 M월 d일"/></td>

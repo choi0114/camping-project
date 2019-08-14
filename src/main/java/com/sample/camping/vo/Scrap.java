@@ -7,6 +7,8 @@ public class Scrap {
 	private Integer no;
 	private Date createDate;
 	private User user;
+	private ReviewBoard reviewBoard;
+	
 	public Integer getNo() {
 		return no;
 	}
@@ -25,7 +27,10 @@ public class Scrap {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+	public ReviewBoard getReviewBoard() {
+		return reviewBoard;
+	}
+	public void setReviewBoard(ReviewBoard reviewBoard) {
+		this.reviewBoard = reviewBoard;
+	}
 }

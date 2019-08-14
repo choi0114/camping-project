@@ -27,6 +27,7 @@ import com.sample.camping.service.MypageService;
 import com.sample.camping.vo.CampSite;
 import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.MyCampsite;
+import com.sample.camping.vo.Scrap;
 import com.sample.camping.vo.User;
 
 @Controller
@@ -161,12 +162,6 @@ public class MypageController {
 		return "redirect:/mypage/addCamp.camp";
 	}
 	
-	@RequestMapping("/conquest.camp")
-	public String conquest() {
-		
-		return "mypage/conquest";
-	}
-	
 	@RequestMapping("/oneline.camp")
 	public String oneline() {
 		
@@ -174,23 +169,13 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/scrap.camp")
-	public String scrap() {
+	public String scrap(HttpSession session, Model model) {
+		User user = (User) session.getAttribute("LOGIN_USER");
+		List<Scrap> scraps = myPageService.getScrapById(user.getId());
+		
+		model.addAttribute("scraps", scraps);
 		
 		return "mypage/scrap";
-	}
-
-	@RequestMapping("/mail.camp")
-	public String mail() {
-		
-		return "mypage/mail";
-	}
-
-	@RequestMapping("/friend.camp")
-	public String friend() {
-		
-		
-		
-		return "mypage/friend";
 	}
 
 	@RequestMapping("/info.camp")
