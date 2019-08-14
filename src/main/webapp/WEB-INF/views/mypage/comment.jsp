@@ -54,7 +54,7 @@
 							<tr>
 								<input type="hidden" id="no" value="${free.freeBoard.no }">
 								<input type="hidden" id="boardType" value="4">
-								<td>${comment.freeBoard.title }</td>
+								<td>${free.freeBoard.title }</td>
 								<td>${free.contents }</td>
 								<td><fmt:formatDate value="${free.createDate }" pattern="yyyy년 M월 d일"/></td>
 							</tr>
