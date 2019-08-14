@@ -160,6 +160,12 @@ public class BoardServiceImpl implements BoardService{
 		dao.updateHate(map);
 	}
 
+	@Override
+	public void insertScrap(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.insertScrap(map);
+	}
+
 	
 	
 }

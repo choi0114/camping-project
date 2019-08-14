@@ -22,7 +22,7 @@
 <%@ include file="../common/detailNav.jsp" %>
 <div class="container" style="padding-top: 120px;">
   	<div class="page-header">
-  		<h1>MY CART > 주문하기</h1>
+  		<h1>MY CART > 주문내역</h1>
   	</div>
   	
   	<div class="row">

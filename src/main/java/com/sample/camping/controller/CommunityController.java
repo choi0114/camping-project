@@ -236,6 +236,22 @@ public class CommunityController {
 		}
 		
 	}
+	@GetMapping("/insertScrap.camp")
+	public @ResponseBody void insertScrap(@RequestParam int boardType, 
+			@RequestParam int boardNo, HttpSession session) {
+		User user = (User) session.getAttribute("LOGIN_USER");
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 해당 보드를 가져온다
+		map.put("boardType", boardType);
+		if(boardType == 2) {
+			// 조이닝 라이크를 1 증가시킨다.
+			map.put("userId", user.getId());
+			map.put("boardNo", boardNo);
+			boardService.insertScrap(map);
+			// setter를 사용하여 라이크 필드를 변경시킨다. setLikes()
+			// updateBoard를 사용해 가져왔던 보드를 다시 넣는다.
+		}
+	}
 	
 	@GetMapping("/updateHate.camp")
 	public @ResponseBody String updateHate(@RequestParam int boardType, 

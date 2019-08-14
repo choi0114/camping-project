@@ -41,7 +41,7 @@
        		
             <div class="row bottom-line " >
                 <div class="col-sm-1 boot">
-                   <img class="id-img " src="/camping/resources/images/profilePhoto/${board.profilePhoto }" width="50" border-radius=50% height="50" alt=""/>
+                   <img class="id-img " src="/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }" width="50" border-radius=50% height="50" alt=""/>
                 </div>
                 <div class="col-sm-7 boot ">
                    <div class="row nick" >
@@ -82,9 +82,11 @@
                     <span style="border:1px solid; margin-top:7px; padding-left:-20px;" class="glyphicon glyphicon glyphicon glyphicon-comment btn-sm" aria-hidden="true">
                     	<span  class="like">${board.commentCnt }</span>
                     </span>
-                    <span style="border:1px solid; margin-top:7px;" class="glyphicon glyphicon glyphicon-share btn-sm" aria-hidden="true">
-                    	<span  class="like">공유하기</span>
-                    </span>
+	            	<c:if test="${boardType == 2 }">
+	                    <span style="border:1px solid; margin-top:7px;" class="glyphicon glyphicon glyphicon-share btn-sm" aria-hidden="true">
+	                    	<span  class="like">스크랩</span>
+	                    </span>
+	            	</c:if>
                    
                 </div>
                 <div class="col-sm-6 text-right">
@@ -145,6 +147,19 @@
 </div>
    <script type="text/javascript">
    		$(function(){
+   			var boardType = $("#boardType").val();
+			var boardNo= $("#boardNo").val();
+   			$(".glyphicon-share").click(function(){
+   				$.ajax({
+   					type:"GET"
+   					, url:"insertScrap.camp?boardType="+boardType+"&boardNo="+boardNo
+   					, success:function(){
+   						location.href="detail.camp?boardType="+boardType+"&no="+boardNo
+   					}
+   				});
+   				
+   			})
+   			
    			$("#click-home").click(function(){
    				location.href="home.camp"
    			})

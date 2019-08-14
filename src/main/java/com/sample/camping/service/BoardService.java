@@ -7,6 +7,7 @@ import com.sample.camping.vo.Board;
 import com.sample.camping.vo.Comment;
 
 public interface BoardService {
+	void insertScrap(Map<String, Object> map);
 	void addJoin(Board board);
 	void addOpinion(Board board);
 	void addReview(Board board);
