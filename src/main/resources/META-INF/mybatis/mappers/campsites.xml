@@ -193,19 +193,22 @@
 	
 	<select id="getReviewByCSNo" parameterType="int" resultType="reviewBoard">
 		select
-			review_no				no,
-			review_title			title,
-			review_contents		contents,
-			review_likes			likes,
-			review_hates			hates,
-			review_views			views,
-			review_thumbnail		thumbnail,
-			review_create_date		createDate,
-			user_id					"user.id",
-			campsite_no				"campSite.no"
+			r.review_no				no,
+			r.review_title			title,
+			r.review_contents		contents,
+			r.review_likes			likes,
+			r.review_hates			hates,
+			r.review_views			views,
+			r.review_thumbnail		thumbnail,
+			r.review_create_date	createDate,
+			r.user_id				"user.id",
+			r.campsite_no			"campSite.no",
+			u.user_nick_name		"user.nickName"
 		from
-			camp_review_boards
+			camp_review_boards r, camp_users u
 		where
+			r.user_id = u.user_id
+		and
 			campsite_no = #{value}
 	</select>
 	

@@ -16,7 +16,6 @@ import com.sample.camping.service.CampsitesService;
 import com.sample.camping.service.ThemeService;
 import com.sample.camping.view.WeatherXMLView;
 import com.sample.camping.vo.CampSite;
-import com.sample.camping.vo.LikeCampsite;
 import com.sample.camping.vo.LikeHateCampsite;
 import com.sample.camping.vo.OpinionBoard;
 import com.sample.camping.vo.ReviewBoard;
@@ -42,12 +41,15 @@ public class CampingController {
 	}
 	
 	@RequestMapping("/alreadyjjim.camp")
-	public @ResponseBody LikeCampsite alreadyJjim(int no, String id) {
+	public @ResponseBody Map<String, Object> alreadyJjim(int no, String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("no", no);
 		map.put("id", id);
 		
-		return campsiteService.getJjimByNoId(map);
+		Map<String, Object> newmap = new HashMap<String, Object>();
+		newmap.put("likeCampsite", campsiteService.getJjimByNoId(map));
+		
+		return newmap;
 	}
 	
 	@RequestMapping("/detail.camp")

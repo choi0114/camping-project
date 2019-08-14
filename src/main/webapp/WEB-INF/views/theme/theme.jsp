@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="/camping/resources/css/theme/theme.css">
 </head>
 <body>
-<div class="container">
+<div class="container" style="background-color: #f7f7f9;">
 	
 	<!-- Modal -->
 	<div id="theme-search-modal" class="modal fade" role="dialog">
@@ -21,7 +21,7 @@
 		    <!-- Modal content-->
 		    <div class="modal-content">
 		      	<div class="modal-body">
-		        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        	<button type="button" class="close" data-dismiss="modal" onclick="history.back();">&times;</button>
 		        	<div class="row">
 		        		<div class="col-sm-2">
 		        			<h2 style="color: #25a5f0;">테마검색</h2>
