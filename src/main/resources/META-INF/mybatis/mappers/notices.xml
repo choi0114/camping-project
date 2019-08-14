@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.camping.dao.NoticeDao">
+
+	<select id="getAllNotices" resultType="noticeBoard">
+		select
+			notice_no				no,
+			notice_title			title,
+			notice_contents			contents,
+			notice_likes			likes,
+			notice_hates			hates,
+			notice_views			views,
+			notice_create_date		createDate
+		from
+			camp_notice_boards
+		order by
+			notice_no desc
+	</select>
+	
+	<select id="getNoticeByNo" parameterType="int" resultType="noticeBoard">
+		select
+			notice_no				no,
+			notice_title			title,
+			notice_contents			contents,
+			notice_likes			likes,
+			notice_hates			hates,
+			notice_views			views,
+			notice_create_date		createDate
+		from
+			camp_notice_boards
+		where
+			notice_no = #{value}
+	</select>
+	
+	<select id="getAllNoticeCommentsByNo" parameterType="int" resultType="noticeComment">
+		select
+			c.comment_no			no,
+			c.comment_contents		contents,
+			c.comment_create_date 	createDate,
+			c.notice_no				"noticeBoard.no",
+			c.user_id				"user.id",
+			u.user_profile_photo	"user.profilePhoto",
+			u.user_nick_name		"user.nickName"
+			
+		from
+			camp_notice_comments c, camp_users u
+		where
+			c.user_id = u.user_id
+		and
+			notice_no = #{value}
+		order by
+			comment_no desc
+	</select>
+	
+	<select id="insertComment" parameterType="map">
+		insert into camp_notice_comments
+			(comment_no, comment_contents, notice_no, user_id)
+		values
+			(camp_comment_seq.nextval, #{contents}, #{no}, #{id})
+	</select>
+</mapper>

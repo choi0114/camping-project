@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,13 +28,13 @@
 		<div class="col-sm-12">
 			<form>
 				<div class="pull-right">
-					<select>
-						<option>제목</option>
-						<option>내용</option>
-						<option>제목+내용</option>
+					<select name="search-sort">
+						<option value="title">제목</option>
+						<option value="contents">내용</option>
+						<option value="tandc">제목+내용</option>
 					</select>
 					<input type="text">
-					<button class="btn">검색</button>
+					<button id="search-btn" class="btn">검색</button>
 				</div>
 			</form>
 		</div>
@@ -54,41 +56,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>
-							<a href="noticedetail.camp">하이</a>
-						</td>
-						<td>2019-08-09</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>
-							<a href="noticedetail.camp">하이</a>
-						</td>
-						<td>2019-08-09</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>
-							<a href="noticedetail.camp">하이</a>
-						</td>
-						<td>2019-08-09</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>
-							<a href="noticedetail.camp">하이</a>
-						</td>
-						<td>2019-08-09</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>
-							<a href="noticedetail.camp">하이</a>
-						</td>
-						<td>2019-08-09</td>
-					</tr>
+				<c:choose>
+					<c:when test="${not empty notices }">
+						<c:forEach var="notice" items="${notices }">
+							<tr>
+								<td>${notice.no }</td>
+								<td>
+									<a href="noticedetail.camp?no=${notice.no }" style="color: #000;">${notice.title }</a>
+								</td>
+								<td><fmt:formatDate value="${notice.createDate }" pattern="yyyy-MM-dd"/></td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="4">
+								등록된 공지사항이 없습니다.
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 				</tbody>
 			</table>
 		</div>

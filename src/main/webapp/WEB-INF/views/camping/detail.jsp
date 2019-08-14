@@ -20,10 +20,14 @@
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/slick/slick-theme.css">
     <script src="/camping/resources/css/campingdetail/slick/slick.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/camping/resources/js/moment.js"></script>
+    <style>
+    	.content-box img {display: none;}
+    </style>
 </head>
 <body data-campsite-no="${campsite.no }">
 	<%@ include file="../common/detailNav.jsp" %>
-	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }" style="padding-top: 120px;">
+	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
@@ -349,8 +353,8 @@
     <div class="row" style="margin-top: 40px;">
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
-                <li class="active" id="opinion-box"><a>의견</a></li>
-                <li id="review-box"><a>리뷰</a></li>
+                <li class="active" id="opinion-box"><a style="color: #000;">의견</a></li>
+                <li id="review-box"><a style="color: #000;">리뷰</a></li>
             </ul>
         </div>
     </div>
@@ -394,25 +398,23 @@
     	</c:choose>
     		<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">
 		        <div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="camp4.jpg">
-		            <img src="/camping/resources/images/mypage/camp4.jpg" width="130px" height="130px" style="cursor: pointer;"/>
+		            <img src="/camping/resources/images/mypage/camp3.jpg" width="130px" height="130px" style="cursor: pointer;"/>
 		        </div>
 		        <a href="#">
 			        <div class="col-sm-10">
 			            <div style="margin-bottom: 5px;">
-			                <span style="font-size: 18px; color: #000;">제목</span>
+			                <span style="font-size: 18px; color: #000;">강원정보문화진흥원..최고!</span>
 			            </div>
 			            <div style="margin-bottom: 10px;">
 			                <span style="color: #888;">
-			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-			                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+			                    여기 완전 좋아요! 꼭 가보시길 추천추천
 			                </span>
 			            </div>
 			            <div style="margin-bottom: 10px;">
-			                <span style="color: #3ea9cd">닉네임</span>
+			                <span style="color: #3ea9cd">은쟘</span>
 			            </div>
 			            <div class="text-right" style="margin-bottom: 15px;">
-			                <span style="color: #000;">2019-08-03</span>
+			                <span style="color: #000;">2019-08-06</span>
 			            </div>
 			        </div>
 		        </a>
@@ -461,32 +463,6 @@
 		    </div>
     	</div>
     </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-sm-12 text-center">
-            <a class="btn btn-default">
-                <span class="glyphicon glyphicon-backward"></span>
-            </a>
-            <a class="btn btn-default">
-                <span class="glyphicon glyphicon-triangle-left"></span>
-            </a>
-            <a class="btn btn-default active">1</a>
-            <a class="btn btn-default">2</a>
-            <a class="btn btn-default">3</a>
-            <a class="btn btn-default">4</a>
-            <a class="btn btn-default">5</a>
-            <a class="btn btn-default">6</a>
-            <a class="btn btn-default">7</a>
-            <a class="btn btn-default">8</a>
-            <a class="btn btn-default">9</a>
-            <a class="btn btn-default">10</a>
-            <a class="btn btn-default">
-                <span class="glyphicon glyphicon-triangle-right"></span>
-            </a>
-            <a class="btn btn-default">
-                <span class="glyphicon glyphicon-forward"></span>
-            </a>
-        </div>
-    </div>
     <div class="row" style="border-bottom: 1px solid #ddd; margin-top: 60px;"></div>
     <div class="row" style="margin-top: 15px; margin-bottom: 60px;">
         <div class="col-sm-12">
@@ -497,10 +473,10 @@
     </div>
     
 	<div id="campsite-photo-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
 	  		<!-- Modal content-->
 		    <div class="modal-content">
-		      	<div class="modal-body text-center">
+		      	<div id="modal-photo-box" class="modal-body text-center">
 		      	</div>
 		    </div>
 	  	</div>
@@ -1231,7 +1207,7 @@
     			$.each(opinions, function(index, opinion) {
     				var html = '<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">'
 				        	 + '<div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="' + opinion.thumbnail + '">'
-		            		 + '<img src="/camping/resources/images/mypage/' + opinion.thumbnail + '" width="130px" height="130px"/>'
+		            		 + '<img src="/camping/resources/images/mypage/' + opinion.thumbnail + '" width="130px" height="130px" style="cursor: pointer;"/>'
 		        			 + '</div>'
 		        			 + '<a href="#">'
 		        			 + '<div class="col-sm-10">'
@@ -1264,6 +1240,7 @@
     		url: 'reviews.camp?no=' + no,
     		dataType: 'json',
     		success: function(reviews) {
+    			console.log(reviews);
     			$('#board-box').empty();
     			
     			if(reviews.length == 0) {
@@ -1278,21 +1255,21 @@
 	    			$.each(reviews, function(index, review) {
 	    				var html = '<div class="row" style="margin-top: 40px; border-bottom: 1px solid #ddd;">'
 					        	 + '<div class="col-sm-2 text-center photo-box" style="margin-bottom: 10px;" data-photo="' + review.thumbnail + '">'
-			            		 + '<img src="/camping/resources/images/mypage/' + review.thumbnail + '" width="130px" height="130px"/>'
+			            		 + '<img src="/camping/resources/images/community/' + review.thumbnail + '" width="130px" height="130px" style="cursor: pointer;"/>'
 			        			 + '</div>'
-			        			 + '<a href="#">'
+			        			 + '<a href="community/detail.camp?no=' + review.no + '&boardType=2">'
 			        			 + '<div class="col-sm-10">'
 			            		 + '<div style="margin-bottom: 5px;">'
-			                	 + '<span style="font-size: 18px;">' + review.title + '</span>'
+			                	 + '<span style="font-size: 18px; color: #000;">' + review.title + '</span>'
 			            		 + '</div>'
-			            		 + '<div style="margin-bottom: 10px;">'
+			            		 + '<div style="margin-bottom: 10px;" class="content-box">'
 			                	 + '<span style="color: #888;">' + review.contents + '</span>'
 					             + '</div>'
 			            		 + '<div style="margin-bottom: 10px;">'
 			                	 + '<span style="color: #3ea9cd">' + review.user.nickName + '</span>'
 			            		 + '</div>'
 			            		 + '<div class="text-right" style="margin-bottom: 15px;">'
-			                	 + '<span>' + review.createDate + '</span>'
+			                	 + '<span style="color: #000;">' + moment(review.createDate).format('YYYY-MM-DD') + '</span>'
 			            		 + '</div>'
 			        			 + '</div>'
 			        			 + '</a>'
@@ -1306,15 +1283,17 @@
     	});
     });
     
-    $('.photo-box').click(function() {
+    $('div').on('click', '.photo-box', function() {
     	var photo = $(this).attr('data-photo');
-    	$('.modal-body').empty();
-    	$('.modal-body').append('<img src="/camping/resources/images/mypage/' + photo + '"/>');
+    	$('#modal-photo-box').empty();
+    	$('#modal-photo-box').append('<img src="/camping/resources/images/community/' + photo + '"/>');
     	
     	$('#campsite-photo-modal').modal('show');
     });
     
     $('#jjim-campsite-btn').click(function() {
+    	var user = '${LOGIN_USER.id}';
+    	var no = $('body').attr('data-campsite-no');
     	
     	if(user == '') {
     		alert('로그인이 필요한 서비스입니다.');
@@ -1322,15 +1301,12 @@
     	}
     	
     	$.ajax({
-	    	var user = '${LOGIN_USER.id}';
-	    	var no = $('body').attr('data-campsite-no');
-
 	    	url: 'alreadyjjim.camp',
     		data: {id: user, no: no},
     		dataType: 'json',
     		success: function(jjim) {
-    			console.log(jjim);
-    			if(jjim) {
+    			console.log(jjim.likeCampsite);
+    			if(jjim.likeCampsite) {
     				alert('이미 찜한 캠핑장입니다.');
     				return false;
     			} else {
