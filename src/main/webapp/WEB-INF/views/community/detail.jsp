@@ -83,17 +83,17 @@
                     	<span  class="like">${board.commentCnt }</span>
                     </span>
 	            	<c:if test="${boardType == 2 }">
-	                    <span style="border:1px solid; margin-top:7px;" class="glyphicon glyphicon glyphicon-share btn-sm" aria-hidden="true">
+	                    <span style="border:1px solid; margin-top:7px; cursor:pointer;" class="glyphicon glyphicon glyphicon-share btn-sm" aria-hidden="true">
 	                    	<span  class="like">스크랩</span>
 	                    </span>
 	            	</c:if>
                    
                 </div>
                 <div class="col-sm-6 text-right">
-                    <span  id="click-hate" style="border:1px solid; margin-top:7px;" class="glyphicon glyphicon-thumbs-down btn-sm" aria-hidden="true">
+                    <span  id="click-hate" style="border:1px solid; margin-top:7px; cursor:pointer;" class="glyphicon glyphicon-thumbs-down btn-sm" aria-hidden="true">
                     	<span  class="like">${board.hates }</span>
                     </span>
-                    <span  id="click-like" style="border:1px solid; margin-top:7px;" class="glyphicon glyphicon-thumbs-up btn-sm" aria-hidden="true">
+                    <span  id="click-like" style="border:1px solid; margin-top:7px; cursor: pointer;" class="glyphicon glyphicon-thumbs-up btn-sm" aria-hidden="true">
                     	<span  class="like">${board.likes }</span>
                     </span>
                	</div>

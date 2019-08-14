@@ -50,8 +50,8 @@
 	  									<img src="/camping/resources/images/product/${purchase.goodsPhoto }" alt="Nature" style="width: 120px; height:100px">
 	  								</td>
 	  								<td>${purchase.goodsName }</td>
-	  								<td id="price-${purchase.purchaseNo}" >${ purchase.goodsPrice*purchase.amount }</td>
-	  								<c:set var= "sum" value="${sum +  purchase.goodsPrice*purchase.amount }"/>
+	  								<td id="price-${purchase.purchaseNo}" >${ purchase.goodsPrice}</td>
+	  								<c:set var= "sum" value="${sum +  purchase.goodsPrice }"/>
 	  								<td >
 										${purchase.amount}
 									</td>
@@ -116,7 +116,7 @@
 		var addr = $("[name='doro-addr']").val() + $("[name='detail-addr']").val();
 		var price = $("[name='total-price']").html();
 		
-		location.href = "addOrder.camp?no="+no+"&addr="+addr+"&price="+price;
+		location.href = "addOrder.camp?no="+no+"&addr="+addr+"&price="+ (parseInt(price)+2500);
 		
 	})
 	
