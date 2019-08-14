@@ -60,8 +60,8 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	@Override
-	public void addBookmark(String id, int no) {
-		homeDao.addBookmark(id, no);
+	public void addBookmark(Map<String, Object> map) {
+		homeDao.addBookmark(map);
 	}
 	
 	@Override

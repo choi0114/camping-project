@@ -375,7 +375,7 @@
     			<c:forEach var="notice" items="${notices }">
     			<div class="notice">
     				<span class="date">1개월 전</span>
-    				<a href="#">${notice.title }</a>
+    				<a href="/camping/community/detail.camp?no=${notice.no }">${notice.title }</a>
     			</div>
     			</c:forEach>
     		</div>
@@ -467,7 +467,7 @@
     			</dt>
     			<c:forEach var="review" items="${reviews }">
     			<dd>
-    				<a href="#">&gt;  ${review.title }</a>
+    				<a href="/camping/community/detail.camp?boardType=2&no=${review.no }">&gt;  ${review.title }</a>
     				<c:if test="${review.cnt > 1}">
     				<span class="comment">${review.cnt }</span>
     				</c:if>
@@ -482,7 +482,7 @@
     			</dt>
     			<c:forEach var="free" items="${frees }">
     			<dd>
-    				<a href="#">&gt;  ${free.title }</a>
+    				<a href="/camping/community/detail.camp?boardType=2&no=${free.no }">&gt;  ${free.title }</a>
     				<c:if test="${free.cnt > 1}">
     				<span class="comment">${free.cnt }</span>
     				</c:if>
@@ -543,7 +543,7 @@
  	var pno = 1;
  	var dt = new Date();
  	var massage = ['저는 구글이 아닙니다. 살살 검색해주세요','응수쌤 천재입니다', '검색만 하지 말고 댓글도 좀 써주세요','오늘은 어디로 가볼까?',
- 			'오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDay())+'일 입니다.','JHTA로 오세요~',
+ 			'오늘은 '+(dt.getMonth()+1)+'월 '+(dt.getDate())+'일 입니다.','JHTA로 오세요~',
 			'현재 시간은 '+dt.getHours()+'시 '+dt.getMinutes()+'분 입니다.','찾는 캠핑장이 없으면 관리자를 조르세요', '만든이: 지민, 은정, 동건, 수정, 혜인, 본경'];
 
  	/* '추천검색 결과와 실제 결과는 다를수 있어요','검색어 입력 후 엔터 또는 버튼 클릭하세요', '행정구역 검색시 두글자만 입력(예: 부산)','읍면동 이름으로 검색 가능합니다',

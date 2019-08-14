@@ -18,6 +18,6 @@ public interface HomeService {
 	List<ReviewBoard> getAllReviewBoard();
 	List<FreeBoard> getAllFreeBoard();
 	List<NoticeBoard> getAllNoticeBoard();
-	void addBookmark(String id, int no);
+	void addBookmark(Map<String, Object> map);
 	void deleteBookmark(int no);
 }
