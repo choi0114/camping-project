@@ -71,30 +71,33 @@
 		where campsite_sido = #{city}
 	</select>
 	
-	<select id="getCampSitesByUpdate" resultType="campSite">
-		select no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYn, sido, gugun
+	<select id="getCampSitesByUpdate" resultType="map">
+		select no, name, sort, latitude, longitude, address, tel, sites, price, likes, hates, photo, point, createDate, usedYn, sido, gugun, likeno
 		from (select
-				campsite_no no,
-				campsite_name name,
-				campsite_sort sort,
-				campsite_latitude latitude,
-				campsite_longitude longitude,
-				campsite_address address,
-				campsite_tel tel,
-				campsite_sites sites,
-				campsite_price price,
-				campsite_likes likes,
-				campsite_hates hates,
-				campsite_photo photo,
-				campsite_point point,
-				campsite_create_date createDate,
-				campsite_used_yn usedYn,
-				campsite_sido sido,
-				campsite_gugun gugun
+				A.campsite_no no,
+				A.campsite_name name,
+				A.campsite_sort sort,
+				A.campsite_latitude latitude,
+				A.campsite_longitude longitude,
+				A.campsite_address address,
+				A.campsite_tel tel,
+				A.campsite_sites sites,
+				A.campsite_price price,
+				A.campsite_likes likes,
+				A.campsite_hates hates,
+				A.campsite_photo photo,
+				A.campsite_point point,
+				A.campsite_create_date createDate,
+				A.campsite_used_yn usedYn,
+				A.campsite_sido sido,
+				A.campsite_gugun gugun,
+				B.like_campsite_no likeno
 			from
-				camp_campsites
+				camp_campsites A, camp_like_campsite B
+			where
+				A.campsite_no = B.campsite_no(+)
 			order by
-				campsite_no asc)
+				A.campsite_no asc)
 		where rownum &lt;= 20	
 	</select>
 	
@@ -147,17 +150,33 @@
 	</select>
 	
 	<select id="getAllNoticeBoard" resultType="noticeBoard">
-		select
-			notice_no no,
-			notice_title title,
-			notice_contents contents,
-			notice_likes likes,
-			notice_hates hates,
-			notice_views views,
-			notice_create_date createDate
-		from
-			camp_notice_boards
-			
+		select *
+		from (select
+				notice_no no,
+				notice_title title,
+				notice_contents contents,
+				notice_likes likes,
+				notice_hates hates,
+				notice_views views,
+				notice_create_date createDate
+			from
+				camp_notice_boards
+			order by notice_no desc
+			)
+		where
+			rownum &lt;= 2
 	</select>
+	
+	<insert id="addBookmark" parameterType="map">
+		insert into 
+			camp_like_campsite (like_campsite_no, user_id, campsite_no)
+		values
+			(camp_camping_site_seq.nextval, #{id}, #{no})
+	</insert>
+	
+	<delete id="deleteBookmark" parameterType="int">
+		delete from camp_like_campsite
+		where campsite_no = ${no}
+	</delete>
 
 </mapper>
