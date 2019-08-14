@@ -137,7 +137,7 @@
     <div class="gnb">
         <ul class="">
             <li><a href="home.camp">HOME</a></li>
-            <li><a href="#">공지사항</a></li>
+            <li><a href="">공지사항</a></li>
             <c:choose>
             	<c:when test="${empty LOGIN_USER }">
 		            <li><a id="open-register-modal">회원가입</a></li>

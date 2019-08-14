@@ -152,22 +152,14 @@
 		update
 		  camp_campsites
 		set
+		  <if test="photo != null">
+			  campsite_photo = #{photo},
+		  </if>
 		  campsite_name = #{name},
-		  campsite_sort = #{sort},
 		  campsite_latitude = #{latitude},
 		  campsite_longitude = #{longitude},
 		  campsite_address = #{address},
-		  campsite_tel = #{tel},
-		  campsite_sites = #{sites},
-		  campsite_price = #{price},
-		  campsite_likes = #{likes},
-		  campsite_hates = #{hates},
-		  campsite_photo = #{photo},
-		  campsite_point = #{point},
-		  campsite_create_date = #{createDate},
-		  campsite_used_yn = #{usedYn},
-		  campsite_sido = #{sido},
-		  campsite_gugun = #{gugun}
+		  campsite_tel = #{tel}
 		where
 		  campsite_no = #{no}  
 	</update>

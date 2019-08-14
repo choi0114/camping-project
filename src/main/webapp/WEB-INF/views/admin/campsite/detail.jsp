@@ -19,7 +19,7 @@
     </head>
     <style>
     	.image {
-    		width: 376px;
+    		width: 376px;	
     	}
         .margin-div {
             margin-top: 15px;
@@ -48,8 +48,9 @@
 					<div class="container">
 						<h1 class="admin-buttom">캠핑장 관리</h1>
 						<div class="well">
-							<form method="post" action="detail.camp" enctype="multipart/form-data" onsubmit="checkfield(event)">
-								<input type="hidden" name="pno" value="${param.pno }">
+							<form method="post" action="update.camp" enctype="multipart/form-data" >
+								<input type="hidden" name="pno" value="${not empty param.pno ? param.pno : 1 }">
+								<input type="hidden" name="no" value="${param.no }">
 									<div class="form-group">
 										<div class="row">
 											<div class="col-xs-1">
@@ -64,7 +65,7 @@
                                         <label>주소</label>
                                     </div>
                                     <div class="col-xs-7">
-                                        <input class="form-control" name="price" type="text" value="${campSite.address }"/>
+                                        <input class="form-control" name="address" type="text" value="${campSite.address }"/>
                                     </div>
                                 </div>
 									</div>
@@ -73,7 +74,7 @@
                                         <label>전화번호</label>
                                     </div>
                                     <div class="col-xs-3">
-                                        <input class="form-control" name="price" type="text" value="${campSite.tel }"/>
+                                        <input class="form-control" name="tel" type="text" value="${campSite.tel }"/>
                                     </div>
                                 </div>
                                 <div class="row margin-div">
@@ -81,15 +82,24 @@
                                         <label>경도</label>
                                     </div>
                                     <div class="col-xs-3">
-                                        <input class="form-control" name="price" type="text" value="${campSite.longitude }"/>
+                                        <input class="form-control" name="longitude" type="text" value="${campSite.longitude }"/>
                                     </div>
                                      <div class="col-xs-1 admin-line-height">
                                         <label>위도</label>
                                     </div>
                                     <div class="col-xs-3">
-                                        <input class="form-control" name="price" type="text" value="${campSite.latitude }"/>
+                                        <input class="form-control" name="latitude" type="text" value="${campSite.latitude }"/>
                                     </div>
                                 </div>
+									<div class="form-group"></div>
+									<div class="row">
+										<div class="col-xs-1 admin-line-height margin-btn">
+											<label class="label-padding">이미지</label>
+										</div>
+										<div class="col-xs-11">
+											<input type="file" name="photo" class="form-control">
+										</div>
+									</div>
 									<div class="form-group"></div>
 									<div class="row">
 										<div class="col-xs-1 admin-line-height margin-btn">
@@ -99,6 +109,9 @@
 											<img class="image" src="/camping/resources/images/campsite/${campSite.photo }"/>
 										</div>
 									</div>
+									<div class="col-sm-1">
+	                    			 <img class="id-img2 " src="/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }" width="60" border-radius=50% height="60" alt=""/>
+	               					 </div>
 									<div class="text-right">
 										<input type="submit" class="btn btn-default" value="수정"> 
 										<a class="btn btn-default" href="list.camp?pno=${param.pno }">취소</a>

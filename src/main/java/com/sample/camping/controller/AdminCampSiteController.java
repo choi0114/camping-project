@@ -1,5 +1,7 @@
 package com.sample.camping.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +9,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sample.camping.service.AdminCampSiteService;
 import com.sample.camping.vo.AdminPagination;
@@ -57,12 +61,7 @@ public class AdminCampSiteController {
 		return "admin/campsite/detail";
 	}
 	
-	@RequestMapping("/update.camp")
-	public String update() {
-		return "admin/campsite/update";
-	}
 	
-
 	@RequestMapping("/form.camp")
 	public String form() {
 		
@@ -95,7 +94,31 @@ public class AdminCampSiteController {
 		return "redirect:admin/approve/list?no="+no;
 	}
 	
+	@RequestMapping("/update.camp")
+	public String detailUpdate(String name, String address, String tel, Double latitude, Double longitude, MultipartFile photo,
+			@RequestParam("no")int no) throws Exception {
 	
+		String savePath = "C:/사용자/dhchi/git2/camping-project/src/main/webapp/resources/images/campsite";
+		CampSite campSite = adminCampSiteService.getCampingSitesbyNo(no);
+		
+		campSite.setName(name);
+		campSite.setAddress(address);
+		campSite.setTel(tel);
+		campSite.setLatitude(latitude);
+		campSite.setLongitude(longitude);
+		
+		if(!photo.isEmpty()) {
+			
+			String filename = photo.getOriginalFilename();
+			campSite.setPhoto(filename);
+			
+			FileCopyUtils.copy(photo.getInputStream(), new FileOutputStream(new File(savePath, filename)));
+		}
+		
+		adminCampSiteService.updateCampingSitesByNo(campSite);
+		
+		return "redirect:list.camp?no="+no;
+	}
 	
 	
 	@RequestMapping("/list.camp")
