@@ -128,26 +128,6 @@
 		</c:choose>
 		</div>
 	</div>
-	<div class="row" style="margin-bottom: 50px;">
-		<div class="col-sm-12 text-center">
-			<button class="btn btn-border-group">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-			<button class="btn btn-border-group active">1</button>
-			<button class="btn btn-border-group">2</button>
-			<button class="btn btn-border-group">3</button>
-			<button class="btn btn-border-group">4</button>
-			<button class="btn btn-border-group">5</button>
-			<button class="btn btn-border-group">6</button>
-			<button class="btn btn-border-group">7</button>
-			<button class="btn btn-border-group">8</button>
-			<button class="btn btn-border-group">9</button>
-			<button class="btn btn-border-group">10</button>
-			<button class="btn btn-border-group">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-		</div>
-	</div>
 </div>
 <script type="text/javascript">
 

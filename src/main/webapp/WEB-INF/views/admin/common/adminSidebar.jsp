@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <head>
-	<title>Bootstrap Example</title>
+	<title>5gCamping :: 1박 2일</title>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -65,12 +65,11 @@
 	<div id="page-wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-              <li><a href="statistics.camp?sort=Statistics" class=${param.sort eq 'Statistics'?'sidebar-active':'' }>관리자 메인</a></li>
-              <li><a href="list.camp?sort=LIST&pno=1" class=${param.sort eq 'LIST'?'sidebar-active':'' }>캠핑장 관리</a></li>
-              <li><a href="approve.camp?sort=Approve" class=${param.sort eq 'Approve'?'sidebar-active':'' }>승인 관리</a></li>
+              <li><a href="/camping/admin/list.camp?sort=LIST&pno=1" class=${param.sort eq 'LIST'?'sidebar-active':'' }>캠핑장 관리</a></li>
+              <li><a href="/camping/admin/approve.camp?sort=Approve" class=${param.sort eq 'Approve'?'sidebar-active':'' }>승인 관리</a></li>
               <li><a href="/camping/product/adminProduct.camp?sort=Product" class=${param.sort eq 'Product'?'sidebar-active':'' }>캠핑용품 관리</a></li>
-              <li><a href="noticeList.camp?sort=Notice" class=${param.sort eq 'Notice'?'sidebar-active':'' }>공지 사항</a></li>
-              <li><a href="statistics.camp?sort=Statistics2" class=${param.sort eq 'Statistics2'?'sidebar-active':'' }>통  계</a></li>
+              <li><a href="/camping/admin/noticeList.camp?sort=Notice" class=${param.sort eq 'Notice'?'sidebar-active':'' }>공지 사항</a></li>
+              <li><a href="/camping/admin/statistics.camp?sort=Statistics2" class=${param.sort eq 'Statistics2'?'sidebar-active':'' }>통  계</a></li>
             </ul>
         </div>
     </div>
