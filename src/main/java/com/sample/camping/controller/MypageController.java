@@ -3,6 +3,7 @@ package com.sample.camping.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,32 @@ public class MypageController {
 		model.addAttribute("likeCamp", likeCamp);
 		
 		return "mypage/mypage";
+	}
+	
+	@RequestMapping("/profilePhoto.camp")
+	public String profilePhoto(MultipartFile photo, HttpSession session) throws IOException {
+		String savePath = "C:/Users/JHTA/git/camping-project/src/main/webapp/resources/images/profilePhoto";
+		User user = (User) session.getAttribute("LOGIN_USER");
+		
+		String filename = user.getId();
+		
+		if(!photo.isEmpty()) {
+			long date = System.currentTimeMillis ( );
+			
+			filename += date;
+			filename += photo.getOriginalFilename();
+			
+			FileCopyUtils.copy(photo.getInputStream(), new FileOutputStream(new File(savePath, filename)));
+			System.out.println(filename);
+		}
+		System.out.println(filename);
+		
+		user.setId(user.getId());
+		user.setProfilePhoto(filename);
+		
+		myPageService.updateUserProfilePhoto(user);
+		
+		return "redirect:/mypage/mypage.camp";
 	}
 	
 	@RequestMapping("/comment.camp")

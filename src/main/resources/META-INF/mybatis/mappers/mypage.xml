@@ -195,6 +195,15 @@
 			user_id = #{id}
 	</update>
 	
+	<update id="updateUserProfilePhoto" parameterType="user">
+		update
+			camp_users
+		set
+			user_profile_photo = #{profilePhoto}
+		where
+			user_id = #{id}
+	</update>
+	
 	<insert id="addCampSite" parameterType="campSite">
 		insert 
 			into camp_campsites (

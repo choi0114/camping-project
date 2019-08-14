@@ -195,9 +195,9 @@
 									<div class="panel-heading">
 										<h3>프로필 사진 변경</h3>
 									</div>
-									<form method="post">
+									<form method="post" action="profilePhoto.camp" enctype="multipart/form-data">
 										<div class="rephoto">
-											<div class="avatar" style="background: url(/camping/resources/images/profilePhoto/default.png) center center no-repeat; background-size: 100%;"></div>
+											<div class="avatar" style="background: url(/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }) center center no-repeat; background-size: 100%;"></div>
 											<div class="msg">
 												회원님을 알릴 수 있는 사진을 등록해 주세요.
 												<br>
@@ -209,7 +209,7 @@
 											<div class="upload">
 												<span id="filename"></span>
 												<label for="upFile">사진선택
-													<input type="file" name="upfile" class="upfile" id="upFile" >
+													<input type="file" name="photo" class="upfile" id="upFile" >
 												</label>
 												<button type="submit" class="bbtn2 bbtn2-gray" style="height: 30px; line-height: 30px;">
 													<i><img src="/camping/resources/images/mypage/photo-camera.png" style="width: 14px; height: 14px; color: #fff;"></i>
