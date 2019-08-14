@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Bootstrap Example</title>
+	<title>5gCamping :: 1박 2일</title>
+	<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -24,7 +25,7 @@
 </head>
 <body style="background-color: #f7f7f9;" data-user="${LOGIN_USER.id }" data-notice-no="${notice.no }">
 <%@ include file="../common/detailNav.jsp" %>
-<div class="container">
+<div class="container" style="padding-top: 100px;">
 	<div class="page-header">
 		<span style="font-size: 24px; font-weight: 500;">오지캠핑 공지사항</span>
 		<button class="btn btn-border-group pull-right" onclick="history.back()">돌아가기</button>
@@ -126,26 +127,6 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		</div>
-	</div>
-	<div class="row" style="margin-bottom: 50px;">
-		<div class="col-sm-12 text-center">
-			<button class="btn btn-border-group">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-			<button class="btn btn-border-group active">1</button>
-			<button class="btn btn-border-group">2</button>
-			<button class="btn btn-border-group">3</button>
-			<button class="btn btn-border-group">4</button>
-			<button class="btn btn-border-group">5</button>
-			<button class="btn btn-border-group">6</button>
-			<button class="btn btn-border-group">7</button>
-			<button class="btn btn-border-group">8</button>
-			<button class="btn btn-border-group">9</button>
-			<button class="btn btn-border-group">10</button>
-			<button class="btn btn-border-group">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
 		</div>
 	</div>
 </div>

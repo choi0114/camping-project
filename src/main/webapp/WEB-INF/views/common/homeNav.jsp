@@ -81,7 +81,7 @@
             	<c:otherwise>
 		            <c:choose>
 			            <c:when test="${LOGIN_USER.id eq 'admin'}">
-				            <li><a href="admin/list.camp">관리자페이지</a></li>
+				            <li><a href="admin/list.camp?sort=LIST&pno=1">관리자페이지</a></li>
 			            </c:when>
 			            <c:otherwise>
 				            <li><a href="mypage/mypage.camp">마이페이지</a></li>

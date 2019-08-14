@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>Bootstrap Example</title>
+<title>5gCamping :: 1박 2일</title>
+<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -56,7 +57,7 @@
 									<tr>
 										<td class="text-center"><input type="checkbox" name="campsiteNo" value="${campSite.no }"></td>
 										<td class="text-center">${campSite.no }</td>
-										<td class="text-center"><a href="detail.camp?pno=${param.pno }&no=${campSite.no }">${campSite.name }</a></td>
+										<td class="text-center"><a href="detail.camp?pno=${param.pno }&no=${campSite.no }" style="color: #000;">${campSite.name }</a></td>
 										<td class="text-center">${campSite.price }</td>
 										<td class="text-center"><fmt:formatDate value="${campSite.createDate }" pattern="yyyy-MM-dd" /></td>
 										<td class="text-center">${campSite.usedYn }</td>

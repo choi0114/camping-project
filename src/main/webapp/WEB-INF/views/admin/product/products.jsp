@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>Bootstrap Example</title>
+    <title>5gCamping :: 1박 2일</title>
+    <link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -19,6 +20,11 @@
     </style>
 </head>
 <body style="background-color:#f7f7f9">
+<%@ include file="../common/adminNavi.jsp"%>
+	<div class="col-xs-1">
+		<c:set var="menu" value="campsite" />
+		<%@ include file="../common/adminSidebar.jsp"%>
+	</div>
 <div class="container">
 	<div class="page-header">
 		<h1>상품관리 <button class="btn btn-default pull-right" id="btn-open-modal">등록</button></h1>

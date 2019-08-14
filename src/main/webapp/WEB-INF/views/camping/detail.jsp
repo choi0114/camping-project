@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>5GCamping :: 캠핑장 상세</title>
+	<title>5GCamping :: 1박 2일</title>
+	<link rel="shortcut icon" href="/camping/resources/images/campinglogo.png">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -27,7 +28,7 @@
 </head>
 <body data-campsite-no="${campsite.no }">
 	<%@ include file="../common/detailNav.jsp" %>
-	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }">
+	<div class="container" data-latitude="${campsite.latitude }" data-longitude="${campsite.longitude }" style="padding-top: 100px;">
 		<div>
 			<div class="row">
 				<div class="col-sm-6">
