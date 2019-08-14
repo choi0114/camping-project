@@ -31,5 +31,5 @@ public interface BoardDao {
 	void addComment(Map<String, Object> map);
 	void updateLike(Map<String, Object> map);
 	void updateHate(Map<String, Object> map);
-	
+	void insertScrap(Map<String, Object> map);
 }

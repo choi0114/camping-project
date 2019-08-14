@@ -460,6 +460,16 @@
 		)
 		values (CAMP_BOARD_SEQ.nextval,#{title},#{contents},#{userId},#{thumbnail})
 	</insert>
+	<insert id="insertScrap" parameterType="map">
+		insert into CAMP_SCRAPS (
+			SCRAP_NO
+			,SCRAP_CREATE_DATE
+			,USER_ID
+			,REVIEW_NO
+		)
+		values (CAMP_SCRAP_SEQ.nextval,sysdate, #{userId}, #{boardNo})
+		
+	</insert>
 	<update id="updateLike" parameterType="map">
 		update 
 			<choose>

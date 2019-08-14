@@ -15,39 +15,19 @@
 </head>
 <body>
 <%@ include file="../common/detailNav.jsp" %>
-	<div class="row">
-		<div class="col-sm-5 col-sm-offset-2 page-head-left">
+<div class="container" style="padding:120px;">
+	<div class="row" style="padding-bottom: 10px;">
+		<div class="col-sm-5  page-head-left" >
 			<span>커뮤니티 > 게시글작성</span>
 		</div>
-		<div class="col-sm-3 page-head-right">
-			<form class="form-inline">
-				<div class="form-group pull-right">
-					<select class="form-control">
-						<option>전체</option>
-						<option>제목</option>
-					</select> 
-					<input class="form-control" type="text" title="통합검색"  name="headerkeyword"  maxlength="10">
-					<button class="form-control" type="button" class="btn btn-default" id="btn_header_search">검색</button>
-				</div>
-			</form>
-		</div>
+		
 	</div>
 	<hr />
 
 
 	<div class="row bottom">
-		<div class="col-sm-2 col-sm-offset-2">
-	   		<div class="panel panel-primary">
-	   			<ul class="list-group" id="dept-list-box">
-	    			<li class='list-group-item' data-board-type="0" >전체: 최신순 </li>
-	    			<li class='list-group-item' data-board-type="1" >가입인사 게시판 </li>
-	    			<li class='list-group-item' data-board-type="2" >캠핑장 리뷰 게시판 </li>
-	    			<li class='list-group-item' data-board-type="3" >캠핑장 의견 게시판 </li>
-	    			<li class='list-group-item' data-board-type="4" >자유 게시판 </li>
-	   			</ul>
-	   		</div>
-	    </div>
-		<div class="col-sm-5 in-board">
+		
+		<div class=" in-board">
 			<form id="register-form" class="writeWell well " method="post" action="write.camp" enctype="multipart/form-data" >
 				<div class="form-group">
 					<label>게시판 선택</label>
@@ -85,6 +65,7 @@
 					<textarea rows="10" class="form-control" name="contents" id="board-contents"></textarea>
 				</div>
 				<div class="text-right">
+					<input type="hidden"  id="login-user" name="login-user" value="${LOGIN_USER }"/>
 					<button type="button" class="btn btn-primary" id="btn-add-form">등록</button>
 				</div>
 			</form>
@@ -133,6 +114,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<script type="text/javascript">
 	$(function() {
 		$(".list-group-item").click(function(){
@@ -357,7 +339,10 @@
 	
 	// 등록버튼 클릭시 실행할 코드
 	$('#btn-add-form').click(function() {
-		
+		if($("#login-user").val() == null){
+			alert("로그인이 필요한 서비스입니다.");
+			return false;
+		}
 		if ($("#board-title").val() == '') {
 			alert("제목을 입력하여 주세요");
 			return false;
