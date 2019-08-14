@@ -264,29 +264,6 @@
 				<button type="button"  class="btn btn-default" id="btn-no-campingsite">삭제</button>
 			</div>
 		</div>
-			<div class="text-center">
-				<ul class="pagination">
-					<c:choose>
-						<c:when test="${pagination.first }">
-							<li><a href="">&laquo;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="list.camp?pno=${pagination.page - 1 }">&laquo;</a></li>
-						</c:otherwise>
-					</c:choose>
-					<c:forEach var="num" begin="${pagination.begin }" end="${pagination.end }">
-						<li class="${pagination.page == num ? 'active' : '' }"><a href="noticeList.camp?pno=${num }">${num }</a></li>
-					</c:forEach>
-					<c:choose>
-						<c:when test="${pagination.last }">
-							<li><a href="">&raquo;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="noticeList.camp?pno=${pagination.page + 1 }">&raquo;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
     </div>
     <script type="text/javascript">
     	$('tbody tr:odd').hide();
