@@ -109,13 +109,15 @@
         #container .gnb ul li > a:hover {color: #0d7ebf; font-weight: bold;}
         #container a {text-decoration: none;}
         #container .header-wrap {
-            width: 1200px;
+            width: 1500px;
             margin: 0 auto;
             position: absolute;
             left: 50%;
             margin-left: -900px;
             top: 30px;
         }
+        
+        #container .header-wrap .logo img{width: 172px;}
         #container.scrolled {background-color: #383943;}
         li{list-style: none;}
         .logo{display: inline-block; float: left; margin: 8px 0 0 0;}
