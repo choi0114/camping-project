@@ -203,7 +203,7 @@
 												<br>
 												등록된 사진은 회원님의 개시물이나 댓글등에 사용됩니다.
 												<br>
-												사진 크기는 180 X 180px 이상 크기로 등록하세요.
+												사진 크기는 180 X 180px 이상 크기로 등록하세요. 사진은 정사각형 혹은 정사각형에 비슷한 직사각형으로 해주세요
 											</div>
 											<div class="clear"></div>
 											<div class="upload">
@@ -229,7 +229,7 @@
 									</div>
 									<div class="panel-body" style="height: 250px; overflow-y: scroll; position: relative;">
 										<c:choose>
-										<c:when test="${boardMap eq ''and not empty boardMap }">
+										<c:when test="${not empty boardMap }">
 											<ul class="list-group">
 												<c:forEach var="free" items="${boardMap.free }">
 													<li class="list-group-item">
@@ -273,7 +273,7 @@
 									</div>
 									<div class="panel-body" style="height: 270px; overflow-y: scroll; position: relative;">
 										<c:choose>
-											<c:when test="${commentMap eq ''and not empty commentMap }">
+											<c:when test="${not empty commentMap }">
 												<ul class="list-group">
 													<c:forEach var="freeComment" items="${commentMap.freeComment }">
 														<li class="list-group-item">

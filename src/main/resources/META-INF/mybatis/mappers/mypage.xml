@@ -56,15 +56,18 @@
 	
 	<select id="getJoiningBoardCommentById" parameterType="string" resultType="joiningBoardComment">
 		select 
-			comment_no no,
-			comment_contents contents,
-			comment_create_date createDate,
-			joining_no "joiningBoard.no",
-			user_id "user.id"
+			a.comment_no no,
+			a.comment_contents contents,
+			a.comment_create_date createDate,
+			a.joining_no "joiningBoard.no",
+			a.user_id "user.id",
+			b.joining_title "joining.title"
 		from 
-			camp_joining_comments
+			camp_joining_comments a, camp_joining_boards b
 		where 
-			user_id = #{userId}
+			a.joining_no = b.joining_no
+		and
+			a.user_id = #{userId} 
 	</select>
 	
 	<select id="getOpinionBoardCommentById" parameterType="string" resultType="opinionComment">
@@ -72,9 +75,9 @@
 			a.comment_no no,
 			a.comment_contents contents,
 			a.comment_create_date createDate,
-			b.opinion_no "opinionBoard.no",
-			b.opinion_title "opinionBoard.title",
-			a.user_id "user.id"
+			a.opinion_no "opinionBoard.no",
+			a.user_id "user.id",
+			b.opinion_title "opinionBoard.title"
 		from 
 			camp_opinion_comments a, camp_opinion_boards b
 		where 
@@ -85,28 +88,34 @@
 	
 	<select id="getReviewBoardCommentById" parameterType="string" resultType="reviewBoardComment">
 		select 
-			comment_no no,
-			comment_contents contents,
-			comment_create_date createDate,
-			review_no "reviewBoard.no",
-			user_id "user.id"
+			a.comment_no no,
+			a.comment_contents contents,
+			a.comment_create_date createDate,
+			a.review_no "reviewBoard.no",
+			a.user_id "user.id",
+			b.review_title "reviewBoard.title"
 		from
-			camp_review_comments
+			camp_review_comments a, camp_review_boards b
 		where 
-			user_id = #{userId}
+			a.review_no = b.review_no
+		and 
+			a.user_id = #{userId}
 	</select>
 	
 	<select id="getFreeBoardCommentById" parameterType="string" resultType="freeBoardComment">
 		select 
-			comment_no no,
-			comment_contents contents,
-			comment_create_date createDate,
-			free_no "freeBoard.no",
-			user_id "user.id"
+			a.comment_no no,
+			a.comment_contents contents,
+			a.comment_create_date createDate,
+			a.free_no "freeBoard.no",
+			a.user_id "user.id",
+			b.free_title "freeBoard.title"
 		from 
-			camp_free_comments
+			camp_free_comments a, camp_free_boards b
 		where 
-			user_id = #{userId}
+			a.free_no = b.free_no
+		and
+			a.user_id = #{userId}
 	</select>
 	
 	<select id="getAllCommentCount" parameterType="string" resultType="int">
