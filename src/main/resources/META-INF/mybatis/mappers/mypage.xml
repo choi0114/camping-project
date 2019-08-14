@@ -152,7 +152,7 @@
 			b.campSite_sort "campSite.sort",
 			b.campSite_address "campSite.address",
 			b.campSite_tel "campSite.tel",
-			b.campSite_photo "campSite.proto",
+			b.campSite_photo "campSite.photo",
 			b.campSite_point "campSite.point",
 			b.campSite_sido "campSite.sido"
 		from
