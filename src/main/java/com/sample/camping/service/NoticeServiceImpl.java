@@ -35,4 +35,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public void insertComment(Map<String, Object> map) {
 		noticeDao.insertComment(map);
 	}
+	
+	@Override
+	public List<NoticeComment> get10Comments(Map<String, Object> map) {
+		return noticeDao.get10Comments(map);
+	}
 }

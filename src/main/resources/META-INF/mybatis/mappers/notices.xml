@@ -59,4 +59,39 @@
 		values
 			(camp_comment_seq.nextval, #{contents}, #{no}, #{id})
 	</select>
+	
+	<select id="get10Comments" parameterType="map" resultType="noticeComment">
+		select
+			no, 
+			contents, 
+			createDate, 
+			"noticeBoard.no", 
+			"user.id",
+			"user.profilePhoto",
+			"user.nickName"
+		from (
+			select
+				row_number() over (order by c.comment_no) rowno,
+				c.comment_no			no,
+				c.comment_contents		contents,
+				c.comment_create_date 	createDate,
+				c.notice_no				"noticeBoard.no",
+				c.user_id				"user.id",
+				u.user_profile_photo	"user.profilePhoto",
+				u.user_nick_name		"user.nickName"
+				
+			from
+				camp_notice_comments c, camp_users u
+			where
+				c.user_id = u.user_id
+			and
+				notice_no = #{no}
+			order by
+				comment_no desc
+		)
+		where
+			rowno >= #{begin}
+		and
+			rowno &lt;= #{end}
+	</select>
 </mapper>
