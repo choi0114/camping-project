@@ -355,7 +355,7 @@ public class ProductController {
 		MultipartFile mf = form.getPhoto();
 		System.out.println(mf);
 		
-		String  profileImageSaveDirectory = "C:/Users/RealBird/git/camping-project/src/main/webapp/resources/images/product";
+		String  profileImageSaveDirectory = "/Users/choeeunjeong/git/camping-project/src/main/webapp/resources/images/product";
 		if(!mf.isEmpty()) {
 			String filename = mf.getOriginalFilename();
 			FileCopyUtils.copy(mf.getBytes(), new File(profileImageSaveDirectory, filename));
