@@ -1,22 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
         #footer-full {padding: 50px 0; background: #d9dbe9; height: 203px;}
     	#footer-full .flogo {margin-right: 40px;}
     	#footer-full .bottomMenu {margin: 6px 0 15px 0;}
     	#footer-full .bottomMenu a {font-size: 15px; text-decoration: none; color: #000;}
     	#footer-full .bottomMenu .vline {display: inline-block; margin: 0 16px; color: #a7a9b3;}
+    	#footer-full .footer-logo img{width: 100px}
         
     </style>
-</head>
 <body> 
    <div id="footer-full">
     	<div class="m-wrap">

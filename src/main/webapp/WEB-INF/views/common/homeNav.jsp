@@ -48,16 +48,17 @@
             margin: 0 auto;
             position: absolute;
             left: 50%;
-            margin-left: -600px;
+            margin-left: -550px;
             top: 30px;
         }
+        #container .header-wrap .logo img{width: 172px;}
         #container.scrolled {background-color: #383943;}
         li{list-style: none;}
         .logo{display: inline-block; float: left; margin: 8px 0 0 0;}
         .logo h1{margin: 0;}
         
         .topmenu{text-align: center;}
-        .topmenu>ul{display: inline-block; float: left; padding: 0; margin: 33px -60px 18px 60px;}
+        .topmenu>ul{display: inline-block; float: left; padding: 0; margin: 33px -60px 18px 30px;}
         .topmenu>ul>li{float: left; font-size: 18px; margin: 0 32px;}
         .topmenu ul li>a{font-weight: 600; color: #fff; padding: 20px 0px;}
         .topmenu ul li>a:hover{color: #0d7ebf; font-weight: bold;}
