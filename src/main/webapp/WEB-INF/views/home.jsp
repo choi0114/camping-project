@@ -206,8 +206,8 @@
     	#camping-map.maininfo .campinfo-wrap .kmapright .items {width: 283px; margin: 7px 40px 30px 0; float: left;}
 		#camping-map.maininfo .campinfo-wrap .kmapright .items .photo {width: 283px; height: 168px;
 																position: relative; overflow: hidden;}
-		#camping-map.maininfo .campinfo-wrap .kmapright .items img.tm {transition: transform .2s;
-    																	width: 100%; height: 100%;}
+		#camping-map.maininfo .campinfo-wrap .kmapright .items img.tm {width: 100%; height: 100%;}
+		#camping-map.maininfo .campinfo-wrap .kmapright .items img.tm:hover {transition: transform .2s; transform: scale(1.1);}
     	#camping-map.maininfo .campinfo-wrap .kmapright .items .photo span.distance {position: absolute;
    				 left: 0; bottom: 0; display: inline-block; background: #000; background: rgba(0,0,0,.1);
     				padding: 4px 5px; color: #efe03e; z-index: 10; font-size: 11px;}
@@ -252,6 +252,10 @@
    		#move-top-btn {position: fixed; bottom: 70px; right: 70px;display: none; z-index: 999; width: 50px; height: 50px;
    						background: #333; line-height: 60px;}
    		#move-top-btn i {font-size: x-large; margin-left: 11px;}
+   		
+   		.circles-wrp:hover{transform: scale(1.1); transition: all 0.3s ease-in-out;}
+   		
+   		
 
     </style>
 </head>
@@ -292,11 +296,11 @@
 	                        </div>
 	                    </div>
 	                    <div class="col-sm-12 inkey">
-	                        <a class="link-inkey">#무료</a>
+	                        <a class="link-inkey">#낚시</a>
 	                        <a class="link-inkey">#숲속</a>
-	                        <a class="link-inkey">#무료야영장</a>
+	                        <a class="link-inkey">#자연휴양림</a>
 	                        <a class="link-inkey">#가평</a>
-	                        <a class="link-inkey">#그늘</a>
+	                        <a class="link-inkey">#바다</a>
 	                        <a class="link-inkey">#양양</a>
 	                    </div>
 	                    <ul id="search-result" class="list-group results" >
@@ -342,14 +346,16 @@
 	                                <img src="/camping/resources/images/campsite/${item.PHOTO }" alt="##캠핑장" width="450" class="tm">
 	                                <a href="#" class="link-scrap" id="chk-scrap-2659">
 	                                <c:if test="${not empty LOGIN_USER }">
-	                                	<c:choose>
-	                                	<c:when test="${not empty item.LIKENO }">
-		                                    <img alt="" src="/camping/resources/images/bookmark2.png" data-no="${item.NO }" class="bookmark-del" style="width:17px;"  aria-hidden="true">
-	                                	</c:when>
-	                                	<c:otherwise>
-		                                    <img alt="" src="/camping/resources/images/bookmark.png" data-no="${item.NO }" class="bookmark-add" style="width:17px;" aria-hidden="true">
-	                                	</c:otherwise>
-	                               		 </c:choose>
+	                                	
+	                                	<%-- <c:choose>
+	                                	<c:when test="${not empty item.LIKENO }"> --%>
+		                                    <img alt="" src="/camping/resources/images/${not empty item.LIKENO ? 'bookmark2.png' : 'bookmark.png'}" data-no="${item.NO }" 
+		                                    class="${not empty item.LIKENO ? 'bookmark-del' : 'bookmark-add'}" style="width:17px;"  aria-hidden="true">
+	                                	<%-- </c:when>
+	                                	<c:otherwise> --%>
+		                                   <%--  <img alt="" src="/camping/resources/images/bookmark.png" data-no="${item.NO }" class="bookmark-add" style="width:17px;" aria-hidden="true"> --%>
+	                                	<%-- </c:otherwise>
+	                               		 </c:choose> --%>
 	                                </c:if>
 	                                </a>
 	                            </div>
@@ -502,20 +508,37 @@
 	$(".thumb").click(function() {
 		 location.href = "detail.camp?no=" + $(this).attr("data-no");;
 	})
-	/* $(".bookmark-add").click(function() {
-		var session = 
+	
+	$(".bookmark-add").click(function(event) {
+		
+		var $bookmark = $(this);
 		var campsiteNo = $(this).attr("data-no");
 		$.ajax ({
 			type:"get",
-			url:"addbookmark.camp"
-			data:{no:campsiteNo, },
+			url:"addbookmark.camp",
+			data:{no:campsiteNo},
 			dataType:"json",
-			success:function(result)
+			success:function(result){
+				$bookmark.attr('src', '/camping/resources/images/bookmark2.png').attr('class', 'bookmark-del')
+			}
 		})
+		return false;
 	})
-	$(".bookmark-del").click(function() {
+	
+	$(".bookmark-del").click(function(event) {
+		var $bookmark = $(this);
 		var campsiteNo = $(this).attr("data-no");
-	}) */
+		$.ajax ({
+			type:"get",
+			url:"delbookmark.camp",
+			data:{no:campsiteNo},
+			dataType:"json",
+			success:function(result){
+				$bookmark.attr('src', '/camping/resources/images/bookmark.png').attr('class', 'bookmark-add')
+			}
+		})
+		return false;
+	}) 
 	
 	/* 지역별 버튼 눌렀을 때 스크롤 내려가기 */
 		$('.btn-sido').click(function() {
@@ -573,11 +596,12 @@
 		$(".keyword-del").show();
 		var keyword = $("#search-box").val();
 		
+		$("#search-result").empty();
 		searchFind(keyword, 1);
 		
 	})
 	
-	$("#btn-more").click(function() {
+	$("#search-result").on('click', '#btn-more', function() {
 		var keyword = $("#search-box").val();
 		pno++;
 		searchFind(keyword, pno);
@@ -585,6 +609,9 @@
 	
 	/* 검색결과 */
 	function searchFind(keyword, pno) {
+ 		
+		
+		
 		$.ajax ({
 			type:"get",
 			url:"search.camp",
@@ -598,7 +625,11 @@
 					var html = '<li class="list-group-item" id="keyword-item" keyword-name="'+camp.name+'">';
             		html += '<div class="row">';
             		html += '<div class="col-xs-3 list-image">';
-            		html += '<img alt="" src="/camping/resources/images/slide1.jpg" width="80" height="45">';
+            		if (camp.photo == null) {
+	            		html += '<img alt="" src="/camping/resources/images/campsite/noimg.jpg" width="80" height="45">';
+            		} else {
+	            		html += '<img alt="" src="/camping/resources/images/campsite/'+camp.photo+'" width="80" height="45">';
+            		}
             		html += '</div>';
             		html += '<a href="#" class="cdirectlink">';
             		html += '<div class="col-xs-7 cright hand">';
@@ -657,6 +688,8 @@
 			key = key.replace("#", "");
 		$("#search-box").val(key);
 		$("#search-box").focus();
+		
+		$("#search-result").empty();
 		searchFind(key);
 		
 		$(".keyword-del").show();
@@ -871,6 +904,7 @@
 		
 		if(nowpage == 1) {
 			$("#btn-prev").removeClass('on');
+			$("#btn-next").addClass('on');
 		}
 		
 		if(totalpage == nowpage) {

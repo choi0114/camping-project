@@ -76,7 +76,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("addbookmark.camp")
-	public String addbookmark(int no, HttpSession session) {
+	public @ResponseBody Map<String, Object> addbookmark(int no, HttpSession session) {
 		
 		User user = (User)session.getAttribute("LOGIN_USER");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -85,14 +85,29 @@ public class HomeController {
 		
 		homeService.addBookmark(map);
 		
-		return "redirect:/camping/home.camp";
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("campsiteNo", no);
+		result.put("status", "ADD");
+		
+		return result;
 	}
 	
 	@RequestMapping("delbookmark.camp")
-	public @ResponseBody String delbookmark(int no) {
+	public@ResponseBody Map<String, Object> delbookmark(int no, HttpSession session) {
+		
+		User user = (User)session.getAttribute("LOGIN_USER");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", user.getId());
+		map.put("no", no);
+		homeService.deleteBookmark(map);
 		
 		
-		return "redirect:/camping/home.camp";
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("campsiteNo", no);
+		result.put("status", "DEL");
+		
+		return result;
 	}
 	
 }
