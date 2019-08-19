@@ -19,5 +19,5 @@ public interface HomeService {
 	List<FreeBoard> getAllFreeBoard();
 	List<NoticeBoard> getAllNoticeBoard();
 	void addBookmark(Map<String, Object> map);
-	void deleteBookmark(int no);
+	void deleteBookmark(Map<String, Object> map);
 }

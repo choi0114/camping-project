@@ -65,7 +65,7 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	@Override
-	public void deleteBookmark(int no) {
-		homeDao.deleteBookmark(no);
+	public void deleteBookmark(Map<String, Object> map) {
+		homeDao.deleteBookmark(map);
 	}
 }
