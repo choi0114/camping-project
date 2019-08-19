@@ -172,12 +172,12 @@
 		insert into 
 			camp_like_campsite (like_campsite_no, user_id, campsite_no)
 		values
-			(camp_camping_site_seq.nextval, #{id}, #{no})
+			(camp_camping_site_seq.nextval, #{userId}, #{no})
 	</insert>
 	
-	<delete id="deleteBookmark" parameterType="int">
+	<delete id="deleteBookmark" parameterType="map">
 		delete from camp_like_campsite
-		where like_campsite_no = ${no}
+		where user_id = #{userId} and campsite_no = #{no}
 	</delete>
 
 </mapper>
