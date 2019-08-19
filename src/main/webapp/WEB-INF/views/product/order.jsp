@@ -73,7 +73,7 @@
 		  					<div style="padding:4px;">
 		  						 <h3  class="text-right totalPrice"
 		                            style="color: #e91d75; padding-top: 10px">
-		                            <span name="total-price" >${order.price }</span>원
+		                            <span name="total-price" >${order.price+2500 }</span>원
 		                        </h3>
 		  					</div>
 		  					<div class="text-right" style="padding:4px; ">

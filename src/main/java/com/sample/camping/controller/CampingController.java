@@ -112,7 +112,7 @@ public class CampingController {
 	public ModelAndView getWeatherXML(String x, String y) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("path", "http://www.kma.go.kr/wid/queryDFS.jsp?gridx="+x+"&gridy="+y);
+		mav.addObject("path", "https://www.kma.go.kr/wid/queryDFS.jsp?gridx="+x+"&gridy="+y);
 		mav.setView(new WeatherXMLView());
 		
 		return mav;

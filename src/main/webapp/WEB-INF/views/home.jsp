@@ -483,7 +483,7 @@
     			</dt>
     			<c:forEach var="free" items="${frees }">
     			<dd>
-    				<a href="/camping/community/detail.camp?boardType=2&no=${free.no }">&gt;  ${free.title }</a>
+    				<a href="/camping/community/detail.camp?boardType=4&no=${free.no }">&gt;  ${free.title }</a>
     				<c:if test="${free.cnt > 1}">
     				<span class="comment">${free.cnt }</span>
     				</c:if>
@@ -957,6 +957,9 @@
 					var html = '<div class="camp-right-content" data-no="'+camp.no+'">';
 					html += '<div class="items hand col-sm-4" id="location-items" style="cursor:pointer">';
 					html += '<div class="photo">';
+					if(camp.photo == null) {
+						camp.photo = 'noimg.jpg';
+					}
 					html += '<img src="/camping/resources/images/campsite/'+camp.photo+'" class="tm">';
 					if(camp.sort == 'CAMP') {
 						html += '<span class="cat" style="color: #91ee6c">'+camp.sort+'</span>';

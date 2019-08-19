@@ -72,33 +72,40 @@ public class AdminCampSiteController {
 	public String listUpdate(Model model, @RequestParam("no")int no) {
 		CampSite campsite = adminCampSiteService.getCampingSitesbyNo(no);
 		String str = campsite.getUsedYn();
-		if(str.equals("Y")) {
+		if("Y".equals(str)) {
 			campsite.setUsedYn("N");
-		} else if(str.equals("N")) {
+		} else {
 			campsite.setUsedYn("Y");
 		}
+		
+		adminCampSiteService.updateCampingSitesByNo(campsite);
+		
 		model.addAttribute("campsite", campsite);
-		return "redirect:admin/campsite/list?no="+no;
+		return "redirect:list.camp";
 	}
 	
 	@RequestMapping("listUpdates.camp")
 	public String listUpdates(Model model, @RequestParam("no")int no) {
 		CampSite campsites = adminCampSiteService.getCampingSitebyNo(no);
 		String str = campsites.getMyCampsite().getStatus();
-		if(str.equals("Y")) {
+		System.out.println(str);
+		if("Y".equals(str)) {
 			campsites.getMyCampsite().setStatus("N");
-		} else if(str.equals("N")) {
+		} else {
 			campsites.getMyCampsite().setStatus("Y");
 		}
+		
+		adminCampSiteService.updateCampingSitesByNo(campsites);
+		
 		model.addAttribute("campsite", campsites);
-		return "redirect:admin/approve/list?no="+no;
+		return "redirect:list.camp";
 	}
 	
 	@RequestMapping("/update.camp")
 	public String detailUpdate(String name, String address, String tel, Double latitude, Double longitude, MultipartFile photo,
 			@RequestParam("no")int no) throws Exception {
 	
-		String savePath = "C:/사용자/dhchi/git2/camping-project/src/main/webapp/resources/images/campsite";
+		String savePath = "/Users/choeeunjeong/workspace/camping-project/src/main/webapp/resources/images/campsite";
 		CampSite campSite = adminCampSiteService.getCampingSitesbyNo(no);
 		
 		campSite.setName(name);

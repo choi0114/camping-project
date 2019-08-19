@@ -209,12 +209,12 @@
 							$.each(products, function(index, product){
 								var row = '<div class="col-md-4" style="padding-bottom:15px;">';
 								row += '<div style="padding:15px; background-color: white; min-height: 370px; ">';
-								row += '<a href="detail.camp?no=${product.goodsNo }" style="padding-top:10px;">';
+								row += '<a href="detail.camp?no='+product.goodsNo +'" style="padding-top:10px;">';
 								row += '<img src="/camping/resources/images/product/'+ product.photo +'" width="230px;" height="157px;" alt="Nature" style="width: 100%">';
 								row += '</a>';
 								row += '<div >';
 								row += '<h4 class="text-center" >';
-								row += '<a href="detail.camp?no=${product.goodsNo }">';
+								row += '<a href="detail.camp?no='+product.goodsNo +'">';
 								row += ' <span style="padding-top: 15px; ';
 								row += 'padding-bottom: -20px;';
 								row += '  display: inline-block;';
@@ -269,7 +269,7 @@
 							$.each(products, function(index, product){
 								var row = '<div class="col-md-4" style="padding-bottom:15px;">';
 								row += '<div style="padding:15px; background-color: white; min-height: 370px; ">';
-								row += '<a href="detail.do" style="padding-top:10px;">';
+								row += '<a href="detail.camp?no=' + product.goodsNo + '" style="padding-top:10px;">';
 								row += '<img src="/camping/resources/images/product/'+ product.photo +'" width="230px;" height="157px;" alt="Nature" style="width: 100%">';
 								row += '</a>';
 								row += '<div >';

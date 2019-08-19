@@ -2,15 +2,19 @@ package com.sample.camping.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.camping.service.AdminNoticeBoardService;
+import com.sample.camping.service.NoticeService;
 import com.sample.camping.vo.AdminPagination;
 import com.sample.camping.vo.NoticeBoard;
 
@@ -20,6 +24,9 @@ public class AdminNoticeBoardController {
 	
 	@Autowired
 	private AdminNoticeBoardService adminNoticeBoardService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	@RequestMapping("/noticeList.camp")
 	public String search(
@@ -39,25 +46,52 @@ public class AdminNoticeBoardController {
 		AdminPagination adminPagination = new AdminPagination(pno, 10, records);
 		
 		model.addAttribute("pagination",adminPagination);
-		model.addAttribute("listCamp", adminNoticeBoardService.getNoticeAll(param));
+		model.addAttribute("notices", adminNoticeBoardService.getNoticeAll(param));
 		return "admin/notice/list";
 	}
 	
 	
-	@RequestMapping("/noticeAdd.camp")
-	public String addNotice(int no, String title, String contents) {
+	@PostMapping("/addnotice.camp")
+	public String addNotice(String title, String contents) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("contents", contents);
 		
+		System.out.println("title : " + title + ", contents : " + contents);
+		adminNoticeBoardService.addNotice(map);
 		
-		NoticeBoard noticeBoard = new NoticeBoard();
-		noticeBoard.setNo(no);
-		noticeBoard.setTitle(title);
-		noticeBoard.setContents(contents);
-		adminNoticeBoardService.addNotice(noticeBoard);
-		
-		return "admin/notice/list";
+		return "redirect:noticeList.camp?sort=Notice";
 	}
 		
-			
+	@RequestMapping("/deleteNotice.camp")
+	public @ResponseBody List<NoticeBoard> removeNotice(int no) {
+		adminNoticeBoardService.deleteNoticeByNo(no);
+		
+		return noticeService.getAllNotices();
+	}
+	
+	@RequestMapping("/noticeform.camp")
+	public String noticeform() {
+		return "admin/notice/form";
+	}
+	
+	@RequestMapping("/modifyform.camp")
+	public String modifyform(int no, Model model) {
+		model.addAttribute("notice", noticeService.getNoticeByNo(no));
+		
+		return "admin/notice/update";
+	}
+	
+	@RequestMapping("/updatenotice.camp")
+	public String updatenotice(int no, String title, String contents) {
+		NoticeBoard notice = noticeService.getNoticeByNo(no);
+		notice.setTitle(title);
+		notice.setContents(contents);
+		
+		adminNoticeBoardService.updateNoticeByNo(notice);
+		
+		return "redirect:noticeList.camp?sort=Notice";
+	}
 	
 	
 }

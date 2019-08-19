@@ -20,7 +20,7 @@
 </head>
 
 <body style="background-color: #f7f7f9">
-
+<%@ include file="../common/detailNav.jsp"%>
 <div class="container" style="padding-top: 120px;">
     <div class="col-sm-12 new-product-list">
         <div class="row">

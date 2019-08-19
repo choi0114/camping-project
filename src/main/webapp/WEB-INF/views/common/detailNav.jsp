@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
         #resultImg{position: absolute;left: 331px;top: 90px;}
         
@@ -162,7 +162,7 @@
     </div>
     <div class="header-wrap">
         <div class="logo">
-            <h1><a href="home.camp"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
+            <h1><a href="/camping/home.camp"><img src="/camping/resources/images/5g_logo1.png" alt="오지캠핑"/></a></h1>
         </div>
         <div class="topmenu">
             <ul>
@@ -175,7 +175,7 @@
                 <li><a href="/camping/product/category.camp">캠핑용품</a></li>
                 <li class="searchli"> 
                     <div class="topsearch">
-                       <form action="map.camp?resach" method="get" id="layout-search-border"> <!--onsubmit-->
+                       <form action="/camping/map.camp?resach" method="get" id="layout-search-border"> <!--onsubmit-->
                            <fieldset>
                                 <legend>통합검색 폼</legend>
                                 <input autocomplete="off" type="text" id="totalsearch" class="search-input" name="keyword" placeholder="캠핑장 검색" onfocus="this.placeholder = ''" onblur="this.placeholder = '캠핑장 검색'" value="">

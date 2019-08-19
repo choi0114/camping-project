@@ -60,15 +60,12 @@ public class MypageController {
 	
 	@RequestMapping("/profilePhoto.camp")
 	public String profilePhoto(MultipartFile photo, HttpSession session) throws IOException {
-		String savePath = "C:/Users/JHTA/git/camping-project/src/main/webapp/resources/images/profilePhoto";
+		String savePath = "/Users/choeeunjeong/workspace/camping-project/src/main/webapp/resources/images/profilePhoto";
 		User user = (User) session.getAttribute("LOGIN_USER");
 		
 		String filename = user.getId();
 		
 		if(!photo.isEmpty()) {
-			long date = System.currentTimeMillis ( );
-			
-			filename += date;
 			filename += photo.getOriginalFilename();
 			
 			FileCopyUtils.copy(photo.getInputStream(), new FileOutputStream(new File(savePath, filename)));
@@ -136,7 +133,7 @@ public class MypageController {
 	
 	@RequestMapping("/detail.camp")
 	public String detail(String name, String sort, String address, String tel, Double latitude, Double longitude, int sites, int price, MultipartFile photo, HttpSession session) throws Exception {
-		String savePath = "C:/Users/JHTA/git/camping-project/src/main/webapp/resources/images/campsite";
+		String savePath = "/Users/choeeunjeong/workspace/camping-project/src/main/webapp/resources/images/campsite";
 		MyCampsite mycamp = new MyCampsite();
 		User user = (User) session.getAttribute("LOGIN_USER");
 		

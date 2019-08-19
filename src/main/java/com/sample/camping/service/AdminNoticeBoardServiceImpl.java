@@ -16,8 +16,8 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService {
 	private AdminNoticeBoardDao noticeBoardDao;
 	
 	@Override
-	public void addNotice(NoticeBoard noticeBoard) {
-		
+	public void addNotice(Map<String, Object> map) {
+		noticeBoardDao.addNotice(map);
 	}
 	
 	@Override
@@ -42,7 +42,10 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService {
 		noticeBoardDao.updateNoticeByNo(noticeBoard);
 	}
 	
-	
+	@Override
+	public void deleteNoticeByNo(int no) {
+		noticeBoardDao.deleteNoticeByNo(no);
+	}
 	
 	
 }

@@ -13,7 +13,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript" src="/camping/resources/js/liquidFillGauge.js"></script>
     <link rel="stylesheet" href="/camping/resources/css/campingdetail/detail.css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42f56255a4fcf9b77f5d2aa725945ccf&libraries=drawing"></script>
@@ -709,8 +709,8 @@
 
     // TM좌표를 구하기 위해 필요한 AccessToken을 얻는 API 요청
     function getAccessToken() {
-    	var consumerKey = '4bb91b4af049480babda';
-       	var consumerSecret = '0cc468f9e2ec428f9962';
+    	var consumerKey = 'c5c73e1fc6f541c7815b';
+       	var consumerSecret = '8c3d4ffa71a048d493d9';
     	
     	return $.ajax({
     		url: 'https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json',

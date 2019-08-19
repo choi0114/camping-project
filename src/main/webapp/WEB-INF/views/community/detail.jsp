@@ -26,15 +26,16 @@
    <div class="row">
        <div class="col-sm-3"></div>
        <div class="col-sm-6 panel panel-default">
-       		<div class="text-right" id="click-home"  style="margin-top:20px;">
-       			<span style="border:1px solid; margin-top:7px; padding-left:-20px; margin-top:-20px;" class="glyphicon glyphicon glyphicon-list-alt btn-sm" aria-hidden="true">
-	            	<span  class="like">목록으로</span>
-	            </span>
+       		<div class="text-right" style="margin-top:20px;">
+       			<button class="btn" style="background-color: #fff; border: 1px solid #ccc;" onclick="history.back()">
+       				<span class="glyphicon glyphicon glyphicon-list-alt"></span>
+       				<span class="like">목록으로</span>
+       			</button>
        		</div>
        		
             <div class="row bottom-line " >
                 <div class="col-sm-1 boot">
-                   <img class="id-img " src="/camping/resources/images/profilePhoto/${LOGIN_USER.profilePhoto }" width="50" border-radius=50% height="50" alt=""/>
+                   <img class="id-img " src="/camping/resources/images/profilePhoto/${board.profilePhoto }" width="50" border-radius=50% height="50" alt=""/>
                 </div>
                 <div class="col-sm-7 boot ">
                    <div class="row nick" >

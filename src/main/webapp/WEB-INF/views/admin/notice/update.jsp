@@ -36,54 +36,44 @@
         }
 	    </style>
 			<body>
-				<c:set var="menu" value="campsite" />
+				<c:set var="menu" value="Notice" />
+				<%@ include file="../common/adminNavi.jsp"%>
+				<div class="row">
+					<div class="col-xs-1">
+					<%@ include file="../common/adminSidebar.jsp"%>
+					</div>
 				<div class="col-xs-11">
 					<div class="container">
-						<h1 class="admin-buttom">캠핑장 관리</h1>
+						<h1 class="admin-buttom">공지사항 수정</h1>
 						<div class="well">
-							<form method="post" action="update.camping" enctype="multipart/form-data" onsubmit="checkfield(event)">
-								<input type="hidden" name="pno" value="${param.pno }">
+							<form method="post" action="updatenotice.camp">
+									<input type="hidden" name="no" value="${notice.no }"/>
 									<div class="form-group">
-										<div class="row">
-											<div class="col-xs-1 list-number">
-												<label>번호</label>
-											</div>
-											<div class="col-xs-11"></div>
-											<input type="hidden" name="no" value="${campSite.no }">
-										</div>
 										<div class="row">
 											<div class="col-xs-1">
-												<label>캠핑장명</label>
+												<label>제목</label>
 											</div>
 											<div class="col-xs-11">
-												<input class="form-control" name="name" type="text" value="${campSite.name }" id="name" />
+												<input class="form-control" name="title" type="text" id="title" value="${notice.title }"/>
 											</div>
 										</div>
-									</div>
-									<div class="form-group"></div>
-									<div class="row">
-										<div class="col-xs-1 admin-line-height margin-btn">
-											<label class="label-padding">이미지첨부</label>
-										</div>
-										<div class="col-xs-11">
-											<input type="file" name="imageFile" id="imageFile" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-xs-1"></div>
-											<div class="col-xs-11">
-												<textarea class="form-control margin-div" name="info" placeholder="상세설명" rows="10" id="info"></textarea>
-											</div>
-										</div>
+										<div class="row margin-div">
+		                                    <div class="col-xs-12 admin-line-height">
+		                                        <label>내용</label>
+		                                    </div>
+		                                    <div class="col-xs-12">
+		                                        <textarea class="form-control" name="contents" id="contents" cols="70" rows="10">${notice.contents }</textarea>
+		                                    </div>
+                                		</div>
 									</div>
 									<div class="text-right">
-										<input type="submit" class="btn btn-warning" value="등록"> <a
-											class="btn btn-default" href="list.camp?pno=${pno }">취소</a>
+										<input type="submit" class="btn btn-warning" value="수정"> 
+										<a class="btn btn-default" href="#" onclick="history.back()">취소</a>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
+				</div>
 			</body>
 </html>
